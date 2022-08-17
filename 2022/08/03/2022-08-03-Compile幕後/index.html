@@ -1,104 +1,205 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <meta http-equiv="content-type" content="text/html; charset=utf-8">
-    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-    <title>Echo November&#39;s note</title>
-    
-<link rel="stylesheet" href="/css/style.css">
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 6.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-    
-<link rel="stylesheet" href="/css/gitment.css">
+<link rel="stylesheet" href="/css/main.css">
 
-    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
-<meta name="generator" content="Hexo 6.2.0"></head>
-<body>
-<header class="header">
-    <div class="header-inner">
-        <div class="header-title">
 
-        </div>
-        <nav class="header-nav">
-            
-            <a href="/" class="header-nav-link" >
-                Home
-            </a>
-            
+<link rel="stylesheet" href="/lib/font-awesome/css/all.min.css">
 
-            
-            <a href="/archives" class="header-nav-link">
-                Archives
-            </a>
-            
+<script id="hexo-configurations">
+    var NexT = window.NexT || {};
+    var CONFIG = {"hostname":"example.com","root":"/","scheme":"Muse","version":"7.8.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12,"onmobile":false},"copycode":{"enable":false,"show_result":false,"style":null},"back2top":{"enable":true,"sidebar":false,"scrollpercent":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"fancybox":false,"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"algolia":{"hits":{"per_page":10},"labels":{"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}},"localsearch":{"enable":false,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}};
+  </script>
 
-            
-            <a href="/tags" class="header-nav-link">
-                Tags
-            </a>
-            
+  <meta name="description" content="習慣使用了具備強大功能的整合工具– IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 建置(Build)  然後▷，有時是只點下▷，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Compile幕後">
+<meta property="og:url" content="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/index.html">
+<meta property="og:site_name" content="Echo November&#39;s note">
+<meta property="og:description" content="習慣使用了具備強大功能的整合工具– IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 建置(Build)  然後▷，有時是只點下▷，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="http://example.com/images/gcc.jpg">
+<meta property="article:published_time" content="2022-08-02T17:10:32.000Z">
+<meta property="article:modified_time" content="2022-08-17T09:21:55.334Z">
+<meta property="article:author" content="Echo November">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="compile">
+<meta property="article:tag" content="程式設計師的自我修養">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://example.com/images/gcc.jpg">
 
-            
-            <a href="/about/" class="header-nav-link">
-                About
-            </a>
-            
-        </nav>
+<link rel="canonical" href="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome : false,
+    isPost : true,
+    lang   : 'en'
+  };
+</script>
+
+  <title>Compile幕後 | Echo November's note</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
     </div>
-</header>
-<header class="mobile-header">
-    <div class="mobile-nav">
-        <div class="mobile-nav-icon">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-        <div class="mobile-nav-title">
-            <a href="/" class="mobile-nav-title-link">Echo November's Blog</a>
-        </div>
+  </div>
 
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <span class="logo-line-before"><i></i></span>
+      <h1 class="site-title">Echo November's note</h1>
+      <span class="logo-line-after"><i></i></span>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
-    <nav class="mobile-menu">
-        <ul class="mobile-menu-list">
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-home"></i>
-                <a href="/" class="mobile-nav-link">Home</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-archive"></i>
-                <a href="/archives" class="mobile-nav-link">Archives</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-tag"></i>
-                <a href="/tags" class="mobile-nav-link">Tags</a>
-            </li>
-            <li class="mobile-menu-item">
-                <i class="iconfont icon-about"></i>
-                <a href="/about/" class="mobile-nav-link">About</a>
-            </li>
-        </ul>
-    </nav>
-</header>
-<div class="main">
-    <div class="content-inner">
-        <div class="posts">
-    <article class="post-whole">
-        <div class="post-title">
-            <h2 class="title">Compile幕後</h2>
-            <div class="post-meta">
-                <span class="post-time">2022-08-03</span>
-                
-                <span class="post-visit"> visited：<span id="busuanzi_value_page_pv"></span></span>
-            </div>
-        </div>
-        <div class="post-toc" id="post-toc">
-    <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#main-cpp"><span class="toc-text">main.cpp</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Preprocessing-cpp-gt-ii%EF%BC%8C%E8%99%95%E7%90%86%EF%BC%83%EF%BC%8C%E5%88%AA%E9%99%A4%E8%A8%BB%E8%A7%A3-x2F-x2F-x2F-x2F-%EF%BC%8C%E5%8A%A0%E4%BB%A5%E7%B7%A8%E8%99%9F%E3%80%82"><span class="toc-text">1. Preprocessing: .cpp -&gt; .ii，處理＃，刪除註解(&#x2F;&#x2F;, &#x2F;**&#x2F;)，加以編號。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Compilation-ii-gt-s%EF%BC%8C%E5%B0%87-ii%E6%AA%94%E9%80%B2%E8%A1%8C%E5%88%86%E6%9E%90%E4%BB%A5%E5%8F%8A%E6%9C%80%E4%BD%B3%E5%8C%96%EF%BC%8C%E5%B0%87%E9%AB%98%E9%9A%8E%E8%AA%9E%E8%A8%80%E7%BF%BB%E8%AD%AF%E6%88%90assembly-code%E3%80%82%E5%B1%AC%E6%96%BC%E7%A8%8B%E5%BC%8F%E5%BB%BA%E6%A7%8B%E9%81%8E%E7%A8%8B%E6%9C%80%E8%A4%87%E9%9B%9C%E7%9A%84%E7%92%B0%E7%AF%80%E3%80%82"><span class="toc-text">2. Compilation: .ii -&gt; .s，將 .ii檔進行分析以及最佳化，將高階語言翻譯成assembly code。屬於程式建構過程最複雜的環節。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Assembly-s-gt-o%EF%BC%8C%E5%B0%87assembly-code%E4%B8%80%E4%B8%80%E7%BF%BB%E8%AD%AF%E6%88%90machine-code%E3%80%82"><span class="toc-text">3. Assembly: .s -&gt; .o，將assembly code一一翻譯成machine code。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-Linking-o-static-library-gt-out%EF%BC%8C%E5%B0%87-o%E6%AA%94%E9%80%A3%E7%B5%90static-library-%E4%B8%80%E5%A4%A7%E5%A0%86-o%E6%AA%94-%E5%BD%A2%E6%88%90-out%E6%AA%94%E3%80%82"><span class="toc-text">4. Linking: .o + static library -&gt; .out，將.o檔連結static library(一大堆.o檔)形成.out檔。</span></a></li></ol>
-    <div class="back-to-top" id="back-to-top">
-        <a href="javascript:void(0);">回到顶部</a>
-    </div>
+  </div>
 </div>
-        <div class="post-content">
-            <p>習慣使用了具備強大功能的整合工具– IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code>  然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
+
+
+
+
+<nav class="site-nav">
+  <ul id="menu" class="main-menu menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a>
+
+  </li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content post posts-expand">
+            
+
+    
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Echo November">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's note">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          Compile幕後
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="far fa-calendar"></i>
+              </span>
+              <span class="post-meta-item-text">Posted on</span>
+
+              <time title="Created: 2022-08-03 01:10:32" itemprop="dateCreated datePublished" datetime="2022-08-03T01:10:32+08:00">2022-08-03</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="far fa-calendar-check"></i>
+                </span>
+                <span class="post-meta-item-text">Edited on</span>
+                <time title="Modified: 2022-08-17 17:21:55" itemprop="dateModified" datetime="2022-08-17T17:21:55+08:00">2022-08-17</time>
+              </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>習慣使用了具備強大功能的整合工具– IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code>  然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
 <p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。<br><img src="/images/gcc.jpg" alt="gcc compilation"></p>
 <p>以下用一支比helloworld更簡單的程式來呈現:</p>
@@ -114,72 +215,195 @@
 <h3 id="4-Linking-o-static-library-gt-out，將-o檔連結static-library-一大堆-o檔-形成-out檔。"><a href="#4-Linking-o-static-library-gt-out，將-o檔連結static-library-一大堆-o檔-形成-out檔。" class="headerlink" title="4. Linking: .o + static library -&gt; .out，將.o檔連結static library(一大堆.o檔)形成.out檔。"></a>4. Linking: .o + static library -&gt; .out，將.o檔連結static library(一大堆.o檔)形成.out檔。</h3><figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ld -static (一大堆.<span class="keyword">o</span>檔) </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^C^@&gt;^@^A^@^@^@À^<span class="keyword">P</span>^@^@^</span><br><span class="line">^@^@@^@^@^@^@^@^@^@è;^@^@^@^@^@^@^@^@^@^@@</span><br><span class="line">^@<span class="number">8</span>^@^M^@@^@^_^@^^^@^F^@^@^@^D^@^@^@@^@^@^</span><br><span class="line">@^@^@^@^@@^@^@^@^@^@^@^@@^......</span><br></pre></td></tr></table></figure>
 
 
-        </div>
-        
-        <div class="post-tag">
-            
-            <a class="tag" href="/tags/C/" title="C++">C++</a>
-            
-            <a class="tag" href="/tags/compile/" title="compile">compile</a>
-            
-            <a class="tag" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" title="程式設計師的自我修養">程式設計師的自我修養</a>
-            
-        </div>
-        
-    </article>
-</div>
-<div class="paginator">
-    
-        
-            <a class="prev" href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">
-                <i class="iconfont icon-prev"></i>
-                <span class="nav-default">解碼.o檔</span>
-                <span class="nav-mobile">Prev</span>
-            </a>
-        
-        
-            <a class="next" href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">
-                <span class="nav-default">CMake與Make</span>
-                <span class="nav-mobile">Next</span>
-                <i class="iconfont icon-next"></i>
-            </a>
-        
-    
-</div>
-<div id="comment-container"></div>
     </div>
-</div>
-<footer class="footer-social">
-    
 
     
-
+    
     
 
-    <div class="footer-copyright">
-        <p class="time-line">
-            &copy;
-            
-            
-            2022
-            &nbsp;<i class="iconfont icon-github"></i>&nbsp;
-            <a target="_blank" href="https://github.com/EN-Chou">Echo November</a>
-        </p>
-        <p class="theme-info">
-            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme -
-            <a target="_blank" href="https://github.com/iJinxin/hexo-theme-sky">Sky</a>
-        </p>
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/compile/" rel="tag"># compile</a>
+              <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" rel="tag"># 程式設計師的自我修養</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/" rel="prev" title="CMake與Make">
+      <i class="fa fa-chevron-left"></i> CMake與Make
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/" rel="next" title="解碼.o檔">
+      解碼.o檔 <i class="fa fa-chevron-right"></i>
+    </a></div>
     </div>
-</footer>
-</body>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+      </footer>
+    
+  </article>
+  
+  
+  
 
-<script src="/js/index.js"></script>
 
-<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
-<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+
+          </div>
+          
+
 <script>
-    
-
+  window.addEventListener('tabs:register', () => {
+    let { activeClass } = CONFIG.comments;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
 </script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#main-cpp"><span class="nav-number">1.</span> <span class="nav-text">main.cpp</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Preprocessing-cpp-gt-ii%EF%BC%8C%E8%99%95%E7%90%86%EF%BC%83%EF%BC%8C%E5%88%AA%E9%99%A4%E8%A8%BB%E8%A7%A3-x2F-x2F-x2F-x2F-%EF%BC%8C%E5%8A%A0%E4%BB%A5%E7%B7%A8%E8%99%9F%E3%80%82"><span class="nav-number">2.</span> <span class="nav-text">1. Preprocessing: .cpp -&gt; .ii，處理＃，刪除註解(&#x2F;&#x2F;, &#x2F;**&#x2F;)，加以編號。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Compilation-ii-gt-s%EF%BC%8C%E5%B0%87-ii%E6%AA%94%E9%80%B2%E8%A1%8C%E5%88%86%E6%9E%90%E4%BB%A5%E5%8F%8A%E6%9C%80%E4%BD%B3%E5%8C%96%EF%BC%8C%E5%B0%87%E9%AB%98%E9%9A%8E%E8%AA%9E%E8%A8%80%E7%BF%BB%E8%AD%AF%E6%88%90assembly-code%E3%80%82%E5%B1%AC%E6%96%BC%E7%A8%8B%E5%BC%8F%E5%BB%BA%E6%A7%8B%E9%81%8E%E7%A8%8B%E6%9C%80%E8%A4%87%E9%9B%9C%E7%9A%84%E7%92%B0%E7%AF%80%E3%80%82"><span class="nav-number">3.</span> <span class="nav-text">2. Compilation: .ii -&gt; .s，將 .ii檔進行分析以及最佳化，將高階語言翻譯成assembly code。屬於程式建構過程最複雜的環節。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-Assembly-s-gt-o%EF%BC%8C%E5%B0%87assembly-code%E4%B8%80%E4%B8%80%E7%BF%BB%E8%AD%AF%E6%88%90machine-code%E3%80%82"><span class="nav-number">4.</span> <span class="nav-text">3. Assembly: .s -&gt; .o，將assembly code一一翻譯成machine code。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-Linking-o-static-library-gt-out%EF%BC%8C%E5%B0%87-o%E6%AA%94%E9%80%A3%E7%B5%90static-library-%E4%B8%80%E5%A4%A7%E5%A0%86-o%E6%AA%94-%E5%BD%A2%E6%88%90-out%E6%AA%94%E3%80%82"><span class="nav-number">5.</span> <span class="nav-text">4. Linking: .o + static library -&gt; .out，將.o檔連結static library(一大堆.o檔)形成.out檔。</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Echo November</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">12</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">14</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo November</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" class="theme-link" rel="noopener" target="_blank">Hexo</a> & <a href="https://muse.theme-next.org/" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+</body>
 </html>

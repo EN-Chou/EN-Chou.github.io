@@ -83,38 +83,30 @@
         <div class="posts">
     <article class="post-whole">
         <div class="post-title">
-            <h2 class="title">2022-07-08-隨手記</h2>
+            <h2 class="title">Compile-幕後</h2>
             <div class="post-meta">
-                <span class="post-time">2022-07-08</span>
+                <span class="post-time">2022-08-03</span>
                 
                 <span class="post-visit"> visited：<span id="busuanzi_value_page_pv"></span></span>
             </div>
         </div>
         <div class="post-toc" id="post-toc">
     <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-Unit-testing"><span class="toc-text">1.  Unit testing</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-Compiler-Explorer"><span class="toc-text">2. Compiler Explorer</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Citcuit"><span class="toc-text">3. Citcuit</span></a></li></ol>
+    
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：</p>
-<span id="more"></span>
-<h3 id="1-Unit-testing"><a href="#1-Unit-testing" class="headerlink" title="1.  Unit testing"></a>1.  Unit testing</h3><p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>中，pytest是用來跑unit testing的target。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure>
-<h3 id="2-Compiler-Explorer"><a href="#2-Compiler-Explorer" class="headerlink" title="2. Compiler Explorer"></a>2. <a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3><p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I’ve pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p>
-<p>Reply: You do not need to worry about assembly right now, but a programmer needs to know their machines eventually.  At the moment your understanding to assembly is sufficient.  Just be aware of its existence. </p>
-<h3 id="3-Citcuit"><a href="#3-Citcuit" class="headerlink" title="3. Citcuit"></a>3. Citcuit</h3><p>每次執行指令時，在電路端都會有不同的表現。</p>
+            <p>習慣使用了具備強大功能的整合工具– IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下  建置(Build)  然後  ▷ ，有時是只點下  ▷  ，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
+<p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。</p>
 
         </div>
         
         <div class="post-tag">
             
-            <a class="tag" href="/tags/mini-sprint/" title="mini-sprint">mini-sprint</a>
-            
-            <a class="tag" href="/tags/YYQA/" title="YYQA">YYQA</a>
-            
-            <a class="tag" href="/tags/%E9%9A%A8%E6%89%8B%E8%A8%98/" title="隨手記">隨手記</a>
+            <a class="tag" href="/tags/compile/" title="compile">compile</a>
             
         </div>
         
@@ -123,15 +115,9 @@
 <div class="paginator">
     
         
-            <a class="prev" href="/2022/07/16/2022-07-16-Introduction-to-python-importation/">
-                <i class="iconfont icon-prev"></i>
-                <span class="nav-default">Introduction-to-python-importation</span>
-                <span class="nav-mobile">Prev</span>
-            </a>
         
-        
-            <a class="next" href="/2022/07/07/2022-07-07-cmake-QA/">
-                <span class="nav-default">Cmake-QA</span>
+            <a class="next" href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">
+                <span class="nav-default">CMake與Make</span>
                 <span class="nav-mobile">Next</span>
                 <i class="iconfont icon-next"></i>
             </a>

@@ -38,6 +38,10 @@
             
 
             
+            <a href="/about/" class="header-nav-link">
+                About
+            </a>
+            
         </nav>
     </div>
 </header>
@@ -77,6 +81,24 @@
 <div class="main">
     <div class="content-inner">
         <div class="posts">
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/08/03/2022-08-03-Compile-%E5%B9%95%E5%BE%8C/">Compile-幕後</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-08-03</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>習慣使用了具備強大功能的整合工具– IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下  建置(Build)  然後  ▷ ，有時是只點下  ▷  ，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
+<p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。</p>
+
+                
+            </div>
+        </article>
     
         <article class="post-abstract">
             <div class="post-title">

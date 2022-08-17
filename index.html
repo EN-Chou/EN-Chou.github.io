@@ -121,7 +121,7 @@
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">5</span>
+        <span class="site-state-item-count">6</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -159,7 +159,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/16/hello-world/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/07/2022-07-07-cmake-QA/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,7 +177,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/08/16/hello-world/" class="post-title-link" itemprop="url">Hello World</a>
+          <a href="/2022/07/07/2022-07-07-cmake-QA/" class="post-title-link" itemprop="url">2022-07-07-cmake-QA</a>
         </h2>
 
         <div class="post-meta-container">
@@ -188,7 +188,14 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2022-08-16 15:13:29" itemprop="dateCreated datePublished" datetime="2022-08-16T15:13:29+08:00">2022-08-16</time>
+      <time title="Created: 2022-07-07 02:55:58" itemprop="dateCreated datePublished" datetime="2022-07-07T02:55:58+08:00">2022-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-08-17 10:28:56" itemprop="dateModified" datetime="2022-08-17T10:28:56+08:00">2022-08-17</time>
     </span>
 
   
@@ -201,20 +208,13 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Welcome to <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>! This is your very first post. Check <a target="_blank" rel="noopener" href="https://hexo.io/docs/">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a target="_blank" rel="noopener" href="https://hexo.io/docs/troubleshooting.html">troubleshooting</a> or you can ask me on <a target="_blank" rel="noopener" href="https://github.com/hexojs/hexo/issues">GitHub</a>.</p>
-<h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">&quot;My New Post&quot;</span></span><br></pre></td></tr></table></figure>
+          <h3 id="1-Please-search-the-cmake-document-for-why-you-should-mkdir-before-building-a-cmake-project-Similarly-please-share-the-link-that-provides-the-information"><a href="#1-Please-search-the-cmake-document-for-why-you-should-mkdir-before-building-a-cmake-project-Similarly-please-share-the-link-that-provides-the-information" class="headerlink" title="1. Please search the cmake document for why you should mkdir before building a cmake project.  Similarly, please share the link that provides the information."></a>1. Please search the cmake document for why you should mkdir before building a cmake project.  Similarly, please share the link that provides the information.</h3><p>So at first I went <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nlKcXPUJGwA&ab_channel=Code,Tech,andTutorials">here</a>.  I get to know:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Usage</span><br><span class="line"></span><br><span class="line">  cmake [options] path-to-source</span><br><span class="line">  cmake [options] path-to-existing-build</span><br><span class="line">  cmake [options] -S path-to-source -B path-to-build</span><br></pre></td></tr></table></figure>
 
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/writing.html">Writing</a></p>
-<h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/server.html">Server</a></p>
-<h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/generating.html">Generating</a></p>
-<h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-
-<p>More info: <a target="_blank" rel="noopener" href="https://hexo.io/docs/one-command-deployment.html">Deployment</a></p>
-
+<p>From the <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nlKcXPUJGwA&ab_channel=Code,Tech,andTutorials+">video</a>, the mkdir seems to be what most people do. The reason to why mkdir I supposed is that it helps organize our files, so that files won’t be a mess. It helps, but not a necessity. In order to better confirm my words, I did a little experiment on it:<br>cmake -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F; .<br>sudo make install<br>It works as well. So I think the reason to mkdir is that it helps sort our files in an organized way. </p>
+<p>While building pybind, there are files being generated, including Makefile; no additional CMakeLists.txt are generated accordingly. I’m not sure whether it is possible that cmake would generate an additional CMakeLists.txt. If it does, the reason to mkdir will be even obvious, i.e, overwritting will increase the difficulty if we want to undo. </p>
+<h2 id="2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you"><a href="#2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you" class="headerlink" title="2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you."></a>2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you.</h2><p>It designated the directory of installation. (<a target="_blank" rel="noopener" href="https://zh.wikibooks.org/wiki/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D">link</a>)<br>On my pc, while cmake <code>-DCMAKE_INSTALL_PREFIX=/ .</code>,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">-- Installing: /usr/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/include/pybind11/pybind11.h</span><br><span class="line">...</span><br><span class="line"><span class="keyword">while</span> cmake -DCMAKE_INSTALL_PREFIX=/usr/local .,</span><br><span class="line">...</span><br><span class="line">-- Installing: /usr/local/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/local/include/pybind11/pybind11.h</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -276,7 +276,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-16 17:16:17" itemprop="dateModified" datetime="2022-08-16T17:16:17+08:00">2022-08-16</time>
+      <time title="Modified: 2022-08-16 17:23:51" itemprop="dateModified" datetime="2022-08-16T17:23:51+08:00">2022-08-16</time>
     </span>
 
   
@@ -358,7 +358,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-16 17:00:41" itemprop="dateModified" datetime="2022-08-16T17:00:41+08:00">2022-08-16</time>
+      <time title="Modified: 2022-08-16 17:24:00" itemprop="dateModified" datetime="2022-08-16T17:24:00+08:00">2022-08-16</time>
     </span>
 
   
@@ -371,7 +371,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="軟體工程兩件事"><a href="#軟體工程兩件事" class="headerlink" title="軟體工程兩件事"></a>軟體工程兩件事</h2><h3 id="1-寫腳本–-也就是寫makefile。"><a href="#1-寫腳本–-也就是寫makefile。" class="headerlink" title="1. 寫腳本– 也就是寫makefile。"></a>1. 寫腳本– 也就是寫makefile。</h3><p>以modmesh的makefile作為例子：</p>
+          <h3 id="1-寫腳本–-也就是寫makefile。"><a href="#1-寫腳本–-也就是寫makefile。" class="headerlink" title="1. 寫腳本– 也就是寫makefile。"></a>1. 寫腳本– 也就是寫makefile。</h3><p>以modmesh的makefile作為例子：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: default</span><br><span class="line">default: buildext</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br><span class="line"></span><br><span class="line">.PHONY: cmakeclean</span><br><span class="line">cmakeclean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br><span class="line"></span><br><span class="line">.PHONY: pytest</span><br><span class="line">pytest: $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">env</span> $(RUNENV) \</span><br></pre></td></tr></table></figure>
 <p>.PHONY，根據<a target="_blank" rel="noopener" href="https://mropengate.blogspot.com/2018/01/makefile.html">這篇文章</a>的說法它叫做「偽目標」（嗯要慢慢用心體會，要認識的還真不少）依據我目前為止的認知上，冒號之前為target，冒號之後為dependency, i.e, target: dependency，並且會層層向下追朔，以上的例子來看default作為target，dependency則是buildext，此時程式就會再向下追朔，找到buildext作為target之處，向下追朔，或是執行裡頭的指令。</p>
 <p>To “build the target”，則如</p>

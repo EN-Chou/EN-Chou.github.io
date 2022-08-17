@@ -96,6 +96,7 @@
         <div class="post-content">
             <p>Comment: In a well-organized C++ code base, the hpp files should always be included using the full path like:</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/base.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/profile.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/buffer/buffer.hpp&gt;</span></span></span><br></pre></td></tr></table></figure>
+<span id="more"></span>
 <p>「Python import 的module 並不必然要用python撰寫，也可以藉由C++」。然而我誤解了這番話的意思，進而混用了 header files 與 modules，以為以下的實驗會成功： </p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import importation <span class="comment">#succeed</span></span><br><span class="line">import layer1.importation <span class="comment">#succeed</span></span><br><span class="line">import header <span class="comment">#failed</span></span><br></pre></td></tr></table></figure>
 <p>以下是python importation 整理過後的資訊：</p>

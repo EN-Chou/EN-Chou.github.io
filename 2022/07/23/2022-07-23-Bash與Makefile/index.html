@@ -79,41 +79,37 @@
         <div class="posts">
     <article class="post-whole">
         <div class="post-title">
-            <h2 class="title">Pybind11-build-from-source.md</h2>
+            <h2 class="title">Bash與Makefile</h2>
             <div class="post-meta">
-                <span class="post-time">2022-07-05</span>
+                <span class="post-time">2022-07-23</span>
                 
                 <span class="post-visit"> visited：<span id="busuanzi_value_page_pv"></span></span>
             </div>
         </div>
         <div class="post-toc" id="post-toc">
     <strong class="post-toc-title">目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#makefile"><span class="toc-text">makefile</span></a></li></ol>
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <p>Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found). </p>
+            <p>在認識到Linux以前，我鮮少接觸到CLI(Command Line Interface)，也花了些許時間去熟悉。一開始看它也許會感到有些震懾，但並沒有想像中的複雜，單純是將我們習慣使用的GUI(Graphical User Interface)改成CLI，滑鼠改成鍵盤，簡單做了轉換。</p>
 <span id="more"></span>
-<p>I followed the history at first, and it was like:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /usr/local/include/pybind</span><br><span class="line"><span class="built_in">cd</span> ~/git-repo</span><br><span class="line">git <span class="built_in">clone</span> (github pybind repository)</span><br><span class="line"><span class="built_in">cd</span> pybind</span><br><span class="line"><span class="built_in">mkdir</span> build/install -p</span><br><span class="line"><span class="built_in">cd</span> build/install</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../..</span><br></pre></td></tr></table></figure>
-<p>the <code>viewer</code> could be successfully built and run. The second attempt was following was following the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation in readme</a>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..</span><br><span class="line">make check -j 4</span><br></pre></td></tr></table></figure>
-<p>along with <code>sudo make install</code> followed.</p>
-<p>Up to this point, I don’t quite understand the purpose of <code>mkdir</code> before <code>cmake</code>, and the reason to why <code>cmake</code> and <code>sudo make install</code> seems to be the main point to build <code>pybind11</code> instead of other action such as <code>python3 setup.py install</code>, and when to define certain variable such as  <code>-DCMAKE_INSTALL_PREFIX=/usr/local</code> instead of leaving it default.</p>
-
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt6-default <span class="comment">#以superuser身份安裝qt6-default</span></span><br><span class="line"><span class="built_in">mkdir</span> build/install -p <span class="comment">#新增資料夾</span></span><br><span class="line"><span class="built_in">cd</span> build/install <span class="comment">#切換目錄到build/install</span></span><br><span class="line"><span class="built_in">rm</span> –rf build <span class="comment">#remove文件, recursively.</span></span><br></pre></td></tr></table></figure>
+<h3 id="makefile"><a href="#makefile" class="headerlink" title="makefile"></a>makefile</h3><p>make 以及 makefile讓我們得以自動化我們想執行的command line。比如說modmesh裡面中clean這個target，若是藉由一行一行的command line我們會需要輸入以下的指令，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure>
+<p>但如果已經在Makefile中寫好了clean這個target，將一行行的command line寫成了shell script。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure>
+<p>我們就可以去藉由make，直接輸入 <code>make clean</code> 去執行我們想要去執行的內容，不用逐步命令。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make clean</span><br></pre></td></tr></table></figure>
         </div>
         
         <div class="post-tag">
             
-            <a class="tag" href="/tags/YYQA/" title="YYQA">YYQA</a>
-            
-            <a class="tag" href="/tags/pybind11/" title="pybind11">pybind11</a>
-            
             <a class="tag" href="/tags/make/" title="make">make</a>
             
-            <a class="tag" href="/tags/cmake/" title="cmake">cmake</a>
+            <a class="tag" href="/tags/bash/" title="bash">bash</a>
             
         </div>
         
@@ -122,15 +118,15 @@
 <div class="paginator">
     
         
-            <a class="prev" href="/2022/07/07/2022-07-07-cmake-QA/">
+            <a class="prev" href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">
                 <i class="iconfont icon-prev"></i>
-                <span class="nav-default">Cmake-QA</span>
+                <span class="nav-default">CMake與Make</span>
                 <span class="nav-mobile">Prev</span>
             </a>
         
         
-            <a class="next" href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/">
-                <span class="nav-default">軟體工程兩件事</span>
+            <a class="next" href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">
+                <span class="nav-default">用C++寫python-module</span>
                 <span class="nav-mobile">Next</span>
                 <i class="iconfont icon-next"></i>
             </a>

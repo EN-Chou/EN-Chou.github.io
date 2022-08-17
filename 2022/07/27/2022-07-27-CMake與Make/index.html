@@ -79,37 +79,36 @@
         <div class="posts">
     <article class="post-whole">
         <div class="post-title">
-            <h2 class="title">Pybind11-build-from-source.md</h2>
+            <h2 class="title">CMake與Make</h2>
             <div class="post-meta">
-                <span class="post-time">2022-07-05</span>
+                <span class="post-time">2022-07-27</span>
                 
                 <span class="post-visit"> visited：<span id="busuanzi_value_page_pv"></span></span>
             </div>
         </div>
         <div class="post-toc" id="post-toc">
     <strong class="post-toc-title">目录</strong>
-    
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake-vs-make"><span class="toc-text">CMake vs make?</span></a></li></ol>
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <p>Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found). </p>
+            <p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，但卻做著不太一樣的事情，好像不只是差了一個C這麼簡單。</p>
 <span id="more"></span>
-<p>I followed the history at first, and it was like:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /usr/local/include/pybind</span><br><span class="line"><span class="built_in">cd</span> ~/git-repo</span><br><span class="line">git <span class="built_in">clone</span> (github pybind repository)</span><br><span class="line"><span class="built_in">cd</span> pybind</span><br><span class="line"><span class="built_in">mkdir</span> build/install -p</span><br><span class="line"><span class="built_in">cd</span> build/install</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../..</span><br></pre></td></tr></table></figure>
-<p>the <code>viewer</code> could be successfully built and run. The second attempt was following was following the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation in readme</a>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..</span><br><span class="line">make check -j 4</span><br></pre></td></tr></table></figure>
-<p>along with <code>sudo make install</code> followed.</p>
-<p>Up to this point, I don’t quite understand the purpose of <code>mkdir</code> before <code>cmake</code>, and the reason to why <code>cmake</code> and <code>sudo make install</code> seems to be the main point to build <code>pybind11</code> instead of other action such as <code>python3 setup.py install</code>, and when to define certain variable such as  <code>-DCMAKE_INSTALL_PREFIX=/usr/local</code> instead of leaving it default.</p>
 
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation$ <span class="built_in">ls</span></span><br><span class="line">build  CMakeLists.txt  pybind11  test.cpp</span><br><span class="line">~/git-repo/importation/build$ cmake .. </span><br><span class="line">~/git-repo/importation/build$ <span class="built_in">ls</span></span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11</span><br><span class="line">~/git-repo/importation/build$ make</span><br></pre></td></tr></table></figure>
+
+<h3 id="CMake-vs-make"><a href="#CMake-vs-make" class="headerlink" title="CMake vs make?"></a>CMake vs make?</h3><p>這裡對於make做了些許的整理，make可以用來自動化shell script。CMake之於Make，與make之於shell script，存在了一些相似性。</p>
+<p>「CMake 用來產生跨平台的專案建置文件，在 windows 下它會生成 visual studio 的專案檔 (.sln) codeblock eclipse，在 linux 下它會生成 Makefile。」在cmake之前的環境如下：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation$ <span class="built_in">ls</span></span><br><span class="line">CMakeLists.txt  pybind11  test.cpp</span><br><span class="line">~/git-repo/importation$ <span class="built_in">ls</span> build/</span><br><span class="line">(empty)</span><br></pre></td></tr></table></figure>
+<p>然後創建build這個directory，這能夠幫助我們將原始文件以及CMake過程的中間產物做做區分，再進行CMake：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation$ <span class="built_in">mkdir</span> build</span><br><span class="line">~/git-repo/importation$ <span class="built_in">cd</span> build/</span><br><span class="line">~/git-repo/importation/build$ cmake ..</span><br></pre></td></tr></table></figure>
+<p>執行完成後，build底下就會有Makefile：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation/build$ ls</span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11</span><br></pre></td></tr></table></figure>
         </div>
         
         <div class="post-tag">
-            
-            <a class="tag" href="/tags/YYQA/" title="YYQA">YYQA</a>
-            
-            <a class="tag" href="/tags/pybind11/" title="pybind11">pybind11</a>
             
             <a class="tag" href="/tags/make/" title="make">make</a>
             
@@ -122,15 +121,9 @@
 <div class="paginator">
     
         
-            <a class="prev" href="/2022/07/07/2022-07-07-cmake-QA/">
-                <i class="iconfont icon-prev"></i>
-                <span class="nav-default">Cmake-QA</span>
-                <span class="nav-mobile">Prev</span>
-            </a>
         
-        
-            <a class="next" href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/">
-                <span class="nav-default">軟體工程兩件事</span>
+            <a class="next" href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/">
+                <span class="nav-default">Bash與Makefile</span>
                 <span class="nav-mobile">Next</span>
                 <i class="iconfont icon-next"></i>
             </a>

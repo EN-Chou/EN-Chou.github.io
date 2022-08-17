@@ -84,6 +84,46 @@
     
         <article class="post-abstract">
             <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/08/17/2022-08-15-%E6%B7%BA%E5%85%A5ELF/">2022-08-15-淺入ELF</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-08-17</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。<code>.o</code>, <code>.a</code>與<code>.so</code>皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，包括<code>file header</code>, <code>.text section</code>, <code>.data section</code> 以及 <code>.bss section</code>等區段。其中 <code>.text</code>存放程式碼區段，<code>.data</code>存放已初始化的全域變數以及靜態變數，而<code>.bss</code>存放已初始化的全域變數以及靜態變數。這篇的小實驗同樣是藉由<code>main.cpp</code>這支簡單的小程式來進行。 </p>
+<h3 id="main-cpp"><a href="#main-cpp" class="headerlink" title="main.cpp"></a>main.cpp</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="size"><a href="#size" class="headerlink" title="size"></a>size</h3><p>size這個指令可以用來查看ELF檔各個區段的長度，在main.cpp檔中，我們並未宣告任何的變數，於是可以看到以下在於.text以及.data區段的長度皆為0。<br>$ size main.o<br>   text	   data	    bss	    dec	    hex	filename<br>    103	      0	      0	    103	     67	main.o</p>
+
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/">.bashrc與環境變數設定</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-08-10</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 </p>
+<h3 id="bashrc"><a href="#bashrc" class="headerlink" title=".bashrc"></a>.bashrc</h3><p>“bash”是Bourne Again SHell的簡稱，是Linux預設使用的shell。使用者，termial，shell這三個元素的相關性可以藉由「使用者，透過terminal，與shell進行溝通」來描述。
+                    <div class="read-more">
+                        <a href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/" class="read-more-link">
+                            ReadMore
+                            <i class="iconfont icon-readmore"></i>
+                        </a>
+                    </div>
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
                 <h2><a class="post-title-link" href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">解碼.o檔</a></h2>
             </div>
             <div class="post-meta">
@@ -92,9 +132,14 @@
             </div>
             <div class="post-content">
                 
-                    <p><img src="https://www.androidauthority.com/wp-content/uploads/2016/03/what-is-machine-code-video-thumb-768x432.jpg.webp" alt="Assembly"></p>
-<p>從<a href="">這篇</a>可以看到在vim中開啟main.o，而上圖充斥著1&amp;0，看似截然不同的兩個東西。</p>
-
+                    <p><img src="/images/assembler.png" alt="Assembly"></p>
+<p>從<a target="_blank" rel="noopener" href="http://localhost:4000/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">這篇</a>可以看到在vim中開啟main.o，而上圖充斥著1&amp;0，看似截然不同的兩個東西。</p>
+                    <div class="read-more">
+                        <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/" class="read-more-link">
+                            ReadMore
+                            <i class="iconfont icon-readmore"></i>
+                        </a>
+                    </div>
                 
             </div>
         </article>
@@ -207,7 +252,7 @@
     
         <article class="post-abstract">
             <div class="post-title">
-                <h2><a class="post-title-link" href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/">2022-07-08-隨手記</a></h2>
+                <h2><a class="post-title-link" href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/">2022-07-08 隨手記</a></h2>
             </div>
             <div class="post-meta">
                 <span class="post-time">2022-07-08</span>
@@ -247,52 +292,15 @@
             </div>
         </article>
     
-        <article class="post-abstract">
-            <div class="post-title">
-                <h2><a class="post-title-link" href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">Pybind11-build-from-source.md</a></h2>
-            </div>
-            <div class="post-meta">
-                <span class="post-time">2022-07-05</span>
-                
-            </div>
-            <div class="post-content">
-                
-                    <p>Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found). </p>
-                    <div class="read-more">
-                        <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/" class="read-more-link">
-                            ReadMore
-                            <i class="iconfont icon-readmore"></i>
-                        </a>
-                    </div>
-                
-            </div>
-        </article>
-    
-        <article class="post-abstract">
-            <div class="post-title">
-                <h2><a class="post-title-link" href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/">軟體工程兩件事</a></h2>
-            </div>
-            <div class="post-meta">
-                <span class="post-time">2022-07-03</span>
-                
-            </div>
-            <div class="post-content">
-                
-                    <h3 id="1-寫腳本–-也就是寫makefile。"><a href="#1-寫腳本–-也就是寫makefile。" class="headerlink" title="1. 寫腳本– 也就是寫makefile。"></a>1. 寫腳本– 也就是寫makefile。</h3><p>以modmesh的makefile作為例子：</p>
-                    <div class="read-more">
-                        <a href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/" class="read-more-link">
-                            ReadMore
-                            <i class="iconfont icon-readmore"></i>
-                        </a>
-                    </div>
-                
-            </div>
-        </article>
-    
 </div>
 <div class="paginator">
     
         
+        
+        <a class="next" href="/page/2/">
+            Next
+            <i class="iconfont icon-next"></i>
+        </a>
         
     
 </div>

@@ -98,10 +98,11 @@
     </div>
 </div>
         <div class="post-content">
-            <p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。<code>.o</code>, <code>.a</code>與<code>.so</code>皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，包括<code>file header</code>, <code>.text section</code>, <code>.data section</code> 以及 <code>.bss section</code>等區段。其中 <code>.text</code>存放程式碼區段，<code>.data</code>存放已初始化的全域變數以及靜態變數，而<code>.bss</code>存放已初始化的全域變數以及靜態變數。這篇的小實驗同樣是藉由<code>main.cpp</code>這支簡單的小程式來進行。 </p>
+            <p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，包括file header, .text section, .data section 以及 .bss section等區段。其中 “.text”存放程式碼區段，”.data”存放已初始化的全域變數以及靜態變數，而”.bss”存放已初始化的全域變數以及靜態變數。這篇的小實驗同樣是藉由<code>main.cpp</code>這支簡單的小程式來進行。 </p>
+<span id="more"></span>
 <h3 id="main-cpp"><a href="#main-cpp" class="headerlink" title="main.cpp"></a>main.cpp</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="size"><a href="#size" class="headerlink" title="size"></a>size</h3><p>size這個指令可以用來查看ELF檔各個區段的長度，在main.cpp檔中，我們並未宣告任何的變數，於是可以看到以下在於.text以及.data區段的長度皆為0。<br>$ size main.o<br>   text	   data	    bss	    dec	    hex	filename<br>    103	      0	      0	    103	     67	main.o</p>
-
+<h3 id="size"><a href="#size" class="headerlink" title="size"></a>size</h3><p>size這個指令可以用來查看ELF檔各個區段的長度。在main.cpp檔中，我們並未宣告任何的變數，於是可以看到以下在於.text以及.data區段的長度皆為0。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ size main.o</span><br><span class="line">   text	   data	    bss	    dec	    hex	filename</span><br><span class="line">    103	      0	      0	    103	     67	main.o</span><br></pre></td></tr></table></figure>
         </div>
         
         <div class="post-tag">

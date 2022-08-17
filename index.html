@@ -1,9 +1,264 @@
-extends includes/layout
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>Echo November&#39;s note</title>
+    
+<link rel="stylesheet" href="/css/style.css">
 
-block container
-    include mixins/post
-    +articles()
+    
+<link rel="stylesheet" href="/css/gitment.css">
 
-block pagination
-    include mixins/paginator
-    +forList()
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header class="header">
+    <div class="header-inner">
+        <div class="header-title">
+
+        </div>
+        <nav class="header-nav">
+            
+            <a href="/" class="header-nav-link" >
+                Home
+            </a>
+            
+
+            
+            <a href="/archives" class="header-nav-link">
+                Archives
+            </a>
+            
+
+            
+            <a href="/tags" class="header-nav-link">
+                Tags
+            </a>
+            
+
+            
+        </nav>
+    </div>
+</header>
+<header class="mobile-header">
+    <div class="mobile-nav">
+        <div class="mobile-nav-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="mobile-nav-title">
+            <a href="/" class="mobile-nav-title-link">EN-Chou's Blog</a>
+        </div>
+
+    </div>
+    <nav class="mobile-menu">
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-home"></i>
+                <a href="/" class="mobile-nav-link">Home</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-archive"></i>
+                <a href="/archives" class="mobile-nav-link">Archives</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-tag"></i>
+                <a href="/tags" class="mobile-nav-link">Tags</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-about"></i>
+                <a href="/about/" class="mobile-nav-link">About</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="main">
+    <div class="content-inner">
+        <div class="posts">
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">用C++寫python-module</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-07-20</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<br><img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&name=small" alt="C++ chats with python"></p>
+<p>「其它的程式語言對你作力學是沒用的，作計算就三本柱 Python、C++、Fortran 足矣，連 C 都沒什麼用處。」Python在計算的速度上相較於C++非常的緩慢，這個<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3PcIJKd1PKU&ab_channel=xmdi">demo</a>很清楚地呈現了這件事。</p>
+<p>以計算力學為題，python在tool的開發，input的整合上具有優勢，但是在計算效能上的表現不佳，於是就有了許多與python互相支援的foreign function interface(FFI)，如 swig, cython, pybind11。<br>截python所長，補C++所短 (or vice versa) ，似乎是做出更好的力學程式不可或缺的元素，pybind扮演的角色於是顯現。接下來就簡單用C++寫一個python的module:</p>
+<h3 id="1-寫-cpp-x2F-h-file。"><a href="#1-寫-cpp-x2F-h-file。" class="headerlink" title="1. 寫 .cpp&#x2F;.h file。"></a>1. 寫 .cpp&#x2F;.h file。</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pybind11/pybind11.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">square</span><span class="params">(<span class="type">double</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> i*i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(test, handle)&#123; <span class="comment">//Module 的attributes 會在這裡做定義</span></span><br><span class="line">        handle.<span class="built_in">doc</span>()=<span class="string">&quot;This is my doc&quot;</span>;</span><br><span class="line">        handle.<span class="built_in">def</span>(<span class="string">&quot;sqrt&quot;</span>, &amp;square);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="2-寫-CMakeList-txt。"><a href="#2-寫-CMakeList-txt。" class="headerlink" title="2. 寫 CMakeList.txt。"></a>2. 寫 CMakeList.txt。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.4)</span><br><span class="line">PROJECT(pybind_vid)</span><br><span class="line">add_subdirectory(pybind11)</span><br><span class="line">pybind11_add_module(<span class="built_in">test</span> test.cpp) //test為建構的module的名稱 test.cpp是它所依據的檔案</span><br></pre></td></tr></table></figure>
+<h3 id="3-Build-the-module。"><a href="#3-Build-the-module。" class="headerlink" title="3. Build the module。"></a>3. Build the module。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build/</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h3 id="4-在python中使用前面所建立的module。"><a href="#4-在python中使用前面所建立的module。" class="headerlink" title="4. 在python中使用前面所建立的module。"></a>4. 在python中使用前面所建立的module。</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation/test$ python3</span><br><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt; test.sqrt(3.145)</span><br><span class="line">9.891025</span><br><span class="line">&gt;&gt;&gt; test.__doc__</span><br><span class="line"><span class="string">&quot;This is my doc&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>dir(test)中可以看我們define的function以及attributes。</li>
+<li>What’s the cause of success within <code>~/git-repo/importation/test</code> but not <code>~/git-repo/importation</code>?<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;cached&#x27;</span>, <span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;path&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/07/16/2022-07-16-Introduction-to-python-importation/">Introduction-to-python-importation</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-07-16</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>Comment: In a well-organized C++ code base, the hpp files should always be included using the full path like:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/base.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/profile.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/buffer/buffer.hpp&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>「Python import 的module 並不必然要用python撰寫，也可以藉由C++」。然而我誤解了這番話的意思，進而混用了 header files 與 modules，以為以下的實驗會成功： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import importation <span class="comment">#succeed</span></span><br><span class="line">import layer1.importation <span class="comment">#succeed</span></span><br><span class="line">import header <span class="comment">#failed</span></span><br></pre></td></tr></table></figure>
+<p>以下是python importation 整理過後的資訊：</p>
+<h3 id="1-import-modmesh"><a href="#1-import-modmesh" class="headerlink" title="1. import modmesh"></a>1. import modmesh</h3><p>以<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>作為例子，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import modmesh</span><br></pre></td></tr></table></figure>
+<p>我原先同樣是誤會 modmesh.hpp 才是被 python import的對象；但這個對象其實是<code>library(or python package):$(MODMESH_ROOT)/modmesh</code>。如果它已經被 built, 那麼目錄裡頭就會有 <code>__init__.py</code> 以及 <code>.so</code> 。</p>
+<h3 id="2-python-importation"><a href="#2-python-importation" class="headerlink" title="2. python importation"></a>2. python importation</h3><p>python importation 的機制在於編輯 <code>sys.path</code>. e,g </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del sys.path[0]</span><br></pre></td></tr></table></figure>
+<p><code>sys.path</code>儲存的是尋找python module的路徑。在這個動作之後，原先若是被import的對象被列在<code>sys.path[0]</code>所儲存的路徑之下，那麼import就會失敗。</p>
+<h3 id="3-Module-written-in-C"><a href="#3-Module-written-in-C" class="headerlink" title="3. Module written in C++"></a>3. Module written in C++</h3><p>如前所述，Python import 的module 並不必然要用python撰寫，e.g. C++, 它們是透過 import shared library(.so)來被python支援。 C++ and python 的連結可透過 swig, cython, pybind11 等等。在modmesh 中則是使用 pybind11。</p>
+
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/">2022-07-08-隨手記</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-07-08</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：</p>
+<h3 id="1-Unit-testing"><a href="#1-Unit-testing" class="headerlink" title="1.  Unit testing"></a>1.  Unit testing</h3><p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>中，pytest是用來跑unit testing的target。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure>
+<h3 id="2-Compiler-Explorer"><a href="#2-Compiler-Explorer" class="headerlink" title="2. Compiler Explorer"></a>2. <a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3><p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I’ve pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p>
+<p>Reply: You do not need to worry about assembly right now, but a programmer needs to know their machines eventually.  At the moment your understanding to assembly is sufficient.  Just be aware of its existence. </p>
+<h3 id="3-Citcuit"><a href="#3-Citcuit" class="headerlink" title="3. Citcuit"></a>3. Citcuit</h3><p>每次執行指令時，在電路端都會有不同的表現。</p>
+
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/07/07/2022-07-07-cmake-QA/">Cmake-QA</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-07-07</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <h3 id="1-Please-search-the-cmake-document-for-why-you-should-mkdir-before-building-a-cmake-project-Similarly-please-share-the-link-that-provides-the-information"><a href="#1-Please-search-the-cmake-document-for-why-you-should-mkdir-before-building-a-cmake-project-Similarly-please-share-the-link-that-provides-the-information" class="headerlink" title="1. Please search the cmake document for why you should mkdir before building a cmake project.  Similarly, please share the link that provides the information."></a>1. Please search the cmake document for why you should mkdir before building a cmake project.  Similarly, please share the link that provides the information.</h3><p>So at first I went <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nlKcXPUJGwA&ab_channel=Code,Tech,andTutorials">here</a>.  I get to know:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Usage</span><br><span class="line"></span><br><span class="line">  cmake [options] path-to-source</span><br><span class="line">  cmake [options] path-to-existing-build</span><br><span class="line">  cmake [options] -S path-to-source -B path-to-build</span><br></pre></td></tr></table></figure>
+
+<p>From the <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nlKcXPUJGwA&ab_channel=Code,Tech,andTutorials+">video</a>, the mkdir seems to be what most people do. The reason to why mkdir I supposed is that it helps organize our files, so that files won’t be a mess. It helps, but not a necessity. In order to better confirm my words, I did a little experiment on it:<br>cmake -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F; .<br>sudo make install<br>It works as well. So I think the reason to mkdir is that it helps sort our files in an organized way. </p>
+<p>While building pybind, there are files being generated, including Makefile; no additional CMakeLists.txt are generated accordingly. I’m not sure whether it is possible that cmake would generate an additional CMakeLists.txt. If it does, the reason to mkdir will be even obvious, i.e, overwritting will increase the difficulty if we want to undo. </p>
+<h3 id="2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you"><a href="#2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you" class="headerlink" title="2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you."></a>2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you.</h3><p>It designated the directory of installation. (<a target="_blank" rel="noopener" href="https://zh.wikibooks.org/wiki/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D">link</a>)<br>On my pc, while cmake <code>-DCMAKE_INSTALL_PREFIX=/ .</code>,</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">-- Installing: /usr/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/include/pybind11/pybind11.h</span><br><span class="line">...</span><br><span class="line"><span class="keyword">while</span> cmake -DCMAKE_INSTALL_PREFIX=/usr/local .,</span><br><span class="line">...</span><br><span class="line">-- Installing: /usr/local/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/local/include/pybind11/pybind11.h</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">Pybind11-build-from-source.md</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-07-05</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <p>Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found). </p>
+<p>I followed the history at first, and it was like:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /usr/local/include/pybind</span><br><span class="line"><span class="built_in">cd</span> ~/git-repo</span><br><span class="line">git <span class="built_in">clone</span> (github pybind repository)</span><br><span class="line"><span class="built_in">cd</span> pybind</span><br><span class="line"><span class="built_in">mkdir</span> build/install -p</span><br><span class="line"><span class="built_in">cd</span> build/install</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../..</span><br></pre></td></tr></table></figure>
+<p>the <code>viewer</code> could be successfully built and run. The second attempt was following was following the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation in readme</a>:</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..</span><br><span class="line">make check -j 4</span><br></pre></td></tr></table></figure>
+<p>along with <code>sudo make install</code> followed.</p>
+<p>Up to this point, I don’t quite understand the purpose of <code>mkdir</code> before <code>cmake</code>, and the reason to why <code>cmake</code> and <code>sudo make install</code> seems to be the main point to build <code>pybind11</code> instead of other action such as <code>python3 setup.py install</code>, and when to define certain variable such as  <code>-DCMAKE_INSTALL_PREFIX=/usr/local</code> instead of leaving it default.</p>
+
+                
+            </div>
+        </article>
+    
+        <article class="post-abstract">
+            <div class="post-title">
+                <h2><a class="post-title-link" href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/">軟體工程兩件事</a></h2>
+            </div>
+            <div class="post-meta">
+                <span class="post-time">2022-07-03</span>
+                
+            </div>
+            <div class="post-content">
+                
+                    <h3 id="1-寫腳本–-也就是寫makefile。"><a href="#1-寫腳本–-也就是寫makefile。" class="headerlink" title="1. 寫腳本– 也就是寫makefile。"></a>1. 寫腳本– 也就是寫makefile。</h3><p>以modmesh的makefile作為例子：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: default</span><br><span class="line">default: buildext</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br><span class="line"></span><br><span class="line">.PHONY: cmakeclean</span><br><span class="line">cmakeclean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br><span class="line"></span><br><span class="line">.PHONY: pytest</span><br><span class="line">pytest: $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">env</span> $(RUNENV) \</span><br></pre></td></tr></table></figure>
+<p>.PHONY，根據<a target="_blank" rel="noopener" href="https://mropengate.blogspot.com/2018/01/makefile.html">這篇文章</a>的說法它叫做「偽目標」（嗯要慢慢用心體會，要認識的還真不少）依據我目前為止的認知上，冒號之前為target，冒號之後為dependency, i.e, target: dependency，並且會層層向下追朔，以上的例子來看default作為target，dependency則是buildext，此時程式就會再向下追朔，找到buildext作為target之處，向下追朔，或是執行裡頭的指令。</p>
+<p>To “build the target”，則如</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure>
+<p>同樣的事情也不見得要透過這樣的方法來進行，i.e, make clean在terminal中藉由以下的指令產生等效的結果：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line"><span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br></pre></td></tr></table></figure>
+<p>我想這就是為什麼寫makefile會叫做寫腳本，真的是有異曲同工之妙ㄋ～</p>
+<h3 id="2-命名檔案"><a href="#2-命名檔案" class="headerlink" title="2. 命名檔案"></a>2. 命名檔案</h3>
+                
+            </div>
+        </article>
+    
+</div>
+<div class="paginator">
+    
+        
+        
+    
+</div>
+
+    </div>
+</div>
+<footer class="footer-social">
+    
+
+    
+
+    
+
+    <div class="footer-copyright">
+        <p class="time-line">
+            &copy;
+            
+            
+            2022
+            &nbsp;<i class="iconfont icon-heart"></i>&nbsp;
+            <a target="_blank" href="https://github.com/iJinxin">EN-Chou</a>
+        </p>
+        <p class="theme-info">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme -
+            <a target="_blank" href="https://github.com/iJinxin/hexo-theme-sky">Sky</a>
+        </p>
+    </div>
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    
+
+</script>
+</html>

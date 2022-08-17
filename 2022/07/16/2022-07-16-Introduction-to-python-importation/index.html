@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>Echo November&#39;s note</title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
+<meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header class="header">
+    <div class="header-inner">
+        <div class="header-title">
+
+        </div>
+        <nav class="header-nav">
+            
+            <a href="/" class="header-nav-link" >
+                Home
+            </a>
+            
+
+            
+            <a href="/archives" class="header-nav-link">
+                Archives
+            </a>
+            
+
+            
+            <a href="/tags" class="header-nav-link">
+                Tags
+            </a>
+            
+
+            
+        </nav>
+    </div>
+</header>
+<header class="mobile-header">
+    <div class="mobile-nav">
+        <div class="mobile-nav-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="mobile-nav-title">
+            <a href="/" class="mobile-nav-title-link">EN-Chou's Blog</a>
+        </div>
+
+    </div>
+    <nav class="mobile-menu">
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-home"></i>
+                <a href="/" class="mobile-nav-link">Home</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-archive"></i>
+                <a href="/archives" class="mobile-nav-link">Archives</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-tag"></i>
+                <a href="/tags" class="mobile-nav-link">Tags</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-about"></i>
+                <a href="/about/" class="mobile-nav-link">About</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="main">
+    <div class="content-inner">
+        <div class="posts">
+    <article class="post-whole">
+        <div class="post-title">
+            <h2 class="title">Introduction-to-python-importation</h2>
+            <div class="post-meta">
+                <span class="post-time">2022-07-16</span>
+                
+                <span class="post-visit"> visited：<span id="busuanzi_value_page_pv"></span></span>
+            </div>
+        </div>
+        <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-import-modmesh"><span class="toc-text">1. import modmesh</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-python-importation"><span class="toc-text">2. python importation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-Module-written-in-C"><span class="toc-text">3. Module written in C++</span></a></li></ol>
+    <div class="back-to-top" id="back-to-top">
+        <a href="javascript:void(0);">回到顶部</a>
+    </div>
+</div>
+        <div class="post-content">
+            <p>Comment: In a well-organized C++ code base, the hpp files should always be included using the full path like:</p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/base.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/profile.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/buffer/buffer.hpp&gt;</span></span></span><br></pre></td></tr></table></figure>
+<p>「Python import 的module 並不必然要用python撰寫，也可以藉由C++」。然而我誤解了這番話的意思，進而混用了 header files 與 modules，以為以下的實驗會成功： </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import importation <span class="comment">#succeed</span></span><br><span class="line">import layer1.importation <span class="comment">#succeed</span></span><br><span class="line">import header <span class="comment">#failed</span></span><br></pre></td></tr></table></figure>
+<p>以下是python importation 整理過後的資訊：</p>
+<h3 id="1-import-modmesh"><a href="#1-import-modmesh" class="headerlink" title="1. import modmesh"></a>1. import modmesh</h3><p>以<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>作為例子，</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import modmesh</span><br></pre></td></tr></table></figure>
+<p>我原先同樣是誤會 modmesh.hpp 才是被 python import的對象；但這個對象其實是<code>library(or python package):$(MODMESH_ROOT)/modmesh</code>。如果它已經被 built, 那麼目錄裡頭就會有 <code>__init__.py</code> 以及 <code>.so</code> 。</p>
+<h3 id="2-python-importation"><a href="#2-python-importation" class="headerlink" title="2. python importation"></a>2. python importation</h3><p>python importation 的機制在於編輯 <code>sys.path</code>. e,g </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del sys.path[0]</span><br></pre></td></tr></table></figure>
+<p><code>sys.path</code>儲存的是尋找python module的路徑。在這個動作之後，原先若是被import的對象被列在<code>sys.path[0]</code>所儲存的路徑之下，那麼import就會失敗。</p>
+<h3 id="3-Module-written-in-C"><a href="#3-Module-written-in-C" class="headerlink" title="3. Module written in C++"></a>3. Module written in C++</h3><p>如前所述，Python import 的module 並不必然要用python撰寫，e.g. C++, 它們是透過 import shared library(.so)來被python支援。 C++ and python 的連結可透過 swig, cython, pybind11 等等。在modmesh 中則是使用 pybind11。</p>
+
+        </div>
+        
+        <div class="post-tag">
+            
+            <a class="tag" href="/tags/YYQA/" title="YYQA">YYQA</a>
+            
+            <a class="tag" href="/tags/python/" title="python">python</a>
+            
+        </div>
+        
+    </article>
+</div>
+<div class="paginator">
+    
+        
+            <a class="prev" href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">
+                <i class="iconfont icon-prev"></i>
+                <span class="nav-default">用C++寫python-module</span>
+                <span class="nav-mobile">Prev</span>
+            </a>
+        
+        
+            <a class="next" href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/">
+                <span class="nav-default">2022-07-08-隨手記</span>
+                <span class="nav-mobile">Next</span>
+                <i class="iconfont icon-next"></i>
+            </a>
+        
+    
+</div>
+<div id="comment-container"></div>
+    </div>
+</div>
+<footer class="footer-social">
+    
+
+    
+
+    
+
+    <div class="footer-copyright">
+        <p class="time-line">
+            &copy;
+            
+            
+            2022
+            &nbsp;<i class="iconfont icon-heart"></i>&nbsp;
+            <a target="_blank" href="https://github.com/iJinxin">EN-Chou</a>
+        </p>
+        <p class="theme-info">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme -
+            <a target="_blank" href="https://github.com/iJinxin/hexo-theme-sky">Sky</a>
+        </p>
+    </div>
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    
+
+</script>
+</html>

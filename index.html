@@ -116,12 +116,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -159,7 +159,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/07/2022-07-07-cmake-QA/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/17/2022-07-08-%E5%B0%8F%E9%9B%9C%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -177,7 +177,84 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/07/2022-07-07-cmake-QA/" class="post-title-link" itemprop="url">2022-07-07-cmake-QA</a>
+          <a href="/2022/08/17/2022-07-08-%E5%B0%8F%E9%9B%9C%E8%A8%98/" class="post-title-link" itemprop="url">2022-07-08-隨手記</a>
+        </h2>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2022-08-17 10:30:50 / Modified: 10:37:48" itemprop="dateCreated datePublished" datetime="2022-08-17T10:30:50+08:00">2022-08-17</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+          <p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：</p>
+<h3 id="1-Unit-testing"><a href="#1-Unit-testing" class="headerlink" title="1.  Unit testing"></a>1.  Unit testing</h3><p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>中，pytest是用來跑unit testing的target。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure>
+<h3 id="2-Compiler-Explorer"><a href="#2-Compiler-Explorer" class="headerlink" title="2. Compiler Explorer"></a>2. <a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3><p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I’ve pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p>
+<p>Reply: You do not need to worry about assembly right now, but a programmer needs to know their machines eventually.  At the moment your understanding to assembly is sufficient.  Just be aware of its existence. </p>
+<ol start="3">
+<li>Citcuit<br>每次執行指令時，在電路端都會有不同的表現。</li>
+</ol>
+
+      
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+        <div class="post-eof"></div>
+      
+    </footer>
+  </article>
+</div>
+
+
+
+
+    
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/07/Cmake-QA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="EN-Chou">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's note">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="undefined | Echo November's note">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h2 class="post-title" itemprop="name headline">
+          <a href="/2022/07/07/Cmake-QA/" class="post-title-link" itemprop="url">2022-07-07-cmake-QA</a>
         </h2>
 
         <div class="post-meta-container">
@@ -195,7 +272,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-17 10:28:56" itemprop="dateModified" datetime="2022-08-17T10:28:56+08:00">2022-08-17</time>
+      <time title="Modified: 2022-08-17 10:35:13" itemprop="dateModified" datetime="2022-08-17T10:35:13+08:00">2022-08-17</time>
     </span>
 
   
@@ -213,7 +290,7 @@
 
 <p>From the <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nlKcXPUJGwA&ab_channel=Code,Tech,andTutorials+">video</a>, the mkdir seems to be what most people do. The reason to why mkdir I supposed is that it helps organize our files, so that files won’t be a mess. It helps, but not a necessity. In order to better confirm my words, I did a little experiment on it:<br>cmake -DCMAKE_INSTALL_PREFIX&#x3D;&#x2F; .<br>sudo make install<br>It works as well. So I think the reason to mkdir is that it helps sort our files in an organized way. </p>
 <p>While building pybind, there are files being generated, including Makefile; no additional CMakeLists.txt are generated accordingly. I’m not sure whether it is possible that cmake would generate an additional CMakeLists.txt. If it does, the reason to mkdir will be even obvious, i.e, overwritting will increase the difficulty if we want to undo. </p>
-<h2 id="2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you"><a href="#2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you" class="headerlink" title="2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you."></a>2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you.</h2><p>It designated the directory of installation. (<a target="_blank" rel="noopener" href="https://zh.wikibooks.org/wiki/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D">link</a>)<br>On my pc, while cmake <code>-DCMAKE_INSTALL_PREFIX=/ .</code>,</p>
+<h3 id="2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you"><a href="#2-Please-find-out-what-CMAKE-INSTALL-PREFIX-does-and-show-me-the-link-that-explains-it-to-you" class="headerlink" title="2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you."></a>2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you.</h3><p>It designated the directory of installation. (<a target="_blank" rel="noopener" href="https://zh.wikibooks.org/wiki/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D">link</a>)<br>On my pc, while cmake <code>-DCMAKE_INSTALL_PREFIX=/ .</code>,</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">-- Installing: /usr/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/include/pybind11/pybind11.h</span><br><span class="line">...</span><br><span class="line"><span class="keyword">while</span> cmake -DCMAKE_INSTALL_PREFIX=/usr/local .,</span><br><span class="line">...</span><br><span class="line">-- Installing: /usr/local/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/local/include/pybind11/pybind11.h</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
       
     </div>
@@ -240,7 +317,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/05/Pybind11-build-from-source-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -258,7 +335,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/" class="post-title-link" itemprop="url">2022-07-05-pybind11-build-from-source.md</a>
+          <a href="/2022/07/05/Pybind11-build-from-source-md/" class="post-title-link" itemprop="url">2022-07-05-pybind11-build-from-source.md</a>
         </h2>
 
         <div class="post-meta-container">
@@ -322,7 +399,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/03/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -340,7 +417,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/" class="post-title-link" itemprop="url">軟體工程兩件事</a>
+          <a href="/2022/07/03/%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/" class="post-title-link" itemprop="url">軟體工程兩件事</a>
         </h2>
 
         <div class="post-meta-container">

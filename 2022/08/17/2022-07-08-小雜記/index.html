@@ -20,31 +20,30 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.12.3","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the pdf documentation in readme (I focused on the wrong chapter">
+    <meta name="description" content="這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向： 1.  Unit testingUnit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2022-07-05-pybind11-build-from-source.md">
-<meta property="og:url" content="http://example.com/2022/07/05/2022-07-05-pybind11-build-from-source-md/index.html">
+<meta property="og:title" content="2022-07-08-隨手記">
+<meta property="og:url" content="http://example.com/2022/08/17/2022-07-08-%E5%B0%8F%E9%9B%9C%E8%A8%98/index.html">
 <meta property="og:site_name" content="Echo November&#39;s note">
-<meta property="og:description" content="Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the pdf documentation in readme (I focused on the wrong chapter">
+<meta property="og:description" content="這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向： 1.  Unit testingUnit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-07-04T17:21:26.000Z">
-<meta property="article:modified_time" content="2022-08-16T09:23:51.401Z">
+<meta property="article:published_time" content="2022-08-17T02:30:50.000Z">
+<meta property="article:modified_time" content="2022-08-17T02:37:48.772Z">
 <meta property="article:author" content="EN-Chou">
-<meta property="article:tag" content="pybind11">
-<meta property="article:tag" content="make">
-<meta property="article:tag" content="cmake">
+<meta property="article:tag" content="mini-sprint">
 <meta property="article:tag" content="YYQA">
+<meta property="article:tag" content="隨手記">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
+<link rel="canonical" href="http://example.com/2022/08/17/2022-07-08-%E5%B0%8F%E9%9B%9C%E8%A8%98/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/07/05/2022-07-05-pybind11-build-from-source-md/","path":"2022/07/05/2022-07-05-pybind11-build-from-source-md/","title":"2022-07-05-pybind11-build-from-source.md"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/08/17/2022-07-08-%E5%B0%8F%E9%9B%9C%E8%A8%98/","path":"2022/08/17/2022-07-08-小雜記/","title":"2022-07-08-隨手記"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>2022-07-05-pybind11-build-from-source.md | Echo November's note</title>
+<title>2022-07-08-隨手記 | Echo November's note</title>
   
 
 
@@ -99,7 +98,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -112,6 +111,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-Unit-testing"><span class="nav-number">1.</span> <span class="nav-text">1.  Unit testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-Compiler-Explorer"><span class="nav-number">2.</span> <span class="nav-text">2. Compiler Explorer</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -124,12 +124,12 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">3</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
       <div class="site-state-item site-state-tags">
-        <span class="site-state-item-count">6</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">tags</span>
       </div>
   </nav>
@@ -168,7 +168,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/08/17/2022-07-08-%E5%B0%8F%E9%9B%9C%E8%A8%98/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.gif">
@@ -181,12 +181,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="2022-07-05-pybind11-build-from-source.md | Echo November's note">
+      <meta itemprop="name" content="2022-07-08-隨手記 | Echo November's note">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2022-07-05-pybind11-build-from-source.md
+          2022-07-08-隨手記
         </h1>
 
         <div class="post-meta-container">
@@ -196,15 +196,9 @@
         <i class="far fa-calendar"></i>
       </span>
       <span class="post-meta-item-text">Posted on</span>
+      
 
-      <time title="Created: 2022-07-05 01:21:26" itemprop="dateCreated datePublished" datetime="2022-07-05T01:21:26+08:00">2022-07-05</time>
-    </span>
-    <span class="post-meta-item">
-      <span class="post-meta-item-icon">
-        <i class="far fa-calendar-check"></i>
-      </span>
-      <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2022-08-16 17:23:51" itemprop="dateModified" datetime="2022-08-16T17:23:51+08:00">2022-08-16</time>
+      <time title="Created: 2022-08-17 10:30:50 / Modified: 10:37:48" itemprop="dateCreated datePublished" datetime="2022-08-17T10:30:50+08:00">2022-08-17</time>
     </span>
 
   
@@ -217,13 +211,14 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found). </p>
-<p>I followed the history at first, and it was like:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /usr/local/include/pybind</span><br><span class="line"><span class="built_in">cd</span> ~/git-repo</span><br><span class="line">git <span class="built_in">clone</span> (github pybind repository)</span><br><span class="line"><span class="built_in">cd</span> pybind</span><br><span class="line"><span class="built_in">mkdir</span> build/install -p</span><br><span class="line"><span class="built_in">cd</span> build/install</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../..</span><br></pre></td></tr></table></figure>
-<p>the <code>viewer</code> could be successfully built and run. The second attempt was following was following the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation in readme</a>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..</span><br><span class="line">make check -j 4</span><br></pre></td></tr></table></figure>
-<p>along with <code>sudo make install</code> followed.</p>
-<p>Up to this point, I don’t quite understand the purpose of <code>mkdir</code> before <code>cmake</code>, and the reason to why <code>cmake</code> and <code>sudo make install</code> seems to be the main point to build <code>pybind11</code> instead of other action such as <code>python3 setup.py install</code>, and when to define certain variable such as  <code>-DCMAKE_INSTALL_PREFIX=/usr/local</code> instead of leaving it default.</p>
+        <p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：</p>
+<h3 id="1-Unit-testing"><a href="#1-Unit-testing" class="headerlink" title="1.  Unit testing"></a>1.  Unit testing</h3><p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>中，pytest是用來跑unit testing的target。</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure>
+<h3 id="2-Compiler-Explorer"><a href="#2-Compiler-Explorer" class="headerlink" title="2. Compiler Explorer"></a>2. <a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3><p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I’ve pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p>
+<p>Reply: You do not need to worry about assembly right now, but a programmer needs to know their machines eventually.  At the moment your understanding to assembly is sufficient.  Just be aware of its existence. </p>
+<ol start="3">
+<li>Citcuit<br>每次執行指令時，在電路端都會有不同的表現。</li>
+</ol>
 
     </div>
 
@@ -233,24 +228,20 @@
 
     <footer class="post-footer">
           <div class="post-tags">
-              <a href="/tags/pybind11/" rel="tag"># pybind11</a>
-              <a href="/tags/make/" rel="tag"># make</a>
-              <a href="/tags/cmake/" rel="tag"># cmake</a>
+              <a href="/tags/mini-sprint/" rel="tag"># mini-sprint</a>
               <a href="/tags/YYQA/" rel="tag"># YYQA</a>
+              <a href="/tags/%E9%9A%A8%E6%89%8B%E8%A8%98/" rel="tag"># 隨手記</a>
           </div>
 
         
 
           <div class="post-nav">
             <div class="post-nav-item">
-                <a href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/" rel="prev" title="軟體工程兩件事">
-                  <i class="fa fa-chevron-left"></i> 軟體工程兩件事
+                <a href="/2022/07/07/Cmake-QA/" rel="prev" title="2022-07-07-cmake-QA">
+                  <i class="fa fa-chevron-left"></i> 2022-07-07-cmake-QA
                 </a>
             </div>
             <div class="post-nav-item">
-                <a href="/2022/07/07/2022-07-07-cmake-QA/" rel="next" title="2022-07-07-cmake-QA">
-                  2022-07-07-cmake-QA <i class="fa fa-chevron-right"></i>
-                </a>
             </div>
           </div>
     </footer>

@@ -1,0 +1,268 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=utf-8">
+    <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+    <title>Echo November&#39;s note</title>
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    
+<link rel="stylesheet" href="/css/gitment.css">
+
+    <link rel="stylesheet" type="text/css" href="//at.alicdn.com/t/font_859455_eaq7v6w8ktj.css">
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<body>
+<header class="header">
+    <div class="header-inner">
+        <div class="header-title">
+
+        </div>
+        <nav class="header-nav">
+            
+            <a href="/" class="header-nav-link" >
+                Home
+            </a>
+            
+
+            
+            <a href="/archives" class="header-nav-link">
+                Archives
+            </a>
+            
+
+            
+            <a href="/tags" class="header-nav-link">
+                Tags
+            </a>
+            
+
+            
+            <a href="/about/" class="header-nav-link">
+                About
+            </a>
+            
+        </nav>
+    </div>
+</header>
+<header class="mobile-header">
+    <div class="mobile-nav">
+        <div class="mobile-nav-icon">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <div class="mobile-nav-title">
+            <a href="/" class="mobile-nav-title-link">Echo November's Blog</a>
+        </div>
+
+    </div>
+    <nav class="mobile-menu">
+        <ul class="mobile-menu-list">
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-home"></i>
+                <a href="/" class="mobile-nav-link">Home</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-archive"></i>
+                <a href="/archives" class="mobile-nav-link">Archives</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-tag"></i>
+                <a href="/tags" class="mobile-nav-link">Tags</a>
+            </li>
+            <li class="mobile-menu-item">
+                <i class="iconfont icon-about"></i>
+                <a href="/about/" class="mobile-nav-link">About</a>
+            </li>
+        </ul>
+    </nav>
+</header>
+<div class="main">
+    <div class="content-inner">
+        <div class="posts">
+    <article class="post-whole">
+        <div class="post-title">
+            <h2 class="title">CFDLab Server Manual</h2>
+            <div class="post-meta">
+                <span class="post-time">2022-09-03</span>
+                
+                <span class="post-visit"> visited：<span id="busuanzi_value_page_pv"></span></span>
+            </div>
+        </div>
+        <div class="post-toc" id="post-toc">
+    <strong class="post-toc-title">目录</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-installation"><span class="toc-text">Linux installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server-%E8%A8%AD%E5%AE%9A"><span class="toc-text">Server 設定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5master-client%E9%97%9C%E9%96%89selinuxsecurity-enhanced-linux"><span class="toc-text">第一步(master &amp; client)關閉SELinux(Security Enhanced Linux)：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E8%A8%AD%E5%AE%9Aip"><span class="toc-text">第二步 設定IP：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-nfsnetwork-file-system%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E6%94%AF%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%AD%A5mount%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%94%AF%E7%A1%AC%E7%A2%9F%E5%88%86%E4%BA%AB%E8%B3%87%E6%96%99"><span class="toc-text">第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</span></a></li></ol></li></ol></li></ol>
+    <div class="back-to-top" id="back-to-top">
+        <a href="javascript:void(0);">回到顶部</a>
+    </div>
+</div>
+        <div class="post-content">
+            <p>這篇是由我們實驗室前輩的傳承和同學們大家一起統整的Server灌系統流程。 <span id="more"></span></p>
+<h3 id="linux-installation">Linux installation</h3>
+<ul>
+<li>製作USB開機隨身碟</li>
+<li>插入USB開機隨身碟</li>
+<li>進bios（開機之後狂按delete, F2 or F10，依據主機板而不同）。進bios要做兩件事：
+<ol type="1">
+<li>進階頻率設定 -&gt; 進階CPU -&gt; Hyper-Threading技術 -&gt; 關閉（不同廠家的Hyper-Threading 位置不同需要找一下）</li>
+<li>BIOS功能 -&gt; 啟動優先權一（Boot Priority I）-&gt; 選擇USB開機隨身碟(UEFI...Transcend...16GB...) (如果沒有出現UEFI，重開機)</li>
+</ol>
+<ul>
+<li>改完以上兩件事後， Save and exit。</li>
+</ul></li>
+<li>開機後選擇Install Scientific 7.7</li>
+<li>Install system:
+<ol type="1">
+<li>DATE &amp; TIME 選 Taiwan(Taipei)，設定時間。</li>
+<li>語言設English(絕對不要改)</li>
+<li>鍵盤設US(絕對不要改)</li>
+<li>Software Selection(見Appendix I)</li>
+<li><p>Installation Destination:<br />
+Create-&gt; Standard-&gt; 分配容量<br />
+先將原有的都刪除，</p>
+<table>
+<thead>
+<tr class="header">
+<th>名稱</th>
+<th>容量</th>
+<th>資料型態</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>/boot</td>
+<td>10GiB</td>
+<td>ext4</td>
+</tr>
+<tr class="even">
+<td>Swap</td>
+<td>10GiB</td>
+<td>swap</td>
+</tr>
+<tr class="odd">
+<td>/boot/efi</td>
+<td>10GiB</td>
+<td>EFI</td>
+</tr>
+<tr class="even">
+<td>/</td>
+<td>150GiB</td>
+<td>ext4</td>
+</tr>
+<tr class="odd">
+<td>/home</td>
+<td>其他全部給它(看free)</td>
+<td>ext4</td>
+</tr>
+</tbody>
+</table></li>
+<li>以上弄完進到下一個頁面<br />
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Root password: cfd(<span class="built_in">shift</span>)2603</span><br><span class="line">User creation: CFD-ibX(看第幾台，e.g. 第三台就輸入CFD-ib3)</span><br><span class="line">User password: CFD(<span class="built_in">shift</span>)2603</span><br></pre></td></tr></table></figure></li>
+</ol></li>
+<li>關機並移除USB開機隨身碟</li>
+</ul>
+<h3 id="server-設定">Server 設定</h3>
+<ul>
+<li>開機並以root進入系統（進入系統要選擇not listed，帳號打root），第一次登入時有關網路設定的全部跳過，最後的 <strong>Privacy</strong> 要 off。</li>
+<li>桌面點右鍵選擇<code>open terminal</code> 進到終端機畫面。</li>
+</ul>
+<h5 id="第一步master-client關閉selinuxsecurity-enhanced-linux">第一步(master &amp; client)關閉SELinux(Security Enhanced Linux)：</h5>
+<ol type="1">
+<li>用文字編輯器<code>vi</code>編輯 SELinux 設定檔： （輸入<code>i</code>即可該使打字，輸入<code>esc</code>後輸入<code>:wq</code>儲存離開。（完整指令可以參考<a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~r92094/c++/vi_command.htm">這篇</a>） <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/selinux/config</span><br></pre></td></tr></table></figure></li>
+<li>關閉防火牆： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disabled firewalld</span><br></pre></td></tr></table></figure></li>
+</ol>
+<h5 id="第二步-設定ip">第二步 設定IP：</h5>
+<ul>
+<li>進入圖形界面的設定（畫面右上角時間的地方，左下角的齒輪）。</li>
+<li>Bluetooth(Infiniband)打開<br />
+</li>
+<li>設定Infiniband:<br />
+Method: Infiniband -&gt; Manual IPV4</li>
+</ul>
+<table>
+<thead>
+<tr class="header">
+<th>Address</th>
+<th>Netmask</th>
+<th>Gateway</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td>192.168.170.13X</td>
+<td>255.255.255.0</td>
+<td>(不要設定)</td>
+</tr>
+</tbody>
+</table>
+<h5 id="第三步-nfsnetwork-file-system讓用戶端支主機可以同步mount伺服器支硬碟分享資料">第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</h5>
+<ul>
+<li>接上ethernet(白色)</li>
+</ul>
+
+        </div>
+        
+        <div class="post-tag">
+            
+            <a class="tag" href="/tags/Computation/" title="Computation">Computation</a>
+            
+            <a class="tag" href="/tags/bash/" title="bash">bash</a>
+            
+        </div>
+        
+    </article>
+</div>
+<div class="paginator">
+    
+        
+        
+            <a class="next" href="/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/">
+                <span class="nav-default">淺入C++巨集</span>
+                <span class="nav-mobile">Next</span>
+                <i class="iconfont icon-next"></i>
+            </a>
+        
+    
+</div>
+<div id="comment-container"></div>
+    </div>
+</div>
+<footer class="footer-social">
+    
+
+    
+
+    
+
+    <div class="footer-copyright">
+        <p class="time-line">
+            &copy;
+            
+            
+            2022
+            &nbsp;<i class="iconfont icon-github"></i>&nbsp;
+            <a target="_blank" href="https://github.com/EN-Chou">Echo November</a>
+        </p>
+        <p class="theme-info">
+            Powered by <a target="_blank" href="https://hexo.io">Hexo</a>  |  Theme -
+            <a target="_blank" href="https://github.com/iJinxin/hexo-theme-sky">Sky</a>
+        </p>
+    </div>
+</footer>
+</body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+<script src="https://imsun.github.io/gitment/dist/gitment.browser.js"></script>
+<script>
+    
+
+</script>
+</html>

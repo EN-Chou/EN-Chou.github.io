@@ -87,9 +87,9 @@
         <div class="posts">
     <article class="post-whole">
         <div class="post-title">
-            <h2 class="title">CFDLab Server Manual</h2>
+            <h2 class="title">CFDLab Server Manual-1</h2>
             <div class="post-meta">
-                <span class="post-time">2022-09-03</span>
+                <span class="post-time">2022-09-04</span>
                 
                 <span class="post-visit"> visited：<span id="busuanzi_value_page_pv"></span></span>
             </div>
@@ -217,8 +217,8 @@ IPV4</li>
 <li>下載三個套件：<code>ypbind</code>, <code>yp-tools</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ypbind</span><br><span class="line">yum -y install yp-tools</span><br></pre></td></tr></table></figure></li>
 <li>設定 NIS domain的名字 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/bin/domainname CFD-CLUSTER</span><br></pre></td></tr></table></figure></li>
 <li>configuration-1: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NISDOMAIN=CFD-CLUSTER</span><br></pre></td></tr></table></figure></li>
-<li>configuration-2: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yp.conf</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Damain CFD-CLUSTER server CFDLab</span><br></pre></td></tr></table></figure></li>
-<li>configuration-3: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/idmapd.conf</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Damain=CFD-CLUSTER</span><br></pre></td></tr></table></figure></li>
+<li>configuration-2: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yp.conf</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Domain CFD-CLUSTER server CFDLab</span><br></pre></td></tr></table></figure></li>
+<li>configuration-3: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/idmapd.conf</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Domain=CFD-CLUSTER</span><br></pre></td></tr></table></figure></li>
 <li>configuration-4: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nsswitch.conf</span><br></pre></td></tr></table></figure> 檔案中找到以下區塊，並修改成以下內容: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Passwd: files nisplus nis</span><br><span class="line">shadow: files nisplus nis</span><br><span class="line">Group: files nisplus nis</span><br><span class="line">Hosts: files dns nisplus nis</span><br></pre></td></tr></table></figure></li>
 <li>可以用 <code>setup</code> 快速檢查。</li>
 </ul>
@@ -237,6 +237,12 @@ IPV4</li>
 </div>
 <div class="paginator">
     
+        
+            <a class="prev" href="/2022/09/04/2022-09-04-CFDLabServerManual-2/">
+                <i class="iconfont icon-prev"></i>
+                <span class="nav-default">2022-09-04-CFDLabServerManual-2</span>
+                <span class="nav-mobile">Prev</span>
+            </a>
         
         
             <a class="next" href="/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/">

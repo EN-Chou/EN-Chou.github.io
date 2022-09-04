@@ -28,7 +28,7 @@
 <meta property="og:description" content="這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-08T02:30:50.000Z">
-<meta property="article:modified_time" content="2022-09-04T08:13:30.645Z">
+<meta property="article:modified_time" content="2022-09-04T20:13:32.192Z">
 <meta property="article:author" content="Echo November">
 <meta property="article:tag" content="mini-sprint">
 <meta property="article:tag" content="YYQA">
@@ -123,7 +123,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#unit-testing"><span class="nav-number">1.</span> <span class="nav-text">1. Unit testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compiler-explorer"><span class="nav-number">2.</span> <span class="nav-text">2. Compiler Explorer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#citcuit"><span class="nav-number">3.</span> <span class="nav-text">3. Citcuit</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#unit-testing"><span class="nav-number">1.</span> <span class="nav-text">Unit testing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#compiler-explorer"><span class="nav-number">2.</span> <span class="nav-text">Compiler Explorer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#citcuit"><span class="nav-number">3.</span> <span class="nav-text">Citcuit</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -239,12 +239,13 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向： <span id="more"></span></p>
-<h3 id="unit-testing">1. Unit testing</h3>
+<h3 id="unit-testing">Unit testing</h3>
 <p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>中，pytest是用來跑unit testing的target。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure></p>
-<h3 id="compiler-explorer">2. <a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3>
+<h3 id="compiler-explorer"><a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3>
 <p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I've pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p>
-<p>Reply: You do not need to worry about assembly right now, but a programmer needs to know their machines eventually. At the moment your understanding to assembly is sufficient. Just be aware of its existence.</p>
-<h3 id="citcuit">3. Citcuit</h3>
+<p><strong>Reply: </strong><br />
+You do not need to worry about assembly right now, but a programmer needs to know their machines eventually. At the moment your understanding to assembly is sufficient. Just be aware of its existence.</p>
+<h3 id="citcuit">Citcuit</h3>
 <p>每次執行指令時，在電路端都會有不同的表現。</p>
 
     </div>

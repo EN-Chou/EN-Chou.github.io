@@ -1,40 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="utf-8">
-
-    
-
-    <!-- 渲染优化 -->
-    <meta name="renderer" content="webkit">
-    <meta name="force-rendering" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="HandheldFriendly" content="True" >
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!--icon-->
-
-    
-    
-    
-    
-    
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
 
 
-    <!-- meta -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-
-<title>CMake-QA | Echo November&#39;s note</title>
-
-
-    <meta name="keywords" content="YYQA, cmake">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <!-- OpenGraph -->
- 
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
     <meta name="description" content="In respond of Note：Pybind11 build from source,">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CMake-QA">
@@ -47,107 +32,195 @@
 <meta property="article:author" content="Echo November">
 <meta property="article:tag" content="YYQA">
 <meta property="article:tag" content="cmake">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 
 
-    
-<link rel="stylesheet" href="/css/style/main.css">
- 
+<link rel="canonical" href="http://example.com/2022/07/07/2022-07-07-cmake-QA/">
 
-    
-    
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
-        
-    
 
-    
-    
 
-    
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/07/07/2022-07-07-cmake-QA/","path":"2022/07/07/2022-07-07-cmake-QA/","title":"CMake-QA"}</script>
 
-     
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CMake-QA | Echo November's note</title>
+  
 
-    <!-- custom head -->
 
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end end --></head>
 
-    <body>
-        <div id="app" tabindex="-1">
-            <header class="header">
-    <div class="header__left">
-        <a href="/" class="button">
-            <span class="logo__text">Echo November&#39;s Note</span>
-        </a>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
     </div>
-    <div class="header__right">
-        
-            <div class="navbar__menus">
-                
-                    <a href="/" class="navbar-menu button">首頁</a>
-                
-                    <a href="/tags/" class="navbar-menu button">標籤</a>
-                
-                    <a href="/archives/" class="navbar-menu button">典藏</a>
-                
-                    <a href="/about/" class="navbar-menu button">Page</a>
-                
-            </div>
-        
-        
-        
+  </div>
 
-        
-        
+  <div class="site-meta">
 
-        
-            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
-            <div class="dropdown-menus" id="dropdown-menus">
-                
-                    <a href="/" class="dropdown-menu button">首頁</a>
-                
-                    <a href="/tags/" class="dropdown-menu button">標籤</a>
-                
-                    <a href="/archives/" class="dropdown-menu button">典藏</a>
-                
-                    <a href="/about/" class="dropdown-menu button">Page</a>
-                
-            </div>
-        
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Echo November's note</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
-</header>
-
-
-            <main class="main">
-    
-
-<div class="post-title">
-    <h1 class="post-title__text">
-        CMake-QA
-    </h1>
-    <div class="post-title__meta">
-        <a href="/archives/2022/07/" class="post-meta__date button">2022-07-07</a>
-        
- 
-        
-    
-    
-
-
- 
-
- 
-    </div>
+  </div>
 </div>
 
 
 
-<article class="post content-card">
-    <div class="post__header"></div>
-    <div class="post__content">
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#please-search-the-cmake-document-for-why-you-should-mkdir-before-building-a-cmake-project.-similarly-please-share-the-link-that-provides-the-information."><span class="nav-number">1.</span> <span class="nav-text">1. Please search the cmake document for why you should mkdir before building a cmake project. Similarly, please share the link that provides the information.</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#please-find-out-what-cmake_install_prefix-does-and-show-me-the-link-that-explains-it-to-you."><span class="nav-number">2.</span> <span class="nav-text">2. Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you.</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Echo November</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/07/2022-07-07-cmake-QA/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Echo November">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's note">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CMake-QA | Echo November's note">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CMake-QA
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-07 02:55:58" itemprop="dateCreated datePublished" datetime="2022-07-07T02:55:58+08:00">2022-07-07</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-09-04 16:25:06" itemprop="dateModified" datetime="2022-09-04T16:25:06+08:00">2022-09-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
         <p>In respond of <a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/07/05/2022-07-05-pybind11-build-from-source-md/">Note：Pybind11 build from source</a>, <span id="more"></span></p>
 <h3 id="please-search-the-cmake-document-for-why-you-should-mkdir-before-building-a-cmake-project.-similarly-please-share-the-link-that-provides-the-information.">1. Please search the cmake document for why you should <code>mkdir</code> before building a cmake project. Similarly, please share the link that provides the information.</h3>
 <p>So at first I went <a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=nlKcXPUJGwA&amp;ab_channel=Code%2CTech%2CandTutorials">here</a>. I get to know:</p>
@@ -158,110 +231,76 @@
 <p>It designated the directory of installation. (<a target="_blank" rel="noopener" href="https://zh.wikibooks.org/wiki/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D">link</a>) On my pc, while cmake <code>-DCMAKE_INSTALL_PREFIX=/ .</code>, <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">-- Installing: /usr/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/include/pybind11/pybind11.h</span><br><span class="line">...</span><br><span class="line"><span class="keyword">while</span> cmake -DCMAKE_INSTALL_PREFIX=/usr/local .,</span><br><span class="line">...</span><br><span class="line">-- Installing: /usr/local/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/local/include/pybind11/pybind11.h</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>
 
     </div>
-     
-    <div class="post-footer__meta"><p>updated at 2022-09-04</p></div> 
-    <div class="post-entry__tags"><a href="/tags/YYQA/" class="post-tags__link button"># YYQA</a><a href="/tags/cmake/" class="post-tags__link button"># cmake</a></div> 
-</article>
 
-
-    <div class="nav">
-        <div class="nav__prev">
-            
-                <a href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            Note：Mini-sprint 20220708
-                        </div>
-                    </div>
-                </a>
-            
-        </div>
-        <div class="nav__next">
-            
-                <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/" class="nav__link">
-                    <div>
-                        <div class="nav__label">
-                            Next Post
-                        </div>
-                        <div class="nav__title">
-                            Note：Pybind11 build from source
-                        </div>
-                    </div>
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
-                    </div>
-                </a>
-            
-        </div>
-    </div>
-
-
-
-
-
-</main>
-
-            <footer class="footer">
+    
     
     
 
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/YYQA/" rel="tag"># YYQA</a>
+              <a href="/tags/cmake/" rel="tag"># cmake</a>
+          </div>
 
-    
-     
- 
-
- 
-    
         
-        <p class="footer-copyright">
-            Copyright © 2022 <a href="/">Echo November&#39;s note</a>
-        </p>
-    
-    
-    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
-</footer>
 
-        </div>
-         
-
- 
-
- 
-
- 
-
- 
-
-
-
- 
-
-
-
- 
-
-
-    
- 
-
- 
-
- 
-
- 
-
- 
-
- 
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/" rel="prev" title="Note：Pybind11 build from source">
+                  <i class="fa fa-chevron-left"></i> Note：Pybind11 build from source
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/" rel="next" title="Note：Mini-sprint 20220708">
+                  Note：Mini-sprint 20220708 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
 
 
 
 
-    </body>
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo November</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
 </html>

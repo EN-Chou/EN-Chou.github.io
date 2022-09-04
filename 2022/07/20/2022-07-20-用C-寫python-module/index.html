@@ -1,40 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-    <head>
-    <meta charset="utf-8">
-
-    
-
-    <!-- 渲染优化 -->
-    <meta name="renderer" content="webkit">
-    <meta name="force-rendering" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="HandheldFriendly" content="True" >
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!--icon-->
-
-    
-    
-    
-    
-    
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 6.2.0">
 
 
-    <!-- meta -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
 
-
-<title>用C++寫python module | Echo November&#39;s note</title>
-
-
-    <meta name="keywords" content="python, C++, Computation">
+<link rel="stylesheet" href="/css/main.css">
 
 
 
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
 
-    <!-- OpenGraph -->
- 
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Muse","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":false,"style":null},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
     <meta name="description" content="做這個小實驗的當天看到這個梗圖，相當呼應這個主題:">
 <meta property="og:type" content="article">
 <meta property="og:title" content="用C++寫python module">
@@ -49,108 +34,196 @@
 <meta property="article:tag" content="python">
 <meta property="article:tag" content="C++">
 <meta property="article:tag" content="Computation">
-<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small">
 
 
-    
-<link rel="stylesheet" href="/css/style/main.css">
- 
+<link rel="canonical" href="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">
 
-    
-    
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
-        
-    
 
-    
-    
 
-    
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/","path":"2022/07/20/2022-07-20-用C-寫python-module/","title":"用C++寫python module"}</script>
 
-     
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用C++寫python module | Echo November's note</title>
+  
 
-    <!-- custom head -->
 
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end end --></head>
 
-    <body>
-        <div id="app" tabindex="-1">
-            <header class="header">
-    <div class="header__left">
-        <a href="/" class="button">
-            <span class="logo__text">Echo November&#39;s Note</span>
-        </a>
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
     </div>
-    <div class="header__right">
-        
-            <div class="navbar__menus">
-                
-                    <a href="/" class="navbar-menu button">首頁</a>
-                
-                    <a href="/tags/" class="navbar-menu button">標籤</a>
-                
-                    <a href="/archives/" class="navbar-menu button">典藏</a>
-                
-                    <a href="/about/" class="navbar-menu button">Page</a>
-                
-            </div>
-        
-        
-        
+  </div>
 
-        
-        
+  <div class="site-meta">
 
-        
-            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
-            <div class="dropdown-menus" id="dropdown-menus">
-                
-                    <a href="/" class="dropdown-menu button">首頁</a>
-                
-                    <a href="/tags/" class="dropdown-menu button">標籤</a>
-                
-                    <a href="/archives/" class="dropdown-menu button">典藏</a>
-                
-                    <a href="/about/" class="dropdown-menu button">Page</a>
-                
-            </div>
-        
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Echo November's note</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
     </div>
-</header>
-
-
-            <main class="main">
-    
-
-<div class="post-title">
-    <h1 class="post-title__text">
-        用C++寫python module
-    </h1>
-    <div class="post-title__meta">
-        <a href="/archives/2022/07/" class="post-meta__date button">2022-07-20</a>
-        
- 
-        
-    
-    
-
-
- 
-
- 
-    </div>
+  </div>
 </div>
 
 
 
-<article class="post content-card">
-    <div class="post__header"></div>
-    <div class="post__content">
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%AB-.cpp.h-file"><span class="nav-number">1.</span> <span class="nav-text">1. 寫 .cpp&#x2F;.h file。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%AB-cmakelist.txt"><span class="nav-number">2.</span> <span class="nav-text">2. 寫 CMakeList.txt。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#build-the-module"><span class="nav-number">3.</span> <span class="nav-text">3. Build the module。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8python%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%89%8D%E9%9D%A2%E6%89%80%E5%BB%BA%E7%AB%8B%E7%9A%84module"><span class="nav-number">4.</span> <span class="nav-text">4. 在python中使用前面所建立的module。</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#problem-unsolved"><span class="nav-number">5.</span> <span class="nav-text">0. Problem Unsolved</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+  <p class="site-author-name" itemprop="name">Echo November</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">17</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-tags">
+        <span class="site-state-item-count">16</span>
+        <span class="site-state-item-name">tags</span>
+      </div>
+  </nav>
+</div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.gif">
+      <meta itemprop="name" content="Echo November">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's note">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用C++寫python module | Echo November's note">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用C++寫python module
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-20 11:41:47" itemprop="dateCreated datePublished" datetime="2022-07-20T11:41:47+08:00">2022-07-20</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar-check"></i>
+      </span>
+      <span class="post-meta-item-text">Edited on</span>
+      <time title="Modified: 2022-09-04 16:29:08" itemprop="dateModified" datetime="2022-09-04T16:29:08+08:00">2022-09-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
         <p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<span id="more"></span> <img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small" alt="C++ chats with python" /></p>
 <p>「其它的程式語言對你作力學是沒用的，作計算就三本柱 Python、C++、Fortran 足矣，連 C 都沒什麼用處。」Python在計算的速度上相較於C++非常的緩慢，這個<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3PcIJKd1PKU&amp;ab_channel=xmdi">demo</a>很清楚地呈現了這件事。</p>
 <p>以計算力學為題，python在tool的開發，input的整合上具有優勢，但是在計算效能上的表現不佳，於是就有了許多與python互相支援的foreign function interface(FFI)，如 swig, cython, pybind11。 截python所長，補C++所短 (or vice versa) ，似乎是做出更好的力學程式不可或缺的元素，pybind扮演的角色於是顯現。接下來就簡單用C++寫一個python的module:</p>
@@ -171,110 +244,77 @@
 </ul>
 
     </div>
-     
-    <div class="post-footer__meta"><p>updated at 2022-09-04</p></div> 
-    <div class="post-entry__tags"><a href="/tags/python/" class="post-tags__link button"># python</a><a href="/tags/C/" class="post-tags__link button"># C++</a><a href="/tags/Computation/" class="post-tags__link button"># Computation</a></div> 
-</article>
 
-
-    <div class="nav">
-        <div class="nav__prev">
-            
-                <a href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            Bash與Makefile
-                        </div>
-                    </div>
-                </a>
-            
-        </div>
-        <div class="nav__next">
-            
-                <a href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/" class="nav__link">
-                    <div>
-                        <div class="nav__label">
-                            Next Post
-                        </div>
-                        <div class="nav__title">
-                            Python importation 機制
-                        </div>
-                    </div>
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
-                    </div>
-                </a>
-            
-        </div>
-    </div>
-
-
-
-
-
-</main>
-
-            <footer class="footer">
+    
     
     
 
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Computation/" rel="tag"># Computation</a>
+          </div>
 
-    
-     
- 
-
- 
-    
         
-        <p class="footer-copyright">
-            Copyright © 2022 <a href="/">Echo November&#39;s note</a>
-        </p>
-    
-    
-    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
-</footer>
 
-        </div>
-         
-
- 
-
- 
-
- 
-
- 
-
-
-
- 
-
-
-
- 
-
-
-    
- 
-
- 
-
- 
-
- 
-
- 
-
- 
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/" rel="prev" title="Python importation 機制">
+                  <i class="fa fa-chevron-left"></i> Python importation 機制
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/" rel="next" title="Bash與Makefile">
+                  Bash與Makefile <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
 
 
 
 
-    </body>
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Echo November</span>
+</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/muse/" rel="noopener" target="_blank">NexT.Muse</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/schemes/muse.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+</body>
 </html>

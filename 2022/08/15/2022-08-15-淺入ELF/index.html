@@ -1,158 +1,167 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang=en>
+<head>
     <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-    
-
-    <!-- 渲染优化 -->
-    <meta name="renderer" content="webkit">
-    <meta name="force-rendering" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="HandheldFriendly" content="True" >
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!--icon-->
-
-    
-    
-    
-    
-    
-
-
-    <!-- meta -->
-
-
-<title>什麼是 ELF | Echo November&#39;s note</title>
-
-
-    <meta name="keywords" content="C++, 程式設計師的自我修養, ELF">
-
-
-
-
-    <!-- OpenGraph -->
- 
-    <meta name="description" content="繼這篇文章，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，">
-<meta property="og:type" content="article">
-<meta property="og:title" content="什麼是 ELF">
-<meta property="og:url" content="http://example.com/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/index.html">
-<meta property="og:site_name" content="Echo November&#39;s note">
-<meta property="og:description" content="繼這篇文章，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-15T07:11:21.000Z">
-<meta property="article:modified_time" content="2022-09-04T08:56:04.910Z">
-<meta property="article:author" content="Echo November">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="程式設計師的自我修養">
-<meta property="article:tag" content="ELF">
-<meta name="twitter:card" content="summary_large_image">
-
-
-    
-<link rel="stylesheet" href="/css/style/main.css">
- 
-
-    
-    
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+    <title>
         
+        什麼是 ELF - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
     
+<link rel="stylesheet" href="/css/aircloud.css">
 
     
-    
+<link rel="stylesheet" href="/css/gitment.css">
 
-    
-
-     
-
-    <!-- custom head -->
-
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="Echo November's note" type="application/atom+xml">
+</head>
 
-    <body>
-        <div id="app" tabindex="-1">
-            <header class="header">
-    <div class="header__left">
-        <a href="/" class="button">
-            <span class="logo__text">Demo</span>
-        </a>
-    </div>
-    <div class="header__right">
-        
-            <div class="navbar__menus">
-                
-                    <a href="/" class="navbar-menu button">首页</a>
-                
-                    <a href="/tags/" class="navbar-menu button">标签</a>
-                
-                    <a href="/archives/" class="navbar-menu button">归档</a>
-                
-                    <a href="/friends/" class="navbar-menu button">友链</a>
-                
-                    <a href="/page/" class="navbar-menu button">Page</a>
-                
-            </div>
-        
-        
-        
+<body>
 
-        
-        
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
 
-        
-            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
-            <div class="dropdown-menus" id="dropdown-menus">
-                
-                    <a href="/" class="dropdown-menu button">首页</a>
-                
-                    <a href="/tags/" class="dropdown-menu button">标签</a>
-                
-                    <a href="/archives/" class="dropdown-menu button">归档</a>
-                
-                    <a href="/friends/" class="dropdown-menu button">友链</a>
-                
-                    <a href="/page/" class="dropdown-menu button">Page</a>
-                
-            </div>
-        
-    </div>
-</header>
+<div class="index-about">
+    <i>  </i>
+</div>
 
-
-            <main class="main">
+<div class="index-container">
     
-
-<div class="post-title">
-    <h1 class="post-title__text">
-        什麼是 ELF
-    </h1>
-    <div class="post-title__meta">
-        <a href="/archives/2022/08/" class="post-meta__date button">2022-08-15</a>
+    <div class="index-left">
         
- 
-        
-    
-    
-
-
- 
-
- 
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/" />
+        </div>
+        <div class="name">
+            <i>Echo November</i>
+        </div>
     </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Belf%E6%AA%94%E5%85%A7%E5%AE%B9"><span class="toc-text">查看ELF檔內容</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%9F%A5%E7%9C%8Belf%E6%AA%94%E5%90%84%E5%80%8B%E5%8D%80%E6%AE%B5%E7%9A%84%E9%95%B7%E5%BA%A6"><span class="toc-text">查看ELF檔各個區段的長度</span></a></li></ol>
+</div>
+    
 </div>
 
 
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
 
-<article class="post content-card">
-    <div class="post__header"></div>
-    <div class="post__content">
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        什麼是 ELF
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2022-08-15 15:11:21</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#C++" title="C++">C++</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#程式設計師的自我修養" title="程式設計師的自我修養">程式設計師的自我修養</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#ELF" title="ELF">ELF</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
         <p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，<span id="more"></span>包括file header, .text section, .data section 以及 .bss section等區段。其中"file header"描述檔案的基本屬性，包括檔案版本，目的機器型號，程式入口位址等等，".text"存放程式碼區段，".data"存放已初始化的全域變數以及靜態變數，而".bss"存放已初始化的全域變數以及靜態變數。這篇的小實驗同樣是藉由<code>main.cpp</code>這支簡單的小程式來進行。</p>
 <p><strong>main.cpp</strong> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="查看elf檔內容">查看ELF檔內容</h3>
@@ -160,161 +169,65 @@
 <h3 id="查看elf檔各個區段的長度">查看ELF檔各個區段的長度</h3>
 <p><code>size</code>這個指令可以用來查看ELF檔各個區段的長度。在main.cpp檔中，我們並未宣告任何的變數，於是可以看到以下在於".text"以及".data"區段的長度皆為0。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ size main.o</span><br><span class="line">   text	   data	    bss	    dec	    hex	filename</span><br><span class="line">    103	      0	      0	    103	     67	main.o</span><br></pre></td></tr></table></figure></p>
 
-    </div>
-     
-    <div class="post-footer__meta"><p>updated at 2022-09-04</p></div> 
-    <div class="post-entry__tags"><a href="/tags/C/" class="post-tags__link button"># C++</a><a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" class="post-tags__link button"># 程式設計師的自我修養</a><a href="/tags/ELF/" class="post-tags__link button"># ELF</a></div> 
-</article>
-
-
-    <div class="nav">
-        <div class="nav__prev">
-            
-                <a href="/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            在C++中使用Pytorch模型
-                        </div>
-                    </div>
-                </a>
-            
-        </div>
-        <div class="nav__next">
-            
-                <a href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/" class="nav__link">
-                    <div>
-                        <div class="nav__label">
-                            Next Post
-                        </div>
-                        <div class="nav__title">
-                            .bashrc與環境變數設定
-                        </div>
-                    </div>
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
-                    </div>
-                </a>
-            
-        </div>
-    </div>
-
-
-
-
-
-</main>
-
-            <footer class="footer">
-    
-    
-
-
-    
-     
- 
-
- 
-    
         
-        <p class="footer-copyright">
-            Copyright © 2022 <a href="/">Echo November&#39;s note</a>
-        </p>
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
+    </div>
+</div>
+
+    </div>
+</div>
+
+
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
     
-    
-    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
 </footer>
 
-        </div>
-         
-
- 
-
- 
-
- 
-
- 
 
 
 
- 
+</body>
 
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
+<script src="/js/index.js"></script>
 
- 
-
-
-    
- 
-
- 
-
-
-    <script>
-        if (typeof MathJax === 'undefined') {
-            window.MathJax = {
-                loader: {
-                    source: {
-                        '[tex]/amsCd': '[tex]/amscd',
-                        '[tex]/AMScd': '[tex]/amscd'
-                    }
-                },
-                tex: {
-                    inlineMath: {'[+]': [['$', '$']]},
-                    tags: 'ams'
-                },
-                options: {
-                    renderActions: {
-                        findScript: [10, doc => {
-                            document.querySelectorAll('script[type^="math/tex"]').forEach(node => {
-                                const display = !!node.type.match(/; *mode=display/);
-                                const math = new doc.options.MathItem(node.textContent, doc.inputJax[0], display);
-                                const text = document.createTextNode('');
-                                node.parentNode.replaceChild(text, node);
-                                math.start = {node: text, delim: '', n: 0};
-                                math.end = {node: text, delim: '', n: 0};
-                                doc.math.push(math);
-                            });
-                        }, '', false],
-                        insertedScript: [200, () => {
-                            document.querySelectorAll('mjx-container').forEach(node => {
-                                let target = node.parentNode;
-                                if (target.nodeName.toLowerCase() === 'li') {
-                                    target.parentNode.classList.add('has-jax');
-                                }
-                            });
-                        }, '', false]
-                    }
-                }
-            };
-            (function () {
-                var script = document.createElement('script');
-                script.src = "https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js";
-                script.defer = true;
-                document.head.appendChild(script);
-            })();
-        } else {
-            MathJax.startup.document.state(0);
-            MathJax.texReset();
-            MathJax.typeset();
-        }
-    </script>
- 
-
- 
-
- 
-
- 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 
-    </body>
+
+
 </html>

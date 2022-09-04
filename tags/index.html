@@ -1,220 +1,937 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang=en>
+<head>
     <meta charset="utf-8">
-
-    
-
-    <!-- 渲染优化 -->
-    <meta name="renderer" content="webkit">
-    <meta name="force-rendering" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="HandheldFriendly" content="True" >
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!--icon-->
-
-    
-    
-    
-    
-    
-
-
-    <!-- meta -->
-
-
-<title>tags | Echo November&#39;s note</title>
-
-
-
-
-
-    <!-- OpenGraph -->
- 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
     <meta property="og:type" content="website">
-<meta property="og:title" content="tags">
-<meta property="og:url" content="http://example.com/tags/index.html">
-<meta property="og:site_name" content="Echo November&#39;s note">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-17T08:37:49.000Z">
-<meta property="article:modified_time" content="2022-08-17T08:39:05.889Z">
-<meta property="article:author" content="Echo November">
-<meta name="twitter:card" content="summary_large_image">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-
-    
-<link rel="stylesheet" href="/css/style/main.css">
- 
-
-    
-    
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+    <title>
         
+        tags - undefined
+        
+    </title>
+
+    <!-- Custom CSS -->
     
+<link rel="stylesheet" href="/css/aircloud.css">
 
     
-    
+<link rel="stylesheet" href="/css/gitment.css">
 
-    
-
-     
-
-    <!-- custom head -->
-
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="Echo November's note" type="application/atom+xml">
+</head>
 
-    <body>
-        <div id="app" tabindex="-1">
-            <header class="header">
-    <div class="header__left">
-        <a href="/" class="button">
-            <span class="logo__text">Demo</span>
+<body>
+
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/" />
+        </div>
+        <div class="name">
+            <i>Echo November</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li  class=active >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        <div id='tag_cloud' class="tags">
+    
+    <a href="#bash" class="tag-triangle" title="bash"><i class="tag-i">bash</i></a>
+    
+    <a href="#C++" class="tag-triangle" title="C++"><i class="tag-i">C++</i></a>
+    
+    <a href="#cmake" class="tag-triangle" title="cmake"><i class="tag-i">cmake</i></a>
+    
+    <a href="#compile" class="tag-triangle" title="compile"><i class="tag-i">compile</i></a>
+    
+    <a href="#Computation" class="tag-triangle" title="Computation"><i class="tag-i">Computation</i></a>
+    
+    <a href="#ELF" class="tag-triangle" title="ELF"><i class="tag-i">ELF</i></a>
+    
+    <a href="#Machine Learning" class="tag-triangle" title="Machine Learning"><i class="tag-i">Machine Learning</i></a>
+    
+    <a href="#make" class="tag-triangle" title="make"><i class="tag-i">make</i></a>
+    
+    <a href="#mini-sprint" class="tag-triangle" title="mini-sprint"><i class="tag-i">mini-sprint</i></a>
+    
+    <a href="#object file" class="tag-triangle" title="object file"><i class="tag-i">object file</i></a>
+    
+    <a href="#pybind11" class="tag-triangle" title="pybind11"><i class="tag-i">pybind11</i></a>
+    
+    <a href="#python" class="tag-triangle" title="python"><i class="tag-i">python</i></a>
+    
+    <a href="#Pytorch" class="tag-triangle" title="Pytorch"><i class="tag-i">Pytorch</i></a>
+    
+    <a href="#YYQA" class="tag-triangle" title="YYQA"><i class="tag-i">YYQA</i></a>
+    
+    <a href="#程式設計師的自我修養" class="tag-triangle" title="程式設計師的自我修養"><i class="tag-i">程式設計師的自我修養</i></a>
+    
+    <a href="#隨手記" class="tag-triangle" title="隨手記"><i class="tag-i">隨手記</i></a>
+    
+</div>
+
+<!-- 标签列表 -->
+
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="bash">
+                    <span class="tag-text">bash</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/23/2022-07-23-Bash與Makefile/">
+            <h2 class="post-title">
+                Bash與Makefile
+            </h2>
+            
         </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
     </div>
-    <div class="header__right">
-        
-            <div class="navbar__menus">
-                
-                    <a href="/" class="navbar-menu button">首页</a>
-                
-                    <a href="/tags/" class="navbar-menu button">标签</a>
-                
-                    <a href="/archives/" class="navbar-menu button">归档</a>
-                
-                    <a href="/friends/" class="navbar-menu button">友链</a>
-                
-                    <a href="/page/" class="navbar-menu button">Page</a>
-                
-            </div>
-        
-        
-        
-
-        
-        
-
-        
-            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
-            <div class="dropdown-menus" id="dropdown-menus">
-                
-                    <a href="/" class="dropdown-menu button">首页</a>
-                
-                    <a href="/tags/" class="dropdown-menu button">标签</a>
-                
-                    <a href="/archives/" class="dropdown-menu button">归档</a>
-                
-                    <a href="/friends/" class="dropdown-menu button">友链</a>
-                
-                    <a href="/page/" class="dropdown-menu button">Page</a>
-                
-            </div>
-        
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/10/2022-08-10-bashrc與環境變數設定/">
+            <h2 class="post-title">
+                .bashrc與環境變數設定
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
     </div>
-</header>
-
-
-            <main class="main">
     
-
-<div class="post-title">
-    <h1 class="post-title__text">
-        tags
-    </h1>
-    <div class="post-title__meta">
-        <a href="/archives/2022/08/" class="post-meta__date button">2022-08-17</a>
-        
- 
-        
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/04/2022-09-04-CFDLabServerManual-1/">
+            <h2 class="post-title">
+                CFDLab Server Manual-1
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
     
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/04/2022-09-04-CFDLabServerManual-2/">
+            <h2 class="post-title">
+                CFDLabServerManual-2
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
     
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="C++">
+                    <span class="tag-text">C++</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/20/2022-07-20-用C-寫python-module/">
+            <h2 class="post-title">
+                用C++寫python module
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/03/2022-08-03-Compile幕後/">
+            <h2 class="post-title">
+                Compile幕後
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/09/2022-08-09-解碼-o檔/">
+            <h2 class="post-title">
+                解碼.o檔
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/15/2022-08-15-淺入ELF/">
+            <h2 class="post-title">
+                什麼是 ELF
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/26/2022-08-26-在C-中使用Pytorch模型/">
+            <h2 class="post-title">
+                在C++中使用Pytorch模型
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/03/2022-09-03-淺入C++巨集/">
+            <h2 class="post-title">
+                什麼是C++巨集
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/02/2022-09-02-使用-define取代文字/">
+            <h2 class="post-title">
+                使用#define取代文字
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="cmake">
+                    <span class="tag-text">cmake</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
+            <h2 class="post-title">
+                Note：Pybind11 build from source
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/07/2022-07-07-cmake-QA/">
+            <h2 class="post-title">
+                CMake-QA
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/27/2022-07-27-CMake與Make/">
+            <h2 class="post-title">
+                什麼是CMake與Make
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/26/2022-08-26-在C-中使用Pytorch模型/">
+            <h2 class="post-title">
+                在C++中使用Pytorch模型
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="compile">
+                    <span class="tag-text">compile</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/03/2022-08-03-Compile幕後/">
+            <h2 class="post-title">
+                Compile幕後
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/09/2022-08-09-解碼-o檔/">
+            <h2 class="post-title">
+                解碼.o檔
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Computation">
+                    <span class="tag-text">Computation</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/20/2022-07-20-用C-寫python-module/">
+            <h2 class="post-title">
+                用C++寫python module
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/03/2022-09-03-淺入C++巨集/">
+            <h2 class="post-title">
+                什麼是C++巨集
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/02/2022-09-02-使用-define取代文字/">
+            <h2 class="post-title">
+                使用#define取代文字
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/04/2022-09-04-CFDLabServerManual-1/">
+            <h2 class="post-title">
+                CFDLab Server Manual-1
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/09/04/2022-09-04-CFDLabServerManual-2/">
+            <h2 class="post-title">
+                CFDLabServerManual-2
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="ELF">
+                    <span class="tag-text">ELF</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/15/2022-08-15-淺入ELF/">
+            <h2 class="post-title">
+                什麼是 ELF
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Machine Learning">
+                    <span class="tag-text">Machine Learning</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/26/2022-08-26-在C-中使用Pytorch模型/">
+            <h2 class="post-title">
+                在C++中使用Pytorch模型
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="make">
+                    <span class="tag-text">make</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
+            <h2 class="post-title">
+                Note：Pybind11 build from source
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/27/2022-07-27-CMake與Make/">
+            <h2 class="post-title">
+                什麼是CMake與Make
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/23/2022-07-23-Bash與Makefile/">
+            <h2 class="post-title">
+                Bash與Makefile
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="mini-sprint">
+                    <span class="tag-text">mini-sprint</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/03/2022-07-03-軟體工程兩件事/">
+            <h2 class="post-title">
+                軟體工程兩件事
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/08/2022-07-08-隨手記/">
+            <h2 class="post-title">
+                Note：Mini-sprint 20220708
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="object file">
+                    <span class="tag-text">object file</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/09/2022-08-09-解碼-o檔/">
+            <h2 class="post-title">
+                解碼.o檔
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="pybind11">
+                    <span class="tag-text">pybind11</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
+            <h2 class="post-title">
+                Note：Pybind11 build from source
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="python">
+                    <span class="tag-text">python</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/16/2022-07-16-Python-importation-機制/">
+            <h2 class="post-title">
+                Python importation 機制
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/20/2022-07-20-用C-寫python-module/">
+            <h2 class="post-title">
+                用C++寫python module
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="Pytorch">
+                    <span class="tag-text">Pytorch</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/26/2022-08-26-在C-中使用Pytorch模型/">
+            <h2 class="post-title">
+                在C++中使用Pytorch模型
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="YYQA">
+                    <span class="tag-text">YYQA</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/03/2022-07-03-軟體工程兩件事/">
+            <h2 class="post-title">
+                軟體工程兩件事
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
+            <h2 class="post-title">
+                Note：Pybind11 build from source
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/07/2022-07-07-cmake-QA/">
+            <h2 class="post-title">
+                CMake-QA
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/08/2022-07-08-隨手記/">
+            <h2 class="post-title">
+                Note：Mini-sprint 20220708
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/16/2022-07-16-Python-importation-機制/">
+            <h2 class="post-title">
+                Python importation 機制
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="程式設計師的自我修養">
+                    <span class="tag-text">程式設計師的自我修養</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/03/2022-08-03-Compile幕後/">
+            <h2 class="post-title">
+                Compile幕後
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/09/2022-08-09-解碼-o檔/">
+            <h2 class="post-title">
+                解碼.o檔
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/08/15/2022-08-15-淺入ELF/">
+            <h2 class="post-title">
+                什麼是 ELF
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
+
+<div class="one-tag-list">
+                <span class="fa fa-tag listing-seperator" id="隨手記">
+                    <span class="tag-text">隨手記</span>
+                </span>
+    
+    <!-- <li class="listing-item">
+    <time datetime="{{ post.date | date:"%Y-%m-%d" }}">{{ post.date | date:"%Y-%m-%d" }}</time>
+    <a href="{{ post.url }}" title="{{ post.title }}">{{ post.title }}</a>
+    </li> -->
+    <div class="post-preview">
+        <a href="/2022/07/08/2022-07-08-隨手記/">
+            <h2 class="post-title">
+                Note：Mini-sprint 20220708
+            </h2>
+            
+        </a>
+        <!-- <p class="post-meta">{{ post.date | date:"%Y-%m-%d" }}</p> -->
+    </div>
+    
+</div>
 
 
- 
-
- 
     </div>
 </div>
 
 
-
-<article class="post content-card">
-    <div class="post__header"></div>
-    <div class="post__content">
+<footer class="footer">
+    <ul class="list-inline text-center">
         
-    </div>
-     
-    <div class="post-footer__meta"><p>updated at 2022-08-17</p></div> 
-    <div class="post-entry__tags"></div> 
-</article>
-
-
-
-
-
-
-</main>
-
-            <footer class="footer">
-    
-    
-
-
-    
-     
- 
-
- 
-    
         
-        <p class="footer-copyright">
-            Copyright © 2022 <a href="/">Echo November&#39;s note</a>
-        </p>
+
+        
+
+        
+
+        
+
+        
+
+    </ul>
     
-    
-    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
 </footer>
 
-        </div>
-         
-
- 
-
- 
-
- 
-
- 
 
 
 
- 
+</body>
 
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = false
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
 
+<script src="/js/index.js"></script>
 
- 
-
-
-    
- 
-
- 
-
- 
-
- 
-
- 
-
- 
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
 
 
 
-    </body>
+
+
 </html>

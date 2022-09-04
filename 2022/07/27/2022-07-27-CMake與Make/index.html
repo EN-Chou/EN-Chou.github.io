@@ -1,40 +1,11 @@
 <!DOCTYPE html>
-<html lang="en">
-    <head>
+<html lang=en>
+<head>
+    <!-- so meta -->
     <meta charset="utf-8">
-
-    
-
-    <!-- 渲染优化 -->
-    <meta name="renderer" content="webkit">
-    <meta name="force-rendering" content="webkit">
-    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
-    <meta name="HandheldFriendly" content="True" >
-    <meta name="apple-mobile-web-app-capable" content="yes">
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!--icon-->
-
-    
-    
-    
-    
-    
-
-
-    <!-- meta -->
-
-
-<title>什麼是CMake與Make | Echo November&#39;s note</title>
-
-
-    <meta name="keywords" content="make, cmake">
-
-
-
-
-    <!-- OpenGraph -->
- 
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
     <meta name="description" content="在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是make仰賴Makefile, 而cmake仰賴CMakeList.txt，但兩者">
 <meta property="og:type" content="article">
 <meta property="og:title" content="什麼是CMake與Make">
@@ -47,112 +18,144 @@
 <meta property="article:author" content="Echo November">
 <meta property="article:tag" content="make">
 <meta property="article:tag" content="cmake">
-<meta name="twitter:card" content="summary_large_image">
-
-
-    
-<link rel="stylesheet" href="/css/style/main.css">
- 
-
+<meta name="twitter:card" content="summary">
     
     
-        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+      
         
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/favicon-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
     
+    <!-- title -->
+    <title>什麼是CMake與Make</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
 
+    <!-- persian styles -->
+    
+    <!-- rss -->
     
     
-
-    
-
-     
-
-    <!-- custom head -->
-
+	<!-- mathjax -->
+	
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
-    <body>
-        <div id="app" tabindex="-1">
-            <header class="header">
-    <div class="header__left">
-        <a href="/" class="button">
-            <span class="logo__text">Demo</span>
-        </a>
-    </div>
-    <div class="header__right">
-        
-            <div class="navbar__menus">
-                
-                    <a href="/" class="navbar-menu button">首页</a>
-                
-                    <a href="/tags/" class="navbar-menu button">标签</a>
-                
-                    <a href="/archives/" class="navbar-menu button">归档</a>
-                
-                    <a href="/friends/" class="navbar-menu button">友链</a>
-                
-                    <a href="/page/" class="navbar-menu button">Page</a>
-                
-            </div>
-        
-        
-        
-
-        
-        
-
-        
-            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
-            <div class="dropdown-menus" id="dropdown-menus">
-                
-                    <a href="/" class="dropdown-menu button">首页</a>
-                
-                    <a href="/tags/" class="dropdown-menu button">标签</a>
-                
-                    <a href="/archives/" class="dropdown-menu button">归档</a>
-                
-                    <a href="/friends/" class="dropdown-menu button">友链</a>
-                
-                    <a href="/page/" class="dropdown-menu button">Page</a>
-                
-            </div>
-        
-    </div>
-</header>
-
-
-            <main class="main">
+<body class="max-width mx-auto px3 ltr">
     
-
-<div class="post-title">
-    <h1 class="post-title__text">
-        什麼是CMake與Make
-    </h1>
-    <div class="post-title__meta">
-        <a href="/archives/2022/07/" class="post-meta__date button">2022-07-27</a>
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
         
- 
+        <li><a class="icon" aria-label="Previous post" href="/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
         
-    
-    
+        
+        <li><a class="icon" aria-label="Next post" href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&text=什麼是CMake與Make"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&is_video=false&description=什麼是CMake與Make"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=什麼是CMake與Make&body=Check out this article: http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&name=什麼是CMake與Make&description=&lt;p&gt;在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是&lt;code&gt;make&lt;/code&gt;仰賴&lt;code&gt;Makefile&lt;/code&gt;, 而&lt;code&gt;cmake&lt;/code&gt;仰賴&lt;code&gt;CMakeList.txt&lt;/code&gt;，但兩者做著不一樣的事情。"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&t=什麼是CMake與Make"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
 
-
- 
-
- 
     </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#cmake"><span class="toc-number">1.</span> <span class="toc-text">CMake</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#make"><span class="toc-number">2.</span> <span class="toc-text">Make</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmake-and-make"><span class="toc-number">3.</span> <span class="toc-text">CMake and make</span></a></li></ol>
+    </div>
+  </span>
 </div>
 
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        什麼是CMake與Make
+    </h1>
 
 
-<article class="post content-card">
-    <div class="post__header"></div>
-    <div class="post__content">
-        <p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是<code>make</code>仰賴<code>Makefile</code>, 而<code>cmake</code>仰賴<code>CMakeList.txt</code>，但兩者做著不一樣的事情。 <span id="more"></span></p>
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Echo November</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-07-27T12:58:36.000Z" itemprop="datePublished">2022-07-27</time>
+        
+      
+    </div>
+
+
+      
+
+      
+    <div class="article-tag">
+        <i class="fas fa-tag"></i>
+        <a class="tag-link-link" href="/tags/cmake/" rel="tag">cmake</a>, <a class="tag-link-link" href="/tags/make/" rel="tag">make</a>
+    </div>
+
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是<code>make</code>仰賴<code>Makefile</code>, 而<code>cmake</code>仰賴<code>CMakeList.txt</code>，但兩者做著不一樣的事情。 <span id="more"></span></p>
 <h3 id="cmake">CMake</h3>
 <p>CMake 用來產生跨平台的專案建置文件，在 windows 下它會生成 visual studio 的專案檔 (.sln) codeblock eclipse，在 linux 下它會生成 Makefile，雖然makefile是可以人工生成，但當手寫makefile並不方便，也不能跨平台使用，於是<code>cmake</code>依平台生成建置文件即可帶來便利性。（最終端的<code>CMakeLists.txt</code>依然是由依然是由人工攥寫）</p>
 <ul>
@@ -166,111 +169,142 @@
 <li><code>cmake</code> 搭配 <code>make</code>的使用： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/demo$ <span class="built_in">ls</span></span><br><span class="line">build  CMakeLists.txt  pybind11  test.cpp <span class="comment">#cmake所根據的CMakeLists.txt存在此目錄底下</span></span><br><span class="line">~/git-repo/demo/build$ cmake .. <span class="comment">#cmake根據CMakeLists.txt 生成 Makefile</span></span><br><span class="line">~/git-repo/demo/build$ <span class="built_in">ls</span></span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11 <span class="comment">#cmake所生成的Makefile</span></span><br><span class="line">~/git-repo/demo/build$ make <span class="comment">#make根據Makefile執行裡頭的shellscript</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
-    </div>
-     
-    <div class="post-footer__meta"><p>updated at 2022-09-04</p></div> 
-    <div class="post-entry__tags"><a href="/tags/make/" class="post-tags__link button"># make</a><a href="/tags/cmake/" class="post-tags__link button"># cmake</a></div> 
+  </div>
 </article>
 
 
-    <div class="nav">
-        <div class="nav__prev">
-            
-                <a href="/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/" class="nav__link">
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
-                    </div>
-                    <div>
-                        <div class="nav__label">
-                            Previous Post
-                        </div>
-                        <div class="nav__title">
-                            Compile幕後
-                        </div>
-                    </div>
-                </a>
-            
-        </div>
-        <div class="nav__next">
-            
-                <a href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/" class="nav__link">
-                    <div>
-                        <div class="nav__label">
-                            Next Post
-                        </div>
-                        <div class="nav__title">
-                            Bash與Makefile
-                        </div>
-                    </div>
-                    <div>
-                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
-                    </div>
-                </a>
-            
-        </div>
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li>
+        
+      </ul>
     </div>
 
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#cmake"><span class="toc-number">1.</span> <span class="toc-text">CMake</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#make"><span class="toc-number">2.</span> <span class="toc-text">Make</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmake-and-make"><span class="toc-number">3.</span> <span class="toc-text">CMake and make</span></a></li></ol>
+    </div>
 
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&text=什麼是CMake與Make"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&is_video=false&description=什麼是CMake與Make"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=什麼是CMake與Make&body=Check out this article: http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&title=什麼是CMake與Make"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&name=什麼是CMake與Make&description=&lt;p&gt;在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是&lt;code&gt;make&lt;/code&gt;仰賴&lt;code&gt;Makefile&lt;/code&gt;, 而&lt;code&gt;cmake&lt;/code&gt;仰賴&lt;code&gt;CMakeList.txt&lt;/code&gt;，但兩者做著不一樣的事情。"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=http://example.com/2022/07/27/2022-07-27-CMake%E8%88%87Make/&t=什麼是CMake與Make"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
 
+    </div>
 
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
 
-</main>
+  </div>
+</div>
 
-            <footer class="footer">
-    
-    
-
-
-    
-     
- 
-
- 
-    
         
-        <p class="footer-copyright">
-            Copyright © 2022 <a href="/">Echo November&#39;s note</a>
-        </p>
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
     
     
-    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
+    2016-2022
+    Echo November
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/probberechts">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
 </footer>
 
-        </div>
-         
+    </div>
+    <!-- styles -->
 
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
  
-
- 
-
- 
-
- 
-
-
-
- 
-
-
-
- 
-
-
-    
- 
-
- 
-
- 
-
- 
-
- 
-
- 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
 
 
 
 
-    </body>
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
 </html>

@@ -95,23 +95,21 @@
             </div>
         </div>
         <div class="post-toc" id="post-toc">
-    <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AF%AB%E8%85%B3%E6%9C%AC%E2%80%93-%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%AF%ABmakefile%E3%80%82"><span class="toc-text">1. 寫腳本– 也就是寫makefile。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%91%BD%E5%90%8D%E6%AA%94%E6%A1%88"><span class="toc-text">2. 命名檔案</span></a></li></ol>
+    <strong class="post-toc-title">目錄</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AF%AB%E8%85%B3%E6%9C%AC---%E4%B9%9F%E5%B0%B1%E6%98%AF%E5%AF%ABmakefile"><span class="toc-text">1. 寫腳本-- 也就是寫makefile。</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E6%AA%94%E6%A1%88"><span class="toc-text">2. 命名檔案</span></a></li></ol>
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <h3 id="1-寫腳本–-也就是寫makefile。"><a href="#1-寫腳本–-也就是寫makefile。" class="headerlink" title="1. 寫腳本– 也就是寫makefile。"></a>1. 寫腳本– 也就是寫makefile。</h3><p>以modmesh的makefile作為例子：</p>
-<span id="more"></span>
+            <p>軟體工程兩件事：寫腳本與命名檔案。<span id="more"></span></p>
+<h3 id="寫腳本---也就是寫makefile">1. 寫腳本-- 也就是寫makefile。</h3>
+<p>以<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>的makefile作為例子：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: default</span><br><span class="line">default: buildext</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br><span class="line"></span><br><span class="line">.PHONY: cmakeclean</span><br><span class="line">cmakeclean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br><span class="line"></span><br><span class="line">.PHONY: pytest</span><br><span class="line">pytest: $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">env</span> $(RUNENV) \</span><br></pre></td></tr></table></figure>
-<p>.PHONY，根據<a target="_blank" rel="noopener" href="https://mropengate.blogspot.com/2018/01/makefile.html">這篇文章</a>的說法它叫做「偽目標」（嗯要慢慢用心體會，要認識的還真不少）依據我目前為止的認知上，冒號之前為target，冒號之後為dependency, i.e, target: dependency，並且會層層向下追朔，以上的例子來看default作為target，dependency則是buildext，此時程式就會再向下追朔，找到buildext作為target之處，向下追朔，或是執行裡頭的指令。</p>
-<p>To “build the target”，則如</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure>
-<p>同樣的事情也不見得要透過這樣的方法來進行，i.e, make clean在terminal中藉由以下的指令產生等效的結果：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line"><span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br></pre></td></tr></table></figure>
-<p>我想這就是為什麼寫makefile會叫做寫腳本，真的是有異曲同工之妙ㄋ～</p>
-<h3 id="2-命名檔案"><a href="#2-命名檔案" class="headerlink" title="2. 命名檔案"></a>2. 命名檔案</h3>
+<p>.PHONY，根據<a target="_blank" rel="noopener" href="https://mropengate.blogspot.com/2018/01/makefile.html">這篇文章</a>的說法它叫做「偽目標」，冒號之前為target，冒號之後為dependency, i.e, <code>target: dependency</code>，層層向下追朔，以上的例子來看<code>default</code>作為target，dependency則是<code>buildext</code>，此時程式就會再向下追朔，找到<code>buildext</code>作為target之處，向下追朔，或是執行裡頭的指令。</p>
+<p>To "build the target"，則如 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure> 同樣的事情也不見得要透過這樣的方法來進行，i.e, <code>make clean</code>在terminal中藉由以下的指令產生等效的結果： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line"><span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br></pre></td></tr></table></figure> 我想這就是為什麼寫makefile會叫做寫腳本，真的是有異曲同工之妙ㄋ～</p>
+<h3 id="命名檔案">2. 命名檔案</h3>
+
         </div>
         
         <div class="post-tag">
@@ -129,7 +127,7 @@
         
             <a class="prev" href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">
                 <i class="iconfont icon-prev"></i>
-                <span class="nav-default">Pybind11 build from source</span>
+                <span class="nav-default">Note：Pybind11 build from source</span>
                 <span class="nav-mobile">Prev</span>
             </a>
         

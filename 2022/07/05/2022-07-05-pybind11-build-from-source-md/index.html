@@ -87,7 +87,7 @@
         <div class="posts">
     <article class="post-whole">
         <div class="post-title">
-            <h2 class="title">Pybind11 build from source</h2>
+            <h2 class="title">Note：Pybind11 build from source</h2>
             <div class="post-meta">
                 <span class="post-time">2022-07-05</span>
                 
@@ -95,21 +95,16 @@
             </div>
         </div>
         <div class="post-toc" id="post-toc">
-    <strong class="post-toc-title">目录</strong>
+    <strong class="post-toc-title">目錄</strong>
     
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <p>Hi, what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found). </p>
-<span id="more"></span>
-<p>I followed the history at first, and it was like:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /usr/local/include/pybind</span><br><span class="line"><span class="built_in">cd</span> ~/git-repo</span><br><span class="line">git <span class="built_in">clone</span> (github pybind repository)</span><br><span class="line"><span class="built_in">cd</span> pybind</span><br><span class="line"><span class="built_in">mkdir</span> build/install -p</span><br><span class="line"><span class="built_in">cd</span> build/install</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../..</span><br></pre></td></tr></table></figure>
-<p>the <code>viewer</code> could be successfully built and run. The second attempt was following was following the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation in readme</a>:</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..</span><br><span class="line">make check -j 4</span><br></pre></td></tr></table></figure>
-<p>along with <code>sudo make install</code> followed.</p>
-<p>Up to this point, I don’t quite understand the purpose of <code>mkdir</code> before <code>cmake</code>, and the reason to why <code>cmake</code> and <code>sudo make install</code> seems to be the main point to build <code>pybind11</code> instead of other action such as <code>python3 setup.py install</code>, and when to define certain variable such as  <code>-DCMAKE_INSTALL_PREFIX=/usr/local</code> instead of leaving it default.</p>
+            <p>Hi,<br />
+what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found). <span id="more"></span> I followed the history at first, and it was like: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /usr/local/include/pybind</span><br><span class="line"><span class="built_in">cd</span> ~/git-repo</span><br><span class="line">git <span class="built_in">clone</span> (github pybind repository)</span><br><span class="line"><span class="built_in">cd</span> pybind</span><br><span class="line"><span class="built_in">mkdir</span> build/install -p</span><br><span class="line"><span class="built_in">cd</span> build/install</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../..</span><br></pre></td></tr></table></figure> the <code>viewer</code> could be successfully built and run. The second attempt was following was following the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation in readme</a>: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..</span><br><span class="line">make check -j 4</span><br></pre></td></tr></table></figure> along with <code>sudo make install</code> followed.</p>
+<p>Up to this point, I don't quite understand the purpose of <code>mkdir</code> before <code>cmake</code>, and the reason to why <code>cmake</code> and <code>sudo make install</code> seems to be the main point to build <code>pybind11</code> instead of other action such as <code>python3 setup.py install</code>, and when to define certain variable such as <code>-DCMAKE_INSTALL_PREFIX=/usr/local</code> instead of leaving it default.</p>
 
         </div>
         

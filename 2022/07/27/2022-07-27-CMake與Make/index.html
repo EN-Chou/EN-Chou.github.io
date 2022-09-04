@@ -87,7 +87,7 @@
         <div class="posts">
     <article class="post-whole">
         <div class="post-title">
-            <h2 class="title">CMake與Make</h2>
+            <h2 class="title">什麼是CMake與Make</h2>
             <div class="post-meta">
                 <span class="post-time">2022-07-27</span>
                 
@@ -95,25 +95,27 @@
             </div>
         </div>
         <div class="post-toc" id="post-toc">
-    <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#CMake-vs-make"><span class="toc-text">CMake vs make?</span></a></li></ol>
+    <strong class="post-toc-title">目錄</strong>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#cmake"><span class="toc-text">CMake</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#make"><span class="toc-text">Make</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#cmake-and-make"><span class="toc-text">CMake and make</span></a></li></ol>
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，但卻做著不太一樣的事情，不只是差了一個C這麼簡單。</p>
-<span id="more"></span>
+            <p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是<code>make</code>仰賴<code>Makefile</code>, 而<code>cmake</code>仰賴<code>CMakeList.txt</code>，但兩者做著不一樣的事情。 <span id="more"></span></p>
+<h3 id="cmake">CMake</h3>
+<p>CMake 用來產生跨平台的專案建置文件，在 windows 下它會生成 visual studio 的專案檔 (.sln) codeblock eclipse，在 linux 下它會生成 Makefile，雖然makefile是可以人工生成，但當手寫makefile並不方便，也不能跨平台使用，於是<code>cmake</code>依平台生成建置文件即可帶來便利性。（最終端的<code>CMakeLists.txt</code>依然是由依然是由人工攥寫）</p>
+<ul>
+<li><p>CMakeList.txt: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.4)</span><br><span class="line">PROJECT(pybind_vid)</span><br><span class="line">add_subdirectory(pybind11)</span><br><span class="line">pybind11_add_module(<span class="built_in">test</span> test.cpp)</span><br></pre></td></tr></table></figure></p></li>
+<li><p>cmake: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/demo$ <span class="built_in">ls</span></span><br><span class="line">CMakeLists.txt  pybind11  test.cpp</span><br><span class="line">~/git-repo/demo$ <span class="built_in">mkdir</span> build <span class="comment">#創建build這個directory，區分原始文件以及CMake過程的中間產物</span></span><br><span class="line">~/git-repo/demo$ <span class="built_in">ls</span> build/</span><br><span class="line"><span class="comment"># (empty)</span></span><br><span class="line">~/git-repo/demo$ <span class="built_in">cd</span> build/</span><br><span class="line">~/git-repo/demo/build$ cmake .. <span class="comment">#執行cmake</span></span><br><span class="line">~/git-repo/demo/build$ <span class="built_in">ls</span> <span class="comment">#執行後，build底下就會有Makefile</span></span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11</span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h3 id="make">Make</h3>
+<p><code>make</code>是用來自動化shell script，在<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/">這篇</a>demo了一個手動生成Makefile的範例。</p>
+<h3 id="cmake-and-make">CMake and make</h3>
+<ul>
+<li><code>cmake</code> 搭配 <code>make</code>的使用： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/demo$ <span class="built_in">ls</span></span><br><span class="line">build  CMakeLists.txt  pybind11  test.cpp <span class="comment">#cmake所根據的CMakeLists.txt存在此目錄底下</span></span><br><span class="line">~/git-repo/demo/build$ cmake .. <span class="comment">#cmake根據CMakeLists.txt 生成 Makefile</span></span><br><span class="line">~/git-repo/demo/build$ <span class="built_in">ls</span></span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11 <span class="comment">#cmake所生成的Makefile</span></span><br><span class="line">~/git-repo/demo/build$ make <span class="comment">#make根據Makefile執行裡頭的shellscript</span></span><br></pre></td></tr></table></figure></li>
+</ul>
 
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation$ <span class="built_in">ls</span></span><br><span class="line">build  CMakeLists.txt  pybind11  test.cpp</span><br><span class="line">~/git-repo/importation/build$ cmake .. </span><br><span class="line">~/git-repo/importation/build$ <span class="built_in">ls</span></span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11</span><br><span class="line">~/git-repo/importation/build$ make</span><br></pre></td></tr></table></figure>
-
-<h3 id="CMake-vs-make"><a href="#CMake-vs-make" class="headerlink" title="CMake vs make?"></a>CMake vs make?</h3><p>這裡對於make做了些許的整理，make可以用來自動化shell script。CMake之於Make，與make之於shell script，存在了一些相似性。</p>
-<p>「CMake 用來產生跨平台的專案建置文件，在 windows 下它會生成 visual studio 的專案檔 (.sln) codeblock eclipse，在 linux 下它會生成 Makefile。」在cmake之前的環境如下：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation$ <span class="built_in">ls</span></span><br><span class="line">CMakeLists.txt  pybind11  test.cpp</span><br><span class="line">~/git-repo/importation$ <span class="built_in">ls</span> build/</span><br><span class="line">(empty)</span><br></pre></td></tr></table></figure>
-<p>然後創建build這個directory，這能夠幫助我們將原始文件以及CMake過程的中間產物做做區分，再進行CMake：</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation$ <span class="built_in">mkdir</span> build</span><br><span class="line">~/git-repo/importation$ <span class="built_in">cd</span> build/</span><br><span class="line">~/git-repo/importation/build$ cmake ..</span><br></pre></td></tr></table></figure>
-<p>執行完成後，build底下就會有Makefile：</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation/build$ ls</span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11</span><br></pre></td></tr></table></figure>
         </div>
         
         <div class="post-tag">

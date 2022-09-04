@@ -112,7 +112,7 @@
 </ul>
 <h5 id="小server設定ip流程大型server不用">小server設定ip流程（大型server不用）</h5>
 <ul>
-<li>小server因為無法直接設定infiniband的ip需要繞路（<code>ibstate</code>會顯示"cannot found uuid" ） <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip a #檢查infiniband的mac碼，需記下後面要用</span><br><span class="line">uuidgen ib0 #新增ib0的uuid，一樣要記下後面要用</span><br></pre></td></tr></table></figure>
+<li>小server因為無法直接設定infiniband的ip需要繞路（<code>ibstate</code>會顯示"cannot found uuid" ） <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ip a <span class="comment">#檢查infiniband的mac碼，需記下後面要用</span></span><br><span class="line">uuidgen ib0 <span class="comment">#新增ib0的uuid，一樣要記下後面要用</span></span><br></pre></td></tr></table></figure>
 <ul>
 <li>新增ib0的網路設定</li>
 </ul></li>
@@ -140,7 +140,7 @@
 <li>如果跟 nouveau 有關 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">startx <span class="comment">#回到圖形界面</span></span><br><span class="line">vi /etc/modprobe.d/blacklist-nouveau.conf</span><br></pre></td></tr></table></figure> 加入以下內容： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">options nouveau modeset=0</span><br></pre></td></tr></table></figure> 回到terminal： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo dracut --force</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></li>
 <li>防火牆 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure></li>
 </ol></li>
-<li>確認 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia -smi #有抓到顯卡就ok</span><br></pre></td></tr></table></figure></li>
+<li>確認 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia -smi <span class="comment">#有抓到顯卡就ok</span></span><br></pre></td></tr></table></figure></li>
 </ul>
 
         </div>

@@ -110,7 +110,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+    <div class="sidebar-inner sidebar-overview-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -123,7 +123,6 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#makefile"><span class="nav-number">1.</span> <span class="nav-text">makefile</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -238,15 +237,8 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>在認識到Linux以前，我鮮少接觸到CLI(Command Line Interface)，也花了些許時間去熟悉。一開始看它也許會感到有些震懾，但並沒有想像中的複雜，單純是將我們習慣使用的GUI(Graphical User Interface)改成CLI，滑鼠改成鍵盤，簡單做了轉換。</p>
-<span id="more"></span>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt6-default <span class="comment">#以superuser身份安裝qt6-default</span></span><br><span class="line"><span class="built_in">mkdir</span> build/install -p <span class="comment">#新增資料夾</span></span><br><span class="line"><span class="built_in">cd</span> build/install <span class="comment">#切換目錄到build/install</span></span><br><span class="line"><span class="built_in">rm</span> –rf build <span class="comment">#remove文件, recursively.</span></span><br></pre></td></tr></table></figure>
-<h3 id="makefile"><a href="#makefile" class="headerlink" title="makefile"></a>makefile</h3><p>make 以及 makefile讓我們得以自動化我們想執行的command line。比如說modmesh裡面中clean這個target，若是藉由一行一行的command line我們會需要輸入以下的指令，</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure>
-<p>但如果已經在Makefile中寫好了clean這個target，將一行行的command line寫成了shell script。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure>
-<p>我們就可以去藉由make，直接輸入 <code>make clean</code> 去執行我們想要去執行的內容，不用逐步命令。</p>
-<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make clean</span><br></pre></td></tr></table></figure>
+        <p>在認識到Linux以前，我鮮少接觸到CLI(Command Line Interface)，也花了些許時間去熟悉。一開始看它也許會感到有些震懾，但並沒有想像中的複雜，單純是將我們習慣使用的GUI(Graphical User Interface)改成CLI，滑鼠改成鍵盤，簡單做了轉換。 <span id="more"></span> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt6-default <span class="comment">#以superuser身份安裝qt6-default</span></span><br><span class="line"><span class="built_in">mkdir</span> build/install -p <span class="comment">#新增資料夾</span></span><br><span class="line"><span class="built_in">cd</span> build/install <span class="comment">#切換目錄到build/install</span></span><br><span class="line"><span class="built_in">rm</span> –rf build <span class="comment">#remove文件, recursively.</span></span><br></pre></td></tr></table></figure> ### makefile make 以及 makefile讓我們得以自動化我們想執行的command line。比如說modmesh裡面中clean這個target，若是藉由一行一行的command line我們會需要輸入以下的指令， <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure> 但如果已經在Makefile中寫好了clean這個target，將一行行的command line寫成了shell script。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure> 我們就可以去藉由make，直接輸入 <code>make clean</code> 去執行我們想要去執行的內容，不用逐步命令。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make clean</span><br></pre></td></tr></table></figure></p>
+
     </div>
 
     

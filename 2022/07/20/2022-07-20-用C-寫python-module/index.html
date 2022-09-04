@@ -1,211 +1,72 @@
-<!DOCTYPE html>
-<html>
-  <head>
-  <meta http-equiv="content-type" content="text/html; charset=utf-8">
-  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
-  <meta name="description" content="yanm1ng&#39;s blog">
-  <meta name="keyword" content="hexo-theme, vuejs">
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
   
-    <link rel="shortcut icon" href="/css/images/logo.png">
+  <title>用C++寫python module | Echo November&#39;s note</title>
+  <meta name="author" content="Echo November">
   
-  <title>
-    
-      用C++寫python module | Echo November&#39;s note
-    
-  </title>
-  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
-  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  <meta name="description" content="做這個小實驗的當天看到這個梗圖，相當呼應這個主題:">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+  <meta property="og:title" content="用C++寫python module"/>
+  <meta property="og:site_name" content="Echo November&#39;s note"/>
+
+  
+    <meta property="og:image" content=""/>
+  
+
+  <link rel="shortcut icon" href="/favicon.png">
+  
   
 <link rel="stylesheet" href="/css/style.css">
 
+  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
   
-  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
-  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
-  
-    
-<script src="/js/qrious.js"></script>
-
-  
-  
-  
-  
-    <!-- MathJax support START -->
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
-    <!-- MathJax support END -->
-  
-
-
-  
-  
-    
-<script src="/js/local-search.js"></script>
-
 
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
 <!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
-<div class="wechat-share">
-  <img src="/css/images/logo.png" />
-</div>
-  <body>
-    <header class="header fixed-header">
-  <div class="header-container">
-    <a class="home-link" href="/">
-      <div class="logo"></div>
-      <span>Echo November's note</span>
-    </a>
-    <ul class="right-list">
-      
-        <li class="list-item">
-          
-            <a href="/" class="item-link">Home</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/series/" class="item-link">Series</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/tags/" class="item-link">Tags</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/archives/" class="item-link">Archives</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/project/" class="item-link">Projects</a>
-          
-        </li>
-      
-        <li class="list-item">
-          
-            <a href="/about/" class="item-link">About</a>
-          
-        </li>
-      
-      
-        <li class="menu-item menu-item-search right-list">
-    <a role="button" class="popup-trigger">
-        <i class="fa fa-search fa-fw"></i>
-    </a>
-</li>
-      
-    </ul>
-    <div class="menu">
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-      <span class="icon-bar"></span>
-    </div>
-    <div class="menu-mask">
-      <ul class="menu-list">
-        
-          <li class="menu-item">
-            
-              <a href="/" class="menu-link">Home</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/series/" class="menu-link">Series</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/tags/" class="menu-link">Tags</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/archives/" class="menu-link">Archives</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/project/" class="menu-link">Projects</a>
-            
-          </li>
-        
-          <li class="menu-item">
-            
-              <a href="/about/" class="menu-link">About</a>
-            
-          </li>
-        
-      </ul>
-    </div>
-    
-      <div class="search-pop-overlay">
-    <div class="popup search-popup">
-        <div class="search-header">
-            <span class="search-icon">
-                <i class="fa fa-search"></i>
-            </span>
-            <div class="search-input-container">
-                <input autocomplete="off" autocapitalize="off"
-                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
-                    type="search" class="search-input">
-            </div>
-            <span class="popup-btn-close">
-                <i class="fa fa-times-circle"></i>
-            </span>
-        </div>
-        <div id="search-result">
-            <div id="no-result">
-                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
-            </div>
-        </div>
-    </div>
-</div>
-    
-  </div>
-</header>
 
-    <div id="article-banner">
-  <h2>用C++寫python module</h2>
-  <p class="post-date">2022-07-20</p>
-  <div class="arrow-down">
-    <a href="javascript:;"></a>
-  </div>
+
+<body>
+  <header id="header" class="inner"><div class="alignleft">
+  <h1><a href="/">Echo November&#39;s note</a></h1>
+  <h2><a href="/"></a></h2>
 </div>
-<main class="app-body flex-box">
-  <!-- Article START -->
-  <article class="post-article">
-    <section class="markdown-content"><p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<span id="more"></span> <img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small" alt="C++ chats with python" /></p>
+<nav id="main-nav" class="alignright">
+  <ul>
+    
+      <li><a href="/null">Home</a></li>
+    
+      <li><a href="/archives">Archives</a></li>
+    
+  </ul>
+  <div class="clearfix"></div>
+</nav>
+<div class="clearfix"></div>
+</header>
+  <div id="content" class="inner">
+    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-2022-07-20-用C-寫python-module" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
+  
+  <div class="post-content">
+    <header>
+      
+        <div class="icon"></div>
+        <time class="dt-published" datetime="2022-07-20T03:41:47.000Z"><a href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">2022-07-20</a></time>
+      
+      
+  
+    <h1 class="p-name title" itemprop="headline name">用C++寫python module</h1>
+  
+
+    </header>
+    <div class="e-content entry" itemprop="articleBody">
+      
+        <p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<span id="more"></span> <img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small" alt="C++ chats with python" /></p>
 <p>「其它的程式語言對你作力學是沒用的，作計算就三本柱 Python、C++、Fortran 足矣，連 C 都沒什麼用處。」Python在計算的速度上相較於C++非常的緩慢，這個<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3PcIJKd1PKU&amp;ab_channel=xmdi">demo</a>很清楚地呈現了這件事。</p>
 <p>以計算力學為題，python在tool的開發，input的整合上具有優勢，但是在計算效能上的表現不佳，於是就有了許多與python互相支援的foreign function interface(FFI)，如 swig, cython, pybind11。 截python所長，補C++所短 (or vice versa) ，似乎是做出更好的力學程式不可或缺的元素，pybind扮演的角色於是顯現。接下來就簡單用C++寫一個python的module:</p>
 <h3 id="寫-.cpp.h-file">1. 寫 .cpp/.h file。</h3>
@@ -223,221 +84,148 @@
 <ul>
 <li>What's the cause of success within <code>~/git-repo/importation/test</code> but not <code>~/git-repo/importation</code>? <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;cached&#x27;</span>, <span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;path&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
 </ul>
+
+      
+    </div>
+    <footer>
+      
+        
+        
+  
+  <div class="tags">
+    <a href="/tags/python/">python</a>, <a href="/tags/C/">C++</a>, <a href="/tags/Computation/">Computation</a>
+  </div>
+
+        
+  <div class="addthis addthis_toolbox addthis_default_style">
+    
+      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
+    
+    
+      <a class="addthis_button_tweet"></a>
+    
+    
+      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
+    
+    
+      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
+    
+    <a class="addthis_counter addthis_pill_style"></a>
+  </div>
+  <script src="//s7.addthis.com/js/300/addthis_widget.js"></script>
+
+      
+      <div class="clearfix"></div>
+    </footer>
+  </div>
+</article>
+
+
+<section id="comment">
+  <h1 class="title">Comments</h1>
+
+  
+      <div id="fb-root"></div>
+<script>
+  (function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+</script>
+
+<div class="fb-comments" data-href="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
+      
+  
 </section>
-    <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#python" >
-    <span class="tag-code">python</span>
-  </a>
 
-  <a href="/tags#C++" >
-    <span class="tag-code">C++</span>
-  </a>
-
-  <a href="/tags#Computation" >
-    <span class="tag-code">Computation</span>
-  </a>
-
-      </div>
-    
-    <!-- Tags END -->
-    <!-- NAV START -->
-    
-  <div class="nav-container">
-    <!-- reverse left and right to put prev and next in a more logic postition -->
-    
-      <a class="nav-left" href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/">
-        <span class="nav-arrow">← </span>
-        
-          Python importation 機制
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/">
-        
-          Bash與Makefile
-        
-        <span class="nav-arrow"> →</span>
-      </a>
-    
-  </div>
-
-    <!-- NAV END -->
-    <!-- 打赏 START -->
-    
-      <div class="money-like">
-        <div class="reward-btn">
-          赏
-          <span class="money-code">
-            <span class="alipay-code">
-              <div class="code-image"></div>
-              <b>使用支付宝打赏</b>
-            </span>
-            <span class="wechat-code">
-              <div class="code-image"></div>
-              <b>使用微信打赏</b>
-            </span>
-          </span>
-        </div>
-        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
-      </div>
-    
-    <!-- 打赏 END -->
-    <!-- 二维码 START -->
-    
-      <div class="qrcode">
-        <canvas id="share-qrcode"></canvas>
-        <p class="notice">扫描二维码，分享此文章</p>
-      </div>
-    
-    <!-- 二维码 END -->
-    
-      <!-- Utterances START -->
-      <div id="utterances"></div>
-      <script src="https://utteranc.es/client.js"
-        repo=""
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async></script>    
-      <!-- Utterances END -->
-    
-  </article>
-  <!-- Article END -->
-  <!-- Catalog START -->
-  
-    <aside class="catalog-container">
-  <div class="toc-main">
-    <strong class="toc-title">Catalog</strong>
-    
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AF%AB-.cpp.h-file"><span class="toc-nav-text">1. 寫 .cpp&#x2F;.h file。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%AF%AB-cmakelist.txt"><span class="toc-nav-text">2. 寫 CMakeList.txt。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#build-the-module"><span class="toc-nav-text">3. Build the module。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#%E5%9C%A8python%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%89%8D%E9%9D%A2%E6%89%80%E5%BB%BA%E7%AB%8B%E7%9A%84module"><span class="toc-nav-text">4. 在python中使用前面所建立的module。</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#problem-unsolved"><span class="toc-nav-text">0. Problem Unsolved</span></a></li></ol>
-    
-  </div>
-</aside>
-  
-  <!-- Catalog END -->
-</main>
-
-<script>
-  (function () {
-    var url = 'http://example.com/2022/07/20/2022-07-20-用C-寫python-module/';
-    var banner = ''
-    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
-      $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
-      })
-    } else {
-      $('#article-banner').geopattern(url)
-    }
-    $('.header').removeClass('fixed-header')
-
-    // error image
-    $(".markdown-content img").on('error', function() {
-      $(this).attr('src', '/css/images/error_icon.png')
-      $(this).css({
-        'cursor': 'default'
-      })
-    })
-
-    // zoom image
-    $(".markdown-content img").on('click', function() {
-      var src = $(this).attr('src')
-      if (src !== '/css/images/error_icon.png') {
-        var imageW = $(this).width()
-        var imageH = $(this).height()
-
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-        zoom = zoom < 1 ? 1 : zoom
-        zoom = zoom > 2 ? 2 : zoom
-        var transY = (($(window).height() - imageH) / 2).toFixed(2)
-
-        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
-        $('.image-view-wrap').addClass('wrap-active')
-        $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-        })
-        $('html').css('overflow', 'hidden')
-
-        $('.image-view-wrap').on('click', function() {
-          $(this).remove()
-          $('html').attr('style', '')
-        })
-      }
-    })
-  })();
-</script>
-
-
-  <script>
-    var qr = new QRious({
-      element: document.getElementById('share-qrcode'),
-      value: document.location.href
-    });
-  </script>
-
-
-
-
-
-
-    <div class="scroll-top">
-  <span class="arrow-icon"></span>
+</div></div>
+    <aside id="sidebar" class="alignright">
+  <div class="search">
+  <form action="//google.com/search" method="get" accept-charset="utf-8">
+    <input type="search" name="q" results="0" placeholder="Search">
+    <input type="hidden" name="as_sitesearch" value="example.com">
+  </form>
 </div>
-    <footer class="app-footer">
-  <p class="copyright">
-    &copy; 2022 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
-    <br>
-    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
-    
-  </p>
-</footer>
+
+
+  
+
+  
+<div class="widget tag">
+  <h3 class="title">Tags</h3>
+  <ul class="entry">
+  
+    <li><a href="/tags/C/">C++</a><small>7</small></li>
+  
+    <li><a href="/tags/Computation/">Computation</a><small>5</small></li>
+  
+    <li><a href="/tags/ELF/">ELF</a><small>1</small></li>
+  
+    <li><a href="/tags/Machine-Learning/">Machine Learning</a><small>1</small></li>
+  
+    <li><a href="/tags/Pytorch/">Pytorch</a><small>1</small></li>
+  
+    <li><a href="/tags/YYQA/">YYQA</a><small>5</small></li>
+  
+    <li><a href="/tags/bash/">bash</a><small>4</small></li>
+  
+    <li><a href="/tags/cmake/">cmake</a><small>4</small></li>
+  
+    <li><a href="/tags/compile/">compile</a><small>2</small></li>
+  
+    <li><a href="/tags/make/">make</a><small>3</small></li>
+  
+    <li><a href="/tags/mini-sprint/">mini-sprint</a><small>2</small></li>
+  
+    <li><a href="/tags/object-file/">object file</a><small>1</small></li>
+  
+    <li><a href="/tags/pybind11/">pybind11</a><small>1</small></li>
+  
+    <li><a href="/tags/python/">python</a><small>2</small></li>
+  
+    <li><a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/">程式設計師的自我修養</a><small>3</small></li>
+  
+    <li><a href="/tags/%E9%9A%A8%E6%89%8B%E8%A8%98/">隨手記</a><small>1</small></li>
+  
+  </ul>
+</div>
+
+</aside>
+    <div class="clearfix"></div>
+  </div>
+  <footer id="footer" class="inner"><div class="alignleft">
+  
+  &copy; 2022 Echo November
+  
+</div>
+<div class="clearfix"></div></footer>
+  
+<script src="/js/jquery-3.4.1.min.js"></script>
+
+
+<script src="/js/jquery.imagesloaded.min.js"></script>
+
+
+<script src="/js/gallery.js"></script>
+
+
+
+
+
+
+<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+
+
+<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
 <script>
-  function async(u, c) {
-    var d = document, t = 'script',
-      o = d.createElement(t),
-      s = d.getElementsByTagName(t)[0];
-    o.src = u;
-    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
-    s.parentNode.insertBefore(o, s);
-  }
-</script>
-<script>
-  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
-    FastClick.attach(document.body);
-  })
+(function($){
+  $('.fancybox').fancybox();
+})(jQuery);
 </script>
 
-<script>
-  var hasLine = 'true';
-  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
-    $('figure pre').each(function(i, block) {
-      var figure = $(this).parents('figure');
-      if (hasLine === 'false') {
-        figure.find('.gutter').hide();
-      }
-      hljs.configure({useBR: true});
-      var lang = figure.attr('class').split(' ')[1] || 'code';
-      var codeHtml = $(this).html();
-      var codeTag = document.createElement('code');
-      codeTag.className = lang;
-      codeTag.innerHTML = codeHtml;
-      $(this).attr('class', '').empty().html(codeTag);
-      figure.attr('data-lang', lang.toUpperCase());
-      hljs.highlightBlock(block);
-    });
-  })
-</script>
-<!-- Baidu Tongji -->
-
-
-<script src="/js/script.js"></script>
-
-
-  </body>
+</body>
 </html>

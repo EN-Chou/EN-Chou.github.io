@@ -1,90 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-
-  
-  <title>Compile幕後 | Echo November&#39;s note</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 建置(Build) 然後▷，有時是只點下▷，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。">
-<meta property="og:type" content="article">
-<meta property="og:title" content="Compile幕後">
-<meta property="og:url" content="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/index.html">
-<meta property="og:site_name" content="Echo November&#39;s note">
-<meta property="og:description" content="習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 建置(Build) 然後▷，有時是只點下▷，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="http://example.com/images/gcc.jpg">
-<meta property="article:published_time" content="2022-08-02T17:10:32.000Z">
-<meta property="article:modified_time" content="2022-09-04T08:27:35.244Z">
-<meta property="article:author" content="Echo November">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="compile">
-<meta property="article:tag" content="程式設計師的自我修養">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="http://example.com/images/gcc.jpg">
-  
-    <link rel="alternate" href="/atom.xml" title="Echo November&#39;s note" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700&amp;subset=korean" rel="stylesheet">
-  
-<link rel="stylesheet" href="/css/style.css">
-
-<!-- hexo injector head_end start -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content=""><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Compile幕後</title><link rel="shortcut icon" href="/images/avatar.png" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <!--<div id="banner"></div>-->
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        <a href="/" id="main-nav-title" class="main-nav-link">Echo November&#39;s note</a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives/">Archives</a>
-        
-          <a class="main-nav-link" href="/about/">about</a>
-        
-      </nav>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-2022-08-03-Compile幕後" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      Compile幕後
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar.png"></div><div class="author"><div class="author-name"><a href="/">Echo November</a></div><div class="about-me">Halo~</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">archives</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/gary-Shen"></span><a href="https://github.com/gary-Shen" target="_blank" title="https://github.com/gary-Shen">https://github.com/gary-Shen</a></li><li class="social-item"><span class="label"><img src="/images/socials/flickr.svg" alt="https://www.flickr.com/photos/69944455@N05/"></span><a href="https://www.flickr.com/photos/69944455@N05/" target="_blank" title="https://www.flickr.com/photos/69944455@N05/">https://www.flickr.com/photos/69944455@N05/</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="guanlinshen@126.com"></span><span>guanlinshen@126.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="Grinson"></span><span>Grinson</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">Compile幕後</div><div class="date">2022年08月03日</div><div class="content"><p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
 <p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。 <img src="/images/gcc.jpg" alt="gcc compilation" /></p>
 <p>以下用一支比helloworld更簡單的程式來呈現:</p>
@@ -98,82 +16,16 @@
 <p>將assembly code一一翻譯成machine code。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -<span class="keyword">c</span> main.s -<span class="keyword">o</span> main.<span class="keyword">o</span> </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^@^@^@^@^@^A^@&gt;^@^A^@^@</span><br><span class="line">^@^@^@^@^@^@^@^@^@^@X^B^@^@^@^@^@^@^@^@^@^</span><br><span class="line">@@^@^@^@^@^@@^@^L^@^K^@ó^O^^úUHå¸^@^@^</span><br><span class="line">@^@]Ã^@GCC: (Ubuntu <span class="number">9.4</span>.<span class="number">0</span>-<span class="number">1</span>ubuntu1~<span class="number">20.04</span>.<span class="number">1</span>)</span><br><span class="line"><span class="number">9.4</span>.<span class="number">0</span>^@^@^@^@^@^@^D^@^......</span><br></pre></td></tr></table></figure></p>
 <h3 id="linking-.o-static-library---.out">4. Linking: .o + static library -&gt; .out，</h3>
 <p>將.o檔連結static library(一大堆.o檔)形成.out檔。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ld -static (一大堆.<span class="keyword">o</span>檔) </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^C^@&gt;^@^A^@^@^@À^<span class="keyword">P</span>^@^@^</span><br><span class="line">^@^@@^@^@^@^@^@^@^@è;^@^@^@^@^@^@^@^@^@^@@</span><br><span class="line">^@<span class="number">8</span>^@^M^@@^@^_^@^^^@^F^@^@^@^D^@^@^@@^@^@^</span><br><span class="line">@^@^@^@^@@^@^@^@^@^@^@^@@^......</span><br></pre></td></tr></table></figure></p>
+</div><div class="tags"><a class="tag-link" href="/tags/C/" rel="tag">C++</a><a class="tag-link" href="/tags/compile/" rel="tag">compile</a><a class="tag-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" rel="tag">程式設計師的自我修養</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">解碼.o檔</a></li><li>下一篇：<a href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">什麼是CMake與Make</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-bear" target="_blank">Bear</a><span>.</span></div></footer>
+<script src="/script/jquery.min.js"></script>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/" data-id="cl6xymxbf000ewa2phjmcg5o3" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/compile/" rel="tag">compile</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" rel="tag">程式設計師的自我修養</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Newer</span>
-      <div class="article-nav-title">
-        
-          解碼.o檔
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Older</span>
-      <div class="article-nav-title">什麼是CMake與Make</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 Echo November<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> with 
-      theme_by <a href="http://hexo.io/" target="_blank">mango</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives/" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about/" class="mobile-nav-link">about</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-  
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+<script src="/script/index.js"></script>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-61220413-1', 'auto');
+ga('send', 'pageview');</script>
+<script src="/script/post.js"></script>
+</body></html>

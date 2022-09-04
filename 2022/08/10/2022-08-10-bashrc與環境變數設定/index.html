@@ -1,86 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-
-  
-  <title>.bashrc與環境變數設定 | Echo November&#39;s note</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。">
-<meta property="og:type" content="article">
-<meta property="og:title" content=".bashrc與環境變數設定">
-<meta property="og:url" content="http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/index.html">
-<meta property="og:site_name" content="Echo November&#39;s note">
-<meta property="og:description" content="這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-10T06:57:09.000Z">
-<meta property="article:modified_time" content="2022-08-17T07:25:31.953Z">
-<meta property="article:author" content="Echo November">
-<meta property="article:tag" content="bash">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Echo November&#39;s note" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700&amp;subset=korean" rel="stylesheet">
-  
-<link rel="stylesheet" href="/css/style.css">
-
-<!-- hexo injector head_end start -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content=""><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>.bashrc與環境變數設定</title><link rel="shortcut icon" href="/images/avatar.png" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <!--<div id="banner"></div>-->
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        <a href="/" id="main-nav-title" class="main-nav-link">Echo November&#39;s note</a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives/">Archives</a>
-        
-          <a class="main-nav-link" href="/about/">about</a>
-        
-      </nav>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-2022-08-10-bashrc與環境變數設定" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      .bashrc與環境變數設定
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 </p>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar.png"></div><div class="author"><div class="author-name"><a href="/">Echo November</a></div><div class="about-me">Halo~</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">archives</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/gary-Shen"></span><a href="https://github.com/gary-Shen" target="_blank" title="https://github.com/gary-Shen">https://github.com/gary-Shen</a></li><li class="social-item"><span class="label"><img src="/images/socials/flickr.svg" alt="https://www.flickr.com/photos/69944455@N05/"></span><a href="https://www.flickr.com/photos/69944455@N05/" target="_blank" title="https://www.flickr.com/photos/69944455@N05/">https://www.flickr.com/photos/69944455@N05/</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="guanlinshen@126.com"></span><span>guanlinshen@126.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="Grinson"></span><span>Grinson</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">.bashrc與環境變數設定</div><div class="date">2022年08月10日</div><div class="content"><p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 </p>
 <span id="more"></span>
 
 <h3 id="bashrc"><a href="#bashrc" class="headerlink" title=".bashrc"></a>.bashrc</h3><p>“bash”是Bourne Again SHell的簡稱，是Linux預設使用的shell。使用者，termial，shell這三個元素的相關性可以藉由「使用者，透過terminal，與shell進行溝通」來描述。在開啟terminal時，bash就會被啟動，同時載入.bashrc裡的資訊。以下用一個小實驗來呈現這一點，實驗中在<code>.bashrc</code>裡頭加入:</p>
@@ -96,82 +18,16 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/$ source .bashrc</span><br></pre></td></tr></table></figure>
 <p>重新載入.bashrc後即可在任一目錄底下啟動matlab：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ matlab</span><br></pre></td></tr></table></figure>
+</div><div class="tags"><a class="tag-link" href="/tags/bash/" rel="tag">bash</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/">什麼是 ELF</a></li><li>下一篇：<a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">解碼.o檔</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-bear" target="_blank">Bear</a><span>.</span></div></footer>
+<script src="/script/jquery.min.js"></script>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/" data-id="cl6xymxbj000iwa2p24p7asuk" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/bash/" rel="tag">bash</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Newer</span>
-      <div class="article-nav-title">
-        
-          什麼是 ELF
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Older</span>
-      <div class="article-nav-title">解碼.o檔</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 Echo November<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> with 
-      theme_by <a href="http://hexo.io/" target="_blank">mango</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives/" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about/" class="mobile-nav-link">about</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-  
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+<script src="/script/index.js"></script>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-61220413-1', 'auto');
+ga('send', 'pageview');</script>
+<script src="/script/post.js"></script>
+</body></html>

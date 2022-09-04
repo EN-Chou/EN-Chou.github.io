@@ -1,90 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-
-  
-  <title>用C++寫python module | Echo November&#39;s note</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="做這個小實驗的當天看到這個梗圖，相當呼應這個主題:">
-<meta property="og:type" content="article">
-<meta property="og:title" content="用C++寫python module">
-<meta property="og:url" content="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/index.html">
-<meta property="og:site_name" content="Echo November&#39;s note">
-<meta property="og:description" content="做這個小實驗的當天看到這個梗圖，相當呼應這個主題:">
-<meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small">
-<meta property="article:published_time" content="2022-07-20T03:41:47.000Z">
-<meta property="article:modified_time" content="2022-09-04T08:29:08.594Z">
-<meta property="article:author" content="Echo November">
-<meta property="article:tag" content="python">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="Computation">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small">
-  
-    <link rel="alternate" href="/atom.xml" title="Echo November&#39;s note" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700&amp;subset=korean" rel="stylesheet">
-  
-<link rel="stylesheet" href="/css/style.css">
-
-<!-- hexo injector head_end start -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content=""><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>用C++寫python module</title><link rel="shortcut icon" href="/images/avatar.png" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <!--<div id="banner"></div>-->
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        <a href="/" id="main-nav-title" class="main-nav-link">Echo November&#39;s note</a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives/">Archives</a>
-        
-          <a class="main-nav-link" href="/about/">about</a>
-        
-      </nav>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-2022-07-20-用C-寫python-module" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      用C++寫python module
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<span id="more"></span> <img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small" alt="C++ chats with python" /></p>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar.png"></div><div class="author"><div class="author-name"><a href="/">Echo November</a></div><div class="about-me">Halo~</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">archives</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/gary-Shen"></span><a href="https://github.com/gary-Shen" target="_blank" title="https://github.com/gary-Shen">https://github.com/gary-Shen</a></li><li class="social-item"><span class="label"><img src="/images/socials/flickr.svg" alt="https://www.flickr.com/photos/69944455@N05/"></span><a href="https://www.flickr.com/photos/69944455@N05/" target="_blank" title="https://www.flickr.com/photos/69944455@N05/">https://www.flickr.com/photos/69944455@N05/</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="guanlinshen@126.com"></span><span>guanlinshen@126.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="Grinson"></span><span>Grinson</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">用C++寫python module</div><div class="date">2022年07月20日</div><div class="content"><p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<span id="more"></span> <img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small" alt="C++ chats with python" /></p>
 <p>「其它的程式語言對你作力學是沒用的，作計算就三本柱 Python、C++、Fortran 足矣，連 C 都沒什麼用處。」Python在計算的速度上相較於C++非常的緩慢，這個<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3PcIJKd1PKU&amp;ab_channel=xmdi">demo</a>很清楚地呈現了這件事。</p>
 <p>以計算力學為題，python在tool的開發，input的整合上具有優勢，但是在計算效能上的表現不佳，於是就有了許多與python互相支援的foreign function interface(FFI)，如 swig, cython, pybind11。 截python所長，補C++所短 (or vice versa) ，似乎是做出更好的力學程式不可或缺的元素，pybind扮演的角色於是顯現。接下來就簡單用C++寫一個python的module:</p>
 <h3 id="寫-.cpp.h-file">1. 寫 .cpp/.h file。</h3>
@@ -102,82 +20,16 @@
 <ul>
 <li>What's the cause of success within <code>~/git-repo/importation/test</code> but not <code>~/git-repo/importation</code>? <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;cached&#x27;</span>, <span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;path&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
 </ul>
+</div><div class="tags"><a class="tag-link" href="/tags/C/" rel="tag">C++</a><a class="tag-link" href="/tags/Computation/" rel="tag">Computation</a><a class="tag-link" href="/tags/python/" rel="tag">python</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/">Bash與Makefile</a></li><li>下一篇：<a href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/">Python importation 機制</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-bear" target="_blank">Bear</a><span>.</span></div></footer>
+<script src="/script/jquery.min.js"></script>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/" data-id="cl6xymxbb0009wa2p3oh59y1w" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/Computation/" rel="tag">Computation</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/python/" rel="tag">python</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Newer</span>
-      <div class="article-nav-title">
-        
-          Bash與Makefile
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Older</span>
-      <div class="article-nav-title">Python importation 機制</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 Echo November<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> with 
-      theme_by <a href="http://hexo.io/" target="_blank">mango</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives/" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about/" class="mobile-nav-link">about</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-  
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+<script src="/script/index.js"></script>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-61220413-1', 'auto');
+ga('send', 'pageview');</script>
+<script src="/script/post.js"></script>
+</body></html>

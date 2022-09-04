@@ -1,169 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-  <meta charset="utf-8">
-  
-
-  
-  <title>什麼是 ELF | Echo November&#39;s note</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="繼這篇文章，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，">
-<meta property="og:type" content="article">
-<meta property="og:title" content="什麼是 ELF">
-<meta property="og:url" content="http://example.com/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/index.html">
-<meta property="og:site_name" content="Echo November&#39;s note">
-<meta property="og:description" content="繼這篇文章，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，">
-<meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2022-08-15T07:11:21.000Z">
-<meta property="article:modified_time" content="2022-09-04T08:56:04.910Z">
-<meta property="article:author" content="Echo November">
-<meta property="article:tag" content="C++">
-<meta property="article:tag" content="程式設計師的自我修養">
-<meta property="article:tag" content="ELF">
-<meta name="twitter:card" content="summary">
-  
-    <link rel="alternate" href="/atom.xml" title="Echo November&#39;s note" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
-  <link href="https://fonts.googleapis.com/css?family=Noto+Sans+KR:100,300,400,700&amp;subset=korean" rel="stylesheet">
-  
-<link rel="stylesheet" href="/css/style.css">
-
-<!-- hexo injector head_end start -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content=""><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>什麼是 ELF</title><link rel="shortcut icon" href="/images/avatar.png" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"><!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <!--<div id="banner"></div>-->
-  <div id="header-outer" class="outer">
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        <a href="/" id="main-nav-title" class="main-nav-link">Echo November&#39;s note</a>
-        
-          <a class="main-nav-link" href="/">Home</a>
-        
-          <a class="main-nav-link" href="/archives/">Archives</a>
-        
-          <a class="main-nav-link" href="/about/">about</a>
-        
-      </nav>
-    </div>
-  </div>
-</header>
-
-      <div class="outer">
-        <section id="main"><article id="post-2022-08-15-淺入ELF" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 class="article-title" itemprop="name">
-      什麼是 ELF
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，<span id="more"></span>包括file header, .text section, .data section 以及 .bss section等區段。其中"file header"描述檔案的基本屬性，包括檔案版本，目的機器型號，程式入口位址等等，".text"存放程式碼區段，".data"存放已初始化的全域變數以及靜態變數，而".bss"存放已初始化的全域變數以及靜態變數。這篇的小實驗同樣是藉由<code>main.cpp</code>這支簡單的小程式來進行。</p>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar.png"></div><div class="author"><div class="author-name"><a href="/">Echo November</a></div><div class="about-me">Halo~</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">archives</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/gary-Shen"></span><a href="https://github.com/gary-Shen" target="_blank" title="https://github.com/gary-Shen">https://github.com/gary-Shen</a></li><li class="social-item"><span class="label"><img src="/images/socials/flickr.svg" alt="https://www.flickr.com/photos/69944455@N05/"></span><a href="https://www.flickr.com/photos/69944455@N05/" target="_blank" title="https://www.flickr.com/photos/69944455@N05/">https://www.flickr.com/photos/69944455@N05/</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="guanlinshen@126.com"></span><span>guanlinshen@126.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="Grinson"></span><span>Grinson</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">什麼是 ELF</div><div class="date">2022年08月15日</div><div class="content"><p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，<span id="more"></span>包括file header, .text section, .data section 以及 .bss section等區段。其中"file header"描述檔案的基本屬性，包括檔案版本，目的機器型號，程式入口位址等等，".text"存放程式碼區段，".data"存放已初始化的全域變數以及靜態變數，而".bss"存放已初始化的全域變數以及靜態變數。這篇的小實驗同樣是藉由<code>main.cpp</code>這支簡單的小程式來進行。</p>
 <p><strong>main.cpp</strong> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h3 id="查看elf檔內容">查看ELF檔內容</h3>
 <p><code>readelf</code>這個指令可以用來詳細查看ELF檔，如下面的範例中查看 main.o的file header： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ readelf -h main.o</span><br><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF64</span><br><span class="line">  Data:                              2<span class="string">&#x27;s complement, little endian</span></span><br><span class="line"><span class="string">  Version:                           1 (current)</span></span><br><span class="line"><span class="string">  OS/ABI:                            UNIX - System V</span></span><br><span class="line"><span class="string">  ABI Version:                       0</span></span><br><span class="line"><span class="string">  Type:                              REL (Relocatable file)</span></span><br><span class="line"><span class="string">  Machine:                           Advanced Micro Devices X86-64</span></span><br><span class="line"><span class="string">  Version:                           0x1</span></span><br><span class="line"><span class="string">  Entry point address:               0x0</span></span><br><span class="line"><span class="string">  Start of program headers:          0 (bytes into file)</span></span><br><span class="line"><span class="string">  Start of section headers:          600 (bytes into file)</span></span><br><span class="line"><span class="string">  Flags:                             0x0</span></span><br><span class="line"><span class="string">  Size of this header:               64 (bytes)</span></span><br><span class="line"><span class="string">  Size of program headers:           0 (bytes)</span></span><br><span class="line"><span class="string">  Number of program headers:         0</span></span><br><span class="line"><span class="string">  Size of section headers:           64 (bytes)</span></span><br><span class="line"><span class="string">  Number of section headers:         12</span></span><br><span class="line"><span class="string">  Section header string table index: 11</span></span><br></pre></td></tr></table></figure></p>
 <h3 id="查看elf檔各個區段的長度">查看ELF檔各個區段的長度</h3>
 <p><code>size</code>這個指令可以用來查看ELF檔各個區段的長度。在main.cpp檔中，我們並未宣告任何的變數，於是可以看到以下在於".text"以及".data"區段的長度皆為0。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ size main.o</span><br><span class="line">   text	   data	    bss	    dec	    hex	filename</span><br><span class="line">    103	      0	      0	    103	     67	main.o</span><br></pre></td></tr></table></figure></p>
+</div><div class="tags"><a class="tag-link" href="/tags/C/" rel="tag">C++</a><a class="tag-link" href="/tags/ELF/" rel="tag">ELF</a><a class="tag-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" rel="tag">程式設計師的自我修養</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/">在C++中使用Pytorch模型</a></li><li>下一篇：<a href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/">.bashrc與環境變數設定</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-bear" target="_blank">Bear</a><span>.</span></div></footer>
+<script src="/script/jquery.min.js"></script>
 
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://example.com/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/" data-id="cl6xymxbk000kwa2pgd8wfv73" class="article-share-link">Share</a>
-      
-      
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/C/" rel="tag">C++</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/ELF/" rel="tag">ELF</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" rel="tag">程式設計師的自我修養</a></li></ul>
-
-    </footer>
-  </div>
-  
-    
-<nav id="article-nav">
-  
-    <a href="/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/" id="article-nav-newer" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Newer</span>
-      <div class="article-nav-title">
-        
-          在C++中使用Pytorch模型
-        
-      </div>
-    </a>
-  
-  
-    <a href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/" id="article-nav-older" class="article-nav-link-wrap">
-      <span class="article-nav-caption">Older</span>
-      <div class="article-nav-title">.bashrc與環境變數設定</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-</section>
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2022 Echo November<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> with 
-      theme_by <a href="http://hexo.io/" target="_blank">mango</a>
-    </div>
-  </div>
-</footer>
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/" class="mobile-nav-link">Home</a>
-  
-    <a href="/archives/" class="mobile-nav-link">Archives</a>
-  
-    <a href="/about/" class="mobile-nav-link">about</a>
-  
-</nav>
-    
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
-
-
-  
 <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
 
-  
 <script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-
-
-
-<script src="/js/script.js"></script>
-
-
-
-
-  </div>
-</body>
-</html>
+<script src="/script/index.js"></script>
+<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+ga('create', 'UA-61220413-1', 'auto');
+ga('send', 'pageview');</script>
+<script src="/script/post.js"></script>
+</body></html>

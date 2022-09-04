@@ -1,440 +1,157 @@
 <!DOCTYPE html>
-
 <html lang="en">
     <head>
     <meta charset="utf-8">
-    <!--
-        hexo-theme-suka © SukkaW
-        GitHub: https://github.com/SukkaW/hexo-theme-suka
-    -->
 
-    <!-- ### Resource Hint ### -->
-
-    <!-- ## DNS Prefetch ## -->
-    <meta http-equiv="x-dns-prefetch-control" content="on">
-
-<!-- busuanzi -->
-
-    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
-
-
-<!-- comment -->
-
-
-
-
-
-
-
-<!-- analytics -->
-
-
-
-
-
-
-
-    <!-- ## Preload ## -->
     
-    <!-- Busuanzi -->
-    
-    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
 
-
-
-
-
-
-
-    <!-- ### Meta & Title & Info ### -->
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <!-- 渲染优化 -->
     <meta name="renderer" content="webkit">
+    <meta name="force-rendering" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=Edge,chrome=1">
+    <meta name="HandheldFriendly" content="True" >
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-    <!-- Title -->
-    <title>.bashrc與環境變數設定 | Echo November&#39;s note</title>
-
-    <!-- Favicons -->
-    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
-
-    <!-- ### Import File ### -->
-    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
-    body {
-        background-color: #f8f9fa;
-    }
-
-    a, a:visited {
-        color: #0070ff;
-    }
-
-    a:active, a:focus, a:hover {
-        color: #0070ff;
-        opacity: .75;
-    }
-
-    #post-content a,
-    #post-content a:hover,
-    #post-content a:focus,
-    #post-content a:visited {
-        color: #005eb9;
-        opacity: 1;
-    }
+    <!--icon-->
 
     
-
-    .post-entry .card-body a {
-        color: #0070ff;
-    }
-
-    .avatar {
-        background: #444;
-    }
-
-    .navbar-link,
-    .navbar-link:visited,
-    .timeline .timeline-item .timeline-icon.icon-lg {
-        color: #0070ff;
-    }
-
-    .navbar-link:hover {
-        color: #0070ff;
-        opacity: .8;
-    }
-
-    #search-input .btn,
-    #disqus_click_btn,
-    #disqus-switch-to-direct,
-    #disqus-loadmore-button {
-        background: #727e96;
-        border-color: #727e96;
-        color: #fff;
-    }
-
-    #post-toc a.post-toc-link,
-    #post-toc a.post-toc-link:visited,
-    .share-menu.menu .menu-item>a {
-        color: #727e96;
-    }
-
-    .share-menu.menu .menu-item>a:hover,
-    .share-menu.menu .menu-item>a:focus,
-    .share-menu.menu .menu-item>a:visited {
-        color: #50596c;
-        background: #f8f9fa;
-        opacity: .85;
-    }
-</style><link rel="stylesheet" href="/css/style.min.css">
-
-
-
-
-
-
-
-
-    <!-- Prettify Theme -->
     
-    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
-
-
-
-
-
-<script>
-/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
-!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
-</script>
-
-    <!-- ### Site Verification ### -->
+    
+    
     
 
 
-    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Echo November's note"><meta name="msapplication-starturl" content="http://example.com"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Echo November's note"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <!-- meta -->
 
-    <!-- ### The Open Graph & Twitter Card Protocol ### -->
-    <meta property="og:title" content=".bashrc與環境變數設定 | Echo November&#39;s note"><meta property="og:site_name" content="Echo November&#39;s note"><meta property="og:type" content="article"><meta property="og:url" content="http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/"><meta property="og:locale" content="en"><meta name="description" content="這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 - Echo November - Echo November&#39;s note"><meta name="keywords" content="bash"><meta property="article:published_time" content="2022-08-10T06:57:09.000Z"><meta property="article:modified_time" content="2022-08-17T07:25:31.953Z"><meta property="og:updated_time" content="2022-08-17T07:25:31.953Z"><meta property="article:author" content="Echo November"><meta property="article:tag" content="bash"><meta name="twitter:card" content="summary">
+
+<title>.bashrc與環境變數設定 | Echo November&#39;s note</title>
+
+
+    <meta name="keywords" content="bash">
+
+
+
+
+    <!-- OpenGraph -->
+ 
+    <meta name="description" content="這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。">
+<meta property="og:type" content="article">
+<meta property="og:title" content=".bashrc與環境變數設定">
+<meta property="og:url" content="http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/index.html">
+<meta property="og:site_name" content="Echo November&#39;s note">
+<meta property="og:description" content="這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-08-10T06:57:09.000Z">
+<meta property="article:modified_time" content="2022-08-17T07:25:31.953Z">
+<meta property="article:author" content="Echo November">
+<meta property="article:tag" content="bash">
+<meta name="twitter:card" content="summary_large_image">
+
+
+    
+<link rel="stylesheet" href="/css/style/main.css">
+ 
+
+    
+    
+        <link rel="stylesheet" id="hl-default-theme" href="/css/highlight/default.css" media="none" onload="this.media='all'">
+        
+    
+
+    
+    
 
     
 
-    <!-- ### Canonical link ### -->
-    <link rel="canonical" href="http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/">
+     
 
-    <meta name="generator" content="Hexo 6.2.0">
+    <!-- custom head -->
 
-    <!-- ### Analytics ### -->
-    
-
-
-
-
-
-
-
-    <!-- ### Structured Data ### -->
-    
-
-
-
-<script type="application/ld+json">
-{
-    "@context": "http://schema.org",
-    "url": "http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/",
-    "@type": "BlogPosting",
-    "logo": "http://example.com/img/suka-favicon.ico",
-    "mainEntityOfPage": {
-        "@type": "WebPage",
-        "@id": "http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/"
-    },
-    "headline": ".bashrc與環境變數設定 | Echo November&#39;s note",
-    
-    "image": {
-        "@type": "ImageObject",
-        "url": "http://example.com/img/suka-favicon.ico"
-    },
-    
-    "datePublished": "2022-08-10T06:57:09.000Z",
-    "dateModified": "2022-08-17T07:25:31.953Z",
-    "author": {
-        "@type": "Person",
-        "name": "Echo November",
-        "image": {
-            "@type": "ImageObject",
-            "url": "http://example.com/img/default_avatar.png"
-        },
-        "description": "Hi, nice to meet you."
-    },
-    "publisher": {
-        "@type": "Organization",
-        "name": "Echo November&#39;s note",
-        "logo": {
-            "@type": "ImageObject",
-            "url": "http://example.com/img/suka-favicon.ico"
-        }
-    },
-    
-    "potentialAction": {
-        "@type": "SearchAction",
-        "target": "http://example.com/search?s={search_term_string}",
-        "query-input": "required name=search_term_string"
-    },
-    
-    "keywords": "bash",
-    "description": "這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 - Echo November - Echo November&#39;s note"
-}
-</script>
-
-
-
-    <!-- ### Custom Head ### -->
-    
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --></head>
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
 
     <body>
-            
-
-            <!-- ### Main content ### -->
-            <!-- ## Header ##-->
-<header>
-    <h1 class="header-title text-center"><a href="/">Echo November&#39;s note</a></h1>
-
-    <p class="text-center header-slogan">
+        <div id="app" tabindex="-1">
+            <header class="header">
+    <div class="header__left">
+        <a href="/" class="button">
+            <span class="logo__text">Demo</span>
+        </a>
+    </div>
+    <div class="header__right">
         
-            
-                Hi, nice to meet you.
-            
-        
-    </p>
-
-    <nav class="navbar-section text-center">
-    
-        <a href="/" class="navbar-link">Home</a>
-    
-    
-        <a href="/archives/" class="navbar-link">Archives</a>
-    
-    
-        <a href="/search" class="navbar-link">Search</a>
-    
-    
-    
-        <div class="dropdown dropdown-right">
-    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
-    <ul class="menu share-menu">
-
-        <!-- Share Weibo -->
-        
-        <li class="menu-item">
-            <a href="http://service.weibo.com/share/share.php?appkey=&title=Echo November's note&url=http://example.com&pic=http://example.com/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
-        </li>
-        
-
-        <!-- Share Twitter -->
-        
-        <li class="menu-item">
-            <a href="https://twitter.com/intent/tweet?text=Echo November's note&url=http://example.com&via=Echo November" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
-        </li>
-        
-
-        <!-- Share Facebook -->
-        
-        <li class="menu-item">
-            <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
-        </li>
-        
-
-        <!-- Share Google+ -->
-        
-        <li class="menu-item">
-            <a href="https://plus.google.com/share?url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
-        </li>
-        
-
-        <!-- Share LinkedIn -->
-        
-        <li class="menu-item">
-            <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com&title=.bashrc與環境變數設定" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
-        </li>
-        
-
-        <!-- Share QQ -->
-        
-        <li class="menu-item">
-            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Echo November's note&title=.bashrc與環境變數設定&summary=&pics=http://example.com/img/suka-favicon.ico&url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
-        </li>
-        
-
-        <!-- Share Telegram -->
-        
-        <li class="menu-item">
-            <a href="https://t.me/share/url?url=http://example.com&text=.bashrc與環境變數設定" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
-        </li>
-        
-
-        <!-- QRCode -->
-        
-        <li class="menu-item">
-            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAADECAAAAADlzdG3AAADNklEQVR42u3cwXLbMAxFUf3/T7ebLtJWBO6jCMXtXG+SjC2TRzMUSACT68d/8LpEiBAhQsQ44ipev13w6++vP+8+173352e+fufq+1fzEiFiCrEapIJ2AxLQ3fdE8xIhYhBRTbCaML02wZB5iRDxnYhqYXfv3QW3VbDrxhch4lMQdwOk6OpBQG+iCBFvIqoA1P2+CljVRnL1mZFdrAgRIaJbhN/181i2Q4SIANEmbTcCXLVAu0BXJdy2s+IiRIT1iS4BRoJS9z1JYgHPR4SIAUS3yas2hKskQLewq2uqZEIZ7ESIOISgBZT20N4c+mmCrBrrrxsiQsQwojvo727iyI0hDwLUoCJCxAFEEtBI8TApRJLE2/IBIkLEEII0V6WNLOQQtXpAVA1e5dNJhIgDiGQjuDNxCksLlSJETCLoou0GJ0XLJ40rIkS8gSBBp1rwVUBKDjx08YsQ8QYiOcQ/Kdx3uOrAhTvPRIh4iKDNICcPOWTcKiCKEPEGIkkgk89XAZAENPKQECFiAkEbCKviCl2kaQGnTdyJEDGAIAcbmkB+Urisro+ae0WIeIigDSq04aQ6ZFVBkQa7R102IkQEvR20IJ4UIlcPgjTBtpXtECFiE0E3f6SxhFy/s/lDG0ARIg4h6EGfFsyTxpZuw7k6fIkQMYnYaRShRZBT7y8DoQgRg4idpqo0IbyTWCsTdyJEvISgSWXacNg1pHQ3YxlQRYgYQpCDDD0g0eCVbg63GlREiNhAkGbaKMl78X+W2zagXPU/IhEhYhLRLVLamNuhyoXaJB5EiHgDQZur0iBIb0CVFOiaxESImEZ0hcGk6E6TZSSoLa8TIWIIQRIGXbG8K+5XAXGnyC9CxCQiLZ7ToglNQJBi/e1DR4SIAUQ3OdKwQooxNLh1xZy2o0CEiIcIsulqg07QiEg3lijZLULEACJpHuwWNk06d8lnnLwWIWIIkRTOq0BGGhPTQj5e2CJEHEYkE+sWNi3cpIcpESI+BfG0EJ8mybrEtQgRn4Cgh/wuKU2bf8nYIkRMIpLGErrJ6wJj0pTy6FAkQkSIoIngaqLR4PCgFS1sESIOIf7llwgRIkSIGHv9BGEiX0wvNe/vAAAAAElFTkSuQmCC" alr="QRCode">
-        </li>
-        
-
-    </ul>
-</div>
-    
-    
-</nav>
-</header>
-
-            
-    <!-- ## Post ## -->
-    <div class="post-container">
-    <div id="post-card" class="card">
-        
-        <div class="card-item-container">
-            <div class="card-inner-cell">
-                <!-- # Post Header Info # -->
-                <div class="card-header">
-                    
-    <h1 class="card-title h3 mb-2">.bashrc與環境變數設定</h1>
-
-
-
-
-<div class="post-header-info">
-    <p class="post-header-info-left text-gray">
-        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Echo November's Avatar">
-        <span>2022-08-10</span>
+            <div class="navbar__menus">
+                
+                    <a href="/" class="navbar-menu button">首页</a>
+                
+                    <a href="/tags/" class="navbar-menu button">标签</a>
+                
+                    <a href="/archives/" class="navbar-menu button">归档</a>
+                
+                    <a href="/friends/" class="navbar-menu button">友链</a>
+                
+                    <a href="/page/" class="navbar-menu button">Page</a>
+                
+            </div>
         
         
-            <!-- Busuanzi Post Views -->
-<span id="busuanzi_container_page_pv" hidden>
-    <span class="suka-devide-dot"></span>
-    <span></span>
-    <span id="busuanzi_value_page_pv"></span>
-    <span>Views</span>
-</span>
+        
+
         
         
-    </p>
-    <div class="post-header-info-right">
+
         
-            <div class="dropdown dropdown-right">
-<a class="dropdown-toggle" tabindex="0">Share the post</a>
-<ul class="menu share-menu">
-    <!-- Share Weibo -->
-    
-    <li class="menu-item">
-        <a href="http://service.weibo.com/share/share.php?appkey=&title=.bashrc與環境變數設定&url=http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/&pic=http://example.com/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
-    </li>
-    
-
-    <!-- Share Twitter -->
-    
-    <li class="menu-item">
-        <a href="https://twitter.com/intent/tweet?text=.bashrc與環境變數設定&url=http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/&via=Echo November" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
-    </li>
-    
-
-    <!-- Share Facebook -->
-    
-    <li class="menu-item">
-        <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
-    </li>
-    
-
-    <!-- Share Google+ -->
-    
-    <li class="menu-item">
-        <a href="https://plus.google.com/share?url=http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
-    </li>
-    
-
-    <!-- Share LinkedIn -->
-    
-    <li class="menu-item">
-        <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/&title=Echo November's note" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
-    </li>
-    
-
-    <!-- Share QQ -->
-    
-    <li class="menu-item">
-        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Echo November's note&title=Echo November's note&summary=&pics=http://example.com/img/suka-favicon.ico&url=http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
-    </li>
-    
-
-    <!-- Share Telegram -->
-    
-    <li class="menu-item">
-        <a href="https://t.me/share/url?url=http://example.com/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/&text=Echo November's note" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
-    </li>
-    
-
-    <!-- QRCode -->
-    
-    <li class="menu-item">
-        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAMQAAADECAAAAADlzdG3AAADNklEQVR42u3cwXLbMAxFUf3/T7ebLtJWBO6jCMXtXG+SjC2TRzMUSACT68d/8LpEiBAhQsQ44ipev13w6++vP+8+173352e+fufq+1fzEiFiCrEapIJ2AxLQ3fdE8xIhYhBRTbCaML02wZB5iRDxnYhqYXfv3QW3VbDrxhch4lMQdwOk6OpBQG+iCBFvIqoA1P2+CljVRnL1mZFdrAgRIaJbhN/181i2Q4SIANEmbTcCXLVAu0BXJdy2s+IiRIT1iS4BRoJS9z1JYgHPR4SIAUS3yas2hKskQLewq2uqZEIZ7ESIOISgBZT20N4c+mmCrBrrrxsiQsQwojvo727iyI0hDwLUoCJCxAFEEtBI8TApRJLE2/IBIkLEEII0V6WNLOQQtXpAVA1e5dNJhIgDiGQjuDNxCksLlSJETCLoou0GJ0XLJ40rIkS8gSBBp1rwVUBKDjx08YsQ8QYiOcQ/Kdx3uOrAhTvPRIh4iKDNICcPOWTcKiCKEPEGIkkgk89XAZAENPKQECFiAkEbCKviCl2kaQGnTdyJEDGAIAcbmkB+Urisro+ae0WIeIigDSq04aQ6ZFVBkQa7R102IkQEvR20IJ4UIlcPgjTBtpXtECFiE0E3f6SxhFy/s/lDG0ARIg4h6EGfFsyTxpZuw7k6fIkQMYnYaRShRZBT7y8DoQgRg4idpqo0IbyTWCsTdyJEvISgSWXacNg1pHQ3YxlQRYgYQpCDDD0g0eCVbg63GlREiNhAkGbaKMl78X+W2zagXPU/IhEhYhLRLVLamNuhyoXaJB5EiHgDQZur0iBIb0CVFOiaxESImEZ0hcGk6E6TZSSoLa8TIWIIQRIGXbG8K+5XAXGnyC9CxCQiLZ7ToglNQJBi/e1DR4SIAUQ3OdKwQooxNLh1xZy2o0CEiIcIsulqg07QiEg3lijZLULEACJpHuwWNk06d8lnnLwWIWIIkRTOq0BGGhPTQj5e2CJEHEYkE+sWNi3cpIcpESI+BfG0EJ8mybrEtQgRn4Cgh/wuKU2bf8nYIkRMIpLGErrJ6wJj0pTy6FAkQkSIoIngaqLR4PCgFS1sESIOIf7llwgRIkSIGHv9BGEiX0wvNe/vAAAAAElFTkSuQmCC" alt="QRCode">
-    </li>
-    
-
-</ul>
-</div>
+            <a class="dropdown-icon button" id="btn-dropdown" tabindex="0"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" width='24' height='24' fill="none" stroke="currentColor" stroke-width="0.7" stroke-linecap="round" stroke-linejoin="round"><path fill="currentColor" d="M3.314,4.8h13.372c0.41,0,0.743-0.333,0.743-0.743c0-0.41-0.333-0.743-0.743-0.743H3.314c-0.41,0-0.743,0.333-0.743,0.743C2.571,4.467,2.904,4.8,3.314,4.8z M16.686,15.2H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,15.2,16.686,15.2z M16.686,9.257H3.314c-0.41,0-0.743,0.333-0.743,0.743s0.333,0.743,0.743,0.743h13.372c0.41,0,0.743-0.333,0.743-0.743S17.096,9.257,16.686,9.257z"></path></svg></a>
+            <div class="dropdown-menus" id="dropdown-menus">
+                
+                    <a href="/" class="dropdown-menu button">首页</a>
+                
+                    <a href="/tags/" class="dropdown-menu button">标签</a>
+                
+                    <a href="/archives/" class="dropdown-menu button">归档</a>
+                
+                    <a href="/friends/" class="dropdown-menu button">友链</a>
+                
+                    <a href="/page/" class="dropdown-menu button">Page</a>
+                
+            </div>
         
     </div>
+</header>
+
+
+            <main class="main">
+    
+
+<div class="post-title">
+    <h1 class="post-title__text">
+        .bashrc與環境變數設定
+    </h1>
+    <div class="post-title__meta">
+        <a href="/archives/2022/08/" class="post-meta__date button">2022-08-10</a>
+        
+ 
+        
+    
+    
+
+
+ 
+
+ 
+    </div>
 </div>
-                </div>
-                <div class="card-body">
-                    
-                        
-                        
-                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#bashrc"><span class="post-toc-number">1.</span> <span class="post-toc-text">.bashrc</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%8A%A0%E5%85%A5%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%EF%BC%8C%E8%AE%93MATLAB%E8%83%BD%E5%A4%A0%E5%9C%A8%E4%BB%BB%E4%BD%95%E7%9B%AE%E9%8C%84%E4%B8%8B%E8%A2%AB%E5%9F%B7%E8%A1%8C"><span class="post-toc-number">2.</span> <span class="post-toc-text">加入環境變數，讓MATLAB能夠在任何目錄下被執行</span></a></li></ol></div>
-                        
-                    
-                    <article id="post-content">
-                        <p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 </p>
+
+
+
+<article class="post content-card">
+    <div class="post__header"></div>
+    <div class="post__content">
+        <p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 </p>
 <span id="more"></span>
 
 <h3 id="bashrc"><a href="#bashrc" class="headerlink" title=".bashrc"></a>.bashrc</h3><p>“bash”是Bourne Again SHell的簡稱，是Linux預設使用的shell。使用者，termial，shell這三個元素的相關性可以藉由「使用者，透過terminal，與shell進行溝通」來描述。在開啟terminal時，bash就會被啟動，同時載入.bashrc裡的資訊。以下用一個小實驗來呈現這一點，實驗中在<code>.bashrc</code>裡頭加入:</p>
@@ -451,144 +168,111 @@
 <p>重新載入.bashrc後即可在任一目錄底下啟動matlab：</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ matlab</span><br></pre></td></tr></table></figure>
 
-                    </article>
-                    
+    </div>
+     
+    <div class="post-footer__meta"><p>updated at 2022-08-17</p></div> 
+    <div class="post-entry__tags"><a href="/tags/bash/" class="post-tags__link button"># bash</a></div> 
+</article>
 
 
-    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
-    <script>
-    (function() {
-        var dateUpdate = Date.parse("2022-08-17");
-        var nowDate = new Date();
-        var a = nowDate.getTime();
-        var b = a - dateUpdate;
-        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
-        if (daysUpdateExpire >= 120) {
-            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
-        } else {
-            document.getElementById('date-expire-notification').style.display = 'none';
-        }
-    })();
-    </script>
-
-
-<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2022-08-10T06:57:09.000Z" itemprop="datePublished">2022-08-10</time>
-
-    , Updated at&nbsp;<time datetime="2022-08-17T07:25:31.953Z" itemprop="dateModified">2022-08-17</time>
-
-</p>
-<p class="post-footer-info mb-0 pt-2">
-
-
-
-<span class="post-tags-list mt-2">
-
-<a class="post-tags-list-item" href="/tags/bash/" rel="tag">#&nbsp;bash</a>
-
-</span>
-
-
-</p>
-
-                </div>
-                <div class="post-nav px-2 bg-gray">
-<ul class="pagination">
-    <!-- Prev Nav -->
-    
-        <li class="page-item page-prev">
-            <a href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/" rel="prev">
-                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">什麼是 ELF</div>
-            </a>
-        </li>
-    
-
-    <!-- Next Nav -->
-    
-        <li class="page-item page-next">
-            <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/" rel="next">
-                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
-                <div class="page-item-subtitle">解碼.o檔</div>
-            </a>
-        </li>
-    
-</ul>
-</div>
-
-                
-                    <!-- # Comment # -->
-                    
-                
-            </div>
+    <div class="nav">
+        <div class="nav__prev">
+            
+                <a href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/" class="nav__link">
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M589.088 790.624L310.464 512l278.624-278.624 45.248 45.248L400.96 512l233.376 233.376z" fill="#808080"></path></svg>
+                    </div>
+                    <div>
+                        <div class="nav__label">
+                            Previous Post
+                        </div>
+                        <div class="nav__title">
+                            什麼是 ELF
+                        </div>
+                    </div>
+                </a>
+            
+        </div>
+        <div class="nav__next">
+            
+                <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/" class="nav__link">
+                    <div>
+                        <div class="nav__label">
+                            Next Post
+                        </div>
+                        <div class="nav__title">
+                            解碼.o檔
+                        </div>
+                    </div>
+                    <div>
+                        <svg viewBox="0 0 1024 1024" xmlns="http://www.w3.org/2000/svg" width="24" height="24"><path d="M434.944 790.624l-45.248-45.248L623.04 512l-233.376-233.376 45.248-45.248L713.568 512z" fill="#808080"></path></svg>
+                    </div>
+                </a>
+            
         </div>
     </div>
-</div>
 
-            <!-- ### Footer ### -->
-            <footer class="text-center">
-    <!-- footer copyright -->
+
+
+
+
+</main>
+
+            <footer class="footer">
     
-        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
-            <a class="footer-copyright-a" href="http://example.com">Echo November's note</a>
+    
+
+
+    
+     
+ 
+
+ 
+    
+        
+        <p class="footer-copyright">
+            Copyright © 2022 <a href="/">Echo November&#39;s note</a>
         </p>
-
-    <!-- footer custom text -->
-    <p class="footer-text mb-0">
     
-    </p>
-    <!-- footer develop info -->
-    <p class="footer-develop mb-0">
-        
-    <!-- Busuanzi User Views -->
-    <span id="busuanzi_container_site_uv" hidden>
-        <span></span>
-        <span id="busuanzi_value_site_uv"></span>
-        <span>Viewers</span>
-        
-            <span>|</span>
-        
-    </span>
-
-
-
-
-        
-        Powered by&nbsp;<!--
-         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
-         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
-    </p>
+    
+    <p>Powered by <a href="https://hexo.io" target="_blank">Hexo</a> | Theme - <a href="https://github.com/ChrAlpha/hexo-theme-cards" target="_blank">Cards</a></p>
 </footer>
 
+        </div>
+         
 
-        <!-- ### Import File ### -->
-        <!-- ### Footer JS Import ### -->
+ 
 
-<script>
+ 
+
+ 
+
+ 
+
+
+
+ 
+
+
+
+ 
+
 
     
-window.lazyLoadOptions = {
-    elements_selector: ".lazyload",
-    threshold: 50
-};
-document.getElementById('copyright-year').textContent = new Date().getFullYear();
-console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+ 
 
-</script>
+ 
 
-<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
-    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+ 
 
+ 
 
-<!-- Offset -->
+ 
+
+ 
 
 
 
-
-<!-- Comment -->
-
-
-<!-- ### Custom Footer ### -->
 
     </body>
-
 </html>

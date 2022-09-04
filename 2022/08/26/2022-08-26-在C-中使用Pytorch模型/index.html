@@ -1,8 +1,440 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content=""><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>在C++中使用Pytorch模型</title><link rel="shortcut icon" href="/images/avatar.png" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"><!-- hexo injector head_end start -->
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>在C++中使用Pytorch模型 | Echo November&#39;s note</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Echo November's note"><meta name="msapplication-starturl" content="http://example.com"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Echo November's note"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="在C++中使用Pytorch模型 | Echo November&#39;s note"><meta property="og:site_name" content="Echo November&#39;s note"><meta property="og:type" content="article"><meta property="og:url" content="http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/"><meta property="og:locale" content="en"><meta name="description" content="計算流體力學(CFD)龐大的計算量加上對於即時流場預測的需求，計算效率是被重視的，於是python鮮少被使用，計算用的程式藉由C, C++ 以及 Fortran撰寫。 - Echo November - Echo November&#39;s note"><meta name="keywords" content="cmake, C++, Pytorch, Machine Learning"><meta property="article:published_time" content="2022-08-26T08:27:36.000Z"><meta property="article:modified_time" content="2022-09-04T08:49:24.019Z"><meta property="og:updated_time" content="2022-09-04T08:49:24.019Z"><meta property="article:author" content="Echo November"><meta property="article:tag" content="cmake, C++, Pytorch, Machine Learning"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/">
+
+    <meta name="generator" content="Hexo 6.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/",
+    "@type": "BlogPosting",
+    "logo": "http://example.com/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/"
+    },
+    "headline": "在C++中使用Pytorch模型 | Echo November&#39;s note",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://example.com/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2022-08-26T08:27:36.000Z",
+    "dateModified": "2022-09-04T08:49:24.019Z",
+    "author": {
+        "@type": "Person",
+        "name": "Echo November",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://example.com/img/default_avatar.png"
+        },
+        "description": "Hi, nice to meet you."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Echo November&#39;s note",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://example.com/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://example.com/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "cmake, C++, Pytorch, Machine Learning",
+    "description": "計算流體力學(CFD)龐大的計算量加上對於即時流場預測的需求，計算效率是被重視的，於是python鮮少被使用，計算用的程式藉由C, C++ 以及 Fortran撰寫。 - Echo November - Echo November&#39;s note"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+<!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar.png"></div><div class="author"><div class="author-name"><a href="/">Echo November</a></div><div class="about-me">Halo~</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">archives</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/gary-Shen"></span><a href="https://github.com/gary-Shen" target="_blank" title="https://github.com/gary-Shen">https://github.com/gary-Shen</a></li><li class="social-item"><span class="label"><img src="/images/socials/flickr.svg" alt="https://www.flickr.com/photos/69944455@N05/"></span><a href="https://www.flickr.com/photos/69944455@N05/" target="_blank" title="https://www.flickr.com/photos/69944455@N05/">https://www.flickr.com/photos/69944455@N05/</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="guanlinshen@126.com"></span><span>guanlinshen@126.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="Grinson"></span><span>Grinson</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">在C++中使用Pytorch模型</div><div class="date">2022年08月26日</div><div class="content"><p>計算流體力學(CFD)龐大的計算量加上對於即時流場預測的需求，計算效率是被重視的，於是python鮮少被使用，計算用的程式藉由C, C++ 以及 Fortran撰寫。<span id="more"></span>我們實驗室其中一分支是研究計算效率的提升，方法上包括藉由平行計算，GPU計算，而藉由machine learning的方法來提昇計算效率也是研究對象之一；而常見的deep learning框架包括tensorflow以及pytorch都是藉由python撰寫，於是python輸出的model應用到C++撰寫的計算流力程式就需要耦合兩者的工具。Pytorch 官方所提供的"jit"可以將pytorch訓練出的model用到C++上，主要會分為三個步驟：1. pytorch model以"jit"格式輸出 2. C++中使用torch 以及 3. C++使用torch::jit</p>
+<!-- hexo injector head_end end --></head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Echo November&#39;s note</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                Hi, nice to meet you.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Echo November's note&url=http://example.com&pic=http://example.com/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Echo November's note&url=http://example.com&via=Echo November" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com&title=在C++中使用Pytorch模型" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Echo November's note&title=在C++中使用Pytorch模型&summary=&pics=http://example.com/img/suka-favicon.ico&url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=http://example.com&text=在C++中使用Pytorch模型" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACsklEQVR42u3dwVKDQBBFUf7/p3XlBpl+900wpXLZpEIIHiw79HS3lePjD26HaNGiRT8QfQzb1+vT4/kc5LXzPuIQLbpBX/7Rn/ZfHbdCrl47A9Nx384tWnSBpgE4BRoN3lUgxqAWLfoGNIUvg+eEI4ErWvQ70FPis8Jd7W+DVLToXfSUDF0F0hRsOwnRrVme6MejX1nY3vn4ttW46H+NRoW/IWlPz6fEfwrAl6umoh+LXn24TzcVGqhTghVvJDTLEy36IhBXSTcJpNU5VheWEqsx+EWLBmiykJ0WreQ9U1JE3ytaNEVPN44mAWqLMqk5enmsaNEATYNlJ5kiCRVprooWvYsmyRJd0JIhAHIs6gSIFn1RgEwXQG4IO02hKlhFiwZoMjxCTkoKkE0iFbM80aJLdGpgto2fqaCTikCiRe829MkgSlOcIQXNVFAXLbpF04I4/cG0wJia+HUnQLToolFEmph1Qh8GrupAFC26GLwiwZgWyG3jKA6piBYd0HTh2hQc6XtpwiVaNEGnYcHUFCJFHrpwSEUg0aIb9PihDoatmgHBtngpWnSLTkk6aSRNi9x0TCpuihbdotubQtNgIgVOXAwSLbpo6DeFQRKgOwtZnDCJFg3RZHCKIJviPGnkixbdoEkgtItR0sxMRfpq8Eq06PCPDKmZSYMtPU8DMGMgihYNei4kQMgCgQy10OJQ7ASIFg2LNWSAJSVTqWGfgr2uMIkWDbBkeJUGXlrkJrho0QSdtqa4kgqZNKkSLfoVNC00kptGuhg6rLX8RYgWDdG0id8OG7aoNCQgWnSDJoUXstilg4gH3ESL/il0upBUaGmCEDU/RYu+6Qs7UuGdLArSccsgFy26QOOm+sG/yINc/PYUgmjRYEiFNHOaxIkU4LcDUbTozQLkb9pEixYt+kHoTzp7i2lbwKlJAAAAAElFTkSuQmCC" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">在C++中使用Pytorch模型</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Echo November's Avatar">
+        <span>2022-08-26</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=在C++中使用Pytorch模型&url=http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/&pic=http://example.com/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=在C++中使用Pytorch模型&url=http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/&via=Echo November" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/&title=Echo November's note" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Echo November's note&title=Echo November's note&summary=&pics=http://example.com/img/suka-favicon.ico&url=http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=http://example.com/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/&text=Echo November's note" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAALQAAAC0CAAAAAAYplnuAAACsklEQVR42u3dwVKDQBBFUf7/p3XlBpl+900wpXLZpEIIHiw79HS3lePjD26HaNGiRT8QfQzb1+vT4/kc5LXzPuIQLbpBX/7Rn/ZfHbdCrl47A9Nx384tWnSBpgE4BRoN3lUgxqAWLfoGNIUvg+eEI4ErWvQ70FPis8Jd7W+DVLToXfSUDF0F0hRsOwnRrVme6MejX1nY3vn4ttW46H+NRoW/IWlPz6fEfwrAl6umoh+LXn24TzcVGqhTghVvJDTLEy36IhBXSTcJpNU5VheWEqsx+EWLBmiykJ0WreQ9U1JE3ytaNEVPN44mAWqLMqk5enmsaNEATYNlJ5kiCRVprooWvYsmyRJd0JIhAHIs6gSIFn1RgEwXQG4IO02hKlhFiwZoMjxCTkoKkE0iFbM80aJLdGpgto2fqaCTikCiRe829MkgSlOcIQXNVFAXLbpF04I4/cG0wJia+HUnQLToolFEmph1Qh8GrupAFC26GLwiwZgWyG3jKA6piBYd0HTh2hQc6XtpwiVaNEGnYcHUFCJFHrpwSEUg0aIb9PihDoatmgHBtngpWnSLTkk6aSRNi9x0TCpuihbdotubQtNgIgVOXAwSLbpo6DeFQRKgOwtZnDCJFg3RZHCKIJviPGnkixbdoEkgtItR0sxMRfpq8Eq06PCPDKmZSYMtPU8DMGMgihYNei4kQMgCgQy10OJQ7ASIFg2LNWSAJSVTqWGfgr2uMIkWDbBkeJUGXlrkJrho0QSdtqa4kgqZNKkSLfoVNC00kptGuhg6rLX8RYgWDdG0id8OG7aoNCQgWnSDJoUXstilg4gH3ESL/il0upBUaGmCEDU/RYu+6Qs7UuGdLArSccsgFy26QOOm+sG/yINc/PYUgmjRYEiFNHOaxIkU4LcDUbTozQLkb9pEixYt+kHoTzp7i2lbwKlJAAAAAElFTkSuQmCC" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#pytorch-model%E4%BB%A5-jit-%E6%A0%BC%E5%BC%8F%E8%BC%B8%E5%87%BA"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. pytorch model以 jit 格式輸出</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%9C%A8c%E4%BD%BF%E7%94%A8torch"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. 在C++使用torch</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#%E5%9C%A8c%E4%BD%BF%E7%94%A8torchjit"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. 在C++使用torch::jit</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#python-vs-c-%E4%BD%9C%E7%82%BApytorch%E5%89%8D%E7%AB%AF"><span class="post-toc-number">4.</span> <span class="post-toc-text">Python vs C++ 作為pytorch前端</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>計算流體力學(CFD)龐大的計算量加上對於即時流場預測的需求，計算效率是被重視的，於是python鮮少被使用，計算用的程式藉由C, C++ 以及 Fortran撰寫。<span id="more"></span>我們實驗室其中一分支是研究計算效率的提升，方法上包括藉由平行計算，GPU計算，而藉由machine learning的方法來提昇計算效率也是研究對象之一；而常見的deep learning框架包括tensorflow以及pytorch都是藉由python撰寫，於是python輸出的model應用到C++撰寫的計算流力程式就需要耦合兩者的工具。Pytorch 官方所提供的"jit"可以將pytorch訓練出的model用到C++上，主要會分為三個步驟：1. pytorch model以"jit"格式輸出 2. C++中使用torch 以及 3. C++使用torch::jit</p>
 <h3 id="pytorch-model以-jit-格式輸出">1. pytorch model以 jit 格式輸出</h3>
 <p>讓pytorch訓練完的model用在C++，首先要先將訓練完成的model以jit格式輸出： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">PATH= <span class="string">&quot;01_model_jit.pth&quot;</span></span><br><span class="line">traced_net=torch.jit.trace(model, torch.randn(<span class="number">1</span>,<span class="number">1000</span>))</span><br><span class="line">torch.jit.save(traced_net, PATH)</span><br></pre></td></tr></table></figure></p>
 <h3 id="在c使用torch">2. 在C++使用torch</h3>
@@ -11,16 +443,151 @@
 <p>把pytorch模型訓練出來之後放回C++使用，橋接兩個語言所使用的工具是<a target="_blank" rel="noopener" href="https://pytorch.org/">pytorch官方</a>所提供的工具torch::jit。以下呈現我使用torch::jit的過程。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/script.h&gt;</span></span></span><br><span class="line">...</span><br><span class="line"><span class="keyword">auto</span> options = torch::<span class="built_in">TensorOptions</span>().<span class="built_in">dtype</span>(torch::kFloat32);</span><br><span class="line">torch::Tensor x, out;    </span><br><span class="line">vector&lt;torch::jit::IValue&gt; input;</span><br><span class="line"></span><br><span class="line">torch::jit::script::Module model=torch::jit::<span class="built_in">load</span>(<span class="string">&quot;/path/to/model/01_model_jit.pth&quot;</span>);</span><br><span class="line"><span class="comment">/*(input) array into tensor into vector*/</span></span><br><span class="line">x=torch::<span class="built_in">from_blob</span>(u_st, &#123;<span class="number">1</span>,(N+<span class="number">1</span>)*(N+<span class="number">1</span>)&#125;, options);</span><br><span class="line">input.<span class="built_in">push_back</span>(x)</span><br><span class="line"><span class="comment">/*input into output(tensor)*/</span></span><br><span class="line">out=model.forward(input).<span class="built_in">toTensor</span>();</span><br></pre></td></tr></table></figure></p>
 <h3 id="python-vs-c-作為pytorch前端">Python vs C++ 作為pytorch前端</h3>
 <p>藉由官方所提供的工具可以將整個過程，包括訓練過程都放到C++中，但若沒有強烈的需求官方建議不需要這麼做(<a target="_blank" rel="noopener" href="https://pytorch.org/cppdocs/frontend.html">link</a>)，pytorch以python作為前端能夠維持叫良好的使用者體驗品質，而因為pytorch即便以python作為前端，需要計算需求時就會呼叫C++讓C++去完成，所以相比以C++作為前端，兩者在計算效率上並沒有太多差異。</p>
-</div><div class="tags"><a class="tag-link" href="/tags/C/" rel="tag">C++</a><a class="tag-link" href="/tags/Machine-Learning/" rel="tag">Machine Learning</a><a class="tag-link" href="/tags/Pytorch/" rel="tag">Pytorch</a><a class="tag-link" href="/tags/cmake/" rel="tag">cmake</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/2022/09/02/2022-09-02-%E4%BD%BF%E7%94%A8-define%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/">使用#define取代文字</a></li><li>下一篇：<a href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/">什麼是 ELF</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-bear" target="_blank">Bear</a><span>.</span></div></footer>
-<script src="/script/jquery.min.js"></script>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+                    </article>
+                    
 
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-<script src="/script/index.js"></script>
-<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-61220413-1', 'auto');
-ga('send', 'pageview');</script>
-<script src="/script/post.js"></script>
-</body></html>
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2022-09-04");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2022-08-26T08:27:36.000Z" itemprop="datePublished">2022-08-26</time>
+
+    , Updated at&nbsp;<time datetime="2022-09-04T08:49:24.019Z" itemprop="dateModified">2022-09-04</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/cmake/" rel="tag">#&nbsp;cmake</a>
+
+<a class="post-tags-list-item" href="/tags/C/" rel="tag">#&nbsp;C++</a>
+
+<a class="post-tags-list-item" href="/tags/Pytorch/" rel="tag">#&nbsp;Pytorch</a>
+
+<a class="post-tags-list-item" href="/tags/Machine-Learning/" rel="tag">#&nbsp;Machine Learning</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2022/09/02/2022-09-02-%E4%BD%BF%E7%94%A8-define%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">使用#define取代文字</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">什麼是 ELF</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://example.com">Echo November's note</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

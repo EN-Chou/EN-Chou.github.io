@@ -1,8 +1,440 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content=""><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>Compile幕後</title><link rel="shortcut icon" href="/images/avatar.png" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"><!-- hexo injector head_end start -->
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Compile幕後 | Echo November&#39;s note</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+    <link rel="preload" href="/css/highlight/github.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'"><noscript><link rel="stylesheet" href="/css/highlight/github.min.css"></noscript>
+
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Echo November's note"><meta name="msapplication-starturl" content="http://example.com"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Echo November's note"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Compile幕後 | Echo November&#39;s note"><meta property="og:site_name" content="Echo November&#39;s note"><meta property="og:type" content="article"><meta property="og:url" content="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"><meta property="og:locale" content="en"><meta name="description" content="習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 建置(Build) 然後▷，有時是只點下▷，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。 - Echo November - Echo November&#39;s note"><meta name="keywords" content="C++, compile, 程式設計師的自我修養"><meta property="og:image" content="http://example.com/images/gcc.jpg"><meta property="article:published_time" content="2022-08-02T17:10:32.000Z"><meta property="article:modified_time" content="2022-09-04T08:27:35.244Z"><meta property="og:updated_time" content="2022-09-04T08:27:35.244Z"><meta property="article:author" content="Echo November"><meta property="article:tag" content="C++, compile, 程式設計師的自我修養"><meta name="twitter:card" content="summary">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">
+
+    <meta name="generator" content="Hexo 6.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+<script type="application/ld+json">
+{
+    "@context": "http://schema.org",
+    "url": "http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/",
+    "@type": "BlogPosting",
+    "logo": "http://example.com/img/suka-favicon.ico",
+    "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"
+    },
+    "headline": "Compile幕後 | Echo November&#39;s note",
+    
+    "image": {
+        "@type": "ImageObject",
+        "url": "http://example.com/img/suka-favicon.ico"
+    },
+    
+    "datePublished": "2022-08-02T17:10:32.000Z",
+    "dateModified": "2022-09-04T08:27:35.244Z",
+    "author": {
+        "@type": "Person",
+        "name": "Echo November",
+        "image": {
+            "@type": "ImageObject",
+            "url": "http://example.com/img/default_avatar.png"
+        },
+        "description": "Hi, nice to meet you."
+    },
+    "publisher": {
+        "@type": "Organization",
+        "name": "Echo November&#39;s note",
+        "logo": {
+            "@type": "ImageObject",
+            "url": "http://example.com/img/suka-favicon.ico"
+        }
+    },
+    
+    "potentialAction": {
+        "@type": "SearchAction",
+        "target": "http://example.com/search?s={search_term_string}",
+        "query-input": "required name=search_term_string"
+    },
+    
+    "keywords": "C++, compile, 程式設計師的自我修養",
+    "description": "習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 建置(Build) 然後▷，有時是只點下▷，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。 - Echo November - Echo November&#39;s note"
+}
+</script>
+
+
+
+    <!-- ### Custom Head ### -->
+    
+<!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar.png"></div><div class="author"><div class="author-name"><a href="/">Echo November</a></div><div class="about-me">Halo~</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">archives</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/gary-Shen"></span><a href="https://github.com/gary-Shen" target="_blank" title="https://github.com/gary-Shen">https://github.com/gary-Shen</a></li><li class="social-item"><span class="label"><img src="/images/socials/flickr.svg" alt="https://www.flickr.com/photos/69944455@N05/"></span><a href="https://www.flickr.com/photos/69944455@N05/" target="_blank" title="https://www.flickr.com/photos/69944455@N05/">https://www.flickr.com/photos/69944455@N05/</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="guanlinshen@126.com"></span><span>guanlinshen@126.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="Grinson"></span><span>Grinson</span></li></ul></div></div></div></header><div class="container post"><section class="article"><div class="title">Compile幕後</div><div class="date">2022年08月03日</div><div class="content"><p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
+<!-- hexo injector head_end end --></head>
+
+    <body>
+            
+
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Echo November&#39;s note</a></h1>
+
+    <p class="text-center header-slogan">
+        
+            
+                Hi, nice to meet you.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Echo November's note&url=http://example.com&pic=http://example.com/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Echo November's note&url=http://example.com&via=Echo November" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com&title=Compile幕後" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Echo November's note&title=Compile幕後&summary=&pics=http://example.com/img/suka-favicon.ico&url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=http://example.com&text=Compile幕後" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKQAAACkCAAAAAA83tqdAAACLklEQVR42u2aQXICMQwE9/+fTk4cILamtYEEVu0LRbHY7SrLK83o+PqAcQgppJBCvgHkUYzb73d/XHxf/aeaEz8j5FjI5aF9gFx9kk2l+XbPCSnkbrFd4FD41dxkXSGFLB/eLLC6mMlcQgr5rMChyQINMCGFPJNgpGQiXdR/kgUJeTlIUoi94vPp1aKQl4BsCUjh0D8mIzuwl6pqQn48JBGRqoVIAbbbRJVoCDkXMr38iTDV2WglNvz4TciRkORFv4OpxAJadFXCg5AzIdMi9NB3hHxc0Ak5FpIcbiqG7kDIXGXgCDkesgoIKvrTF8TW2BJyPGQqvKgJkC5qYgwIOReyc6hTgCTjlCTaQgpJLvKugJXEe2L0CzkbkhZa9GLvNDa13AchR0Cmgok2bFIRgGxEyNmQnWK+OvgtwZ4mLkKOhCQiUqfBIxnw1EQQci5kmXQCQ50I9jSAhBSSFuqkuErJMBG8Trm0Ql4OMgmppLmjk9S2TAQhR0IScYmI8bS46ogEQs6FJEYQPfypkEsCgpBC/sasTIGHzXfqiAk5BpIUX8RkSk123cZSIWdDnjUraaNnZwg5GzKakJXIGQQpmgBvg1bIkZAdASo1J6VEJZmnp1Q1IS8JSY336tLumFOnAkfIcZAdgZ5ssJtcoMARUsiGeJACKplQscNKSCGhIU8Ktk7wCSlkSjA6DSDVxZya7VoiqpCXhySFWEpgSYGFmkOEHA/5zkNIIYUU8h/HN8+ZOPcZ7HPcAAAAAElFTkSuQmCC" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            
+    <!-- ## Post ## -->
+    <div class="post-container">
+    <div id="post-card" class="card">
+        
+        <div class="card-item-container">
+            <div class="card-inner-cell">
+                <!-- # Post Header Info # -->
+                <div class="card-header">
+                    
+    <h1 class="card-title h3 mb-2">Compile幕後</h1>
+
+
+
+
+<div class="post-header-info">
+    <p class="post-header-info-left text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Echo November's Avatar">
+        <span>2022-08-03</span>
+        
+        
+            <!-- Busuanzi Post Views -->
+<span id="busuanzi_container_page_pv" hidden>
+    <span class="suka-devide-dot"></span>
+    <span></span>
+    <span id="busuanzi_value_page_pv"></span>
+    <span>Views</span>
+</span>
+        
+        
+    </p>
+    <div class="post-header-info-right">
+        
+            <div class="dropdown dropdown-right">
+<a class="dropdown-toggle" tabindex="0">Share the post</a>
+<ul class="menu share-menu">
+    <!-- Share Weibo -->
+    
+    <li class="menu-item">
+        <a href="http://service.weibo.com/share/share.php?appkey=&title=Compile幕後&url=http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/&pic=http://example.com/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+    </li>
+    
+
+    <!-- Share Twitter -->
+    
+    <li class="menu-item">
+        <a href="https://twitter.com/intent/tweet?text=Compile幕後&url=http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/&via=Echo November" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+    </li>
+    
+
+    <!-- Share Facebook -->
+    
+    <li class="menu-item">
+        <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+    </li>
+    
+
+    <!-- Share Google+ -->
+    
+    <li class="menu-item">
+        <a href="https://plus.google.com/share?url=http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+    </li>
+    
+
+    <!-- Share LinkedIn -->
+    
+    <li class="menu-item">
+        <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/&title=Echo November's note" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+    </li>
+    
+
+    <!-- Share QQ -->
+    
+    <li class="menu-item">
+        <a href="http://connect.qq.com/widget/shareqq/index.html?site=Echo November's note&title=Echo November's note&summary=&pics=http://example.com/img/suka-favicon.ico&url=http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+    </li>
+    
+
+    <!-- Share Telegram -->
+    
+    <li class="menu-item">
+        <a href="https://t.me/share/url?url=http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/&text=Echo November's note" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+    </li>
+    
+
+    <!-- QRCode -->
+    
+    <li class="menu-item">
+        <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAKQAAACkCAAAAAA83tqdAAACLklEQVR42u2aQXICMQwE9/+fTk4cILamtYEEVu0LRbHY7SrLK83o+PqAcQgppJBCvgHkUYzb73d/XHxf/aeaEz8j5FjI5aF9gFx9kk2l+XbPCSnkbrFd4FD41dxkXSGFLB/eLLC6mMlcQgr5rMChyQINMCGFPJNgpGQiXdR/kgUJeTlIUoi94vPp1aKQl4BsCUjh0D8mIzuwl6pqQn48JBGRqoVIAbbbRJVoCDkXMr38iTDV2WglNvz4TciRkORFv4OpxAJadFXCg5AzIdMi9NB3hHxc0Ak5FpIcbiqG7kDIXGXgCDkesgoIKvrTF8TW2BJyPGQqvKgJkC5qYgwIOReyc6hTgCTjlCTaQgpJLvKugJXEe2L0CzkbkhZa9GLvNDa13AchR0Cmgok2bFIRgGxEyNmQnWK+OvgtwZ4mLkKOhCQiUqfBIxnw1EQQci5kmXQCQ50I9jSAhBSSFuqkuErJMBG8Trm0Ql4OMgmppLmjk9S2TAQhR0IScYmI8bS46ogEQs6FJEYQPfypkEsCgpBC/sasTIGHzXfqiAk5BpIUX8RkSk123cZSIWdDnjUraaNnZwg5GzKakJXIGQQpmgBvg1bIkZAdASo1J6VEJZmnp1Q1IS8JSY336tLumFOnAkfIcZAdgZ5ssJtcoMARUsiGeJACKplQscNKSCGhIU8Ktk7wCSlkSjA6DSDVxZya7VoiqpCXhySFWEpgSYGFmkOEHA/5zkNIIYUU8h/HN8+ZOPcZ7HPcAAAAAElFTkSuQmCC" alt="QRCode">
+    </li>
+    
+
+</ul>
+</div>
+        
+    </div>
+</div>
+                </div>
+                <div class="card-body">
+                    
+                        
+                        
+                            <div id="post-toc"><ol class="post-toc"><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#preprocessing-.cpp---.ii"><span class="post-toc-number">1.</span> <span class="post-toc-text">1. Preprocessing: .cpp -&gt; .ii，</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#compilation-.ii---.s"><span class="post-toc-number">2.</span> <span class="post-toc-text">2. Compilation: .ii -&gt; .s，</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#assembly-.s---.o"><span class="post-toc-number">3.</span> <span class="post-toc-text">3. Assembly: .s -&gt; .o，</span></a></li><li class="post-toc-item post-toc-level-3"><a class="post-toc-link" href="#linking-.o-static-library---.out"><span class="post-toc-number">4.</span> <span class="post-toc-text">4. Linking: .o + static library -&gt; .out，</span></a></li></ol></div>
+                        
+                    
+                    <article id="post-content">
+                        <p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
 <p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。 <img src="/images/gcc.jpg" alt="gcc compilation" /></p>
 <p>以下用一支比helloworld更簡單的程式來呈現:</p>
@@ -16,16 +448,149 @@
 <p>將assembly code一一翻譯成machine code。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -<span class="keyword">c</span> main.s -<span class="keyword">o</span> main.<span class="keyword">o</span> </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^@^@^@^@^@^A^@&gt;^@^A^@^@</span><br><span class="line">^@^@^@^@^@^@^@^@^@^@X^B^@^@^@^@^@^@^@^@^@^</span><br><span class="line">@@^@^@^@^@^@@^@^L^@^K^@ó^O^^úUHå¸^@^@^</span><br><span class="line">@^@]Ã^@GCC: (Ubuntu <span class="number">9.4</span>.<span class="number">0</span>-<span class="number">1</span>ubuntu1~<span class="number">20.04</span>.<span class="number">1</span>)</span><br><span class="line"><span class="number">9.4</span>.<span class="number">0</span>^@^@^@^@^@^@^D^@^......</span><br></pre></td></tr></table></figure></p>
 <h3 id="linking-.o-static-library---.out">4. Linking: .o + static library -&gt; .out，</h3>
 <p>將.o檔連結static library(一大堆.o檔)形成.out檔。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ld -static (一大堆.<span class="keyword">o</span>檔) </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^C^@&gt;^@^A^@^@^@À^<span class="keyword">P</span>^@^@^</span><br><span class="line">^@^@@^@^@^@^@^@^@^@è;^@^@^@^@^@^@^@^@^@^@@</span><br><span class="line">^@<span class="number">8</span>^@^M^@@^@^_^@^^^@^F^@^@^@^D^@^@^@@^@^@^</span><br><span class="line">@^@^@^@^@@^@^@^@^@^@^@^@@^......</span><br></pre></td></tr></table></figure></p>
-</div><div class="tags"><a class="tag-link" href="/tags/C/" rel="tag">C++</a><a class="tag-link" href="/tags/compile/" rel="tag">compile</a><a class="tag-link" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" rel="tag">程式設計師的自我修養</a></div></section></div><div class="container"><ul class="nav"><li>上一篇：<a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">解碼.o檔</a></li><li>下一篇：<a href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">什麼是CMake與Make</a></li></ul></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-bear" target="_blank">Bear</a><span>.</span></div></footer>
-<script src="/script/jquery.min.js"></script>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+                    </article>
+                    
 
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
 
-<script src="/script/index.js"></script>
-<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-61220413-1', 'auto');
-ga('send', 'pageview');</script>
-<script src="/script/post.js"></script>
-</body></html>
+    <blockquote id="date-expire-notification" class="post-expired-notify">This article was last updated on <span id="date-expire-num"></span> days ago, and the information described in the article may have changed.</blockquote>
+    <script>
+    (function() {
+        var dateUpdate = Date.parse("2022-09-04");
+        var nowDate = new Date();
+        var a = nowDate.getTime();
+        var b = a - dateUpdate;
+        var daysUpdateExpire = Math.floor(b/(24*3600*1000));
+        if (daysUpdateExpire >= 120) {
+            document.getElementById('date-expire-num').innerHTML = daysUpdateExpire;
+        } else {
+            document.getElementById('date-expire-notification').style.display = 'none';
+        }
+    })();
+    </script>
+
+
+<p class="post-footer-info mb-0 pt-0">Published at&nbsp;<time datetime="2022-08-02T17:10:32.000Z" itemprop="datePublished">2022-08-03</time>
+
+    , Updated at&nbsp;<time datetime="2022-09-04T08:27:35.244Z" itemprop="dateModified">2022-09-04</time>
+
+</p>
+<p class="post-footer-info mb-0 pt-2">
+
+
+
+<span class="post-tags-list mt-2">
+
+<a class="post-tags-list-item" href="/tags/C/" rel="tag">#&nbsp;C++</a>
+
+<a class="post-tags-list-item" href="/tags/compile/" rel="tag">#&nbsp;compile</a>
+
+<a class="post-tags-list-item" href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/" rel="tag">#&nbsp;程式設計師的自我修養</a>
+
+</span>
+
+
+</p>
+
+                </div>
+                <div class="post-nav px-2 bg-gray">
+<ul class="pagination">
+    <!-- Prev Nav -->
+    
+        <li class="page-item page-prev">
+            <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/" rel="prev">
+                <div class="page-item-title"><i class="icon icon-back" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">解碼.o檔</div>
+            </a>
+        </li>
+    
+
+    <!-- Next Nav -->
+    
+        <li class="page-item page-next">
+            <a href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/" rel="next">
+                <div class="page-item-title"><i class="icon icon-forward" aria-hidden="true"></i></div>
+                <div class="page-item-subtitle">什麼是CMake與Make</div>
+            </a>
+        </li>
+    
+</ul>
+</div>
+
+                
+                    <!-- # Comment # -->
+                    
+                
+            </div>
+        </div>
+    </div>
+</div>
+
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://example.com">Echo November's note</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

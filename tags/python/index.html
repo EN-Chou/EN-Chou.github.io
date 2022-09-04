@@ -1,20 +1,424 @@
-<!DOCTYPE html><html><head><meta charset="utf-8"><meta name="description" content=""><meta name="keyword"><meta name="viewport" content="width=device-width, initial-scale=1.0"><meta http-equiv="X-UA-Compatible" content="IE=edge"><title>ECHO November's note</title><link rel="shortcut icon" href="/images/avatar.png" type="image/x-icon"><link href="/styles/site.css" rel="stylesheet"><!-- hexo injector head_end start -->
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+    <meta charset="utf-8">
+    <!--
+        hexo-theme-suka © SukkaW
+        GitHub: https://github.com/SukkaW/hexo-theme-suka
+    -->
+
+    <!-- ### Resource Hint ### -->
+
+    <!-- ## DNS Prefetch ## -->
+    <meta http-equiv="x-dns-prefetch-control" content="on">
+
+<!-- busuanzi -->
+
+    <link rel="dns-prefetch" href="//busuanzi.ibruce.info">
+
+
+<!-- comment -->
+
+
+
+
+
+
+
+<!-- analytics -->
+
+
+
+
+
+
+
+    <!-- ## Preload ## -->
+    
+    <!-- Busuanzi -->
+    
+    <link rel="preload" href="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" as="script">
+
+
+
+
+
+
+
+    <!-- ### Meta & Title & Info ### -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, minimum-scale=1, initial-scale=1, maximum-scale=5, viewport-fit=cover">
+    <meta name="renderer" content="webkit">
+
+    <!-- Title -->
+    <title>Tag: python | Echo November&#39;s note</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image&#x2F;ico" href="/img/suka-favicon.ico">
+
+    <!-- ### Import File ### -->
+    <link rel="stylesheet" href="/lib/spectre/spectre.min.css"><style>
+    body {
+        background-color: #f8f9fa;
+    }
+
+    a, a:visited {
+        color: #0070ff;
+    }
+
+    a:active, a:focus, a:hover {
+        color: #0070ff;
+        opacity: .75;
+    }
+
+    #post-content a,
+    #post-content a:hover,
+    #post-content a:focus,
+    #post-content a:visited {
+        color: #005eb9;
+        opacity: 1;
+    }
+
+    
+
+    .post-entry .card-body a {
+        color: #0070ff;
+    }
+
+    .avatar {
+        background: #444;
+    }
+
+    .navbar-link,
+    .navbar-link:visited,
+    .timeline .timeline-item .timeline-icon.icon-lg {
+        color: #0070ff;
+    }
+
+    .navbar-link:hover {
+        color: #0070ff;
+        opacity: .8;
+    }
+
+    #search-input .btn,
+    #disqus_click_btn,
+    #disqus-switch-to-direct,
+    #disqus-loadmore-button {
+        background: #727e96;
+        border-color: #727e96;
+        color: #fff;
+    }
+
+    #post-toc a.post-toc-link,
+    #post-toc a.post-toc-link:visited,
+    .share-menu.menu .menu-item>a {
+        color: #727e96;
+    }
+
+    .share-menu.menu .menu-item>a:hover,
+    .share-menu.menu .menu-item>a:focus,
+    .share-menu.menu .menu-item>a:visited {
+        color: #50596c;
+        background: #f8f9fa;
+        opacity: .85;
+    }
+</style><link rel="stylesheet" href="/css/style.min.css">
+
+
+
+
+
+
+
+
+    <!-- Prettify Theme -->
+    
+
+
+
+
+<script>
+/*! loadCSS. [c]2017 Filament Group, Inc. MIT License */
+!function(t){"use strict";t.loadCSS||(t.loadCSS=function(){});var e=loadCSS.relpreload={};if(e.support=function(){var e;try{e=t.document.createElement("link").relList.supports("preload")}catch(t){e=!1}return function(){return e}}(),e.bindMediaToggle=function(t){var e=t.media||"all";function a(){t.addEventListener?t.removeEventListener("load",a):t.attachEvent&&t.detachEvent("onload",a),t.setAttribute("onload",null),t.media=e}t.addEventListener?t.addEventListener("load",a):t.attachEvent&&t.attachEvent("onload",a),setTimeout(function(){t.rel="stylesheet",t.media="only x"}),setTimeout(a,3e3)},e.poly=function(){if(!e.support())for(var a=t.document.getElementsByTagName("link"),n=0;n<a.length;n++){var o=a[n];"preload"!==o.rel||"style"!==o.getAttribute("as")||o.getAttribute("data-loadcss")||(o.setAttribute("data-loadcss",!0),e.bindMediaToggle(o))}},!e.support()){e.poly();var a=t.setInterval(e.poly,500);t.addEventListener?t.addEventListener("load",function(){e.poly(),t.clearInterval(a)}):t.attachEvent&&t.attachEvent("onload",function(){e.poly(),t.clearInterval(a)})}"undefined"!=typeof exports?exports.loadCSS=loadCSS:t.loadCSS=loadCSS}("undefined"!=typeof global?global:this);
+</script>
+
+    <!-- ### Site Verification ### -->
+    
+
+
+    <meta name="mobile-web-app-capable" content="yes"><meta name="application-name" content="Echo November's note"><meta name="msapplication-starturl" content="http://example.com"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Echo November's note"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+    <!-- ### The Open Graph & Twitter Card Protocol ### -->
+    <meta property="og:title" content="Tag: python | Echo November&#39;s note"><meta property="og:site_name" content="Echo November&#39;s note"><meta property="og:type" content="website"><meta property="og:url" content="http://example.com/tags/python/"><meta property="og:locale" content="en"><meta name="description" content="Echo November - Echo November&#39;s note">
+
+    
+
+    <!-- ### Canonical link ### -->
+    <link rel="canonical" href="http://example.com/tags/python/">
+
+    <meta name="generator" content="Hexo 6.2.0">
+
+    <!-- ### Analytics ### -->
+    
+
+
+
+
+
+
+
+    <!-- ### Structured Data ### -->
+    
+
+
+
+
+    <!-- ### Custom Head ### -->
+    
+<!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head><body><header class="container" id="header"><div class="header"><div class="header-left"><div class="avatar"><img src="/images/avatar.png"></div><div class="author"><div class="author-name"><a href="/">Echo November</a></div><div class="about-me">Halo~</div></div></div><div class="header-right"><ul class="navigation"><li><a href="/archives">archives</a></li></ul></div><div class="about-me-mask"><div class="about-me-wrap"><div class="about-me__header"><div class="avatar"><img src="/images/avatar.png"></div></div><ul class="socials"><li class="social-item"><span class="label"><img src="/images/socials/github.svg" alt="https://github.com/gary-Shen"></span><a href="https://github.com/gary-Shen" target="_blank" title="https://github.com/gary-Shen">https://github.com/gary-Shen</a></li><li class="social-item"><span class="label"><img src="/images/socials/flickr.svg" alt="https://www.flickr.com/photos/69944455@N05/"></span><a href="https://www.flickr.com/photos/69944455@N05/" target="_blank" title="https://www.flickr.com/photos/69944455@N05/">https://www.flickr.com/photos/69944455@N05/</a></li><li class="social-item"><span class="label"><img src="/images/socials/email.svg" alt="guanlinshen@126.com"></span><span>guanlinshen@126.com</span></li><li class="social-item"><span class="label"><img src="/images/socials/wechat.svg" alt="Grinson"></span><span>Grinson</span></li></ul></div></div></div></header><div class="container"><div class="year-wrap"><div class="year"><a class="title" href="/archives/2022">2022</a></div></div><div class="archives"><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/">軟體工程兩件事</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>軟體工程兩件事：寫腳本與命名檔案。</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/">Note：Pybind11 build from source</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>Hi,<br />
-what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a target="_blank" rel="noopener" href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/">pdf documentation</a> in readme (I focused on the wrong chapter I later found).</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/07/2022-07-07-cmake-QA/">CMake-QA</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>In respond of <a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/07/05/2022-07-05-pybind11-build-from-source-md/">Note：Pybind11 build from source</a>,</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/">Note：Mini-sprint 20220708</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/">Python importation 機制</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>Comment:<br />
-In a well-organized C++ code base, the hpp files should always be included using the full path like:</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">用C++寫python module</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">什麼是CMake與Make</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是<code>make</code>仰賴<code>Makefile</code>, 而<code>cmake</code>仰賴<code>CMakeList.txt</code>，但兩者做著不一樣的事情。</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">07月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/">Bash與Makefile</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>在認識到Linux以前，我鮮少接觸到CLI(Command Line Interface)，也花了些許時間去熟悉。一開始看它也許會感到有些震懾，但並沒有想像中的複雜，單純是將我們習慣使用的GUI(Graphical User Interface)改成CLI，滑鼠改成鍵盤，簡單做了轉換。</p></div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">08月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">Compile幕後</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">08月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">解碼.o檔</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><figure>
-<img src="/images/assembler.png" alt="Assembly" /><figcaption>Assembly</figcaption>
-</figure>
-<p>從<a target="_blank" rel="noopener" href="http://localhost:4000/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">這篇</a>可以看到在vim中開啟main.o，而上圖充斥著1&amp;0，看似截然不同的兩個東西。</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">08月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/">.bashrc與環境變數設定</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 </p></div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">08月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/">什麼是 ELF</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">08月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/">在C++中使用Pytorch模型</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>計算流體力學(CFD)龐大的計算量加上對於即時流場預測的需求，計算效率是被重視的，於是python鮮少被使用，計算用的程式藉由C, C++ 以及 Fortran撰寫。</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">09月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/">什麼是C++巨集</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>C++ 巨集所使用的語言不屬於C語言的範疇，而是Preprocessor所使用的語法。在<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/09/02/2022-09-02%E4%BD%BF%E7%94%A8%20%22#define%22%20%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/">這篇文章</a>初步認識了Preprocess語法，那這篇要接續認識C++巨集。</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">09月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/09/02/2022-09-02-%E4%BD%BF%E7%94%A8-define%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/">使用#define取代文字</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>在<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">Compile幕後</a>中有介紹過preprocessor，而在幾乎每一個C++ 程式中都有以<code>#</code>作為開頭，不以<code>;</code>做結的程式：</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">09月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/09/04/2022-09-04-CFDLabServerManual-1/">CFDLab Server Manual-1</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>這篇是統整後的Server灌系統流程，感謝實驗室前輩的傳承和同學們的努力。Part 1/2</div></div></div></div></div><div class="post-archive"><div class="post-archive__content"><div class="post-archive__month">09月</div><div class="post-archive__body"><a class="post-archive__title" href="/2022/09/04/2022-09-04-CFDLabServerManual-2/">CFDLabServerManual-2</a><div class="post-archive__excerpt"><div class="post-archive__excerpt-content"><p>這篇是統整後的Server灌系統流程，感謝實驗室前輩的傳承和同學們的努力。Part 2/2</div></div></div></div></div></div></div><div id="backToTop"><div class="back-arrow back-arrow-left"></div><div class="back-arrow back-arrow-right"></div></div><footer class="container"><div class="rights"><span>Powered by </span><a href="http://hexo.io" target="_blank">Hexo</a><span>, Theme </span><a href="https://github.com/gary-Shen/hexo-theme-bear" target="_blank">Bear</a><span>.</span></div></footer>
-<script src="/script/jquery.min.js"></script>
+<!-- hexo injector head_end end --></head>
 
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+    <body>
+            
 
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
+            <!-- ### Main content ### -->
+            <!-- ## Header ##-->
+<header>
+    <h1 class="header-title text-center"><a href="/">Echo November&#39;s note</a></h1>
 
-<script src="/script/index.js"></script>
-<script>(function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){(i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)})(window,document,'script','//www.google-analytics.com/analytics.js','ga');
-ga('create', 'UA-61220413-1', 'auto');
-ga('send', 'pageview');</script></body></html>
+    <p class="text-center header-slogan">
+        
+            
+                Hi, nice to meet you.
+            
+        
+    </p>
+
+    <nav class="navbar-section text-center">
+    
+        <a href="/" class="navbar-link">Home</a>
+    
+    
+        <a href="/archives/" class="navbar-link">Archives</a>
+    
+    
+        <a href="/search" class="navbar-link">Search</a>
+    
+    
+    
+        <div class="dropdown dropdown-right">
+    <a class="navbar-link dropdown-toggle" tabindex="0">Share</a>
+    <ul class="menu share-menu">
+
+        <!-- Share Weibo -->
+        
+        <li class="menu-item">
+            <a href="http://service.weibo.com/share/share.php?appkey=&title=Echo November's note&url=http://example.com&pic=http://example.com/img/suka-favicon.ico&searchPic=false&style=simple" target="_blank" rel="external noopener noreferrer nofollow">Share to Weibo</a>
+        </li>
+        
+
+        <!-- Share Twitter -->
+        
+        <li class="menu-item">
+            <a href="https://twitter.com/intent/tweet?text=Echo November's note&url=http://example.com&via=Echo November" target="_blank" rel="external noopener noreferrer nofollow">Share to Twitter</a>
+        </li>
+        
+
+        <!-- Share Facebook -->
+        
+        <li class="menu-item">
+            <a href="https://www.facebook.com/sharer/sharer.php?u=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Facebook</a>
+        </li>
+        
+
+        <!-- Share Google+ -->
+        
+        <li class="menu-item">
+            <a href="https://plus.google.com/share?url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow">Share to Google+</a>
+        </li>
+        
+
+        <!-- Share LinkedIn -->
+        
+        <li class="menu-item">
+            <a href="https://www.linkedin.com/shareArticle?mini=true&url=http://example.com&title=" target="_blank" rel="external noopener noreferrer nofollow">Share to LinkedIn</a>
+        </li>
+        
+
+        <!-- Share QQ -->
+        
+        <li class="menu-item">
+            <a href="http://connect.qq.com/widget/shareqq/index.html?site=Echo November's note&title=&summary=&pics=http://example.com/img/suka-favicon.ico&url=http://example.com" target="_blank" rel="external noopener noreferrer nofollow"> Share to QQ</a>
+        </li>
+        
+
+        <!-- Share Telegram -->
+        
+        <li class="menu-item">
+            <a href="https://t.me/share/url?url=http://example.com&text=" target="_blank" rel="external noopener noreferrer nofollow">Share to Telegram</a>
+        </li>
+        
+
+        <!-- QRCode -->
+        
+        <li class="menu-item">
+            <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAIQAAACECAAAAAB0L9x7AAABiklEQVR42u3a0Y7CMAxE0f7/T8MTEiqJZ1xKmFa3L2hFNzkreRPbyfYIeDYQIEBcArEVz/s7w0EG771+tsYFEYuYTTAbvMJU732MCyIasQ+c0aeabPb97I8AcW2ECsr9dyDujxgF4GyzAnEPxGyjGQWckwCduouCWI6oBv7m87RsG8RShCxaDeDPq3IQSxFVIKkixymIyvFARCK6m5bTJKkml4sViAhENdjsnSpZcZIbEPkIt+h1kxlnbBCZiE08KiidSa1dFEQMwvmFToHkFlEgchFOYqKS4k7DvfzvABGBKBeTZnNMHerKXRREBKIKyqoAcpvxZbIEIhbhLjCqIOpsZCCyEdWlHKcYVoey7e4diCiEeyjfvexhbWAgYhHdAxZ3kZIXAEFEILqLj5vgWMUUiEhE56JwJ/CsRRBELOJoQDqTlc1WENEIpxHmHNQcbqaCuBRCFULO5Y/2xR4Q0YhOc72TLIPIRjiXMpzFrNWIAxGLcA/r1UUNtakdzrZBLEX88wEBAkQ04gnvURoZHe06jAAAAABJRU5ErkJggg==" alr="QRCode">
+        </li>
+        
+
+    </ul>
+</div>
+    
+    
+</nav>
+</header>
+
+            <div class="container">
+    <div class="main-container">
+        <main>
+            <!-- # Title # -->
+            <h2 class="page-title">Tag : python</h2>
+            <!-- # Post List # -->
+            <div class="post-stream-container">
+                
+                    <article class="post-entry container px-0 card">
+        <div class="columns col-gapless">
+            
+                <div class="column col-12">
+                    
+    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/" rel="bookmark">用C++寫python module</a></h2>
+
+
+<p class="mb-0 card-body">
+    
+        做這個小實驗的當天看到這個梗圖，相當呼應這個主題:
+    <a href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">Read more</a>
+</p>
+
+
+
+
+    <!-- Date & Category -->
+    <div class="card-footer post-entry-info text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Echo November's Avatar">
+        <time>2022-07-20</time>
+        
+        
+    </div>
+
+                </div>
+            
+        </div>
+</article>
+
+                
+                    <article class="post-entry container px-0 card">
+        <div class="columns col-gapless">
+            
+                <div class="column col-12">
+                    
+    <h2 class="h5 mb-0 card-header"><a class="card-title" href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/" rel="bookmark">Python importation 機制</a></h2>
+
+
+<p class="mb-0 card-body">
+    
+        Comment:
+In a well-organized C++ code base, the hpp files should always be included using the full path like:
+    <a href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/">Read more</a>
+</p>
+
+
+
+
+    <!-- Date & Category -->
+    <div class="card-footer post-entry-info text-gray">
+        <img class="author-thumb lazyload" data-src="/img/default_avatar.png" src="/img/suka-lazyload.gif" alt="Echo November's Avatar">
+        <time>2022-07-16</time>
+        
+        
+    </div>
+
+                </div>
+            
+        </div>
+</article>
+
+                
+            </div>
+        </main>
+        
+
+    </div>
+</div>
+            <!-- ### Footer ### -->
+            <footer class="text-center">
+    <!-- footer copyright -->
+    
+        <p class="footer-copyright mb-0">Copyright&nbsp;©&nbsp;<span id="copyright-year"></span>
+            <a class="footer-copyright-a" href="http://example.com">Echo November's note</a>
+        </p>
+
+    <!-- footer custom text -->
+    <p class="footer-text mb-0">
+    
+    </p>
+    <!-- footer develop info -->
+    <p class="footer-develop mb-0">
+        
+    <!-- Busuanzi User Views -->
+    <span id="busuanzi_container_site_uv" hidden>
+        <span></span>
+        <span id="busuanzi_value_site_uv"></span>
+        <span>Viewers</span>
+        
+            <span>|</span>
+        
+    </span>
+
+
+
+
+        
+        Powered by&nbsp;<!--
+         --><a href="https://hexo.io" target="_blank" class="footer-develop-a" rel="external nofollow noopener noreferrer">Hexo</a><span class="footer-develop-divider"></span>Theme&nbsp;-&nbsp;<!--
+         --><a href="https://github.com/SukkaW/hexo-theme-suka" target="_blank" class="footer-develop-a" rel="external noopener">Suka</a>
+    </p>
+</footer>
+
+
+        <!-- ### Import File ### -->
+        <!-- ### Footer JS Import ### -->
+
+<script>
+
+    
+window.lazyLoadOptions = {
+    elements_selector: ".lazyload",
+    threshold: 50
+};
+document.getElementById('copyright-year').textContent = new Date().getFullYear();
+console.log('\n %c Suka Theme (hexo-theme-suka) | © SukkaW | Verision 1.3.3 %c https://github.com/SukkaW/hexo-theme-suka \n', 'color: #fff; background: #444; padding:5px 0;', 'background: #bbb; padding:5px 0;');
+
+</script>
+
+<script src="/lib/vanilla-lazyload/lazyload.min.js" async></script>
+    <script src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.js" async></script>
+
+
+<!-- Offset -->
+
+
+
+
+<!-- Comment -->
+
+
+<!-- ### Custom Footer ### -->
+
+    </body>
+
+</html>

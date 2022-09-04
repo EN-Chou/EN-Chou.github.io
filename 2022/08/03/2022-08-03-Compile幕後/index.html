@@ -1,71 +1,167 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang=en>
 <head>
-  <meta charset="utf-8">
-  
-  <title>Compile幕後 | Echo November&#39;s note</title>
-  <meta name="author" content="Echo November">
-  
-  <meta name="description" content="習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 建置(Build) 然後▷，有時是只點下▷，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-  <meta property="og:title" content="Compile幕後"/>
-  <meta property="og:site_name" content="Echo November&#39;s note"/>
+    <title>
+        
+        Compile幕後 - undefined
+        
+    </title>
 
-  
-    <meta property="og:image" content=""/>
-  
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
 
-  <link rel="shortcut icon" href="/favicon.png">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    
+<link rel="stylesheet" href="/css/gitment.css">
 
-  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
-  
-
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
-
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="Echo November's note" type="application/atom+xml">
+</head>
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Echo November&#39;s note</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/null">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
-</header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-2022-08-03-Compile幕後" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2022-08-02T17:10:32.000Z"><a href="/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">2022-08-03</a></time>
-      
-      
-  
-    <h1 class="p-name title" itemprop="headline name">Compile幕後</h1>
-  
 
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/" />
+        </div>
+        <div class="name">
+            <i>Echo November</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#preprocessing-.cpp---.ii"><span class="toc-text">1. Preprocessing: .cpp -&gt; .ii，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#compilation-.ii---.s"><span class="toc-text">2. Compilation: .ii -&gt; .s，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#assembly-.s---.o"><span class="toc-text">3. Assembly: .s -&gt; .o，</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#linking-.o-static-library---.out"><span class="toc-text">4. Linking: .o + static library -&gt; .out，</span></a></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        Compile幕後
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2022-08-03 01:10:32</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#C++" title="C++">C++</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#compile" title="compile">compile</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#程式設計師的自我修養" title="程式設計師的自我修養">程式設計師的自我修養</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
         <p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
 <p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。 <img src="/images/gcc.jpg" alt="gcc compilation" /></p>
@@ -81,147 +177,65 @@
 <h3 id="linking-.o-static-library---.out">4. Linking: .o + static library -&gt; .out，</h3>
 <p>將.o檔連結static library(一大堆.o檔)形成.out檔。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ld -static (一大堆.<span class="keyword">o</span>檔) </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^C^@&gt;^@^A^@^@^@À^<span class="keyword">P</span>^@^@^</span><br><span class="line">^@^@@^@^@^@^@^@^@^@è;^@^@^@^@^@^@^@^@^@^@@</span><br><span class="line">^@<span class="number">8</span>^@^M^@@^@^_^@^^^@^F^@^@^@^D^@^@^@@^@^@^</span><br><span class="line">@^@^@^@^@@^@^@^@^@^@^@^@@^......</span><br></pre></td></tr></table></figure></p>
 
-      
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
     </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/C/">C++</a>, <a href="/tags/compile/">compile</a>, <a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/">程式設計師的自我修養</a>
-  </div>
+</div>
 
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://example.com/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="as_sitesearch" value="example.com">
-  </form>
+    </div>
 </div>
 
 
-  
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
 
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/C/">C++</a><small>7</small></li>
-  
-    <li><a href="/tags/Computation/">Computation</a><small>5</small></li>
-  
-    <li><a href="/tags/ELF/">ELF</a><small>1</small></li>
-  
-    <li><a href="/tags/Machine-Learning/">Machine Learning</a><small>1</small></li>
-  
-    <li><a href="/tags/Pytorch/">Pytorch</a><small>1</small></li>
-  
-    <li><a href="/tags/YYQA/">YYQA</a><small>5</small></li>
-  
-    <li><a href="/tags/bash/">bash</a><small>4</small></li>
-  
-    <li><a href="/tags/cmake/">cmake</a><small>4</small></li>
-  
-    <li><a href="/tags/compile/">compile</a><small>2</small></li>
-  
-    <li><a href="/tags/make/">make</a><small>3</small></li>
-  
-    <li><a href="/tags/mini-sprint/">mini-sprint</a><small>2</small></li>
-  
-    <li><a href="/tags/object-file/">object file</a><small>1</small></li>
-  
-    <li><a href="/tags/pybind11/">pybind11</a><small>1</small></li>
-  
-    <li><a href="/tags/python/">python</a><small>2</small></li>
-  
-    <li><a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/">程式設計師的自我修養</a><small>3</small></li>
-  
-    <li><a href="/tags/%E9%9A%A8%E6%89%8B%E8%A8%98/">隨手記</a><small>1</small></li>
-  
-  </ul>
-</div>
+        
 
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2022 Echo November
-  
-</div>
-<div class="clearfix"></div></footer>
-  
-<script src="/js/jquery-3.4.1.min.js"></script>
+        
 
+        
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
+        
 
-
-<script src="/js/gallery.js"></script>
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
 
 
 
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-<script>
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
 
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
 </html>

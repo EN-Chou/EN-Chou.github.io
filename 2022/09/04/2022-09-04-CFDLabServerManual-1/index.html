@@ -1,71 +1,164 @@
-<!DOCTYPE HTML>
-<html lang="en">
+<!DOCTYPE html>
+<html lang=en>
 <head>
-  <meta charset="utf-8">
-  
-  <title>CFDLab Server Manual-1 | Echo November&#39;s note</title>
-  <meta name="author" content="Echo November">
-  
-  <meta name="description" content="這篇是統整後的Server灌系統流程，感謝實驗室前輩的傳承和同學們的努力。Part 1/2">
-  
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="google-site-verification" content="xBT4GhYoi5qRD5tr338pgPM5OWHHIDR6mNg1a3euekI" />
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta property="og:description" content="">
+    <meta property="og:type" content="website">
+    <meta name="description" content="">
+    <meta name="keyword"  content="">
+    <link rel="shortcut icon" href="/img/favicon.ico">
 
-  <meta property="og:title" content="CFDLab Server Manual-1"/>
-  <meta property="og:site_name" content="Echo November&#39;s note"/>
+    <title>
+        
+        CFDLab Server Manual-1 - undefined
+        
+    </title>
 
-  
-    <meta property="og:image" content=""/>
-  
+    <!-- Custom CSS -->
+    
+<link rel="stylesheet" href="/css/aircloud.css">
 
-  <link rel="shortcut icon" href="/favicon.png">
-  
-  
-<link rel="stylesheet" href="/css/style.css">
+    
+<link rel="stylesheet" href="/css/gitment.css">
 
-  <!--[if lt IE 9]><script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script><![endif]-->
-  
-
+    <!--<link rel="stylesheet" href="https://imsun.github.io/gitment/style/default.css">-->
+    <link href="//at.alicdn.com/t/font_620856_28hi1hpxx24.css" rel="stylesheet" type="text/css">
+    <!-- ga & ba script hoook -->
+    <script></script>
 <!-- hexo injector head_end start -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
 
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
-<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
-
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"><link rel="alternate" href="/atom.xml" title="Echo November's note" type="application/atom+xml">
+</head>
 
 <body>
-  <header id="header" class="inner"><div class="alignleft">
-  <h1><a href="/">Echo November&#39;s note</a></h1>
-  <h2><a href="/"></a></h2>
-</div>
-<nav id="main-nav" class="alignright">
-  <ul>
-    
-      <li><a href="/null">Home</a></li>
-    
-      <li><a href="/archives">Archives</a></li>
-    
-  </ul>
-  <div class="clearfix"></div>
-</nav>
-<div class="clearfix"></div>
-</header>
-  <div id="content" class="inner">
-    <div id="main-col" class="alignleft"><div id="wrapper"><article id="post-2022-09-04-CFDLabServerManual-1" class="h-entry post" itemprop="blogPost" itemscope itemtype="https://schema.org/BlogPosting">
-  
-  <div class="post-content">
-    <header>
-      
-        <div class="icon"></div>
-        <time class="dt-published" datetime="2022-09-04T02:09:06.000Z"><a href="/2022/09/04/2022-09-04-CFDLabServerManual-1/">2022-09-04</a></time>
-      
-      
-  
-    <h1 class="p-name title" itemprop="headline name">CFDLab Server Manual-1</h1>
-  
 
-    </header>
-    <div class="e-content entry" itemprop="articleBody">
-      
+<div class="site-nav-toggle" id="site-nav-toggle">
+    <button>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+        <span class="btn-bar"></span>
+    </button>
+</div>
+
+<div class="index-about">
+    <i>  </i>
+</div>
+
+<div class="index-container">
+    
+    <div class="index-left">
+        
+<div class="nav" id="nav">
+    <div class="avatar-name">
+        <div class="avatar ">
+            <img src="/" />
+        </div>
+        <div class="name">
+            <i>Echo November</i>
+        </div>
+    </div>
+    <div class="contents" id="nav-content">
+        <ul>
+            <li >
+                <a href="/">
+                    <i class="iconfont icon-shouye1"></i>
+                    <span>HOME</span>
+                </a>
+            </li>
+            <li >
+                <a href="/tags">
+                    <i class="iconfont icon-biaoqian1"></i>
+                    <span>TAGS</span>
+                </a>
+            </li>
+            <li >
+                <a href="/archives">
+                    <i class="iconfont icon-guidang2"></i>
+                    <span>ARCHIVES</span>
+                </a>
+            </li>
+            <li >
+                <a href="/collect/">
+                    <i class="iconfont icon-shoucang1"></i>
+                    <span>COLLECT</span>
+                </a>
+            </li>
+            <li >
+                <a href="/about/">
+                    <i class="iconfont icon-guanyu2"></i>
+                    <span>ABOUT</span>
+                </a>
+            </li>
+            
+            <li>
+                <a id="search">
+                    <i class="iconfont icon-sousuo1"></i>
+                    <span>SEARCH</span>
+                </a>
+            </li>
+            
+        </ul>
+    </div>
+    
+        <div id="toc" class="toc-article">
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-installation"><span class="toc-text">Linux installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server-%E8%A8%AD%E5%AE%9A"><span class="toc-text">Server 設定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E9%97%9C%E9%96%89selinuxsecurity-enhanced-linux"><span class="toc-text">第一步關閉SELinux(Security Enhanced Linux)：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E8%A8%AD%E5%AE%9Aip"><span class="toc-text">第二步 設定IP：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-nfsnetwork-file-system%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E6%94%AF%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%AD%A5mount%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%94%AF%E7%A1%AC%E7%A2%9F%E5%88%86%E4%BA%AB%E8%B3%87%E6%96%99"><span class="toc-text">第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-nisnetwork-information-system%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E4%B9%8B%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%88%86%E4%BA%AB%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%85%E8%B3%87%E8%A8%8A"><span class="toc-text">第四步 NIS（Network Information System，讓用戶端之主機可以分享伺服器的使用者資訊）：</span></a></li></ol></li></ol></li></ol>
+</div>
+    
+</div>
+
+
+<div class="search-field" id="search-field">
+    <div class="search-bg" id="search-bg"></div>
+    <div class="search-container">
+        <div class="search-input">
+            <span id="esc-search"> <i class="icon-fanhui iconfont"></i></span>
+            <input id="search-input"/>
+            <span id="begin-search">search</span>
+        </div>
+        <div class="search-result-container" id="search-result-container">
+
+        </div>
+    </div>
+</div>
+
+        <div class="index-about-mobile">
+            <i>  </i>
+        </div>
+    </div>
+    
+    <div class="index-middle">
+        <!-- Main Content -->
+        
+
+
+<div class="post-container">
+    <div class="post-title">
+        CFDLab Server Manual-1
+    </div>
+
+    <div class="post-meta">
+        <span class="attr">Post：<span>2022-09-04 10:09:06</span></span>
+        
+        <span class="attr">Tags：/
+        
+        <a class="tag" href="/tags/#Computation" title="Computation">Computation</a>
+        <span>/</span>
+        
+        <a class="tag" href="/tags/#bash" title="bash">bash</a>
+        <span>/</span>
+        
+        
+        </span>
+        <span class="attr">Visit：<span id="busuanzi_value_page_pv"></span>
+</span>
+</span>
+    </div>
+    <div class="post-content ">
         <p>這篇是統整後的Server灌系統流程，感謝實驗室前輩的傳承和同學們的努力。Part 1/2 <span id="more"></span></p>
 <h3 id="linux-installation">Linux installation</h3>
 <ul>
@@ -186,147 +279,65 @@ IPV4(看第幾台，e.g. 第三台就輸入192.168.170.133)</li>
 <li>可以用 <code>setup</code> 快速檢查。</li>
 </ul>
 
-      
+        
+        <br />
+        <div id="comment-container">
+        </div>
+        <div id="disqus_thread"></div>
+        <div id="lv-container"></div>
+        <div class="giscus"></div>
     </div>
-    <footer>
-      
-        
-        
-  
-  <div class="tags">
-    <a href="/tags/Computation/">Computation</a>, <a href="/tags/bash/">bash</a>
-  </div>
+</div>
 
-        
-  <div class="addthis addthis_toolbox addthis_default_style">
-    
-      <a class="addthis_button_facebook_like" fb:like:layout="button_count"></a>
-    
-    
-      <a class="addthis_button_tweet"></a>
-    
-    
-      <a class="addthis_button_google_plusone" g:plusone:size="medium"></a>
-    
-    
-      <a class="addthis_button_pinterest_pinit" pi:pinit:layout="horizontal"></a>
-    
-    <a class="addthis_counter addthis_pill_style"></a>
-  </div>
-  <script src="//s7.addthis.com/js/300/addthis_widget.js"></script>
-
-      
-      <div class="clearfix"></div>
-    </footer>
-  </div>
-</article>
-
-
-<section id="comment">
-  <h1 class="title">Comments</h1>
-
-  
-      <div id="fb-root"></div>
-<script>
-  (function(d, s, id) {
-    var js, fjs = d.getElementsByTagName(s)[0];
-    if (d.getElementById(id)) return;
-    js = d.createElement(s); js.id = id;
-    js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=123456789012345";
-    fjs.parentNode.insertBefore(js, fjs);
-  }(document, 'script', 'facebook-jssdk'));
-</script>
-
-<div class="fb-comments" data-href="http://example.com/2022/09/04/2022-09-04-CFDLabServerManual-1/index.html" data-num-posts="5" data-width="840" data-colorscheme="light"></div>
-      
-  
-</section>
-
-</div></div>
-    <aside id="sidebar" class="alignright">
-  <div class="search">
-  <form action="//google.com/search" method="get" accept-charset="utf-8">
-    <input type="search" name="q" results="0" placeholder="Search">
-    <input type="hidden" name="as_sitesearch" value="example.com">
-  </form>
+    </div>
 </div>
 
 
-  
+<footer class="footer">
+    <ul class="list-inline text-center">
+        
+        
 
-  
-<div class="widget tag">
-  <h3 class="title">Tags</h3>
-  <ul class="entry">
-  
-    <li><a href="/tags/C/">C++</a><small>7</small></li>
-  
-    <li><a href="/tags/Computation/">Computation</a><small>5</small></li>
-  
-    <li><a href="/tags/ELF/">ELF</a><small>1</small></li>
-  
-    <li><a href="/tags/Machine-Learning/">Machine Learning</a><small>1</small></li>
-  
-    <li><a href="/tags/Pytorch/">Pytorch</a><small>1</small></li>
-  
-    <li><a href="/tags/YYQA/">YYQA</a><small>5</small></li>
-  
-    <li><a href="/tags/bash/">bash</a><small>4</small></li>
-  
-    <li><a href="/tags/cmake/">cmake</a><small>4</small></li>
-  
-    <li><a href="/tags/compile/">compile</a><small>2</small></li>
-  
-    <li><a href="/tags/make/">make</a><small>3</small></li>
-  
-    <li><a href="/tags/mini-sprint/">mini-sprint</a><small>2</small></li>
-  
-    <li><a href="/tags/object-file/">object file</a><small>1</small></li>
-  
-    <li><a href="/tags/pybind11/">pybind11</a><small>1</small></li>
-  
-    <li><a href="/tags/python/">python</a><small>2</small></li>
-  
-    <li><a href="/tags/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E5%B8%AB%E7%9A%84%E8%87%AA%E6%88%91%E4%BF%AE%E9%A4%8A/">程式設計師的自我修養</a><small>3</small></li>
-  
-    <li><a href="/tags/%E9%9A%A8%E6%89%8B%E8%A8%98/">隨手記</a><small>1</small></li>
-  
-  </ul>
-</div>
+        
 
-</aside>
-    <div class="clearfix"></div>
-  </div>
-  <footer id="footer" class="inner"><div class="alignleft">
-  
-  &copy; 2022 Echo November
-  
-</div>
-<div class="clearfix"></div></footer>
-  
-<script src="/js/jquery-3.4.1.min.js"></script>
+        
 
+        
 
-<script src="/js/jquery.imagesloaded.min.js"></script>
+        
 
-
-<script src="/js/gallery.js"></script>
+    </ul>
+    
+    <p>
+        <span id="busuanzi_container_site_pv">
+            <span id="busuanzi_value_site_pv"></span>PV
+        </span>
+        <span id="busuanzi_container_site_uv">
+            <span id="busuanzi_value_site_uv"></span>UV
+        </span>
+        Created By <a target="_blank" rel="noopener" href="https://hexo.io/">Hexo</a>  Theme <a target="_blank" rel="noopener" href="https://github.com/aircloud/hexo-theme-aircloud">AirCloud</a></p>
+</footer>
 
 
 
-
-
-
-<link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
-
-
-<script src="/fancybox/jquery.fancybox.pack.js"></script>
-
-<script>
-(function($){
-  $('.fancybox').fancybox();
-})(jQuery);
-</script>
 
 </body>
+
+<script>
+    // We expose some of the variables needed by the front end
+    window.hexo_search_path = "search.xml"
+    window.hexo_root = "/"
+    window.isPost = true
+</script>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+
+<script src="/js/index.js"></script>
+
+<script async src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+
+
+
+
+
 </html>

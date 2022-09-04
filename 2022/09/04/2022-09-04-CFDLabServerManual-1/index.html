@@ -96,13 +96,13 @@
         </div>
         <div class="post-toc" id="post-toc">
     <strong class="post-toc-title">目录</strong>
-    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-installation"><span class="toc-text">Linux installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server-%E8%A8%AD%E5%AE%9A"><span class="toc-text">Server 設定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5server-client%E9%97%9C%E9%96%89selinuxsecurity-enhanced-linux"><span class="toc-text">第一步(server &amp; client)關閉SELinux(Security Enhanced Linux)：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E8%A8%AD%E5%AE%9Aip"><span class="toc-text">第二步 設定IP：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-nfsnetwork-file-system%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E6%94%AF%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%AD%A5mount%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%94%AF%E7%A1%AC%E7%A2%9F%E5%88%86%E4%BA%AB%E8%B3%87%E6%96%99"><span class="toc-text">第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-nisnetwork-information-system%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E4%B9%8B%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%88%86%E4%BA%AB%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%85%E8%B3%87%E8%A8%8A"><span class="toc-text">第四步 NIS（Network Information System，讓用戶端之主機可以分享伺服器的使用者資訊）：</span></a></li></ol></li></ol></li></ol>
+    <ol class="toc"><li class="toc-item toc-level-3"><a class="toc-link" href="#linux-installation"><span class="toc-text">Linux installation</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#server-%E8%A8%AD%E5%AE%9A"><span class="toc-text">Server 設定</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E9%97%9C%E9%96%89selinuxsecurity-enhanced-linux"><span class="toc-text">第一步關閉SELinux(Security Enhanced Linux)：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E8%A8%AD%E5%AE%9Aip"><span class="toc-text">第二步 設定IP：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-nfsnetwork-file-system%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E6%94%AF%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%AD%A5mount%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%94%AF%E7%A1%AC%E7%A2%9F%E5%88%86%E4%BA%AB%E8%B3%87%E6%96%99"><span class="toc-text">第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-nisnetwork-information-system%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E4%B9%8B%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%88%86%E4%BA%AB%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%85%E8%B3%87%E8%A8%8A"><span class="toc-text">第四步 NIS（Network Information System，讓用戶端之主機可以分享伺服器的使用者資訊）：</span></a></li></ol></li></ol></li></ol>
     <div class="back-to-top" id="back-to-top">
         <a href="javascript:void(0);">回到顶部</a>
     </div>
 </div>
         <div class="post-content">
-            <p>感謝實驗室前輩的傳承和同學們的努力統整出的Server灌系統流程。Part 1/2 <span id="more"></span></p>
+            <p>這篇是統整後的Server灌系統流程，感謝實驗室前輩的傳承和同學們的努力。Part 1/2 <span id="more"></span></p>
 <h3 id="linux-installation">Linux installation</h3>
 <ul>
 <li>製作USB開機隨身碟</li>
@@ -171,7 +171,7 @@ Create-&gt; Standard-&gt; 分配容量<br />
 <li>開機並以root進入系統（進入系統要選擇not listed，帳號打root），第一次登入時有關網路設定的全部跳過，最後的 <strong>Privacy</strong> 要 off。</li>
 <li>桌面點右鍵選擇<code>open terminal</code> 進到終端機畫面。</li>
 </ul>
-<h5 id="第一步server-client關閉selinuxsecurity-enhanced-linux">第一步(server &amp; client)關閉SELinux(Security Enhanced Linux)：</h5>
+<h5 id="第一步關閉selinuxsecurity-enhanced-linux">第一步關閉SELinux(Security Enhanced Linux)：</h5>
 <ul>
 <li>用文字編輯器<code>vi</code>編輯 SELinux 設定檔： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/selinux/config</span><br></pre></td></tr></table></figure> 檔案中加入：（輸入<code>i</code>即可該使打字，輸入<code>esc</code>後輸入<code>:wq</code>儲存離開。（完整指令可以參考<a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~r92094/c++/vi_command.htm">這篇</a>） <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure></li>
 <li>關閉防火牆： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disabled firewalld</span><br></pre></td></tr></table></figure></li>

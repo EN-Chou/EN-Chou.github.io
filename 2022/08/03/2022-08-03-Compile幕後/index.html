@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Compile幕後 | Echo November&#39;s note
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Echo November's note</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <div id="article-banner">
+  <h2>Compile幕後</h2>
+  <p class="post-date">2022-08-03</p>
+  <div class="arrow-down">
+    <a href="javascript:;"></a>
+  </div>
+</div>
+<main class="app-body flex-box">
+  <!-- Article START -->
+  <article class="post-article">
+    <section class="markdown-content"><p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure>
+<p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。 <img src="/images/gcc.jpg" alt="gcc compilation" /></p>
+<p>以下用一支比helloworld更簡單的程式來呈現:</p>
+<p><strong>main.cpp</strong> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>(以下的程式皆是透過vim進行解碼)</p>
+<h3 id="preprocessing-.cpp---.ii">1. Preprocessing: .cpp -&gt; .ii，</h3>
+<p>處理＃，刪除註解(//, /**/)，加以編號。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -E main.cpp -o main.ii</span><br><span class="line">main.ii:</span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;main.cpp&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;built-in&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;/usr/include/stdc-predef.h&quot;</span> <span class="number">1</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span> <span class="number">2</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;main.cpp&quot;</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h3 id="compilation-.ii---.s">2. Compilation: .ii -&gt; .s，</h3>
+<p>將 .ii檔進行分析以及最佳化，將高階語言翻譯成assembly code。屬於程式建構過程最複雜的環節。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">main.s</span><br><span class="line">$ g++ -S main.ii -<span class="keyword">o</span> main.s</span><br><span class="line">        .<span class="keyword">file</span>   <span class="string">&quot;main.cpp&quot;</span></span><br><span class="line">        .text</span><br><span class="line">        .globl  main</span><br><span class="line">        .<span class="built_in">type</span>   main, @<span class="keyword">function</span></span><br><span class="line"><span class="title">main</span>:</span><br><span class="line">.LFB0:</span><br><span class="line">        .cfi_startproc</span><br><span class="line">        endbr64</span><br><span class="line">        pushq   %rbp</span><br><span class="line">        .cfi_def_cfa_offset <span class="number">16</span></span><br><span class="line">        .cfi_offset <span class="number">6</span>, -<span class="number">16</span></span><br><span class="line">        movq    %rsp, %rbp</span><br><span class="line">        .cfi_def_cfa_register <span class="number">6</span></span><br><span class="line">        movl    $<span class="number">0</span>, %eax</span><br><span class="line">        popq    %rbp</span><br><span class="line">        .cfi_def_cfa <span class="number">7</span>, <span class="number">8</span></span><br><span class="line">        <span class="keyword">ret</span></span><br><span class="line">        .cfi_endproc</span><br><span class="line">.LFE0:</span><br><span class="line">        .size   main, .-main</span><br><span class="line">        .ident  <span class="string">&quot;GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0&quot;</span></span><br><span class="line">        .section        .note.GNU-stack,<span class="string">&quot;&quot;</span>,@progbits</span><br><span class="line">        .section        .note.gnu.property,<span class="string">&quot;a&quot;</span></span><br><span class="line">        .align <span class="number">8</span></span><br><span class="line">        .long    <span class="number">1</span><span class="keyword">f</span> - <span class="number">0</span><span class="keyword">f</span></span><br><span class="line">        .long    <span class="number">4</span><span class="keyword">f</span> - <span class="number">1</span><span class="keyword">f</span></span><br><span class="line">        .long    <span class="number">5</span></span><br><span class="line"><span class="number">0</span>:</span><br><span class="line">        .<span class="built_in">string</span>  <span class="string">&quot;GNU&quot;</span></span><br><span class="line"><span class="number">1</span>:</span><br><span class="line">        .align <span class="number">8</span></span><br><span class="line">        .long    <span class="number">0</span>xc0000002</span><br><span class="line">        .long    <span class="number">3</span><span class="keyword">f</span> - <span class="number">2</span><span class="keyword">f</span></span><br><span class="line"><span class="number">2</span>:</span><br><span class="line">        .long    <span class="number">0</span>x3</span><br><span class="line"><span class="number">3</span>:</span><br><span class="line">        .align <span class="number">8</span></span><br><span class="line"><span class="number">4</span>:</span><br></pre></td></tr></table></figure></p>
+<h3 id="assembly-.s---.o">3. Assembly: .s -&gt; .o，</h3>
+<p>將assembly code一一翻譯成machine code。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -<span class="keyword">c</span> main.s -<span class="keyword">o</span> main.<span class="keyword">o</span> </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^@^@^@^@^@^A^@&gt;^@^A^@^@</span><br><span class="line">^@^@^@^@^@^@^@^@^@^@X^B^@^@^@^@^@^@^@^@^@^</span><br><span class="line">@@^@^@^@^@^@@^@^L^@^K^@ó^O^^úUHå¸^@^@^</span><br><span class="line">@^@]Ã^@GCC: (Ubuntu <span class="number">9.4</span>.<span class="number">0</span>-<span class="number">1</span>ubuntu1~<span class="number">20.04</span>.<span class="number">1</span>)</span><br><span class="line"><span class="number">9.4</span>.<span class="number">0</span>^@^@^@^@^@^@^D^@^......</span><br></pre></td></tr></table></figure></p>
+<h3 id="linking-.o-static-library---.out">4. Linking: .o + static library -&gt; .out，</h3>
+<p>將.o檔連結static library(一大堆.o檔)形成.out檔。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ld -static (一大堆.<span class="keyword">o</span>檔) </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^C^@&gt;^@^A^@^@^@À^<span class="keyword">P</span>^@^@^</span><br><span class="line">^@^@@^@^@^@^@^@^@^@è;^@^@^@^@^@^@^@^@^@^@@</span><br><span class="line">^@<span class="number">8</span>^@^M^@@^@^_^@^^^@^F^@^@^@^D^@^@^@@^@^@^</span><br><span class="line">@^@^@^@^@@^@^@^@^@^@^@^@@^......</span><br></pre></td></tr></table></figure></p>
+</section>
+    <!-- Tags START -->
+    
+      <div class="tags">
+        <span>Tags:</span>
+        
+  <a href="/tags#C++" >
+    <span class="tag-code">C++</span>
+  </a>
+
+  <a href="/tags#compile" >
+    <span class="tag-code">compile</span>
+  </a>
+
+  <a href="/tags#程式設計師的自我修養" >
+    <span class="tag-code">程式設計師的自我修養</span>
+  </a>
+
+      </div>
+    
+    <!-- Tags END -->
+    <!-- NAV START -->
+    
+  <div class="nav-container">
+    <!-- reverse left and right to put prev and next in a more logic postition -->
+    
+      <a class="nav-left" href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">
+        <span class="nav-arrow">← </span>
+        
+          什麼是CMake與Make
+        
+      </a>
+    
+    
+      <a class="nav-right" href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">
+        
+          解碼.o檔
+        
+        <span class="nav-arrow"> →</span>
+      </a>
+    
+  </div>
+
+    <!-- NAV END -->
+    <!-- 打赏 START -->
+    
+      <div class="money-like">
+        <div class="reward-btn">
+          赏
+          <span class="money-code">
+            <span class="alipay-code">
+              <div class="code-image"></div>
+              <b>使用支付宝打赏</b>
+            </span>
+            <span class="wechat-code">
+              <div class="code-image"></div>
+              <b>使用微信打赏</b>
+            </span>
+          </span>
+        </div>
+        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
+      </div>
+    
+    <!-- 打赏 END -->
+    <!-- 二维码 START -->
+    
+      <div class="qrcode">
+        <canvas id="share-qrcode"></canvas>
+        <p class="notice">扫描二维码，分享此文章</p>
+      </div>
+    
+    <!-- 二维码 END -->
+    
+      <!-- Utterances START -->
+      <div id="utterances"></div>
+      <script src="https://utteranc.es/client.js"
+        repo=""
+        issue-term="pathname"
+        theme="github-light"
+        crossorigin="anonymous"
+        async></script>    
+      <!-- Utterances END -->
+    
+  </article>
+  <!-- Article END -->
+  <!-- Catalog START -->
+  
+    <aside class="catalog-container">
+  <div class="toc-main">
+    <strong class="toc-title">Catalog</strong>
+    
+      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#preprocessing-.cpp---.ii"><span class="toc-nav-text">1. Preprocessing: .cpp -&gt; .ii，</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#compilation-.ii---.s"><span class="toc-nav-text">2. Compilation: .ii -&gt; .s，</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#assembly-.s---.o"><span class="toc-nav-text">3. Assembly: .s -&gt; .o，</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#linking-.o-static-library---.out"><span class="toc-nav-text">4. Linking: .o + static library -&gt; .out，</span></a></li></ol>
+    
+  </div>
+</aside>
+  
+  <!-- Catalog END -->
+</main>
+
+<script>
+  (function () {
+    var url = 'http://example.com/2022/08/03/2022-08-03-Compile幕後/';
+    var banner = ''
+    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
+      $('#article-banner').css({
+        'background-image': 'url(' + banner + ')'
+      })
+    } else {
+      $('#article-banner').geopattern(url)
+    }
+    $('.header').removeClass('fixed-header')
+
+    // error image
+    $(".markdown-content img").on('error', function() {
+      $(this).attr('src', '/css/images/error_icon.png')
+      $(this).css({
+        'cursor': 'default'
+      })
+    })
+
+    // zoom image
+    $(".markdown-content img").on('click', function() {
+      var src = $(this).attr('src')
+      if (src !== '/css/images/error_icon.png') {
+        var imageW = $(this).width()
+        var imageH = $(this).height()
+
+        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
+        zoom = zoom < 1 ? 1 : zoom
+        zoom = zoom > 2 ? 2 : zoom
+        var transY = (($(window).height() - imageH) / 2).toFixed(2)
+
+        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
+        $('.image-view-wrap').addClass('wrap-active')
+        $('.image-view-wrap img').css({
+          'width': `${imageW}`,
+          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
+        })
+        $('html').css('overflow', 'hidden')
+
+        $('.image-view-wrap').on('click', function() {
+          $(this).remove()
+          $('html').attr('style', '')
+        })
+      }
+    })
+  })();
+</script>
+
+
+  <script>
+    var qr = new QRious({
+      element: document.getElementById('share-qrcode'),
+      value: document.location.href
+    });
+  </script>
+
+
+
+
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2022 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

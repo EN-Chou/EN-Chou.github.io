@@ -10,7 +10,7 @@
   
   <title>
     
-      Note：Mini-sprint 20220708 | Echo November&#39;s note
+      Project | Echo November&#39;s note
     
   </title>
   <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
@@ -196,185 +196,55 @@
 </header>
 
     <div id="article-banner">
-  <h2>Note：Mini-sprint 20220708</h2>
-  <p class="post-date">2022-07-08</p>
-  <div class="arrow-down">
-    <a href="javascript:;"></a>
-  </div>
+  <h2>Projects</h2>
+  <p class="post-date">GitHub Open Source Projects</p>
 </div>
-<main class="app-body flex-box">
-  <!-- Article START -->
-  <article class="post-article">
-    <section class="markdown-content"><p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向： <span id="more"></span></p>
-<h3 id="unit-testing">1. Unit testing</h3>
-<p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>中，pytest是用來跑unit testing的target。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure></p>
-<h3 id="compiler-explorer">2. <a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3>
-<p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I've pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p>
-<p>Reply: You do not need to worry about assembly right now, but a programmer needs to know their machines eventually. At the moment your understanding to assembly is sufficient. Just be aware of its existence.</p>
-<h3 id="citcuit">3. Citcuit</h3>
-<p>每次執行指令時，在電路端都會有不同的表現。</p>
-</section>
-    <!-- Tags START -->
-    
-      <div class="tags">
-        <span>Tags:</span>
-        
-  <a href="/tags#mini-sprint" >
-    <span class="tag-code">mini-sprint</span>
-  </a>
-
-  <a href="/tags#YYQA" >
-    <span class="tag-code">YYQA</span>
-  </a>
-
-  <a href="/tags#隨手記" >
-    <span class="tag-code">隨手記</span>
-  </a>
-
-      </div>
-    
-    <!-- Tags END -->
-    <!-- NAV START -->
-    
-  <div class="nav-container">
-    <!-- reverse left and right to put prev and next in a more logic postition -->
-    
-      <a class="nav-left" href="/2022/07/07/2022-07-07-cmake-QA/">
-        <span class="nav-arrow">← </span>
-        
-          CMake-QA
-        
-      </a>
-    
-    
-      <a class="nav-right" href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/">
-        
-          Python importation 機制
-        
-        <span class="nav-arrow"> →</span>
-      </a>
-    
-  </div>
-
-    <!-- NAV END -->
-    <!-- 打赏 START -->
-    
-      <div class="money-like">
-        <div class="reward-btn">
-          赏
-          <span class="money-code">
-            <span class="alipay-code">
-              <div class="code-image"></div>
-              <b>使用支付宝打赏</b>
-            </span>
-            <span class="wechat-code">
-              <div class="code-image"></div>
-              <b>使用微信打赏</b>
-            </span>
-          </span>
-        </div>
-        <p class="notice">若你觉得我的文章对你有帮助，欢迎点击上方按钮对我打赏</p>
-      </div>
-    
-    <!-- 打赏 END -->
-    <!-- 二维码 START -->
-    
-      <div class="qrcode">
-        <canvas id="share-qrcode"></canvas>
-        <p class="notice">扫描二维码，分享此文章</p>
-      </div>
-    
-    <!-- 二维码 END -->
-    
-      <!-- Utterances START -->
-      <div id="utterances"></div>
-      <script src="https://utteranc.es/client.js"
-        repo=""
-        issue-term="pathname"
-        theme="github-light"
-        crossorigin="anonymous"
-        async></script>    
-      <!-- Utterances END -->
-    
-  </article>
-  <!-- Article END -->
-  <!-- Catalog START -->
-  
-    <aside class="catalog-container">
-  <div class="toc-main">
-    <strong class="toc-title">Catalog</strong>
-    
-      <ol class="toc-nav"><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#unit-testing"><span class="toc-nav-text">1. Unit testing</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#compiler-explorer"><span class="toc-nav-text">2. Compiler Explorer</span></a></li><li class="toc-nav-item toc-nav-level-3"><a class="toc-nav-link" href="#citcuit"><span class="toc-nav-text">3. Citcuit</span></a></li></ol>
-    
-  </div>
-</aside>
-  
-  <!-- Catalog END -->
+<main class="app-body project-app">
+  <div class="card-container" id="all-project"></div>
 </main>
-
 <script>
-  (function () {
-    var url = 'http://example.com/2022/07/08/2022-07-08-隨手記/';
-    var banner = ''
-    if (banner !== '' && banner !== 'undefined' && banner !== 'null') {
-      $('#article-banner').css({
-        'background-image': 'url(' + banner + ')'
-      })
-    } else {
-      $('#article-banner').geopattern(url)
-    }
+  (function() {
+    var url = 'http://example.com/project/index.html';
+    $('#article-banner').geopattern(url);
     $('.header').removeClass('fixed-header')
-
-    // error image
-    $(".markdown-content img").on('error', function() {
-      $(this).attr('src', '/css/images/error_icon.png')
-      $(this).css({
-        'cursor': 'default'
-      })
-    })
-
-    // zoom image
-    $(".markdown-content img").on('click', function() {
-      var src = $(this).attr('src')
-      if (src !== '/css/images/error_icon.png') {
-        var imageW = $(this).width()
-        var imageH = $(this).height()
-
-        var zoom = ($(window).width() * 0.95 / imageW).toFixed(2)
-        zoom = zoom < 1 ? 1 : zoom
-        zoom = zoom > 2 ? 2 : zoom
-        var transY = (($(window).height() - imageH) / 2).toFixed(2)
-
-        $('body').append('<div class="image-view-wrap"><div class="image-view-inner"><img src="'+ src +'" /></div></div>')
-        $('.image-view-wrap').addClass('wrap-active')
-        $('.image-view-wrap img').css({
-          'width': `${imageW}`,
-          'transform': `translate3d(0, ${transY}px, 0) scale3d(${zoom}, ${zoom}, 1)`
-        })
-        $('html').css('overflow', 'hidden')
-
-        $('.image-view-wrap').on('click', function() {
-          $(this).remove()
-          $('html').attr('style', '')
+    $.ajax({
+      headers: {
+        Accept: 'application/vnd.github.v3.raw'
+      },
+      type: 'get',
+      url: 'https://api.github.com/users/yanm1ng/repos',
+      success: function (data) {
+        var repos = data.sort(function(a, b) {
+          return (b.stargazers_count - a.stargazers_count)
+        }).slice(0, 6)
+        var cardHtml = repos.map(function(item) {
+          var description = item.description || ""
+          if (description.replace(/[\u0391-\uFFE5]/g, "aa").length > 72) {
+            description = description.slice(0, 72) + '...'
+          }
+          return (
+            '<section class="project-card">' + 
+              '<a class="card-wrap" href="'+ item.html_url +'" target="_blank">' +
+                '<div class="card-header" data-name="'+ item.name +'"></div>' +
+                '<h3 class="card-title">' + item.name + '</h3>' +
+                '<p class="card-description">' + description + '</p>' +
+                '<div class="card-footer">' +
+                  '<span><i class="fa fa-star"></i>'+ item.stargazers_count +'</span>' +
+                  '<span><i class="fa fa-code-fork"></i>' + item.forks_count +'</span>' +
+                '</div>' +
+              '</a>' +
+            '</section>'
+          )
+        }).join('')
+        $('#all-project').html(cardHtml)
+        $('.card-header').each(function() {
+          var name = $(this).data('name');
+          $(this).geopattern(name);
         })
       }
-    })
-  })();
-</script>
-
-
-  <script>
-    var qr = new QRious({
-      element: document.getElementById('share-qrcode'),
-      value: document.location.href
     });
-  </script>
-
-
-
-
-
-
+  })()
+</script>
     <div class="scroll-top">
   <span class="arrow-icon"></span>
 </div>

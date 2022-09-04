@@ -1,0 +1,532 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" name="viewport">
+  <meta name="description" content="yanm1ng&#39;s blog">
+  <meta name="keyword" content="hexo-theme, vuejs">
+  
+    <link rel="shortcut icon" href="/css/images/logo.png">
+  
+  <title>
+    
+      Echo November&#39;s note
+    
+  </title>
+  <link href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.css" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/tomorrow.min.css" rel="stylesheet">
+  
+<link rel="stylesheet" href="/css/style.css">
+
+  
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/geopattern/1.2.3/js/geopattern.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/nprogress/0.2.0/nprogress.min.js"></script>
+  
+    
+<script src="/js/qrious.js"></script>
+
+  
+  
+  
+  
+    <!-- MathJax support START -->
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <!-- MathJax support END -->
+  
+
+
+  
+  
+    
+<script src="/js/local-search.js"></script>
+
+
+<!-- hexo injector head_end start -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.12.0/dist/katex.min.css">
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/hexo-math@4.0.0/dist/style.css">
+<!-- hexo injector head_end end --><meta name="generator" content="Hexo 6.2.0"></head>
+<div class="wechat-share">
+  <img src="/css/images/logo.png" />
+</div>
+  <body>
+    <header class="header fixed-header">
+  <div class="header-container">
+    <a class="home-link" href="/">
+      <div class="logo"></div>
+      <span>Echo November's note</span>
+    </a>
+    <ul class="right-list">
+      
+        <li class="list-item">
+          
+            <a href="/" class="item-link active">Home</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/series/" class="item-link">Series</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/tags/" class="item-link">Tags</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/archives/" class="item-link">Archives</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/project/" class="item-link">Projects</a>
+          
+        </li>
+      
+        <li class="list-item">
+          
+            <a href="/about/" class="item-link">About</a>
+          
+        </li>
+      
+      
+        <li class="menu-item menu-item-search right-list">
+    <a role="button" class="popup-trigger">
+        <i class="fa fa-search fa-fw"></i>
+    </a>
+</li>
+      
+    </ul>
+    <div class="menu">
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+      <span class="icon-bar"></span>
+    </div>
+    <div class="menu-mask">
+      <ul class="menu-list">
+        
+          <li class="menu-item">
+            
+              <a href="/" class="menu-link mobile-active">Home</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/series/" class="menu-link">Series</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/tags/" class="menu-link">Tags</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/archives/" class="menu-link">Archives</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/project/" class="menu-link">Projects</a>
+            
+          </li>
+        
+          <li class="menu-item">
+            
+              <a href="/about/" class="menu-link">About</a>
+            
+          </li>
+        
+      </ul>
+    </div>
+    
+      <div class="search-pop-overlay">
+    <div class="popup search-popup">
+        <div class="search-header">
+            <span class="search-icon">
+                <i class="fa fa-search"></i>
+            </span>
+            <div class="search-input-container">
+                <input autocomplete="off" autocapitalize="off"
+                    placeholder="Please enter your keyword(s) to search." spellcheck="false"
+                    type="search" class="search-input">
+            </div>
+            <span class="popup-btn-close">
+                <i class="fa fa-times-circle"></i>
+            </span>
+        </div>
+        <div id="search-result">
+            <div id="no-result">
+                <i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>
+            </div>
+        </div>
+    </div>
+</div>
+    
+  </div>
+</header>
+
+    <main class="app-body">
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/09/04/2022-09-04-CFDLabServerManual-2/">CFDLabServerManual-2</a>
+      </h2>
+      <p class="article-date">September 4, 2022</p>
+      
+        
+  <a href="/tags#Computation" >
+    <span class="tag-code">Computation</span>
+  </a>
+
+  <a href="/tags#bash" >
+    <span class="tag-code">bash</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>這篇是統整後的Server灌系統流程，感謝實驗室前輩的傳承和同學們的努力。Part 2/2
+        
+      </div>
+      <a class="more" href="/2022/09/04/2022-09-04-CFDLabServerManual-2/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/09/04/2022-09-04-CFDLabServerManual-1/">CFDLab Server Manual-1</a>
+      </h2>
+      <p class="article-date">September 4, 2022</p>
+      
+        
+  <a href="/tags#Computation" >
+    <span class="tag-code">Computation</span>
+  </a>
+
+  <a href="/tags#bash" >
+    <span class="tag-code">bash</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>這篇是統整後的Server灌系統流程，感謝實驗室前輩的傳承和同學們的努力。Part 1/2
+        
+      </div>
+      <a class="more" href="/2022/09/04/2022-09-04-CFDLabServerManual-1/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/">什麼是C++巨集</a>
+      </h2>
+      <p class="article-date">September 3, 2022</p>
+      
+        
+  <a href="/tags#C++" >
+    <span class="tag-code">C++</span>
+  </a>
+
+  <a href="/tags#Computation" >
+    <span class="tag-code">Computation</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>C++ 巨集所使用的語言不屬於C語言的範疇，而是Preprocessor所使用的語法。在<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/09/02/2022-09-02%E4%BD%BF%E7%94%A8%20%22#define%22%20%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/">這篇文章</a>初步認識了Preprocess語法，那這篇要接續認識C++巨集。
+        
+      </div>
+      <a class="more" href="/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/09/02/2022-09-02-%E4%BD%BF%E7%94%A8-define%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/">使用#define取代文字</a>
+      </h2>
+      <p class="article-date">September 2, 2022</p>
+      
+        
+  <a href="/tags#C++" >
+    <span class="tag-code">C++</span>
+  </a>
+
+  <a href="/tags#Computation" >
+    <span class="tag-code">Computation</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>在<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">Compile幕後</a>中有介紹過preprocessor，而在幾乎每一個C++ 程式中都有以<code>#</code>作為開頭，不以<code>;</code>做結的程式：
+        
+      </div>
+      <a class="more" href="/2022/09/02/2022-09-02-%E4%BD%BF%E7%94%A8-define%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/">在C++中使用Pytorch模型</a>
+      </h2>
+      <p class="article-date">August 26, 2022</p>
+      
+        
+  <a href="/tags#cmake" >
+    <span class="tag-code">cmake</span>
+  </a>
+
+  <a href="/tags#C++" >
+    <span class="tag-code">C++</span>
+  </a>
+
+  <a href="/tags#Pytorch" >
+    <span class="tag-code">Pytorch</span>
+  </a>
+
+  <a href="/tags#Machine Learning" >
+    <span class="tag-code">Machine Learning</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>計算流體力學(CFD)龐大的計算量加上對於即時流場預測的需求，計算效率是被重視的，於是python鮮少被使用，計算用的程式藉由C, C++ 以及 Fortran撰寫。
+        
+      </div>
+      <a class="more" href="/2022/08/26/2022-08-26-%E5%9C%A8C-%E4%B8%AD%E4%BD%BF%E7%94%A8Pytorch%E6%A8%A1%E5%9E%8B/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/">什麼是 ELF</a>
+      </h2>
+      <p class="article-date">August 15, 2022</p>
+      
+        
+  <a href="/tags#C++" >
+    <span class="tag-code">C++</span>
+  </a>
+
+  <a href="/tags#程式設計師的自我修養" >
+    <span class="tag-code">程式設計師的自我修養</span>
+  </a>
+
+  <a href="/tags#ELF" >
+    <span class="tag-code">ELF</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>繼<a target="_blank" rel="noopener" href="https://en-chou.github.io/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">這篇文章</a>，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，
+        
+      </div>
+      <a class="more" href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/">.bashrc與環境變數設定</a>
+      </h2>
+      <p class="article-date">August 10, 2022</p>
+      
+        
+  <a href="/tags#bash" >
+    <span class="tag-code">bash</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 </p>
+        
+      </div>
+      <a class="more" href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">解碼.o檔</a>
+      </h2>
+      <p class="article-date">August 9, 2022</p>
+      
+        
+  <a href="/tags#C++" >
+    <span class="tag-code">C++</span>
+  </a>
+
+  <a href="/tags#compile" >
+    <span class="tag-code">compile</span>
+  </a>
+
+  <a href="/tags#程式設計師的自我修養" >
+    <span class="tag-code">程式設計師的自我修養</span>
+  </a>
+
+  <a href="/tags#object file" >
+    <span class="tag-code">object file</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <figure>
+<img src="/images/assembler.png" alt="Assembly" /><figcaption>Assembly</figcaption>
+</figure>
+<p>從<a target="_blank" rel="noopener" href="http://localhost:4000/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">這篇</a>可以看到在vim中開啟main.o，而上圖充斥著1&amp;0，看似截然不同的兩個東西。
+        
+      </div>
+      <a class="more" href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">Compile幕後</a>
+      </h2>
+      <p class="article-date">August 3, 2022</p>
+      
+        
+  <a href="/tags#C++" >
+    <span class="tag-code">C++</span>
+  </a>
+
+  <a href="/tags#compile" >
+    <span class="tag-code">compile</span>
+  </a>
+
+  <a href="/tags#程式設計師的自我修養" >
+    <span class="tag-code">程式設計師的自我修養</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。
+        
+      </div>
+      <a class="more" href="/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/">Read more</a>
+    </article>
+  
+    <article class="article-card">
+      <h2 class="article-head">
+        <a href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">什麼是CMake與Make</a>
+      </h2>
+      <p class="article-date">July 27, 2022</p>
+      
+        
+  <a href="/tags#make" >
+    <span class="tag-code">make</span>
+  </a>
+
+  <a href="/tags#cmake" >
+    <span class="tag-code">cmake</span>
+  </a>
+
+      
+      <div class="article-summary">
+        
+          <p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是<code>make</code>仰賴<code>Makefile</code>, 而<code>cmake</code>仰賴<code>CMakeList.txt</code>，但兩者做著不一樣的事情。
+        
+      </div>
+      <a class="more" href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/">Read more</a>
+    </article>
+  
+
+  
+    <div class="guide-pager">
+  
+    <a class="unvisible" href="/"><span class="page-arrow">←</span> Prev</a>
+  
+  
+    <a href="/page/2/">Next<span class="page-arrow"> →</span></a>
+  
+</div>
+  
+</main>
+
+
+    <div class="scroll-top">
+  <span class="arrow-icon"></span>
+</div>
+    <footer class="app-footer">
+  <p class="copyright">
+    &copy; 2022 | Proudly powered by <a href="https://hexo.io" target="_blank">Hexo</a>
+    <br>
+    Theme by <a target="_blank" rel="noopener" href="https://github.com/yanm1ng">yanm1ng</a>
+    
+  </p>
+</footer>
+
+<script>
+  function async(u, c) {
+    var d = document, t = 'script',
+      o = d.createElement(t),
+      s = d.getElementsByTagName(t)[0];
+    o.src = u;
+    if (c) { o.addEventListener('load', function (e) { c(null, e); }, false); }
+    s.parentNode.insertBefore(o, s);
+  }
+</script>
+<script>
+  async("//cdnjs.cloudflare.com/ajax/libs/fastclick/1.0.6/fastclick.min.js", function(){
+    FastClick.attach(document.body);
+  })
+</script>
+
+<script>
+  var hasLine = 'true';
+  async("//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js", function(){
+    $('figure pre').each(function(i, block) {
+      var figure = $(this).parents('figure');
+      if (hasLine === 'false') {
+        figure.find('.gutter').hide();
+      }
+      hljs.configure({useBR: true});
+      var lang = figure.attr('class').split(' ')[1] || 'code';
+      var codeHtml = $(this).html();
+      var codeTag = document.createElement('code');
+      codeTag.className = lang;
+      codeTag.innerHTML = codeHtml;
+      $(this).attr('class', '').empty().html(codeTag);
+      figure.attr('data-lang', lang.toUpperCase());
+      hljs.highlightBlock(block);
+    });
+  })
+</script>
+<!-- Baidu Tongji -->
+
+
+<script src="/js/script.js"></script>
+
+
+  </body>
+</html>

@@ -14,9 +14,9 @@
       
         <tags>
             
-            <tag> bash </tag>
-            
             <tag> Computation </tag>
+            
+            <tag> bash </tag>
             
         </tags>
       
@@ -35,9 +35,9 @@
       
         <tags>
             
-            <tag> bash </tag>
-            
             <tag> Computation </tag>
+            
+            <tag> bash </tag>
             
         </tags>
       
@@ -213,9 +213,9 @@
       
         <tags>
             
-            <tag> cmake </tag>
-            
             <tag> make </tag>
+            
+            <tag> cmake </tag>
             
         </tags>
       
@@ -345,11 +345,11 @@
             
             <tag> YYQA </tag>
             
-            <tag> cmake </tag>
-            
             <tag> pybind11 </tag>
             
             <tag> make </tag>
+            
+            <tag> cmake </tag>
             
         </tags>
       

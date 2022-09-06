@@ -1724,7 +1724,7 @@ header.header {
   position: relative;
 }
 .posts-collapse .post-content .collection-title::before {
-  background: #999;
+  background: #efefef;
   border: 1px solid #fff;
   margin-left: -6px;
   margin-top: -4px;
@@ -1742,7 +1742,7 @@ header.header {
   position: relative;
 }
 .posts-collapse .post-content .collection-year::before {
-  background: #bbb;
+  background: #efefef;
   margin-left: -4px;
   margin-top: -4px;
   position: absolute;
@@ -1761,14 +1761,14 @@ header.header {
   margin-left: 5px;
 }
 .posts-collapse .post-content .post-header {
-  border-bottom: 1px dashed #ccc;
+  border-bottom: 0px dashed #ccc;
   margin: 30px 2px 0;
   padding-left: 15px;
   position: relative;
   transition: border 0.2s ease-in-out;
 }
 .posts-collapse .post-content .post-header::before {
-  background: #bbb;
+  background: #112b3c;
   border: 1px solid #fff;
   left: -6px;
   position: absolute;
@@ -1780,7 +1780,7 @@ header.header {
   width: 6px;
 }
 .posts-collapse .post-content .post-header:hover {
-  border-bottom-color: #666;
+  color: #efefef;
 }
 .posts-collapse .post-content .post-header:hover::before {
   background: #222;
@@ -2007,7 +2007,7 @@ header.header {
   margin-top: 2px;
 }
 .posts-expand .post-meta-container time {
-  border-bottom: 1px dashed #999;
+  border-bottom: 0px dashed #999;
 }
 .post-meta {
   display: flex;
@@ -2068,10 +2068,10 @@ header.header {
   justify-content: center;
 }
 .post-eof {
-  background: #ccc;
+  background: #efefef;
   height: 1px;
   margin: 10px auto 30px;
-  width: 8%;
+  width: 100%;
 }
 .post-block:last-of-type .post-eof {
   display: none;

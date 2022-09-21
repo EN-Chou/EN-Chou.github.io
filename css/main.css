@@ -5,7 +5,7 @@
   --text-color: #112b3c;
   --blockquote-color: #666;
   --link-color: #112b3c;
-  --link-hover-color: #efefef;
+  --link-hover-color: $white;
   --brand-color: #fff;
   --brand-hover-color: #fff;
   --table-row-odd-bg-color: #f9f9f9;

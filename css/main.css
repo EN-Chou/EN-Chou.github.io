@@ -225,7 +225,7 @@ p {
 }
 a {
   border-bottom: 0px solid #999;
-  color: var(--link-color);
+  color: #205375;
   cursor: pointer;
   outline: 0;
   text-decoration: none;

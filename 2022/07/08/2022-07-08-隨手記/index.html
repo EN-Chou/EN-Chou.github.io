@@ -22,13 +22,13 @@
 
     <meta name="description" content="這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Note：Mini-sprint 20220708">
+<meta property="og:title" content="2022-07-08-Mini-sprint">
 <meta property="og:url" content="http://example.com/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/index.html">
 <meta property="og:site_name" content="Echo November&#39;s Note">
 <meta property="og:description" content="這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向：">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-07-08T02:30:50.000Z">
-<meta property="article:modified_time" content="2022-09-07T16:49:37.146Z">
+<meta property="article:modified_time" content="2022-09-24T16:22:26.086Z">
 <meta property="article:author" content="Echo November">
 <meta property="article:tag" content="mini-sprint">
 <meta property="article:tag" content="YYQA">
@@ -40,10 +40,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/","path":"2022/07/08/2022-07-08-隨手記/","title":"Note：Mini-sprint 20220708"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/","path":"2022/07/08/2022-07-08-隨手記/","title":"2022-07-08-Mini-sprint"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>Note：Mini-sprint 20220708 | Echo November's Note</title>
+<title>2022-07-08-Mini-sprint | Echo November's Note</title>
   
 
 
@@ -138,7 +138,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">20</span>
+          <span class="site-state-item-count">19</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -215,12 +215,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="Note：Mini-sprint 20220708 | Echo November's Note">
+      <meta itemprop="name" content="2022-07-08-Mini-sprint | Echo November's Note">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          Note：Mini-sprint 20220708
+          2022-07-08-Mini-sprint
         </h1>
 
         <div class="post-meta-container">
@@ -246,8 +246,8 @@
     <div class="post-body" itemprop="articleBody">
         <p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向： <span id="more"></span></p>
 <h3 id="unit-testing">Unit testing</h3>
-<p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh">modmesh</a>中，pytest是用來跑unit testing的target。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure></p>
-<h3 id="compiler-explorer"><a target="_blank" rel="noopener" href="https://godbolt.org/">Compiler Explorer</a></h3>
+<p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a target="_blank" rel="noopener" href="https://github.com/solvcon/modmesh"><em>modmesh</em></a>中，pytest是用來跑unit testing的target。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure></p>
+<h3 id="compiler-explorer"><a target="_blank" rel="noopener" href="https://godbolt.org/"><em>Compiler Explorer</em></a></h3>
 <p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I've pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p>
 <p><strong>Reply: </strong><br />
 You do not need to worry about assembly right now, but a programmer needs to know their machines eventually. At the moment your understanding to assembly is sufficient. Just be aware of its existence.</p>

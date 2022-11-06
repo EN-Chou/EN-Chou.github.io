@@ -31,6 +31,12 @@
       
       
       
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -44,6 +50,12 @@
       
       
       
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
     </entry>
     
     
@@ -56,6 +68,12 @@
         <content type="html"><![CDATA[<blockquote><p>upstream:master &lt;- clone:master is very confusing. In addition, it makes it hard for reviewers to pull your "branch" (actually the master!) to their local.</p></blockquote><p>貢獻一個專案需要注意要用feature branch而不要用master branch發PR，用master branch 發PR 會造成專案擁有者的混淆。 <span id="more"></span> 並且，在編修完一個issue之後，建議的作法是將feature branch刪除。貢獻一個專案的流程可以參考以 下流程：<br />1. Fork 某專案A。<br />2. 創建feature branch並在上面做編修。<br />3. 用這個branch發PR。<br />4. 把此feature branch 合併回master。<br />5. 刪除feature branch。<br />6. 進一步sync專案A</p><h3 id="git-graph">git graph</h3><p>vscode中的 git graph 可以視覺化git，可以讓開發的進展更一目了然，減少出錯的機會，同時也可以 加快熟悉git的腳步。 <img src="https://i.imgur.com/YM4jweI.png" /></p><h3 id="a-starting-point-for-git-command">A starting point for git command</h3><ul><li>git init</li><li>git clone</li><li>git add</li><li>git commit</li><li>git push</li><li>git pull</li></ul>]]></content>
       
       
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
       
     </entry>
     

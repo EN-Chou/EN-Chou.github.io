@@ -20,18 +20,18 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Dynamic Programming(DP) 能帶我們的好處是降低時間複雜度，用空間換取時間。">
+    <meta name="description" content="Dynamic Programming(DP) 能帶來的好處是降低時間複雜度，用空間換取時間。">
 <meta property="og:type" content="article">
 <meta property="og:title" content="淺談Dynamic Programming">
 <meta property="og:url" content="http://example.com/2022/11/06/2022-11-06-Dynamic-Programming/index.html">
 <meta property="og:site_name" content="Echo November&#39;s Note">
-<meta property="og:description" content="Dynamic Programming(DP) 能帶我們的好處是降低時間複雜度，用空間換取時間。">
+<meta property="og:description" content="Dynamic Programming(DP) 能帶來的好處是降低時間複雜度，用空間換取時間。">
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://i.imgur.com/Yf5a5BT.png">
 <meta property="og:image" content="https://i.imgur.com/HYfgkA2.png">
 <meta property="og:image" content="https://i.imgur.com/HYfgkA2.png">
 <meta property="article:published_time" content="2022-11-06T15:17:36.000Z">
-<meta property="article:modified_time" content="2022-11-07T14:38:17.646Z">
+<meta property="article:modified_time" content="2022-11-07T15:39:37.145Z">
 <meta property="article:author" content="Echo November">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https://i.imgur.com/Yf5a5BT.png">
@@ -243,7 +243,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Dynamic Programming(DP) 能帶我們的好處是降低時間複雜度，用空間換取時間。<span id="more"></span></p>
+        <p>Dynamic Programming(DP) 能帶來的好處是降低時間複雜度，用空間換取時間。<span id="more"></span></p>
 <h3 id="recursion">Recursion</h3>
 <p>一個常見的recursion例子即是費波那契數（Fibonacci number），下方是用recursion來實作的C++ 程式： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(n<span class="number">-1</span>)+<span class="built_in">fib</span>(n<span class="number">-2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 上方的程式可以藉由下方的樹狀圖表示，這樣透過top-down的方式來解會重複計算數列中的值，大幅增加了計算時間。這樣的方法的時間複雜度為<span class="math inline">\(O(n^2)\)</span>，但空間複雜度為<span class="math inline">\(O(1)\)</span>。 <img src="https://i.imgur.com/Yf5a5BT.png" /></p>
 <h3 id="dynamic-programmingdp">Dynamic programming(DP)</h3>

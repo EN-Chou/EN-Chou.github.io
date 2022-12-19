@@ -20,13 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta property="og:type" content="article">
+    <meta name="description" content="上週實驗室有一顆硬碟掛點，那顆硬碟裡存放了學長花了很長時間計算的結果，老師在咪挺的時候質疑學長為什麼沒有將資料上傳到雲端？但我們知道那儲存幾億個格點的數據隨便就是幾個TB起跳，要在雲端備份這樣的資料可能嫌麻煩就不把它當作一回事。針對這個問題，老師提醒我們數據以其他形式儲存可以大幅減少空間，那這是什麼意思？ ASCII code and Machine code 在ASCII 的編碼系統中， + A">
+<meta property="og:type" content="article">
 <meta property="og:title" content="2022-11-29-資料儲存的替代方案">
 <meta property="og:url" content="http://example.com/2022/11/29/2022-11-29-%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="Echo November&#39;s Note">
+<meta property="og:description" content="上週實驗室有一顆硬碟掛點，那顆硬碟裡存放了學長花了很長時間計算的結果，老師在咪挺的時候質疑學長為什麼沒有將資料上傳到雲端？但我們知道那儲存幾億個格點的數據隨便就是幾個TB起跳，要在雲端備份這樣的資料可能嫌麻煩就不把它當作一回事。針對這個問題，老師提醒我們數據以其他形式儲存可以大幅減少空間，那這是什麼意思？ ASCII code and Machine code 在ASCII 的編碼系統中， + A">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-29T07:50:40.000Z">
-<meta property="article:modified_time" content="2022-12-19T18:30:22.975Z">
+<meta property="article:modified_time" content="2022-12-19T18:34:49.185Z">
 <meta property="article:author" content="Echo November">
 <meta name="twitter:card" content="summary">
 
@@ -103,7 +105,7 @@
 
   <aside class="sidebar">
 
-    <div class="sidebar-inner sidebar-overview-active">
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
       <ul class="sidebar-nav">
         <li class="sidebar-nav-toc">
           Table of Contents
@@ -116,6 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ascii-code-and-machine-code"><span class="nav-number">1.</span> <span class="nav-text">ASCII code and Machine code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lossless-compression"><span class="nav-number">2.</span> <span class="nav-text">Lossless compression</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -236,7 +239,10 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        
+        <p>上週實驗室有一顆硬碟掛點，那顆硬碟裡存放了學長花了很長時間計算的結果，老師在咪挺的時候質疑學長為什麼沒有將資料上傳到雲端？但我們知道那儲存幾億個格點的數據隨便就是幾個TB起跳，要在雲端備份這樣的資料可能嫌麻煩就不把它當作一回事。針對這個問題，老師提醒我們數據以其他形式儲存可以大幅減少空間，那這是什麼意思？</p>
+<h2 id="ascii-code-and-machine-code">ASCII code and Machine code</h2>
+<p>在ASCII 的編碼系統中， + ASCII -&gt; 1 byte -&gt; 256 possibilities + 1 byte=8 bit + int 1 byte + double 8 byte</p>
+<h2 id="lossless-compression">Lossless compression</h2>
 <!-- flag of hidden posts -->
     </div>
 

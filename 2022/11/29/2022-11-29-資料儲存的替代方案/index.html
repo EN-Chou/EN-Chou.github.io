@@ -20,15 +20,15 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="上週實驗室有一顆硬碟掛點，那顆硬碟裡存放了學長花了很長時間計算的結果，老師在咪挺的時候質疑學長為什麼沒有將資料上傳到雲端？但我們知道那儲存幾億個格點的數據隨便就是幾個TB起跳，要在雲端備份這樣的資料可能嫌麻煩就不把它當作一回事。針對這個問題，老師提醒我們數據以其他形式儲存可以大幅減少空間，那這是什麼意思？ ASCII code and Machine code 在ASCII 的編碼系統中， + A">
+    <meta name="description" content="透過ASCII的編碼與解碼，每一個字元會被獨立存取，下方的number會需要 16(character數量) byte。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2022-11-29-資料儲存的替代方案">
+<meta property="og:title" content="2022-11-29-以純文字存取資料 vs 以binary存取資料">
 <meta property="og:url" content="http://example.com/2022/11/29/2022-11-29-%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/index.html">
 <meta property="og:site_name" content="Echo November&#39;s Note">
-<meta property="og:description" content="上週實驗室有一顆硬碟掛點，那顆硬碟裡存放了學長花了很長時間計算的結果，老師在咪挺的時候質疑學長為什麼沒有將資料上傳到雲端？但我們知道那儲存幾億個格點的數據隨便就是幾個TB起跳，要在雲端備份這樣的資料可能嫌麻煩就不把它當作一回事。針對這個問題，老師提醒我們數據以其他形式儲存可以大幅減少空間，那這是什麼意思？ ASCII code and Machine code 在ASCII 的編碼系統中， + A">
+<meta property="og:description" content="透過ASCII的編碼與解碼，每一個字元會被獨立存取，下方的number會需要 16(character數量) byte。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2022-11-29T07:50:40.000Z">
-<meta property="article:modified_time" content="2022-12-19T18:34:49.185Z">
+<meta property="article:modified_time" content="2022-12-25T15:35:52.165Z">
 <meta property="article:author" content="Echo November">
 <meta name="twitter:card" content="summary">
 
@@ -37,10 +37,10 @@
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/11/29/2022-11-29-%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/","path":"2022/11/29/2022-11-29-資料儲存的替代方案/","title":"2022-11-29-資料儲存的替代方案"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/11/29/2022-11-29-%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/","path":"2022/11/29/2022-11-29-資料儲存的替代方案/","title":"2022-11-29-以純文字存取資料 vs 以binary存取資料"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>2022-11-29-資料儲存的替代方案 | Echo November's Note</title><meta name="robots" content="noindex">
+<title>2022-11-29-以純文字存取資料 vs 以binary存取資料 | Echo November's Note</title>
   
 
 
@@ -118,7 +118,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ascii-code-and-machine-code"><span class="nav-number">1.</span> <span class="nav-text">ASCII code and Machine code</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lossless-compression"><span class="nav-number">2.</span> <span class="nav-text">Lossless compression</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5%E7%B4%94%E6%96%87%E5%AD%97%E5%AD%98%E5%8F%96%E8%B3%87%E6%96%99"><span class="nav-number">1.</span> <span class="nav-text">以純文字存取資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E4%BB%A5binary%E5%AD%98%E5%8F%96%E8%B3%87%E6%96%99"><span class="nav-number">2.</span> <span class="nav-text">以binary存取資料</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#lossless-compression"><span class="nav-number">3.</span> <span class="nav-text">Lossless compression</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -133,7 +133,7 @@
   <nav class="site-state">
       <div class="site-state-item site-state-posts">
         <a href="/archives/">
-          <span class="site-state-item-count">26</span>
+          <span class="site-state-item-count">27</span>
           <span class="site-state-item-name">posts</span>
         </a>
       </div>
@@ -210,12 +210,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="2022-11-29-資料儲存的替代方案 | Echo November's Note">
+      <meta itemprop="name" content="2022-11-29-以純文字存取資料 vs 以binary存取資料 | Echo November's Note">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          2022-11-29-資料儲存的替代方案
+          2022-11-29-以純文字存取資料 vs 以binary存取資料
         </h1>
 
         <div class="post-meta-container">
@@ -239,11 +239,24 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>上週實驗室有一顆硬碟掛點，那顆硬碟裡存放了學長花了很長時間計算的結果，老師在咪挺的時候質疑學長為什麼沒有將資料上傳到雲端？但我們知道那儲存幾億個格點的數據隨便就是幾個TB起跳，要在雲端備份這樣的資料可能嫌麻煩就不把它當作一回事。針對這個問題，老師提醒我們數據以其他形式儲存可以大幅減少空間，那這是什麼意思？</p>
-<h2 id="ascii-code-and-machine-code">ASCII code and Machine code</h2>
-<p>在ASCII 的編碼系統中， + ASCII -&gt; 1 byte -&gt; 256 possibilities + 1 byte=8 bit + int 1 byte + double 8 byte</p>
+        <p>透過ASCII的編碼與解碼，每一個字元會被獨立存取，下方的<code>number</code>會需要 16(character數量) byte。<span id="more"></span>1 個 byte 有 8 bits，然而會被這串數字使用到的值域只有10種排列組合（0～9），但總共的可能性確有 <span class="math inline">\(2^8=256\)</span> 種排列組合這麼多，比起這麼浪費空間的儲存方法，是有替代方法的。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">number=<span class="number">1.34567890123456</span></span><br></pre></td></tr></table></figure>
+<h2 id="以純文字存取資料">以純文字存取資料</h2>
+<p>透過純文字的儲存方式的方式很符合直覺，輸出的檔案可以直接做閱讀，這樣的輸出方式很容易被採納。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">file.write(<span class="built_in">str</span>(number))</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>檔案大小：16 byte。</li>
+<li><p>在vim中開啟檔案：<code>vim data.txt</code> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.34567890123456</span></span><br><span class="line">~                                                                                                     </span><br><span class="line">~                                                                                                     </span><br></pre></td></tr></table></figure></p></li>
+<li><p>讀取檔案 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">contents = file.read()</span><br><span class="line">file.close()</span><br><span class="line"><span class="comment"># contents=1.34567890123456</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
+<h2 id="以binary存取資料">以binary存取資料</h2>
+<p>透過binary的儲存方式的方式可以對應到標準的資料格式，較為節省空間，但缺點是檔案無法直接被閱讀。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.bin&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">file.write(<span class="built_in">bytearray</span>(struct.pack(<span class="string">&quot;d&quot;</span>, number)))</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure></p>
+<ul>
+<li>檔案大小：8 byte。</li>
+<li><p>在vim中開啟檔案：<code>vim data.bin</code> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">¯<span class="symbol">&lt;83&gt;</span>&#123;<span class="symbol">&lt;99&gt;</span>æ<span class="symbol">&lt;87&gt;</span>õ?</span><br><span class="line">~                                                                                                     </span><br><span class="line">~                                                                                                      </span><br></pre></td></tr></table></figure></p></li>
+<li><p>讀取檔案 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.bin&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">contents = struct.unpack(<span class="string">&quot;d&quot;</span>, file.read())[<span class="number">0</span>]</span><br><span class="line">file.close()</span><br><span class="line"><span class="comment"># contents=1.34567890123456</span></span><br></pre></td></tr></table></figure></p></li>
+</ul>
 <h2 id="lossless-compression">Lossless compression</h2>
-<!-- flag of hidden posts -->
+
     </div>
 
     
@@ -256,6 +269,15 @@
 
         
 
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/11/18/2022-11-18-Compiler-and-Interpreter/" rel="next" title="翻譯高階語言-編譯器，直譯器與 Python 採用的方式">
+                  翻譯高階語言-編譯器，直譯器與 Python 採用的方式 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
@@ -310,7 +332,7 @@
 
   
 
-  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":"all","tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+  <script class="next-config" data-name="enableMath" type="application/json">true</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":"all","tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
 <script src="/js/third-party/math/mathjax.js"></script>
 
 

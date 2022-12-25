@@ -11,6 +11,22 @@
         <content type="html"><![CDATA[<p>在<a href="https://en-chou.github.io/2022/11/18/2022-11-18-Compiler-and-Interpreter/"><em>這篇</em></a>介紹了編譯器與直譯器，而Python在被翻譯的過程，同時使用了兩者。<span id="more"></span></p><figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEg0wxzRTdhS4wwD_GjvDbS90ojdAZJgsN0cwUzcQJ95CC2V2fuLbJNGbyricFBkMXy8WYk1Gh9tITUqkuBBFeKmi3ibA3GooYkLCBNXAGquePtby0_U44IWTRXCHVbgI74YnNB83XjXjjf2GoX3Z5cuKbXkR1QMkExezJnsbg-ksbT8yIUffuZws3p2Bw=w643-h362" alt="Translation in Python" /><figcaption>Translation in Python</figcaption></figure><p>Python 同時使用了編譯器以及直譯器，但外顯的行為較近似於使用直譯器實作的語言：Runtime 時進行 parse，執行效率較緩慢，每次的執行是一行程式，若是程式存在語法錯誤，則程式會執行到語法錯誤的那行程式碼才會無法繼續，可以即時測試局部的程式，除錯速度通成較快......</p><p>Python 所採用的方式是首先將 source code 編譯成 bytecode*，bytecode再經過直譯器（Python Virtual Machine, PVM）直譯成 machine code。而Python的直譯器是被編譯過得執行檔，透過不同語言也有不同的實作版本，最通用也是官方的版本是透過 C 實作直譯器，稱作 Cpython，透過 Java 實作的稱作 Jython，透過 C# 實作的是IronPython，透過 Python 實作的是 PyPy。而其他同時使用到編譯器以及直譯器的「直譯語言」包括Lisp，Pascal 與 BASIC等等。</p><blockquote><p>*類似於machine code，但實際上無法被cpu執行的 binary。Python 的 bytecode 存放於 <code>_pycache__</code> 目錄底下的 <code>.pyc</code>。</p></blockquote><p>Source code in python： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">#executable</span></span><br><span class="line">pppprint(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">#syntax error</span></span><br></pre></td></tr></table></figure></p><p>Output： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hello world <span class="comment">#executable</span></span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">NameError NameError                                 Traceback (most recent call last)</span><br><span class="line">Input In [1], <span class="keyword">in</span> &lt;cell line: 2&gt;()</span><br><span class="line">      1 <span class="built_in">print</span>(<span class="string">&quot;hello world\n&quot;</span>)</span><br><span class="line">----&gt; 2 pppprint(<span class="string">&quot;hello world\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">NameError: name <span class="string">&#x27;pppprint&#x27;</span> is not defined <span class="comment">#error</span></span><br></pre></td></tr></table></figure></p>]]></content>
       
       
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> compile </tag>
+            
+            <tag> interpret </tag>
+            
+        </tags>
       
     </entry>
     
@@ -24,6 +40,18 @@
         <content type="html"><![CDATA[<p>透過ASCII的編碼與解碼，每一個字元會被獨立存取，下方的<code>number</code>會需要 16(character數量) byte。<span id="more"></span>1 個 byte 有 8 bits，然而會被這串數字使用到的值域只有10種排列組合（0～9），但總共的可能性確有 <span class="math inline">\(2^8=256\)</span> 種排列組合這麼多，比起這麼浪費空間的儲存方法，是有替代方法的。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">number=<span class="number">1.34567890123456</span></span><br></pre></td></tr></table></figure><h2 id="以純文字存取資料">以純文字存取資料</h2><p>透過純文字的儲存方式的方式很符合直覺，輸出的檔案可以直接做閱讀，這樣的輸出方式很容易被採納。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">file.write(<span class="built_in">str</span>(number))</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure></p><ul><li>檔案大小：16 byte。</li><li><p>在vim中開啟檔案：<code>vim data.txt</code> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.34567890123456</span></span><br><span class="line">~                                                                                                     </span><br><span class="line">~                                                                                                     </span><br></pre></td></tr></table></figure></p></li><li><p>讀取檔案 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">contents = file.read()</span><br><span class="line">file.close()</span><br><span class="line"><span class="comment"># contents=1.34567890123456</span></span><br></pre></td></tr></table></figure></p></li></ul><h2 id="以binary存取資料">以binary存取資料</h2><p>透過binary的儲存方式的方式可以對應到標準的資料格式，較為節省空間，但缺點是檔案無法直接被閱讀。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.bin&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">file.write(<span class="built_in">bytearray</span>(struct.pack(<span class="string">&quot;d&quot;</span>, number)))</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure></p><ul><li>檔案大小：8 byte。</li><li><p>在vim中開啟檔案：<code>vim data.bin</code> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">¯<span class="symbol">&lt;83&gt;</span>&#123;<span class="symbol">&lt;99&gt;</span>æ<span class="symbol">&lt;87&gt;</span>õ?</span><br><span class="line">~                                                                                                     </span><br><span class="line">~                                                                                                      </span><br></pre></td></tr></table></figure></p></li><li><p>讀取檔案 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.bin&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">contents = struct.unpack(<span class="string">&quot;d&quot;</span>, file.read())[<span class="number">0</span>]</span><br><span class="line">file.close()</span><br><span class="line"><span class="comment"># contents=1.34567890123456</span></span><br></pre></td></tr></table></figure></p></li></ul><h2 id="lossless-compression">Lossless compression</h2>]]></content>
       
       
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 隨手記 </tag>
+            
+        </tags>
       
     </entry>
     
@@ -37,6 +65,20 @@
         <content type="html"><![CDATA[<p>有兩種方式將人類所撰寫的是 source code 翻譯電腦能夠看得懂的是 machine code：編譯器或直譯器。<span id="more"></span></p><h2 id="編譯器">編譯器</h2><p><img src="https://4.bp.blogspot.com/-mIykcyEinUo/WUGwEdcDVxI/AAAAAAAAE2c/sxthb7ILzo0IObZypjTk_lylulImGBAzwCLcBGAs/s1600/compiler.png" alt="Translation with compiler" /> + Source code 在 compile time 被 <a href="https://en-chou.github.io/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"><em>編譯</em></a>成 machine code ，然後在 runtime 被執行。 + Runtime 時不進行 parse（or syntactic analysis，語法分析），執行效率較快速。 + 每次的執行是一支程式，執行編譯過後的執行檔來執行程式。 + 若是程式中存在語法錯誤，則程式會無法通過編譯，整支程式都無法執行。 + 無法即時測試局部的程式，除錯速度通成較慢。 + 使用編譯器的語言包括 C/C++, Fortran, Java, rust, go...</p><p>Source code in C： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">//executable</span></span><br><span class="line">pppprintf(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">//syntax error</span></span><br></pre></td></tr></table></figure></p><p>Output： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">識別項\&quot;pppprintf\&quot; 未定義 C/C++(20)</span><br><span class="line">`pppprintf` was not declared <span class="keyword">in</span> this scope gcc</span><br><span class="line"><span class="comment">#nothing executable</span></span><br></pre></td></tr></table></figure></p><h2 id="直譯器">直譯器</h2><p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20210617144008/interpreter.png" alt="Translation with interpreter" /> + Source code 在 runtime 被直譯。 + Runtime 時進行 parse，執行效率較緩慢。 + 每次的執行是一行程式，不會產生額外的檔案。 + 若是程式存在語法錯誤，則程式會執行到語法錯誤的那行程式碼才會無法繼續。 + 可以即時測試局部的程式，除錯速度通成較快。 + 使用直譯器的語言包括 Python, Matlab, Bash, Lisp，Pascal, BASIC...</p><p>Source code in bash： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="built_in">echo</span> hello world &amp;&amp; echoooo hello world <span class="comment">#executable &amp;&amp; syntax error</span></span><br></pre></td></tr></table></figure></p><p>Output： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello world <span class="comment">#executable</span></span><br><span class="line">echoooo: <span class="built_in">command</span> not found <span class="comment">#syntax error</span></span><br></pre></td></tr></table></figure></p><h2 id="note">Note</h2><p>有時候可見某個語言被分類為「編譯語言」或是「直譯語言」（e.g, C語言是編譯語言），但這樣的描述並不全然正確，不經過任何轉換，程式碼也僅是文字檔。一個語言是「編譯」或是「直譯」的理由並不源自語言本身，而是傳換成被電腦理解的過程；而一個幾乎使用的編譯器的語言（e.g, C語言），也可以藉由直譯器來實現。</p><p>參考資料： <a href="https://towardsdatascience.com/understanding-python-bytecode-e7edaae8734d">Understanding Python Bytecode</a> | <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)">Interpreter (computing)</a> | <a href="https://www.circuitstoday.com/compilers-vs-interpreters-an-overview-of-the-differences">Compilers vs Interpreters – An overview of the differences</a> | <a href="https://linuxhint.com/cpython-jython-ironpython-pypy-cython/">Difference between CPython, Jython, IronPython, PyPy, and Cython</a></p>]]></content>
       
       
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> compile </tag>
+            
+            <tag> interpret </tag>
+            
+        </tags>
       
     </entry>
     
@@ -50,6 +92,18 @@
         <content type="html"><![CDATA[<p>Brainfuck 是一個由最少元素組成的程式語言，只有8種操作，但可以完成所有其他程式語言能夠完成的事情。<span id="more"></span></p><p>以下為Brainfuck的8種操作(<span class="math inline">\(x\)</span>: the value pointed space. <code>*ptr=&amp;x</code>)：</p><ul><li>"+": increment, <code>x=x+1</code></li><li>"-": decrement, <code>x=x-1</code></li><li>"&gt;": position+1, <code>ptr=ptr+1</code></li><li>"&lt;": position-1, <code>ptr=ptr-1</code></li><li>".": output, <code>cout&lt;&lt;x;</code></li><li>",": input, <code>cin&lt;&lt;x;</code></li><li>"[": start loop</li><li>"]": end loop when <span class="math inline">\(x\)</span> stores 0</li></ul>]]></content>
       
       
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 隨手記 </tag>
+            
+        </tags>
       
     </entry>
     

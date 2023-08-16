@@ -1,0 +1,846 @@
+<?xml version="1.0" encoding="utf-8"?>
+<search> 
+  
+  
+    
+    <entry>
+      <title>Squashing commit</title>
+      <link href="/2023/03/29/2023-03-29-Squashing-commit/"/>
+      <url>/2023/03/29/2023-03-29-Squashing-commit/</url>
+      
+        <content type="html"><![CDATA[<p>A series of commits shown in the following figure is suggested to be squashed. Let's take a moment to learn about the process of squashing commits.<span id="more"></span> <img src="https://i.imgur.com/OBTxfnc.png" /></p><p>"Squashing" commits refers to the process of combining multiple small and related commits into a single, larger commit. This is often done in order to streamline the commit history and make it easier to understand the changes made to the code over time.</p><p>When you have a multitude of commits, it means that there are a lot of small, incremental changes that have been committed to the repository. These changes may have been made for various reasons, such as fixing bugs, implementing new features, or improving the code's structure. However, having too many small commits can make the commit history difficult to read and follow, especially if some of the commits are not well-documented or don't have clear explanations of the changes made.</p><p>By squashing the multitude of commits into a smaller number of larger commits, you can create a more coherent and understandable commit history. This can be especially useful when you're working on a project with other developers, as it makes it easier for everyone to see the big picture of what changes have been made and why.</p>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Simulation works</title>
+      <link href="/2023/02/05/2023-02-05-CAD/"/>
+      <url>/2023/02/05/2023-02-05-CAD/</url>
+      
+        <content type="html"><![CDATA[<p>These are some of the simulation works that I have done during my years trained as a Mechanical Engineer. <span id="more"></span></p><h3 id="cad-for-automatic-measurement-instrument-for-macro-and-microscale-stresses_exploded-views">CAD for Automatic Measurement Instrument for Macro and Micro‑scale Stresses_Exploded Views</h3><p>This is the CAD for Measurement Instrument for Macro and Micro‑scale Stresses. It is used to visualize our thought and minimize gap between team member. This is first simulated in the computer, then put into reality.<br /><iframe width="560" height="315" src="https://www.youtube.com/embed/ND2CkrGV0Z8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p><h3 id="cad-of-lego-pieced-up-airplane">CAD of Lego pieced-up airplane</h3><p>This airplane is constructed utilizing Autodesk Inventor, composed of numerous lego pieces. The lego pieces are first constructed via 2D sketches and then extruded, these pieces were reused to construct the airplane. <img src="https://i.imgur.com/pAjenht.jpg" /></p><h3 id="balance-bike-bike-with-gyroscope-v.s-without-gyroscope-in-still-waiting-for-traffic-light">Balance Bike: Bike with gyroscope v.s without gyroscope in still waiting for traffic light</h3><p>This work is inspired by us being reluctant to place our feet on the ground while waiting for the traffic light, we want to find alternatives that help us maintain up-right position. <iframe width="560" height="315" src="https://www.youtube.com/embed/cijyrMiNd28" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe></p><p>Then single gyroscope is compared with twin gyroscope.</p><iframe width="560" height="315" src="https://www.youtube.com/embed/_9TZxgz22ds" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe><h3 id="fluid-simulation-lid-driven-cavity">Fluid simulation: Lid driven Cavity</h3><p>This is a numerical solution of lid driven cavity utilizing Projection method written in C++.</p><iframe width="560" height="315" src="https://www.youtube.com/embed/oaSOAeCJnuY" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>]]></content>
+      
+      
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>如何進行lint-check</title>
+      <link href="/2023/01/28/2023-01-28-%E5%A6%82%E4%BD%95%E9%80%B2%E8%A1%8Clint-check/"/>
+      <url>/2023/01/28/2023-01-28-%E5%A6%82%E4%BD%95%E9%80%B2%E8%A1%8Clint-check/</url>
+      
+        <content type="html"><![CDATA[<p>前幾天嘗試在一個 Latex 作為主要語言的專案當中自動進行 lint check，就在這裡筆記一下學到的事情吧。<span id="more"></span></p><p>要做的事情有兩個，將指令寫到 Makefile 當中，並將自動化流程定義在 <code>.github/workflows</code> 的 yaml 檔裡，走過得步驟是: ### 在自己的電腦上行可行性測試 確認自己的想法是否可行，直接的想法是直接在自己的電腦上進行一遍。首先是找到 linter 並安裝： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install chktex</span><br></pre></td></tr></table></figure> 然後就可以使用 <code>chktex</code> 對 <code>.tex</code>檔進行 lint check： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chktex cese.tex projection.tex ustmesh.tex</span><br></pre></td></tr></table></figure> 這個時候<code>chktex</code>會對這些檔案進行靜態分析，有可能會跳出很多 warning，可以暫時不管，後面在回頭把 warning 消除。</p><h3 id="將指令加入makefile">將指令加入makefile</h3><p>接著就是將指令寫到 Makefile 當中 <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: tex</span></span><br><span class="line"><span class="section">tex: </span></span><br><span class="line">chktex cese.tex projection.tex ustmesh.tex</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: lint</span></span><br><span class="line"><span class="section">lint: tex</span></span><br></pre></td></tr></table></figure> 完成後就可以用 <code>make lint</code>來 lint check 囉。</p><p>在這裡藉由了兩個target來完成任務：<code>lint</code> 與 <code>tex</code>，藉由一個 target 同樣可以達到需求。用兩個是考量到後續可能需要會加入其他語言的 linter ，當有多個 linter 在一個專案中做使用時，這可以增加可讀性與結構性，如 <a href="https://github.com/solvcon/modmesh">modmesh</a> 的 lint check <figure class="highlight makefile"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: cformat</span></span><br><span class="line"><span class="section">cformat: <span class="variable">$(CFFILES)</span></span></span><br><span class="line">...</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: cinclude</span></span><br><span class="line"><span class="section">cinclude: <span class="variable">$(CFFILES)</span></span></span><br><span class="line">if ...</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: flake8</span></span><br><span class="line"><span class="section">flake8:</span></span><br><span class="line">cmake --build ...</span><br><span class="line"></span><br><span class="line"><span class="meta"><span class="keyword">.PHONY</span>: lint</span></span><br><span class="line"><span class="section">lint: cformat cinclude flake8</span></span><br></pre></td></tr></table></figure></p><h3 id="將自動化流程定義在-.githubworkflows-的-yaml檔裡">將自動化流程定義在 <code>.github/workflows</code> 的 yaml檔裡</h3><p>回到一開始在電腦上的測試，讓<code>chktex</code>能在電腦上能使用，我們也需將個 dependency 寫入自動化文件中的 <code>jobs</code> 裡： <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">dependency</span> <span class="string">by</span> <span class="string">apt</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line"><span class="string">        ...</span></span><br><span class="line"><span class="string">        # for lint</span></span><br><span class="line"><span class="string">        sudo apt-get -qy install chktex</span></span><br></pre></td></tr></table></figure> 再將 lint check 的指令也寫入： <figure class="highlight yaml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">jobs:</span></span><br><span class="line"><span class="string">...</span></span><br><span class="line">    <span class="bullet">-</span> <span class="attr">name:</span> <span class="string">lint</span> <span class="string">check</span></span><br><span class="line">      <span class="attr">run:</span> <span class="string">|</span></span><br><span class="line">        <span class="string">make</span> <span class="string">lint</span></span><br></pre></td></tr></table></figure> 接著就差一步就完成囉～</p><h3 id="消除-warning">消除 warning</h3><p>前面所產生的 warning 會返回非0的數值，進而導致 github action 的 ci test 不通過。這個問題就要回歸 <a href="https://www.nongnu.org/chktex/ChkTeX.pdf"><em>chktex 的 document</em></a> 一一將警告消除拉。根據文件方法有三：</p><ul><li>依照 linter 的規定走，修改我們所攥寫的<code>.tex</code>文件。</li><li>如果覺得 linter 的規定跟需求不符，可以在創一個<code>.chktexrc</code>的文件，在裡頭客製化修改 linter 的規定： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># Appends</span></span><br><span class="line">NumDash &#123; 1 &#125; <span class="comment">#Warning 8</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># Overwrite</span></span><br><span class="line">Linker = &#123; \vref \pageref \eqref &#125; <span class="comment"># Warning 2</span></span><br><span class="line">PostLink = &#123; \index &#125; <span class="comment"># Warning 24</span></span><br></pre></td></tr></table></figure></li><li>但並非每一個 warning 都能夠客製設定，這時候就可以藉由 per-line suppression 或是 per-file suppression:<ul><li>Per-line suppression： 針對單行的程式碼抑制 warning ，在想要抑制的那行程式尾端加入<code>% chktex ##</code>， <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">\hat</span>&#123;j&#125; <span class="comment">% chktex 7</span></span><br></pre></td></tr></table></figure></li><li>Per-file suppression: 針對單一文件抑制 warning ，在想要抑制的那分文件於開頭加入<code>% chktex-file ##</code>， <figure class="highlight latex"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">% chktex-file 7</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">\RequirePackage</span>[2020-02-02]&#123;latexrelease&#125;</span><br><span class="line"><span class="keyword">\documentclass</span>[11pt,dvips]&#123;article&#125;</span><br><span class="line">...</span><br></pre></td></tr></table></figure></li></ul></li></ul><p>接著就可以 Push 回 github，大功告成囉～</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> make </tag>
+            
+            <tag> bash </tag>
+            
+            <tag> github </tag>
+            
+            <tag> continous integration </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>對於作業系統來說，錯誤與警告一樣嗎？</title>
+      <link href="/2023/01/27/2023-01-27-%E9%8C%AF%E8%AA%A4%E8%88%87%E8%AD%A6%E5%91%8A/"/>
+      <url>/2023/01/27/2023-01-27-%E9%8C%AF%E8%AA%A4%E8%88%87%E8%AD%A6%E5%91%8A/</url>
+      
+        <content type="html"><![CDATA[<p>在<a href="https://en-chou.github.io/2023/01/24/2023-01-24-Commandline%E9%A1%AF%E9%8C%AF/"><em>這篇</em></a> 知道了系統成功與否的區別，那錯誤與警告一樣嗎？而系統是如何表達&quot;警告&quot;，是 0（成功），還是非0（失敗）呢？<span id="more"></span></p><h3 id="錯誤與警告">錯誤與警告</h3><p>在 *nix 的世界裡，錯誤 error 和警告 warning 是不一樣的東西，系統返回的值中，錯誤就一定是 non-zero, warning 就要看當初程式怎麼寫；這如同在撰寫C/C++的程式時，寫成是的「可以決定 main 要 return 0<br>或是 return 任何其他的值。</p><h3 id="一個小案例">一個小案例</h3><p>前幾天我在嘗試藉由 Letax linter-<a href="https://www.nongnu.org/chktex/">ChkTeX</a> 對 Latex 文件進行lint check 。在電腦裝好<code>chktex</code>後，就可以讓 Latex 程式，比如說 <code>projection.tex</code>，進行lint check：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">chktex projection.tex</span><br></pre></td></tr></table></figure><p>這個時候出現了大量警告：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">ChkTeX v1.7.6 - Copyright 1995-96 Jens T. Berger Thielemann.</span><br><span class="line">Compiled with PCRE regex support.</span><br><span class="line">Warning 8 <span class="keyword">in</span> projection.tex line 3: Wrong length of dash may have been used.</span><br><span class="line">\RequirePackage[2020-02-02]&#123;latexrelease&#125;  </span><br><span class="line">                    ^</span><br><span class="line">Warning 8 <span class="keyword">in</span> projection.tex line 3: Wrong length of dash may have been used.</span><br><span class="line">\RequirePackage[2020-02-02]&#123;latexrelease&#125;  </span><br><span class="line">                       ^</span><br><span class="line">Warning 24 <span class="keyword">in</span> projection.tex line 79: Delete this space to maintain correct pagereferences.</span><br><span class="line">\label&#123;s:projection&#125;  </span><br><span class="line">^</span><br><span class="line">......</span><br><span class="line">No errors printed; 121 warnings printed; No user suppressed warnings; No line suppressed warnings.</span><br><span class="line">See the manual <span class="keyword">for</span> how to suppress some or all of these warnings/errors.</span><br></pre></td></tr></table></figure><p>然後藉由<code>echo $?</code>查看執行是成功與否：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">2</span><br></pre></td></tr></table></figure><p>可以看到系統返回非0值，將 warning 以 error 返回。在這個情境下，warning <code>chktex</code>的作者自己在寫程式的時候，決定 warning 將返回一個非0的值。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> make </tag>
+            
+            <tag> bash </tag>
+            
+            <tag> github </tag>
+            
+            <tag> continous integration </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>作業系統是怎麼判斷和表達程式執行是成功與否?</title>
+      <link href="/2023/01/24/2023-01-24-Commandline%E9%A1%AF%E9%8C%AF/"/>
+      <url>/2023/01/24/2023-01-24-Commandline%E9%A1%AF%E9%8C%AF/</url>
+      
+        <content type="html"><![CDATA[<p>程式在結束運行時會返回一個數值以表示結束，作業系統身為系統軟體程式在結束之時同樣也會返回一個數值以表示結束。<span id="more"></span></p><p>我們在terminal給予指令，shell根據指令執行任務，結束時系統也會返回一個值。這些值當中，若是返回0代表執行是成功的，而若是返回非0的值則代表執行的程式是失敗的。其中，不同的非0值也會對應到不同的錯誤（<a href="https://tldp.org/LDP/abs/html/exitcodes.html">Exit Codes With Special Meanings</a>）。</p><p>這個問題的答案也是 Github Actions 的通關依據，若是所有的返回值為0，Github Actions就會判別測試通過；反之，則測試不通過。</p><h3 id="如何查看執行是成功與否？">如何查看執行是成功與否？</h3><p>前一個命令的返回值會儲存在<code>$?</code>當中（<a href="https://tldp.org/LDP/abs/html/internalvariables.html#APPREF">'$'的更多資訊</a>）藉由<code>echo $?</code> 即可查看查看執行是成功與否。</p><ul><li>成功的執行</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo$ <span class="built_in">cd</span> mmnote</span><br><span class="line">~/git-repo/mmnote$ <span class="built_in">echo</span> $?</span><br><span class="line">0</span><br></pre></td></tr></table></figure><ul><li>失敗的執行</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/mmnote$ zzzzz</span><br><span class="line">zzzzz: <span class="built_in">command</span> not found</span><br><span class="line">~/git-repo/mmnote$ <span class="built_in">echo</span> $?</span><br><span class="line">127</span><br></pre></td></tr></table></figure><h3 id="透過Make查看執行是成功與否？">透過Make查看執行是成功與否？</h3><p>假設我們的指令是寫在Makefile當中，make 執行的結果可以直接查看成功與否。</p><ul><li>Makefile的內容</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: success-demo</span><br><span class="line">success-demo: </span><br><span class="line"><span class="built_in">cd</span> mmnote</span><br><span class="line"></span><br><span class="line">.PHONY: fail-demo</span><br><span class="line">fail-demo: </span><br><span class="line">zzzzz</span><br></pre></td></tr></table></figure><ul><li>成功的執行</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo$ make success-demo </span><br><span class="line"><span class="built_in">cd</span> mmnote</span><br></pre></td></tr></table></figure><ul><li>失敗的執行</li></ul><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo$ make fail-demo </span><br><span class="line">zzzzz</span><br><span class="line">make: zzzzz: Command not found</span><br><span class="line">make: *** [Makefile:7: fail-demo] Error 127</span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> make </tag>
+            
+            <tag> bash </tag>
+            
+            <tag> github </tag>
+            
+            <tag> continous integration </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>翻譯高階語言成機器語言-Python採用的方式</title>
+      <link href="/2022/12/18/2022-12-18-Python%E6%8E%A1%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F/"/>
+      <url>/2022/12/18/2022-12-18-Python%E6%8E%A1%E7%94%A8%E7%9A%84%E6%96%B9%E5%BC%8F/</url>
+      
+        <content type="html"><![CDATA[<p>在<a href="https://en-chou.github.io/2022/11/18/2022-11-18-Compiler-and-Interpreter/"><em>這篇</em></a>介紹了編譯器與直譯器，而Python在被翻譯的過程，同時使用了兩者。<span id="more"></span></p><figure><img src="https://blogger.googleusercontent.com/img/a/AVvXsEg0wxzRTdhS4wwD_GjvDbS90ojdAZJgsN0cwUzcQJ95CC2V2fuLbJNGbyricFBkMXy8WYk1Gh9tITUqkuBBFeKmi3ibA3GooYkLCBNXAGquePtby0_U44IWTRXCHVbgI74YnNB83XjXjjf2GoX3Z5cuKbXkR1QMkExezJnsbg-ksbT8yIUffuZws3p2Bw=w643-h362" alt="Translation in Python" /><figcaption>Translation in Python</figcaption></figure><p>Python 同時使用了編譯器以及直譯器，但外顯的行為較近似於使用直譯器實作的語言：Runtime 時進行 parse，執行效率較緩慢，每次的執行是一行程式，若是程式存在語法錯誤，則程式會執行到語法錯誤的那行程式碼才會無法繼續，可以即時測試局部的程式，除錯速度通成較快......</p><p>Python 所採用的方式是首先將 source code 編譯成 bytecode*，bytecode再經過直譯器（Python Virtual Machine, PVM）直譯成 machine code。而Python的直譯器是被編譯過得執行檔，透過不同語言也有不同的實作版本，最通用也是官方的版本是透過 C 實作直譯器，稱作 Cpython，透過 Java 實作的稱作 Jython，透過 C# 實作的是IronPython，透過 Python 實作的是 PyPy。而其他同時使用到編譯器以及直譯器的「直譯語言」包括Lisp，Pascal 與 BASIC等等。</p><blockquote><p>*類似於machine code，但實際上無法被cpu執行的 binary。Python 的 bytecode 存放於 <code>_pycache__</code> 目錄底下的 <code>.pyc</code>。</p></blockquote><p>Source code in python： <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">print</span>(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">#executable</span></span><br><span class="line">pppprint(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">#syntax error</span></span><br></pre></td></tr></table></figure></p><p>Output： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">hello world <span class="comment">#executable</span></span><br><span class="line"></span><br><span class="line">---------------------------------------------------------------------------</span><br><span class="line">NameError NameError                                 Traceback (most recent call last)</span><br><span class="line">Input In [1], <span class="keyword">in</span> &lt;cell line: 2&gt;()</span><br><span class="line">      1 <span class="built_in">print</span>(<span class="string">&quot;hello world\n&quot;</span>)</span><br><span class="line">----&gt; 2 pppprint(<span class="string">&quot;hello world\n&quot;</span>)</span><br><span class="line"></span><br><span class="line">NameError: name <span class="string">&#x27;pppprint&#x27;</span> is not defined <span class="comment">#error</span></span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> compile </tag>
+            
+            <tag> interpret </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>以純文字存取資料 vs 以binary存取資料</title>
+      <link href="/2022/11/29/2022-11-29-%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/"/>
+      <url>/2022/11/29/2022-11-29-%E8%B3%87%E6%96%99%E5%84%B2%E5%AD%98%E7%9A%84%E6%9B%BF%E4%BB%A3%E6%96%B9%E6%A1%88/</url>
+      
+        <content type="html"><![CDATA[<p>透過ASCII的編碼與解碼，每一個字元會被獨立存取，下方的<code>number</code>會需要 16(character數量) byte。<span id="more"></span>1 個 byte 有 8 bits，然而會被這串數字使用到的值域只有10種排列組合（0～9），但總共的可能性確有 <span class="math inline">\(2^8=256\)</span> 種排列組合這麼多，比起這麼浪費空間的儲存方法，是有替代方法的。</p><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">number=<span class="number">1.34567890123456</span></span><br></pre></td></tr></table></figure><h2 id="以純文字存取資料">以純文字存取資料</h2><p>透過純文字的儲存方式的方式很符合直覺，輸出的檔案可以直接做閱讀，這樣的輸出方式很容易被採納。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>, <span class="string">&#x27;w&#x27;</span>)</span><br><span class="line">file.write(<span class="built_in">str</span>(number))</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure></p><ul><li>檔案大小：16 byte。</li><li><p>在vim中開啟檔案：<code>vim data.txt</code> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">1.34567890123456</span></span><br><span class="line">~                                                                                                     </span><br><span class="line">~                                                                                                     </span><br></pre></td></tr></table></figure></p></li><li><p>讀取檔案 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.txt&#x27;</span>, <span class="string">&#x27;r&#x27;</span>)</span><br><span class="line">contents = file.read()</span><br><span class="line">file.close()</span><br><span class="line"><span class="comment"># contents=1.34567890123456</span></span><br></pre></td></tr></table></figure></p></li></ul><h2 id="以binary存取資料">以binary存取資料</h2><p>透過binary的儲存方式的方式可以對應到標準的資料格式，較為節省空間，但缺點是檔案無法直接被閱讀。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> struct</span><br><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.bin&#x27;</span>, <span class="string">&#x27;wb&#x27;</span>)</span><br><span class="line">file.write(<span class="built_in">bytearray</span>(struct.pack(<span class="string">&quot;d&quot;</span>, number)))</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure></p><ul><li>檔案大小：8 byte。</li><li><p>在vim中開啟檔案：<code>vim data.bin</code> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">¯<span class="symbol">&lt;83&gt;</span>&#123;<span class="symbol">&lt;99&gt;</span>æ<span class="symbol">&lt;87&gt;</span>õ?</span><br><span class="line">~                                                                                                     </span><br><span class="line">~                                                                                                      </span><br></pre></td></tr></table></figure></p></li><li><p>讀取檔案 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">file = <span class="built_in">open</span>(<span class="string">&#x27;data.bin&#x27;</span>, <span class="string">&#x27;rb&#x27;</span>)</span><br><span class="line">contents = struct.unpack(<span class="string">&quot;d&quot;</span>, file.read())[<span class="number">0</span>]</span><br><span class="line">file.close()</span><br><span class="line"><span class="comment"># contents=1.34567890123456</span></span><br></pre></td></tr></table></figure></p></li></ul><h2 id="lossless-compression">Lossless compression</h2>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 隨手記 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>翻譯高階語言成機器語言-編譯器與直譯器</title>
+      <link href="/2022/11/18/2022-11-18-Compiler-and-Interpreter/"/>
+      <url>/2022/11/18/2022-11-18-Compiler-and-Interpreter/</url>
+      
+        <content type="html"><![CDATA[<p>有兩種方式將人類所撰寫的是 source code 翻譯電腦能夠看得懂的是 machine code：編譯器或直譯器。<span id="more"></span></p><h2 id="編譯器">編譯器</h2><p><img src="https://4.bp.blogspot.com/-mIykcyEinUo/WUGwEdcDVxI/AAAAAAAAE2c/sxthb7ILzo0IObZypjTk_lylulImGBAzwCLcBGAs/s1600/compiler.png" alt="Translation with compiler" /> + Source code 在 compile time 被 <a href="https://en-chou.github.io/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"><em>編譯</em></a>成 machine code ，然後在 runtime 被執行。 + Runtime 時不進行 parse（or syntactic analysis，語法分析），執行效率較快速。 + 每次的執行是一支程式，執行編譯過後的執行檔來執行程式。 + 若是程式中存在語法錯誤，則程式會無法通過編譯，整支程式都無法執行。 + 無法即時測試局部的程式，除錯速度通成較慢。 + 使用編譯器的語言包括 C/C++, Fortran, Java, rust, go...</p><p>Source code in C： <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">printf</span>(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">//executable</span></span><br><span class="line">pppprintf(<span class="string">&quot;hello world\n&quot;</span>) <span class="comment">//syntax error</span></span><br></pre></td></tr></table></figure></p><p>Output： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">識別項\&quot;pppprintf\&quot; 未定義 C/C++(20)</span><br><span class="line">`pppprintf` was not declared <span class="keyword">in</span> this scope gcc</span><br><span class="line"><span class="comment">#nothing executable</span></span><br></pre></td></tr></table></figure></p><h2 id="直譯器">直譯器</h2><p><img src="https://media.geeksforgeeks.org/wp-content/uploads/20210617144008/interpreter.png" alt="Translation with interpreter" /> + Source code 在 runtime 被直譯。 + Runtime 時進行 parse，執行效率較緩慢。 + 每次的執行是一行程式，不會產生額外的檔案。 + 若是程式存在語法錯誤，則程式會執行到語法錯誤的那行程式碼才會無法繼續。 + 可以即時測試局部的程式，除錯速度通成較快。 + 使用直譯器的語言包括 Python, Matlab, Bash, Lisp，Pascal, BASIC...</p><p>Source code in bash： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="built_in">echo</span> hello world &amp;&amp; echoooo hello world <span class="comment">#executable &amp;&amp; syntax error</span></span><br></pre></td></tr></table></figure></p><p>Output： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hello world <span class="comment">#executable</span></span><br><span class="line">echoooo: <span class="built_in">command</span> not found <span class="comment">#syntax error</span></span><br></pre></td></tr></table></figure></p><h2 id="note">Note</h2><p>有時候可見某個語言被分類為「編譯語言」或是「直譯語言」（e.g, C語言是編譯語言），但這樣的描述並不全然正確，不經過任何轉換，程式碼也僅是文字檔。一個語言是「編譯」或是「直譯」的理由並不源自語言本身，而是傳換成被電腦理解的過程；而一個幾乎使用的編譯器的語言（e.g, C語言），也可以藉由直譯器來實現。</p><p>參考資料： <a href="https://towardsdatascience.com/understanding-python-bytecode-e7edaae8734d">Understanding Python Bytecode</a> | <a href="https://en.wikipedia.org/wiki/Interpreter_(computing)">Interpreter (computing)</a> | <a href="https://www.circuitstoday.com/compilers-vs-interpreters-an-overview-of-the-differences">Compilers vs Interpreters – An overview of the differences</a> | <a href="https://linuxhint.com/cpython-jython-ironpython-pypy-cython/">Difference between CPython, Jython, IronPython, PyPy, and Cython</a></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> compile </tag>
+            
+            <tag> interpret </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Brainfuck&amp;與電腦溝通的基本要素</title>
+      <link href="/2022/11/09/2022-11-09-Brainfuck/"/>
+      <url>/2022/11/09/2022-11-09-Brainfuck/</url>
+      
+        <content type="html"><![CDATA[<p>Brainfuck 是一個由最少元素組成的程式語言，只有8種操作，但可以完成所有其他程式語言能夠完成的事情。<span id="more"></span></p><p>以下為Brainfuck的8種操作(<span class="math inline">\(x\)</span>: the value pointed space. <code>*ptr=&amp;x</code>)：</p><ul><li>"+": increment, <code>x=x+1</code></li><li>"-": decrement, <code>x=x-1</code></li><li>"&gt;": position+1, <code>ptr=ptr+1</code></li><li>"&lt;": position-1, <code>ptr=ptr-1</code></li><li>".": output, <code>cout&lt;&lt;x;</code></li><li>",": input, <code>cin&lt;&lt;x;</code></li><li>"[": start loop</li><li>"]": end loop when <span class="math inline">\(x\)</span> stores 0</li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> 隨手記 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>淺談Dynamic Programming</title>
+      <link href="/2022/11/06/2022-11-06-Dynamic-Programming/"/>
+      <url>/2022/11/06/2022-11-06-Dynamic-Programming/</url>
+      
+        <content type="html"><![CDATA[<p>Dynamic Programming(DP) 能帶來的好處是降低時間複雜度，用空間換取時間。<span id="more"></span></p><h3 id="recursion">Recursion</h3><p>一個常見的recursion例子即是費波那契數（Fibonacci number），下方是用recursion來實作的C++ 程式： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span><span class="params">(n)</span></span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n&lt;=<span class="number">1</span>)</span><br><span class="line">        <span class="keyword">return</span> n</span><br><span class="line">    <span class="keyword">else</span></span><br><span class="line">        <span class="keyword">return</span> <span class="built_in">fib</span>(n<span class="number">-1</span>)+<span class="built_in">fib</span>(n<span class="number">-2</span>)</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 上方的程式可以藉由下方的樹狀圖表示，這樣透過top-down的方式來解會重複計算數列中的值，大幅增加了計算時間。這樣的方法的時間複雜度為<span class="math inline">\(O(n^2)\)</span>，但空間複雜度為<span class="math inline">\(O(1)\)</span>。 <img src="https://i.imgur.com/Yf5a5BT.png" /></p><h3 id="dynamic-programmingdp">Dynamic programming(DP)</h3><p>DP用空間換取時間，它不進行重複的運算，是透過bottom-up的方式將表格建出，也就是依序算出數列中的值，並將計算完的值都儲存起來以供後續查表使用，避免重複計算。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">fib</span> <span class="params">(n)</span> </span>&#123;</span><br><span class="line">    Fib[<span class="number">0</span>] = <span class="number">0</span>;</span><br><span class="line">    Fib[<span class="number">1</span>] = <span class="number">1</span>;</span><br><span class="line"><span class="keyword">for</span> (<span class="type">int</span> i = <span class="number">2</span>; i&lt;=n; i++)&#123;</span><br><span class="line">    Fib[i] = Fib[i<span class="number">-1</span>] + Fib[i<span class="number">-2</span>];</span><br><span class="line">&#125;</span><br><span class="line">       <span class="keyword">return</span> Fib[n]</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure> 因為計算完的值都會被儲存起來，這樣的方法比 recursion需要更多的記憶體。避免重複計算使得時間複雜度變為<span class="math inline">\(O(n)\)</span>，儲存計算完的值使得空間 複雜度為<span class="math inline">\(O(n)\)</span>。 <img src="https://i.imgur.com/HYfgkA2.png" /></p><h3 id="dp的4個步驟">DP的4個步驟</h3><p>Step-1 觀察並找出答案的特徵與結構。e.g.觀察費波那契數為前一個數字以及後一個數字的和。<br />Step-2 以遞迴方式定義函數。e.g. fib(n)=fib(n-1)+fib(n-2); BC: fib(0)=0, fib(1)=1。<br />Step-3 建表，用bottom-up的方式依序求解。e.g. <img src="https://i.imgur.com/HYfgkA2.png" /> Step-4 利用表格資訊組合出答案。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> Algorithm </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>C++的記憶體配置-heap and stack</title>
+      <link href="/2022/11/02/2022-11-02-C-%E5%AE%A3%E5%91%8A%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94%E5%88%86%E9%85%8D/"/>
+      <url>/2022/11/02/2022-11-02-C-%E5%AE%A3%E5%91%8A%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94%E5%88%86%E9%85%8D/</url>
+      
+        <content type="html"><![CDATA[<p>執行以下的程式會出現segementation fault的原因在於記憶體配置：宣告在<code>main()</code>中的矩陣是被存放在stack的區域中，但stack被分配的記憶體空間並不足以存放這些矩陣。<span id="more"></span></p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line"><span class="type">double</span> u[<span class="number">162</span>][<span class="number">161</span>],unew[<span class="number">162</span>][<span class="number">161</span>],uans[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line"><span class="type">double</span> v[<span class="number">161</span>][<span class="number">162</span>],vnew[<span class="number">161</span>][<span class="number">162</span>],vans[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line"><span class="type">double</span> p[<span class="number">162</span>][<span class="number">162</span>],pnew[<span class="number">162</span>][<span class="number">162</span>],pans[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line"><span class="type">double</span> mdot[<span class="number">162</span>][<span class="number">162</span>],uv[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line"><span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><blockquote><p>TY: Stack預設的上限好像是10mb，heap預設我記得是可以容納300萬個int吧，heap 的上限通常都比stack 大很多。兩者上限都可以另外設定，假設把Stack Memory 的大小設定成 1 GB 的話，你的程式一打開就會直接吃掉 1 GB 的 ram。</p></blockquote><h3 id="記憶體配置">記憶體配置</h3><p>記憶體配置分成幾個區段，分別是：</p><ul><li>stack: 區域變數存放的區域。</li><li>heap: 動態記憶體存放的區域。</li><li>data: 全域變數存放的區域。</li><li>text: 程式被存放的區域。</li></ul><h3 id="stack">Stack</h3><p>在function被呼叫後機器才會分配記憶體空間給function的區域變數，<code>return</code>過後空間就會被釋放；在下一次呼叫機器會重新分配記憶體空間給function的區域變數，亦即區域變數的記憶體位址在程式運行的過程中是有可能改變的。</p><h3 id="heap">Heap</h3><p>C++ 中使用heap memory是透過<code>new</code>這個keyword，釋放heap memory則是透過<code>delete</code>這個keyword。與stack不同之處在於，它並不會在<code>return</code>被執行時自動釋放記憶體空間，若是在程式結束前沒有將被分配的空間透過<code>delete</code>來釋放，就會造成"memory leak"。</p><blockquote><p>Memory leaks in small programs might not look like a big deal, but for long-running servers, memory leaks can slow down the whole machine and eventually cause the program to crash.</p></blockquote><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> *p=<span class="keyword">new</span> <span class="type">int</span>;</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>一開始所出現的問題則可以透過兩個方是解決：</p><ol type="1"><li>改使用data的記憶體區段，以全域變數宣告。</li><li>改使用heap的記憶體區段，以動態變數宣告。</li></ol><ul><li>Reference: <a href="https://courses.engr.illinois.edu/cs225/fa2022/resources/stack-heap/"><em>Stack and Heap Memory</em></a></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>修改/恢復commit</title>
+      <link href="/2022/10/31/2022-10-31-%E4%BF%AE%E6%94%B9-%E6%81%A2%E5%BE%A9commit/"/>
+      <url>/2022/10/31/2022-10-31-%E4%BF%AE%E6%94%B9-%E6%81%A2%E5%BE%A9commit/</url>
+      
+        <content type="html"><![CDATA[<p>在改寫程式，提交commit的反覆的過程中，有時會希望手上的程式能夠回到某個過去的狀態，以下的指令是能夠達成以上期望的指令，包括<code>git commit --amend</code>以及<code>git reset</code>。<br /><span id="more"></span></p><h3 id="git-commit---amend"><code>git commit --amend</code></h3><ul><li>用途：修改已經提交的commit。</li><li>初始狀態： <img src="https://i.imgur.com/fXUoDf5.png" /></li><li><p>使用情境：對程式做了些微的改寫，不想為此改寫提交另外的commit，想將所作的修正附加到已經提交的commit中，於是修改已經發出的commit。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit --amend</span><br></pre></td></tr></table></figure> <img src="https://i.imgur.com/HfuL6Ml.png" /></p></li><li><p>對比情境："為此改寫提交另外的commit"。 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git add .</span><br><span class="line">$ git commit -m &quot;update&quot;</span><br></pre></td></tr></table></figure> <img src="https://i.imgur.com/Wloev3X.png" /></p></li></ul><h3 id="git-reset"><code>git reset</code></h3><ul><li>用途：取消已經提交的commit。</li><li>初始狀態： <img src="https://i.imgur.com/Wloev3X.png" /></li><li>選項：<code>--hard</code>, <code>--soft</code>, <code>--mixed</code>，預設是<code>--mixed</code>。<ul><li><code>git reset HEAD~</code> (Note: <code>HEAD</code>是目前工作節點的指標，<code>~</code>是往前1層) <img src="https://i.imgur.com/DVhdeS0.png" /></li><li><code>git reset HEAD~~</code>(Note: <code>HEAD</code>是目前工作節點的指標，<code>~</code>是往前2層) <img src="https://i.imgur.com/BNPUiWX.png" /></li><li><code>git reset --hard HEAD~~</code>(Note: 使用<code>--hard</code>要格外小心，一不小心所有的編修都會消失。<code>--hard</code>徹底刪除commit，也修改工作目錄) <img src="https://i.imgur.com/to1FNFT.png" /></li></ul></li><li>藉由這個指令刪除工作區的內容：<code>git reset --hard HEAD</code>(Note: 回到提交最後一個commit提交後的狀態)<ul><li>初始狀態： <img src="https://i.imgur.com/Q0z2jEk.png" /></li><li><code>git reset --hard HEAD</code> <img src="https://i.imgur.com/FDhM3Z1.png" /></li></ul></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用 Git branch</title>
+      <link href="/2022/10/24/2022-10-24-git-branch%E5%AF%A6%E7%94%A8%E6%8A%80%E5%B7%A7/"/>
+      <url>/2022/10/24/2022-10-24-git-branch%E5%AF%A6%E7%94%A8%E6%8A%80%E5%B7%A7/</url>
+      
+        <content type="html"><![CDATA[<p>共同開發一個專案必須會使用branch相關的指令，包括<code>git branch</code>, <code>git checkout</code>, 以及 <code>git merge</code>。 文章內容將走過以下流程： 1. 創立多個feature branch 2. 切換到名為"feature2"的branch 3. 將編修過後的"feature2" 接回到master branch。 <span id="more"></span></p><h3 id="git-branch"><code>git branch</code></h3><ul><li>用途1：查看branch <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># * denote the current working branch</span></span><br><span class="line">$ git branch</span><br><span class="line">* master</span><br></pre></td></tr></table></figure></li><li>用途2：創立branch (1. 創立多個feature branch) <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git branch feature1 <span class="comment">#創立名為&quot;feature1&quot;的branch</span></span><br><span class="line">$ git branch feature2 <span class="comment">#創立名為&quot;feature2&quot;的branch</span></span><br><span class="line">$ git branch feature3 <span class="comment">#創立名為&quot;feature3&quot;的branch</span></span><br></pre></td></tr></table></figure></li><li>用途3：刪除branch <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d feature3 <span class="comment">#刪除名為&quot;feature3&quot;的branch</span></span><br><span class="line">Deleted branch feature3 (was 1d9e1c2).</span><br><span class="line">$ git branch <span class="comment">#查看刪除&quot;feature3&quot;後的狀態</span></span><br><span class="line">  feature1</span><br><span class="line">  feature2</span><br><span class="line">* master</span><br></pre></td></tr></table></figure></li></ul><h3 id="git-checkout"><code>git checkout</code></h3><ul><li>用途：切換branch（2. 切換到名為"feature2"的branch） <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git branch <span class="comment">#查看切換branch前的狀態</span></span><br><span class="line">  feature1</span><br><span class="line">  feature2</span><br><span class="line">* master</span><br><span class="line">$ git checkout feature2 <span class="comment">#切換</span></span><br><span class="line">Switched to branch <span class="string">&#x27;feature2&#x27;</span></span><br><span class="line">$ git branch <span class="comment">#查看切換branch後的狀態</span></span><br><span class="line">  feature1</span><br><span class="line">* feature2</span><br><span class="line">  master</span><br></pre></td></tr></table></figure> 在git graph 上，空心的節點用以表示編輯中的位置，可以看到feature2在切換過後被以空心的節點表示。 <img src="https://i.imgur.com/vxuqEEe.png" /></li></ul><h3 id="git-merge"><code>git merge</code></h3><ul><li><p>用途：合併branch （3. 將編修過後的"feature2" 接回到master branch）<br />首先，先將工作的branch切換到master： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">Switched to branch <span class="string">&#x27;master&#x27;</span></span><br></pre></td></tr></table></figure> 在git graph 上，空心的節點換到了master branch上： <img src="https://i.imgur.com/77GpcGc.png" /> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge feature2</span><br></pre></td></tr></table></figure> <img src="https://i.imgur.com/IAnlC3O.png" /></p></li><li><p>Note: 最左邊的branch不一定是master。</p></li></ul><h3 id="關於將branch同步到github的題外話">關於將branch同步到github的題外話</h3><ul><li>Push並不會將所有的git branch 部屬到 github ： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br><span class="line">  feature1</span><br><span class="line">* master</span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure> 在master的branch上做push後，github的結果如下： <img src="https://i.imgur.com/xtZFmFd.png" /> 若是希望將名為"feature1"這個branch部屬到github，我們需要先checkout到"feature1"並執行以下的指令： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout feature1 </span><br><span class="line">Switched to branch &#x27;feature1&#x27;</span><br><span class="line">$ git push --set-upstream origin feature1</span><br></pre></td></tr></table></figure> 執行後github的結果如下： <img src="https://i.imgur.com/4I8inGY.png" /></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>共同開發一個專案的小筆記</title>
+      <link href="/2022/10/24/2022-10-24-%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BC%E4%B8%80%E5%80%8B%E5%B0%88%E6%A1%88%E7%9A%84%E5%B0%8F%E7%AD%86%E8%A8%98/"/>
+      <url>/2022/10/24/2022-10-24-%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BC%E4%B8%80%E5%80%8B%E5%B0%88%E6%A1%88%E7%9A%84%E5%B0%8F%E7%AD%86%E8%A8%98/</url>
+      
+        <content type="html"><![CDATA[<blockquote><p>upstream:master &lt;- clone:master is very confusing. In addition, it makes it hard for reviewers to pull your "branch" (actually the master!) to their local.</p></blockquote><p>貢獻一個專案需要注意要用feature branch而不要用master branch發PR，用master branch 發PR會造成專案擁有者的混淆。 <span id="more"></span> 並且，在編修完一個issue之後，建議的作法是將feature branch刪除。貢獻一個專案的流程可以參考以下流程：<br />1. Fork 屬於solvcon的專案modmesh。<br />2. 創建feature branch並在上面做編修。<br />3. 用這個feature branch發PR。<br />4. 把此feature branch 合併回master。<br />5. 刪除feature branch。<br />6. 進一步sync專案A。</p><p>i.e,<br />1. <code>solvon/modesh -&gt; EN/modmesh</code><br />2. <code>git checkout feature1</code><br />3. <code>solvcon:master &lt;- EN:feature1</code><br />4. <code>git checkout master &amp;&amp; git merge feature1</code><br />5. <code>git branch -d feature1</code> and delete the branch on github.<br />6. "Sync fork".</p><h3 id="git-graph">git graph</h3><p>vscode中的 git graph 可以視覺化git，可以讓開發的進展更一目了然，減少出錯的機會，同時也可以加快熟悉git的腳步。 <img src="https://i.imgur.com/YM4jweI.png" /></p><h3 id="a-starting-point-for-git-command">A starting point for git command</h3><ul><li>git init</li><li>git clone</li><li>git add</li><li>git commit</li><li>git push</li><li>git pull</li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 隨手記 </tag>
+            
+            <tag> git </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>在C++部屬pytorch模型</title>
+      <link href="/2022/09/21/2022-09-21-%E5%9C%A8C-%E9%83%A8%E5%B1%ACpytorch%E6%A8%A1%E5%9E%8B/"/>
+      <url>/2022/09/21/2022-09-21-%E5%9C%A8C-%E9%83%A8%E5%B1%ACpytorch%E6%A8%A1%E5%9E%8B/</url>
+      
+        <content type="html"><![CDATA[<p>這一篇將介紹我在C++部屬pytorch模型的方法，作法是參考<a href="https://pytorch.org/cppdocs/installing.html"><em>官方文件</em></a>。考量讓程式能夠同時在Windows以及Linux上運行，程式是透過CMake建置，並分別透過VScode的WSL(Windows)以及Bash(Linux)。<span id="more"></span></p><h3 id="將模型轉換為與語言無關的torchscript模型">將模型轉換為與語言無關的Torchscript模型</h3><p>追求高計算效率的科學或是工程程式，C++ 經常被選擇的程式語言(<a href="https://en-chou.github.io/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/"><em>reference</em></a>)。欲使Pytorch模型可以在C++ 中使用，則可藉由Pytorch官方提供的JIT模組，將pytorch模型轉換為與語言無關的Torchscript模型。 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#訓練完模型將模型轉換為Torchscript模型</span></span><br><span class="line">PATH= <span class="string">&quot;model_jit.pth&quot;</span></span><br><span class="line">traced_net=torch.jit.trace(model, torch.randn(<span class="number">1</span>,<span class="number">6724</span>).to(device))</span><br><span class="line">torch.jit.save(traced_net, PATH)</span><br></pre></td></tr></table></figure></p><h3 id="環境setup">環境setup</h3><ul><li>安裝 Pytorch C++ API (<a href="https://pytorch.org/cppdocs/installing.html"><em>reference</em></a>)</li><li>目錄 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">repository$ <span class="built_in">ls</span></span><br><span class="line">CMakeLists.txt Makefile Source.cpp <span class="comment">#工作目錄下三個檔案</span></span><br></pre></td></tr></table></figure></li><li>CMakeLists.txt <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.2)</span><br><span class="line">project(my_project)</span><br><span class="line"><span class="built_in">set</span>(CMAKE_PREFIX_PATH /path/to/libtorch)</span><br><span class="line">find_package(Torch REQUIRED)</span><br><span class="line"><span class="built_in">set</span>(CMAKE_CXX_FLAGS <span class="string">&quot;<span class="variable">$&#123;CMAKE_CXX_FLAGS&#125;</span> <span class="variable">$&#123;TORCH_CXX_FLAGS&#125;</span>&quot;</span>)</span><br><span class="line">add_executable(<span class="variable">$&#123;PROJECT_NAME&#125;</span> Source.cpp)</span><br><span class="line">target_link_libraries(<span class="variable">$&#123;PROJECT_NAME&#125;</span> <span class="string">&quot;<span class="variable">$&#123;TORCH_LIBRARIES&#125;</span>&quot;</span>)</span><br><span class="line">set_property(TARGET <span class="variable">$&#123;PROJECT_NAME&#125;</span> PROPERTY CXX_STANDARD 14)</span><br><span class="line"><span class="built_in">set</span>(CMAKE_BUILD_TYPE Debug) <span class="comment"># for gdb tool</span></span><br></pre></td></tr></table></figure></li><li>Makefile(用以簡化反覆輸入相同的指令) <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: default</span><br><span class="line">default:</span><br><span class="line"><span class="built_in">rm</span> -rf build</span><br><span class="line"><span class="built_in">mkdir</span> build</span><br></pre></td></tr></table></figure></li><li><code>.cpp</code> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;math.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;fstream&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;string&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/torch.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;torch/script.h&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    torch::jit::script::Module model=torch::jit::<span class="built_in">load</span>(<span class="string">&quot;/path/to/model_jit.pth&quot;</span>);</span><br><span class="line">    <span class="type">double</span> test[<span class="number">2</span>][<span class="number">2</span>]=&#123;<span class="number">0.0</span>&#125;;</span><br><span class="line">    <span class="type">double</span> u_st[<span class="number">1</span>][<span class="number">4</span>]=&#123;&#123;<span class="number">1.0</span> <span class="number">2.0</span> <span class="number">3.0</span> <span class="number">4.0</span>&#125;&#125;;</span><br><span class="line">    <span class="keyword">auto</span> options = torch::<span class="built_in">TensorOptions</span>().<span class="built_in">dtype</span>(torch::kFloat32);</span><br><span class="line">    torch::Tensor x, out;</span><br><span class="line">    vector&lt;torch::jit::IValue&gt; input;</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*(input) array into tensor into vector*/</span></span><br><span class="line">    x=torch::<span class="built_in">from_blob</span>(u_st, &#123;<span class="number">1</span>,<span class="number">4</span>&#125;, options);</span><br><span class="line">    input.<span class="built_in">clear</span>();</span><br><span class="line">    input.<span class="built_in">push_back</span>(x);</span><br><span class="line"></span><br><span class="line">    <span class="comment">/*input into output(tensor)*/</span></span><br><span class="line">    out=model.forward(input).<span class="built_in">toTensor</span>();</span><br><span class="line">    </span><br><span class="line">    <span class="comment">/*(output)tensor into 2D-array*/</span></span><br><span class="line">    cout&lt;&lt; <span class="string">&quot;out[0][j]:   &quot;</span>&lt;&lt;endl;</span><br><span class="line">    <span class="keyword">for</span>(<span class="type">int</span> i=<span class="number">0</span>; i&lt;<span class="number">2</span>; i++)&#123;</span><br><span class="line">        <span class="keyword">for</span>(<span class="type">int</span> j=<span class="number">0</span>; j&lt;<span class="number">2</span>; j++)&#123;</span><br><span class="line">            test[i][j]=out[<span class="number">0</span>][i*(<span class="number">2</span>)+j].<span class="built_in">item</span>&lt;<span class="type">float</span>&gt;();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li></ul><h3 id="build-and-run">Build and run</h3><ul><li>Build <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">repository$ make</span><br><span class="line">repository$ <span class="built_in">cd</span> build</span><br><span class="line">repository/build$ cmake ..</span><br><span class="line">repository/build$ cmake --build . --config Release</span><br></pre></td></tr></table></figure></li><li>Run <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">repository/build$ ./my_project</span><br></pre></td></tr></table></figure> or run in <code>gdb</code> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">repository/build$ gdb ./my_project</span><br><span class="line">(gdb) run</span><br></pre></td></tr></table></figure></li></ul><h3 id="浮點數精度">浮點數精度</h3><p>Pytorch的模型預設的data type是<code>float</code> or <code>Float32</code>，是32-bit 的floating point，如果C++中使用的data type是<code>double</code> or <code>Float64</code>在運算時會出現錯誤。解決此問題需要改動以上程式3個地方。</p><ul><li>Torchscript模型的轉換需加入 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">PATH= <span class="string">&quot;model_jit.pth&quot;</span></span><br><span class="line">traced_net=torch.jit.trace(model, torch.randn(<span class="number">1</span>,<span class="number">6724</span>).to(device))</span><br><span class="line">traced_net.to(torch.float64) <span class="comment">#轉成double </span></span><br><span class="line">torch.jit.save(traced_net, PATH)</span><br></pre></td></tr></table></figure></li><li><code>.cpp</code> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">auto</span> options = torch::<span class="built_in">TensorOptions</span>().<span class="built_in">dtype</span>(torch::kFloat64); <span class="comment">//32改成64</span></span><br></pre></td></tr></table></figure></li><li><code>.cpp</code> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">test[i][j]=out[0][i*(2)+j].item&lt;double&gt;(); // float改成double</span><br></pre></td></tr></table></figure></li></ul><h3 id="是否能在其他語言中使用pytorch模型">是否能在其他語言中使用Pytorch模型?</h3><p>以下是<a href="https://pytorch.org/docs/stable/jit.html"><em>Pytorch documentation</em></a>下方對於Torchscript的描述：</p><blockquote><p>TorchScript is a way to create serializable and optimizable models from PyTorch code. Any TorchScript program can be saved from a Python process and loaded in a process where there is no Python dependency.</p></blockquote><p>免除對於python的相依，Torchscript連結到其他語言需要 front-end API(Application Programming Interface)，目前在官方文件中僅有C++，所以我的理解是目前還無法藉由相同方法在其他語言使用pytorch model。</p><h3 id="python-vs-c-作為pytorch前端">Python vs C++ 作為pytorch前端</h3><p>藉由官方所提供的工具可以將整個過程，包括訓練過程都放到C++中，但若沒有強烈的需求官方建議不需要這麼做(<a href="https://pytorch.org/cppdocs/frontend.html"><em>link</em></a>)，pytorch以python作為前端能夠維持較良好的使用者體驗品質，而因為pytorch即便以python作為前端，需要計算需求時就會呼叫C++ 讓C++ 去完成，所以相比以C++作為前端，兩者在計算效率上並沒有太多差異。</p><h3 id="alternatives">Alternatives</h3><ul><li><a href="https://towardsdatascience.com/an-empirical-approach-to-speedup-your-bert-inference-with-onnx-torchscript-91da336b3a41"><em>ONNX</em></a><br /><blockquote><p>ONNX format models can painlessly be exported from PyTorch, and experiments have shown ONNX Runtime to be outperforming TorchScript.</p></blockquote></li></ul>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> cmake </tag>
+            
+            <tag> C++ </tag>
+            
+            <tag> Computation </tag>
+            
+            <tag> Machine Learning </tag>
+            
+            <tag> Pytorch </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>用alias客製化bash指令</title>
+      <link href="/2022/09/07/2022-09-07-%E7%94%A8bash-alias%E5%AE%A2%E8%A3%BD%E5%8C%96bash%E6%8C%87%E4%BB%A4/"/>
+      <url>/2022/09/07/2022-09-07-%E7%94%A8bash-alias%E5%AE%A2%E8%A3%BD%E5%8C%96bash%E6%8C%87%E4%BB%A4/</url>
+      
+        <content type="html"><![CDATA[<p>"Alias"的意思是「別名」，藉由bash中<code>alias</code>這個指令可以為指令建立別名。有些可能會希望經常被使用到，卻冗長的指令可以被簡化，<code>alias</code>在這樣的情況中可以提供方便性。 <span id="more"></span></p><h3 id="bash-alias">Bash alias</h3><p>最常見的alias可能就是<code>la</code>了，而它是<code>ls -A</code>的別名，可以從<code>.bashrc</code>裡頭找到這一段script: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># some more ls aliases</span></span><br><span class="line"><span class="built_in">alias</span> ll=<span class="string">&#x27;ls -alF&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> la=<span class="string">&#x27;ls -A&#x27;</span></span><br><span class="line"><span class="built_in">alias</span> l=<span class="string">&#x27;ls -CF&#x27;</span></span><br></pre></td></tr></table></figure></p><h3 id="bash-function">Bash function</h3><p>除此之外，<code>function</code> 也是進一步可以簡化指令的工具，語法如下： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">function_name</span></span> () &#123;</span><br><span class="line">    command1</span><br><span class="line">    command2</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 以下定義一個function<code>run</code>來簡化cmake前經常反覆輸入的幾行script： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="title">run</span></span> () &#123;</span><br><span class="line">    <span class="built_in">rm</span> -rf build</span><br><span class="line">    <span class="built_in">mkdir</span> build</span><br><span class="line">    <span class="built_in">cd</span> build</span><br><span class="line">    cmake ..</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure> 如此一來即可以<code>run</code>代替四行的指令。</p><ul><li>以上的更動皆需要透過<code>source ~/.bashrc</code>（重新執行<code>.bashrc</code>）來讓新加入的指令被識別，重新開terminal也能達到相同的目的。</li></ul><h3 id="bash_aliases">.bash_aliases</h3><p>雖然可以將所有的aliases在<code>.bashrc</code>中做定義，但如此一來許多東西都會雜在一起。為了更有效的做後續的修改及管理aliases，可以將aliases在<code>.bash_aliases</code>中做定義，作法上與前面在<code>.bashrc</code>的方法相同。</p><p>需要確保的是在<code>.bashrc</code>中可以找到以下的script，如果沒有的話則可以手動加入： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> [ -f ~/.bash_aliases ]; <span class="keyword">then</span> <span class="comment">#如果.bash_aliases檔案存在</span></span><br><span class="line">    . ~/.bash_aliases <span class="comment">#執行.bash_aliases</span></span><br><span class="line"><span class="keyword">fi</span></span><br></pre></td></tr></table></figure> 在我們每次開啟terminal時，<code>.bashrc</code>就會被執行，而<code>.bash_aliases</code>也因上方的script在terminal開啟時被執行。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>修改hexo主題</title>
+      <link href="/2022/09/06/2022-09-06-%E5%BE%9E%E7%8F%BE%E6%88%90hexo%E4%B8%BB%E9%A1%8C%E5%AE%A2%E8%A3%BD%E5%8C%96blog/"/>
+      <url>/2022/09/06/2022-09-06-%E5%BE%9E%E7%8F%BE%E6%88%90hexo%E4%B8%BB%E9%A1%8C%E5%AE%A2%E8%A3%BD%E5%8C%96blog/</url>
+      
+        <content type="html"><![CDATA[<p>以Hexo作為blog框架帶給我許多便利性，包括攥寫文章是透過Markdown語法，編輯可以透過VScode完成，所學的技術可以相扣在一起。<span id="more"></span>hexo架構下有許多開源的主題，提供了對於css以及js相當不熟悉的我一個相當友善的起點，我選擇了NEXT作主題。</p><h3 id="problems-about-next">Problems about NEXT</h3><p>剛開始使用時，我選擇sky作為主題，但很快的就出現了問題，在手機中瀏覽網誌時程式欄的文字會忽大忽小，不規律不定時的出現，對於css生疏的我無法就根解決問題，換了幾個主題問題依舊。於是我選擇了NEXT，擁有眾多開源者的貢獻我認為這樣子的issue應該不會存在，也確實在我使用了NEXT這個問題就沒有出現過了。</p><h3 id="修改hexo主題">修改hexo主題</h3><p>NEXT主題雖然功能完善，但卻存在許多不合我喜好的設計，於是我著手修改成我喜歡的模樣。我使用的方法很簡單但解決了我幾乎所有想要修改的地方，流程如下：<br />1. 在希望修改的地方右鍵Inspect檢視網頁原始碼。<br />2. 在原始碼中找到相對應的參數。<br />3. 回到blog的repository搜尋並修改參數所在之處。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> 隨手記 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CFDLabServerManual 下</title>
+      <link href="/2022/09/04/2022-09-04-CFDLabServerManual-2/"/>
+      <url>/2022/09/04/2022-09-04-CFDLabServerManual-2/</url>
+      
+        <content type="html"><![CDATA[<p>這篇是CFDLab的server灌系統流程下篇，內容包括infiniband driver及cuda的安裝，以及小型server的ip設定。<span id="more"></span>感謝實驗室前輩的傳承和同學們的努力。</p><h3 id="安裝infiniband-driver及compiler">安裝InfiniBand driver及compiler</h3><h4 id="infiniband">Infiniband</h4><p>安裝包USB把<code>MLNX_OFED...5.0.2..</code>解壓檔縮放到桌面。<br />安裝infiniband driver：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> ~/Desktop <span class="comment">#如果路徑不在桌面要先進桌面</span></span><br><span class="line">tar zxvf MLNX_OFED...5.0.2.. <span class="comment">#解壓縮放到桌面的壓縮檔</span></span><br><span class="line"><span class="built_in">cd</span> MLNX... <span class="comment">#進到解壓縮後的資料夾</span></span><br><span class="line">./mlnx...install <span class="comment">#進行安裝</span></span><br><span class="line">/etc/init.d/openibd restart <span class="comment">#重啟</span></span><br><span class="line">reboot <span class="comment">#可跳過</span></span><br><span class="line">systemctl start opensmd <span class="comment">#重啟服務，OpenSM是InfiniBand兼容的子網管理器和子網管理員，需要它来初始化InfiniBand硬體。</span></span><br><span class="line">systemctl <span class="built_in">enable</span> opensmd <span class="comment">#啟動服務</span></span><br></pre></td></tr></table></figure><p>檢查 infiniband狀態，接上infiband後再進行（用外面的switch或是抬進server房）：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ibstat <span class="comment">#檢查 infiniband狀態，如果Active Linkup 代表 ok </span></span><br></pre></td></tr></table></figure><h4 id="小server設定ip流程大型server不用">小server設定ip流程（大型server不用）</h4><p>(小server因為無法直接設定infiniband的ip需要繞路（<code>ibstate</code>會顯示"cannot found uuid" ）)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip a <span class="comment">#檢查infiniband的mac碼，需記下後面要用</span></span><br><span class="line">uuidgen ib0 <span class="comment">#新增ib0的uuid，一樣要記下後面要用</span></span><br><span class="line">vi /etc/sysconfig/network-script/ifcfg-ib0 <span class="comment">#新增ib0的網路設定</span></span><br></pre></td></tr></table></figure><p>檔案中設定： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">TYPE=InfiniBand</span><br><span class="line">PROXY_METHOD=none</span><br><span class="line">BROWSER_ONLY=no</span><br><span class="line">BOOTPROTO=none</span><br><span class="line">IPADDR=192.168.170.13X <span class="comment">#看第幾台</span></span><br><span class="line">PREFIX=24</span><br><span class="line">DEFROUTE=<span class="built_in">yes</span></span><br><span class="line">IPV4_FAILURE_FATAL=no</span><br><span class="line">IPV6INIT=<span class="built_in">yes</span></span><br><span class="line">IPV6_AUTOCONF=<span class="built_in">yes</span></span><br><span class="line">IPV6_DEFROUTE=<span class="built_in">yes</span></span><br><span class="line">IPV6_FAILURE_FATAL=no</span><br><span class="line">UUID=XXXXX.... <span class="comment">#前面uuidgen跑出來的值</span></span><br><span class="line">HWADDR=XX:XX:XX:XX... <span class="comment">#ip a 抓到的mac碼</span></span><br><span class="line">DEVICE＝ib0</span><br><span class="line">NAME=ib0</span><br><span class="line">IPV6_PRIVACY=no</span><br><span class="line">IPV6_ADDR_GEN_MODE=stable-privacy</span><br><span class="line">NAME=InfiniBand</span><br><span class="line">ONBOOT=<span class="built_in">yes</span></span><br></pre></td></tr></table></figure> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 確定連線狀態：</span></span><br><span class="line">ifup ib0 <span class="comment">#打開網路</span></span><br><span class="line">ping 192.168.170.X <span class="comment">#檢查看看</span></span><br></pre></td></tr></table></figure></p><h4 id="cuda">CUDA</h4><p>安裝包USB把<code>cuda...10.2.89..run</code>解壓檔縮放到桌面。(檔案很大要等一下)<br /><code>ctrl</code>+<code>alt</code>+<code>F1</code>(or <code>F2</code>, <code>F3</code>)進入文字界面。</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">cd</span> /root/Desktop <span class="comment">#進入桌面</span></span><br><span class="line">sh cuda...10.2.89..run</span><br></pre></td></tr></table></figure><p>等待程式執行提出問題，輸入<code>accept</code>。<br />之後進入安裝介面，選項全選。<br />（等超久，如果中途沒有自動跳出就安裝成功！！）</p><p>中途failed的解決方式：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /var/log/nvidia-installer.log <span class="comment">#看哪裡出錯</span></span><br></pre></td></tr></table></figure><p>根據以上的資訊除錯：</p><ul><li>如果跟 X server有關： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl stop gdm</span><br></pre></td></tr></table></figure></li><li>如果跟 nouveau 有關： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">startx <span class="comment">#回到圖形界面</span></span><br><span class="line">vi /etc/modprobe.d/blacklist-nouveau.conf</span><br></pre></td></tr></table></figure> 加入以下內容： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">blacklist nouveau</span><br><span class="line">options nouveau modeset=0</span><br></pre></td></tr></table></figure> 回到terminal： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo dracut --force</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure></li><li>防火牆 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl disable firewalld</span><br><span class="line">systemctl stop firewalld</span><br></pre></td></tr></table></figure></li></ul><p>確認： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nvidia -smi <span class="comment">#有抓到顯卡就ok</span></span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Computation </tag>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CFDLabServerManual 上</title>
+      <link href="/2022/09/04/2022-09-04-CFDLabServerManual-1/"/>
+      <url>/2022/09/04/2022-09-04-CFDLabServerManual-1/</url>
+      
+        <content type="html"><![CDATA[<p>這篇是CFDLab的server灌系統流程上篇，內容包括Linux的安裝，IP設定，NFS設定 及 NIS設定。<span id="more"></span>感謝實驗室前輩的傳承和同學們的努力。</p><h3 id="linux-installation">Linux installation</h3><p>製作USB開機隨身碟。 插入USB開機隨身碟。 進bios（開機之後狂按delete, F2 or F10，依據主機板而不同）。</p><h4 id="進bios要做兩件事">進bios要做兩件事：</h4><ol type="1"><li>進階頻率設定 -&gt; 進階CPU -&gt; Hyper-Threading技術 -&gt; 關閉（不同廠家的Hyper-Threading 位置不同需要找一下）</li><li>BIOS功能 -&gt; 啟動優先權一（Boot Priority I）-&gt; 選擇USB開機隨身碟(UEFI...Transcend...16GB...) (如果沒有出現UEFI，重開機)<br />改完以上兩件事後， Save and exit。</li></ol><p>開機後選擇Install Scientific 7.7。</p><h4 id="install-system">Install system:</h4><ol type="1"><li>DATE &amp; TIME 選 Taiwan(Taipei)，設定時間。</li><li>語言設English(絕對不要改)</li><li>鍵盤設US(絕對不要改)</li><li>Software Selection(見Appendix I)</li><li><p>Installation Destination:<br />Create-&gt; Standard-&gt; 分配容量<br />先將原有的都刪除，</p><table><thead><tr class="header"><th>名稱</th><th>容量</th><th>資料型態</th></tr></thead><tbody><tr class="odd"><td>/boot</td><td>10GiB</td><td>ext4</td></tr><tr class="even"><td>Swap</td><td>10GiB</td><td>swap</td></tr><tr class="odd"><td>/boot/efi</td><td>10GiB</td><td>EFI</td></tr><tr class="even"><td>/</td><td>150GiB</td><td>ext4</td></tr><tr class="odd"><td>/home</td><td>其他全部給它(看free)</td><td>ext4</td></tr></tbody></table></li></ol><p>以上弄完進到下一個頁面：<br /><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Root password: cfd(<span class="built_in">shift</span>)2603</span><br><span class="line">User creation: CFD-ibX(看第幾台，e.g. 第三台就輸入CFD-ib3)</span><br><span class="line">User password: CFD(<span class="built_in">shift</span>)2603</span><br></pre></td></tr></table></figure></p><p>關機並移除USB開機隨身碟。</p><h3 id="server-設定">Server 設定</h3><p>開機並以root進入系統（進入系統要選擇not listed，帳號打root），第一次登入時有關網路設定的全部跳過，最後的 <strong>Privacy</strong> 要 off。 桌面點右鍵選擇<code>open terminal</code> 進到終端機畫面。</p><h4 id="第一步關閉selinuxsecurity-enhanced-linux">第一步關閉SELinux(Security Enhanced Linux)：</h4><p>用文字編輯器<code>vi</code>編輯 SELinux 設定檔： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/selinux/config</span><br></pre></td></tr></table></figure> 檔案中加入：（輸入<code>i</code>即可該使打字，輸入<code>esc</code>後輸入<code>:wq</code>儲存離開。（完整指令可以參考<a href="https://www.csie.ntu.edu.tw/~r92094/c++/vi_command.htm">這篇</a>） <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure> 關閉防火牆： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disabled firewalld</span><br></pre></td></tr></table></figure></p><h4 id="第二步-設定ip">第二步 設定IP：</h4><p>進入圖形界面的設定（畫面右上角時間的地方，左下角的齒輪）。<br />Bluetooth(Infiniband)打開。</p><p><strong>設定Infiniband:</strong><br />Method: Infiniband -&gt; Manual。<br />IPV4(下方Address，看第幾台，e.g. 第三台就輸入192.168.170.133)</p><table><thead><tr class="header"><th>Address</th><th>Netmask</th><th>Gateway</th></tr></thead><tbody><tr class="odd"><td>192.168.170.13X</td><td>255.255.255.0</td><td>(不要設定)</td></tr></tbody></table><h4 id="第三步-nfsnetwork-file-system讓用戶端支主機可以同步mount伺服器支硬碟分享資料">第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</h4><p>接上ethernet(白色)，並上網檢查連線狀態。<br />下載三個套件：<code>glibc-utils</code>, <code>nfs-utils</code>, <code>portmap</code>：</p><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install glibc-utils</span><br><span class="line">yum -y install nfs-utils</span><br><span class="line">yum -y install portmap</span><br></pre></td></tr></table></figure><p><strong>製作host檔（讓每台電腦都可認出彼此）： </strong></p><p>編輯 <code>/etc/hosts</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure><p>檔案中加入：（看有實驗室有幾台）</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">192.168.170.130 CFDLab CFDLab</span><br><span class="line">192.168.170.131 CFDLab-ib1 CFDLab-ib1</span><br><span class="line">192.168.170.132 CFDLab-ib2 CFDLab-ib2</span><br><span class="line">192.168.170.133 CFDLab-ib3 CFDLab-ib3</span><br><span class="line">192.168.170.134 CFDLab-ib4 CFDLab-ib4</span><br><span class="line">192.168.170.135 CFDLab-ib5 CFDLab-ib5</span><br><span class="line">192.168.170.136 CFDLab-ib6 CFDLab-ib6</span><br><span class="line">192.168.170.137 CFDLab-ib7 CFDLab-ib7</span><br><span class="line">192.168.170.138 CFDLab-ib8 CFDLab-ib8</span><br></pre></td></tr></table></figure><p>編輯 <code>/home/hosts</code>：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /home/hosts</span><br></pre></td></tr></table></figure><p>檔案中加入：(同<code>/etc/hosts</code>)</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">192.168.170.130 CFDLab CFDLab</span><br><span class="line">192.168.170.131 CFDLab-ib1 CFDLab-ib1</span><br><span class="line">192.168.170.132 CFDLab-ib2 CFDLab-ib2</span><br><span class="line">192.168.170.133 CFDLab-ib3 CFDLab-ib3</span><br><span class="line">192.168.170.134 CFDLab-ib4 CFDLab-ib4</span><br><span class="line">192.168.170.135 CFDLab-ib5 CFDLab-ib5</span><br><span class="line">192.168.170.136 CFDLab-ib6 CFDLab-ib6</span><br><span class="line">192.168.170.137 CFDLab-ib7 CFDLab-ib7</span><br><span class="line">192.168.170.138 CFDLab-ib8 CFDLab-ib8</span><br></pre></td></tr></table></figure><p>編輯 <code>/etc/fstab</code>： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/fstab</span><br></pre></td></tr></table></figure> 檔案中加入： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFDLab:/home    /home   nfs auto,hard,<span class="built_in">bg</span>,intr   0   0</span><br><span class="line">CFDLab:/opt     /opt    nfs auto,hard,<span class="built_in">bg</span>,intr   0   0</span><br></pre></td></tr></table></figure></p><h4 id="第四步-nisnetwork-information-system讓用戶端之主機可以分享伺服器的使用者資訊">第四步 NIS（Network Information System，讓用戶端之主機可以分享伺服器的使用者資訊）：</h4><p>下載套件與設定： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ypbind </span><br><span class="line">yum -y install yp-tools</span><br><span class="line">/bin/domainname CFD-CLUSTER <span class="comment">#設定 NIS domain的名字</span></span><br></pre></td></tr></table></figure> <strong>Config-1</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NISDOMAIN=CFD-CLUSTER</span><br></pre></td></tr></table></figure> <strong>Config-2</strong><br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yp.conf</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Domain CFD-CLUSTER server CFDLab</span><br></pre></td></tr></table></figure> <strong>Config-3</strong><br /><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/idmapd.conf</span><br></pre></td></tr></table></figure> 檔案中加入: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Domain=CFD-CLUSTER</span><br></pre></td></tr></table></figure> <strong>Config-4</strong> <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nsswitch.conf</span><br></pre></td></tr></table></figure> 檔案中找到以下區塊，並修改成以下內容: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Passwd: files nisplus nis</span><br><span class="line">shadow: files nisplus nis</span><br><span class="line">Group: files nisplus nis</span><br><span class="line">Hosts: files dns nisplus nis</span><br></pre></td></tr></table></figure> 可以用 <code>setup</code> 快速檢查。</p>]]></content>
+      
+      
+      
+        <tags>
+            
+            <tag> Computation </tag>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什麼是C++巨集</title>
+      <link href="/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/"/>
+      <url>/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/</url>
+      
+        <content type="html"><![CDATA[<p>C++ 巨集所使用的語言不屬於C語言的範疇，而是Preprocessor所使用的語法。在<a href="https://en-chou.github.io/2022/09/02/2022-09-02%E4%BD%BF%E7%94%A8%20%22#define%22%20%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/"><em>這篇文章</em></a>初步認識了Preprocess語法，那這篇要接續認識C++巨集。<span id="more"></span></p><p><strong>巨集</strong>是以符號代表一系列操作，用法類似函數，但是巨集指令參數直接取代巨集本體部分的代號，因此沒有資料型態檢查的功能，比較沒有保障。而習慣上會將巨集本體的代號(下例的<code>x</code>與<code>y</code>)都置於<code>()</code>內，如： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PRODUCT(x,y) ((x)*(y))</span></span><br></pre></td></tr></table></figure> (Note:<code>x</code>與<code>y</code>加入了<code>()</code>變為<code>(x)</code>與<code>(y)</code>是因為運算優先權的問題，展開即可以看得出來。)</p><p>而在preprocess語法中，在參數前加入<code>#</code>能夠使程式輸出參數本尊, <code>\</code> 所代表的是連續記號，這個則有助於撰寫多行的巨集，如： <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> Showvalue(x)&#123;    \</span></span><br><span class="line"><span class="meta">    cerr &lt;&lt; #x &lt;&lt; <span class="string">&quot;的值為 &quot;</span>&lt;&lt; x &lt;&lt; endl; \</span></span><br><span class="line"><span class="meta">    cerr &lt;&lt; <span class="string">&quot;按enter鍵繼續。&quot;</span> &lt;&lt; endl;    \</span></span><br><span class="line"><span class="meta">&#125; </span></span><br></pre></td></tr></table></figure> 在主程式中： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">double F1= 12.5;</span><br><span class="line">Showvalue(F1)</span><br></pre></td></tr></table></figure> 輸出為： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">F1的值為12.5</span><br><span class="line">按enter鍵繼續。</span><br></pre></td></tr></table></figure></p><p>reference: &lt;&lt;C++程式設計與應用&gt;&gt;</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Programming </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> Computation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>使用#define取代文字</title>
+      <link href="/2022/09/02/2022-09-02-%E4%BD%BF%E7%94%A8-define%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/"/>
+      <url>/2022/09/02/2022-09-02-%E4%BD%BF%E7%94%A8-define%E5%8F%96%E4%BB%A3%E6%96%87%E5%AD%97/</url>
+      
+        <content type="html"><![CDATA[<p>在<a href="https://en-chou.github.io/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"><em>Compile幕後</em></a>中有介紹過preprocessor，而在幾乎每一個C++ 程式中都有以<code>#</code>作為開頭，不以<code>;</code>做結的程式：<span id="more"></span> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta"># <span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="meta"># <span class="keyword">define</span> N 81</span></span><br></pre></td></tr></table></figure> 這些皆是Preprocess指令的範疇，以下的內容是關於常見的preprocess指令：<code># define</code>，功能包括：</p><h3 id="宣告某一代號的值以方便取代">宣告某一代號的值，以方便取代</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> and &amp;&amp;</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> or ||</span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> not !</span></span><br></pre></td></tr></table></figure><p>用於程式裡頭即能以 <code>and</code> 代替 <code>&amp;&amp;</code> ,如:</p><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>((a==<span class="number">0</span>)<span class="built_in">and</span>(b==<span class="number">0</span>))&#123;&#125; <span class="comment">//等效於 if((a==0)&amp;&amp;(b==0))&#123;&#125;</span></span><br></pre></td></tr></table></figure><h3 id="產生以符號代表常數稱為符號常數">產生以符號代表常數，稱為<strong>符號常數</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br></pre></td></tr></table></figure><h3 id="產生以符號代表的一系列操作稱為巨集">產生以符號代表的一系列操作，稱為<strong>巨集</strong></h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> PRODUCT(x,y) (x*y)</span></span><br></pre></td></tr></table></figure><h3 id="條件式編譯時宣告某一個代號已經被設定"><strong>條件式編譯</strong>時，宣告某一個代號已經被設定</h3><p>就如C++ 中有<code>if-else</code> 具有選擇性的功能，前處理指令中有各種語法，可以有選擇性地執行某些前處理指令，或是編譯原始程式碼的某些部分。條件式編譯的應用之處則如程式在debug與release階段被預期有不同的表現，在debug模式也許會需要程式能夠提供越詳盡的資訊越好，而在release模式則需要扼要的資訊即可。以下用一個小例子來呈現：</p><h4 id="debug-mode">Debug mode</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> debug</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> debug </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FLAG cout&lt;&lt;<span class="string">&quot;Successfully print out Hello world&quot;</span>&lt;&lt;endl</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FLAG </span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Hello world&quot;</span>&lt;&lt;endl;</span><br><span class="line">    FLAG;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在檔案的開頭<code>debug</code>有被定義過，<code>#ifdef debug</code>成立，於是程式就會有選擇性的只編譯上方第一個<code>FLAG</code>的內容，輸出如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Hello world</span><br><span class="line">Successfully print out Hello world</span><br></pre></td></tr></table></figure></p><h4 id="release-mode">Release mode</h4><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> release</span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;iostream&gt;</span></span></span><br><span class="line"><span class="keyword">using</span> <span class="keyword">namespace</span> std;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="keyword">ifdef</span> debug </span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FLAG cout&lt;&lt;<span class="string">&quot;Successfully print out Hello world&quot;</span>&lt;&lt;endl</span></span><br><span class="line"><span class="meta">#<span class="keyword">else</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">define</span> FLAG </span></span><br><span class="line"><span class="meta">#<span class="keyword">endif</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    cout&lt;&lt;<span class="string">&quot;Hello world&quot;</span>&lt;&lt;endl;</span><br><span class="line">    FLAG;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>在檔案的開頭<code>debug</code>沒有被定義過，<code>#ifdef debug</code>不成立，於是程式就會有選擇性的只編譯第二個<code>FLAG</code>的內容，輸出如下： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Hello world</span><br></pre></td></tr></table></figure></p><p>reference: &lt;&lt;C++程式設計與應用&gt;&gt;</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> Computation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什麼是 ELF</title>
+      <link href="/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/"/>
+      <url>/2022/08/15/2022-08-15-%E6%B7%BA%E5%85%A5ELF/</url>
+      
+        <content type="html"><![CDATA[<p>繼<a href="https://en-chou.github.io/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/"><em>這篇文章</em></a>，這篇將接續對於ELF(Executable Linkable Format)的認識。.o, .a與 .so皆是透過ELF檔的格式儲存，ELF檔的結構由多個區段組成，<span id="more"></span>包括file header, .text section, .data section 以及 .bss section等區段。其中"file header"描述檔案的基本屬性，包括檔案版本，目的機器型號，程式入口位址等等，".text"存放程式碼區段，".data"存放已初始化的全域變數以及靜態變數，而".bss"存放已初始化的全域變數以及靜態變數。這篇的小實驗同樣是藉由<code>main.cpp</code>這支簡單的小程式來進行。</p><p><strong>main.cpp</strong> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h3 id="查看elf檔內容">查看ELF檔內容</h3><p><code>readelf</code>這個指令可以用來詳細查看ELF檔，如下面的範例中查看 main.o的file header： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">$ readelf -h main.o</span><br><span class="line">ELF Header:</span><br><span class="line">  Magic:   7f 45 4c 46 02 01 01 00 00 00 00 00 00 00 00 00 </span><br><span class="line">  Class:                             ELF64</span><br><span class="line">  Data:                              2<span class="string">&#x27;s complement, little endian</span></span><br><span class="line"><span class="string">  Version:                           1 (current)</span></span><br><span class="line"><span class="string">  OS/ABI:                            UNIX - System V</span></span><br><span class="line"><span class="string">  ABI Version:                       0</span></span><br><span class="line"><span class="string">  Type:                              REL (Relocatable file)</span></span><br><span class="line"><span class="string">  Machine:                           Advanced Micro Devices X86-64</span></span><br><span class="line"><span class="string">  Version:                           0x1</span></span><br><span class="line"><span class="string">  Entry point address:               0x0</span></span><br><span class="line"><span class="string">  Start of program headers:          0 (bytes into file)</span></span><br><span class="line"><span class="string">  Start of section headers:          600 (bytes into file)</span></span><br><span class="line"><span class="string">  Flags:                             0x0</span></span><br><span class="line"><span class="string">  Size of this header:               64 (bytes)</span></span><br><span class="line"><span class="string">  Size of program headers:           0 (bytes)</span></span><br><span class="line"><span class="string">  Number of program headers:         0</span></span><br><span class="line"><span class="string">  Size of section headers:           64 (bytes)</span></span><br><span class="line"><span class="string">  Number of section headers:         12</span></span><br><span class="line"><span class="string">  Section header string table index: 11</span></span><br></pre></td></tr></table></figure></p><h3 id="查看elf檔各個區段的長度">查看ELF檔各個區段的長度</h3><p><code>size</code>這個指令可以用來查看ELF檔各個區段的長度。在main.cpp檔中，我們並未宣告任何的變數，於是可以看到以下在於".text"以及".data"區段的長度皆為0。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ size main.o</span><br><span class="line">   text   data    bss    dec    hexfilename</span><br><span class="line">    103      0      0    103     67main.o</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> 程式設計師的自我修養 </tag>
+            
+            <tag> ELF </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>.bashrc與環境變數設定</title>
+      <link href="/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/"/>
+      <url>/2022/08/10/2022-08-10-bashrc%E8%88%87%E7%92%B0%E5%A2%83%E8%AE%8A%E6%95%B8%E8%A8%AD%E5%AE%9A/</url>
+      
+        <content type="html"><![CDATA[<p>這一篇將用「Linux下啟動MATLAB」來認識.bashrc以及設定環境變數。 <span id="more"></span></p><h3 id="bashrc">.bashrc</h3><p>"bash"是Bourne Again SHell的簡稱，是Linux預設使用的shell。使用者，termial，shell這三個元素的相關性可以藉由「使用者，透過terminal，與shell進行溝通」來描述。在開啟terminal時，bash就會被啟動，同時載入.bashrc裡的資訊。以下用一個小實驗來呈現這一點，實驗中在<code>.bashrc</code>裡頭加入: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">echo</span> <span class="string">&#x27;BASHRC&#x27;</span></span><br></pre></td></tr></table></figure> 然後開啟terminal，即可看見terminal在開啟時，載入了<code>.bashrc</code>並且執行我們在裡頭寫的，希望它印出"BASHRC"字樣的指令： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">BASHRC</span><br><span class="line">:~$ </span><br></pre></td></tr></table></figure> 我們也可以在裡面設定一些功能，比如說terminal的個人化設置或是環境變數的設定。在<a href="">python importation</a>中有提過「python importation 的機制在於編輯 sys.path」，與在<code>.bashrc</code>中設定環境變數PATH要做的事情是相似的：編輯搜索的目錄，讓系統在一或多個工作目錄底下能夠找的到特定的檔案。</p><h3 id="加入環境變數讓matlab能夠在任何目錄下被執行">加入環境變數，讓MATLAB能夠在任何目錄下被執行</h3><p>在Linux下安裝好MATLAB後，只能藉由CLI啟動，且需先進到"matlab"的目錄底下： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">~$ <span class="built_in">cd</span> /usr/local/MATLAB/R2022a/bin/</span><br><span class="line">/usr/local/MATLAB/R2022a/bin$ ./matlab</span><br></pre></td></tr></table></figure> 需進到目錄底下才能夠啟動MATLAB有損方便性，若是我們希望能在所有目錄底下啟動matlab，則可以在<code>.bashrc</code>中加入環境變數： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">PATH=<span class="variable">$PATH</span>:/usr/local/MATLAB/R2022a/bin</span><br></pre></td></tr></table></figure> 接著藉由source重新整理（重新開啟一個terminal也會去讀取更新後的.bashr進而達到同樣的目的）： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/$ source .bashrc</span><br></pre></td></tr></table></figure> 重新載入.bashrc後即可在任一目錄底下啟動matlab： <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">~$ matlab</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>解碼.o檔</title>
+      <link href="/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/"/>
+      <url>/2022/08/09/2022-08-09-%E8%A7%A3%E7%A2%BC-o%E6%AA%94/</url>
+      
+        <content type="html"><![CDATA[<figure><img src="/images/assembler.png" alt="Assembly" /><figcaption>Assembly</figcaption></figure><p>從<a href="http://localhost:4000/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"><em>這篇</em></a>可以看到在vim中開啟main.o，而上圖充斥著1&amp;0，看似截然不同的兩個東西。 <span id="more"></span></p><p><strong>main.o in vim</strong> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">^?ELF^B^A^A^@^@^@^@^@^@^@^@^@^A^@&gt;^@^A^@^@</span><br><span class="line">^@^@^@^@^@^@^@^@^@^@X^B^@^@^@^@^@^@^@^@^@^</span><br><span class="line">@@^@^@^@^@^@@^@^L^@^K^@ó^O^^úUHå¸^@^@^</span><br><span class="line">@^@]Ã^@GCC: (Ubuntu <span class="number">9.4</span>.<span class="number">0</span>-<span class="number">1</span>ubuntu1~<span class="number">20.04</span>.<span class="number">1</span>)</span><br><span class="line"><span class="number">9.4</span>.<span class="number">0</span>^@^@^@^@^@^@^D^@^......</span><br></pre></td></tr></table></figure> 理解兩者差異的原因，可以從兩個面向去釐清：</p><h3 id="所有的檔案都是由01組成的">所有的檔案都是由0&amp;1組成的</h3><p>電腦中的檔案皆是藉由0&amp;1組成的，包括source file, object file(.o), binary file等等，但vim會將所有的binary藉由ASCII轉換成為我們所看到的plain text，這裡以一main.cpp作為例子：</p><p><strong>main.cpp in vim</strong> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p><strong>main.cpp, configured with <code>:%! xxd -b</code></strong> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">00000000</span>: <span class="number">00100011</span> <span class="number">01100100</span> <span class="number">01100101</span> <span class="number">01100110</span> <span class="number">01101001</span> <span class="number">01101110</span>  #defin</span><br><span class="line"><span class="number">00000006</span>: <span class="number">01100101</span> <span class="number">00100000</span> <span class="number">01001110</span> <span class="number">00100000</span> <span class="number">00111000</span> <span class="number">00110001</span>  <span class="keyword">e</span> <span class="keyword">N</span> <span class="number">81</span></span><br><span class="line"><span class="number">0000000</span><span class="keyword">c</span>: <span class="number">00001010</span> <span class="number">01101001</span> <span class="number">01101110</span> <span class="number">01110100</span> <span class="number">00100000</span> <span class="number">01101101</span>  .<span class="keyword">int</span> <span class="keyword">m</span></span><br><span class="line"><span class="number">00000012</span>: <span class="number">01100001</span> <span class="number">01101001</span> <span class="number">01101110</span> <span class="number">00101000</span> <span class="number">00101001</span> <span class="number">01111011</span>  ain()&#123;</span><br><span class="line"><span class="number">00000018</span>: <span class="number">00001010</span> <span class="number">00001001</span> <span class="number">01110010</span> <span class="number">01100101</span> <span class="number">01110100</span> <span class="number">01110101</span>  ..<span class="keyword">retu</span></span><br><span class="line"><span class="number">0000001</span><span class="keyword">e</span>: <span class="number">01110010</span> <span class="number">01101110</span> <span class="number">00100000</span> <span class="number">00110000</span> <span class="number">00111011</span> <span class="number">00101111</span>  rn <span class="number">0</span>;/</span><br><span class="line"><span class="number">00000024</span>: <span class="number">00101111</span> <span class="number">01110100</span> <span class="number">01101000</span> <span class="number">01101001</span> <span class="number">01110011</span> <span class="number">00100000</span>  /this </span><br><span class="line"><span class="number">0000002</span><span class="keyword">a</span>: <span class="number">01101001</span> <span class="number">01110011</span> <span class="number">00100000</span> <span class="number">01110100</span> <span class="number">01101000</span> <span class="number">01100101</span>  <span class="keyword">is</span> the</span><br><span class="line"><span class="number">00000030</span>: <span class="number">00100000</span> <span class="number">01100101</span> <span class="number">01101110</span> <span class="number">01100100</span> <span class="number">00001010</span> <span class="number">01111101</span>   end.&#125;</span><br><span class="line"><span class="number">00000036</span>: <span class="number">00001010</span> </span><br></pre></td></tr></table></figure> 而透過<code>:%! xxd -b</code> configure vim，則可以查看binary格式的原始資料，可以看到左側的binary與右側的plain text以ASCII CODE一對一的相對應(e.g, <code>00100011</code>-&gt;<code>#</code>, <code>01100100</code>-&gt;<code>d</code>)。 <code>main.o</code> 在透過vim開啟時，透過ASCII CODE decode並且呈現在vim中。而"^@"是在vim中則是對應到了<code>00000000</code>，<code>^@</code>是vim用以表示null character的格式。</p><h3 id="elf-的-binary-decoding">ELF 的 binary decoding</h3><p>不同的檔案有不同的layout，不是所有的檔案都能經過ASCII CODE decode成plain text，如<code>main.o</code> ，可以看到vim中的<code>main.o</code> 無法被閱讀；順帶一提，也並非所有檔案形式都能被decode成plain text，e.g. binary file。.o 檔的檔案形式為ELF，這種檔案可以藉由<code>objdump -dh main.o</code>來decode成plain text。</p><p><strong>main.o, configured with <code>objdump -dh main.o</code></strong> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">main.<span class="keyword">o</span>:     <span class="keyword">file</span> format elf64-x86-<span class="number">64</span></span><br><span class="line"></span><br><span class="line">Sections:</span><br><span class="line">Idx Name          Size      VMA               LMA               File off  Algn</span><br><span class="line">  <span class="number">0</span> .text         <span class="number">0000000</span><span class="keyword">f</span>  <span class="number">0000000000000000</span>  <span class="number">0000000000000000</span>  <span class="number">00000040</span>  <span class="number">2</span>**<span class="number">0</span></span><br><span class="line">                  CONTENTS, ALLOC, LOAD, READONLY, CODE</span><br><span class="line">  <span class="number">1</span> .data         <span class="number">00000000</span>  <span class="number">0000000000000000</span>  <span class="number">0000000000000000</span>  <span class="number">0000004</span><span class="keyword">f</span>  <span class="number">2</span>**<span class="number">0</span></span><br><span class="line">......</span><br></pre></td></tr></table></figure> <strong>Disassembly of section <code>.text</code>:</strong> <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">0000000000000000</span> :</span><br><span class="line">   <span class="number">0</span>:f3 <span class="number">0</span><span class="keyword">f</span> <span class="number">1</span><span class="keyword">e</span> fa          endbr64 </span><br><span class="line">   <span class="number">4</span>:<span class="number">55</span>                   push   %rbp</span><br><span class="line">   <span class="number">5</span>:<span class="number">48</span> <span class="number">89</span> e5             mov    %rsp,%rbp</span><br><span class="line">   <span class="number">8</span>:b8 <span class="number">00</span> <span class="number">00</span> <span class="number">00</span> <span class="number">00</span>       mov    $<span class="number">0</span>x0,%eax</span><br><span class="line">   d:<span class="number">5</span>d                   <span class="keyword">pop</span>    %rbp</span><br><span class="line">   <span class="keyword">e</span>:c3                   retq   </span><br></pre></td></tr></table></figure> ELF包含了很多資訊 ，而程式的邏輯放在 <code>.text</code> 裡面，如果回過頭去看<code>main.s</code>，會發現兩者的內容大同小異。</p><p>ELF是公定好，能夠被電腦所執行的資料格式。而因為電腦執行皆的資訊皆是0&amp;1，所以上圖才藉由0&amp;1去表達ELF檔，並非表面上純文字即0&amp;1。此外，實際上被執行的machine code還包括排列記憶體等其餘的工作，assembly code所轉換的machine code並不是實際上被執行的machine code的全貌。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> compile </tag>
+            
+            <tag> 程式設計師的自我修養 </tag>
+            
+            <tag> object file </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Compile幕後</title>
+      <link href="/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/"/>
+      <url>/2022/08/03/2022-08-03-Compile%E5%B9%95%E5%BE%8C/</url>
+      
+        <content type="html"><![CDATA[<p>習慣使用了具備強大功能的整合工具-- IDE(e.g Visual Studio)，執行source code(e.g .cpp)僅需點下 <code>建置(Build)</code> 然後<code>▷</code>，有時是只點下<code>▷</code>，就完成了許多希望程式去做的事，很方便，但也因此缺乏對於幕後工程的認識。<span id="more"></span>離開了IDE，使用terminal則可以透過下面的指令完成同樣的事情：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ g++ main.cpp -o main.out <span class="comment">#編譯</span></span><br><span class="line">$ ./main.out <span class="comment">#執行</span></span><br><span class="line">helloworld</span><br></pre></td></tr></table></figure><p>編譯透過以上一行簡單的指令，將我們寫的source code編譯成執行檔(在Linux上是.out，在Windows上則是.exe)，然後可以直接被電腦執行。簡單的一句指令，過程則可以分為四個步驟，分別是1. 前編譯Preprocessing, 2. 編譯compilation, 3. 組譯assembly 以及 4. 連結linking。 <img src="/images/gcc.jpg" alt="gcc compilation" /></p><p>以下用一支比helloworld更簡單的程式來呈現:</p><p><strong>main.cpp</strong> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">define</span> N 81</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="number">0</span>;<span class="comment">//this is the end</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><p>(以下的程式皆是透過vim進行解碼)</p><h3 id="preprocessing-.cpp---.ii">Preprocessing: .cpp -&gt; .ii，</h3><p>處理＃，刪除註解(//, /**/)，加以編號。 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -E main.cpp -o main.ii</span><br><span class="line">main.ii:</span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;main.cpp&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;built-in&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;/usr/include/stdc-predef.h&quot;</span> <span class="number">1</span> <span class="number">3</span> <span class="number">4</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;&lt;command-line&gt;&quot;</span> <span class="number">2</span></span><br><span class="line"># <span class="number">1</span> <span class="string">&quot;main.cpp&quot;</span></span><br><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line"> <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p><h3 id="compilation-.ii---.s">Compilation: .ii -&gt; .s，</h3><p>將 .ii檔進行分析以及最佳化，將高階語言翻譯成assembly code。屬於程式建構過程最複雜的環節。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">main.s</span><br><span class="line">$ g++ -S main.ii -<span class="keyword">o</span> main.s</span><br><span class="line">        .<span class="keyword">file</span>   <span class="string">&quot;main.cpp&quot;</span></span><br><span class="line">        .text</span><br><span class="line">        .globl  main</span><br><span class="line">        .<span class="built_in">type</span>   main, @<span class="keyword">function</span></span><br><span class="line"><span class="title">main</span>:</span><br><span class="line">.LFB0:</span><br><span class="line">        .cfi_startproc</span><br><span class="line">        endbr64</span><br><span class="line">        pushq   %rbp</span><br><span class="line">        .cfi_def_cfa_offset <span class="number">16</span></span><br><span class="line">        .cfi_offset <span class="number">6</span>, -<span class="number">16</span></span><br><span class="line">        movq    %rsp, %rbp</span><br><span class="line">        .cfi_def_cfa_register <span class="number">6</span></span><br><span class="line">        movl    $<span class="number">0</span>, %eax</span><br><span class="line">        popq    %rbp</span><br><span class="line">        .cfi_def_cfa <span class="number">7</span>, <span class="number">8</span></span><br><span class="line">        <span class="keyword">ret</span></span><br><span class="line">        .cfi_endproc</span><br><span class="line">.LFE0:</span><br><span class="line">        .size   main, .-main</span><br><span class="line">        .ident  <span class="string">&quot;GCC: (Ubuntu 9.4.0-1ubuntu1~20.04.1) 9.4.0&quot;</span></span><br><span class="line">        .section        .note.GNU-stack,<span class="string">&quot;&quot;</span>,@progbits</span><br><span class="line">        .section        .note.gnu.property,<span class="string">&quot;a&quot;</span></span><br><span class="line">        .align <span class="number">8</span></span><br><span class="line">        .long    <span class="number">1</span><span class="keyword">f</span> - <span class="number">0</span><span class="keyword">f</span></span><br><span class="line">        .long    <span class="number">4</span><span class="keyword">f</span> - <span class="number">1</span><span class="keyword">f</span></span><br><span class="line">        .long    <span class="number">5</span></span><br><span class="line"><span class="number">0</span>:</span><br><span class="line">        .<span class="built_in">string</span>  <span class="string">&quot;GNU&quot;</span></span><br><span class="line"><span class="number">1</span>:</span><br><span class="line">        .align <span class="number">8</span></span><br><span class="line">        .long    <span class="number">0</span>xc0000002</span><br><span class="line">        .long    <span class="number">3</span><span class="keyword">f</span> - <span class="number">2</span><span class="keyword">f</span></span><br><span class="line"><span class="number">2</span>:</span><br><span class="line">        .long    <span class="number">0</span>x3</span><br><span class="line"><span class="number">3</span>:</span><br><span class="line">        .align <span class="number">8</span></span><br><span class="line"><span class="number">4</span>:</span><br></pre></td></tr></table></figure></p><h3 id="assembly-.s---.o">Assembly: .s -&gt; .o，</h3><p>將assembly code一一翻譯成machine code。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ g++ -<span class="keyword">c</span> main.s -<span class="keyword">o</span> main.<span class="keyword">o</span> </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^@^@^@^@^@^A^@&gt;^@^A^@^@</span><br><span class="line">^@^@^@^@^@^@^@^@^@^@X^B^@^@^@^@^@^@^@^@^@^</span><br><span class="line">@@^@^@^@^@^@@^@^L^@^K^@ó^O^^úUHå¸^@^@^</span><br><span class="line">@^@]Ã^@GCC: (Ubuntu <span class="number">9.4</span>.<span class="number">0</span>-<span class="number">1</span>ubuntu1~<span class="number">20.04</span>.<span class="number">1</span>)</span><br><span class="line"><span class="number">9.4</span>.<span class="number">0</span>^@^@^@^@^@^@^D^@^......</span><br></pre></td></tr></table></figure></p><h3 id="linking-.o-static-library---.out">Linking: .o + static library -&gt; .out，</h3><p>將.o檔連結static library(一大堆.o檔)形成.out檔。 <figure class="highlight vim"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$ ld -static (一大堆.<span class="keyword">o</span>檔) </span><br><span class="line">^?ELF^B^A^A^@^@^@^@^C^@&gt;^@^A^@^@^@À^<span class="keyword">P</span>^@^@^</span><br><span class="line">^@^@@^@^@^@^@^@^@^@è;^@^@^@^@^@^@^@^@^@^@@</span><br><span class="line">^@<span class="number">8</span>^@^M^@@^@^_^@^^^@^F^@^@^@^D^@^@^@@^@^@^</span><br><span class="line">@^@^@^@^@@^@^@^@^@^@^@^@@^......</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> C++ </tag>
+            
+            <tag> compile </tag>
+            
+            <tag> 程式設計師的自我修養 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>什麼是CMake與Make</title>
+      <link href="/2022/07/27/2022-07-27-CMake%E8%88%87Make/"/>
+      <url>/2022/07/27/2022-07-27-CMake%E8%88%87Make/</url>
+      
+        <content type="html"><![CDATA[<p>在認識modmesh的過程中，包括modmesh本身以及延伸的小實作，幾乎處處可見make及CMake的身影；雖然對它們的認識甚少，但操作的過程中可以隱約感受到make與cmake似乎存在某種相依性，擁有類似的機制。同樣仰賴導演(make, cmake)與腳本(Makefile, CMakeList.txt)，也就是<code>make</code>仰賴<code>Makefile</code>, 而<code>cmake</code>仰賴<code>CMakeList.txt</code>，但兩者做著不一樣的事情。 <span id="more"></span></p><h3 id="cmake">CMake</h3><p>CMake 用來產生跨平台的專案建置文件，在 windows 下它會生成 visual studio 的專案檔 (.sln) codeblock eclipse，在 linux 下它會生成 Makefile，雖然makefile是可以人工生成，但當手寫makefile並不方便，也不能跨平台使用，於是<code>cmake</code>依平台生成建置文件即可帶來便利性。（最終端的<code>CMakeLists.txt</code>依然是由依然是由人工攥寫）</p><p><strong>CMakeList.txt:</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.4)</span><br><span class="line">PROJECT(pybind_vid)</span><br><span class="line">add_subdirectory(pybind11)</span><br><span class="line">pybind11_add_module(<span class="built_in">test</span> test.cpp)</span><br></pre></td></tr></table></figure> <strong>cmake:</strong> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/demo$ <span class="built_in">ls</span></span><br><span class="line">CMakeLists.txt  pybind11  test.cpp</span><br><span class="line">~/git-repo/demo$ <span class="built_in">mkdir</span> build <span class="comment">#創建build這個directory，區分原始文件以及CMake過程的中間產物</span></span><br><span class="line">~/git-repo/demo$ <span class="built_in">ls</span> build/</span><br><span class="line"><span class="comment"># (empty)</span></span><br><span class="line">~/git-repo/demo$ <span class="built_in">cd</span> build/</span><br><span class="line">~/git-repo/demo/build$ cmake .. <span class="comment">#執行cmake</span></span><br><span class="line">~/git-repo/demo/build$ <span class="built_in">ls</span> <span class="comment">#執行後，build底下就會有Makefile</span></span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11</span><br></pre></td></tr></table></figure></p><h3 id="make">Make</h3><p><code>make</code>是用來自動化shell script，在<a href="https://en-chou.github.io/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/"><em>這篇</em></a>demo了一個手動生成Makefile的範例。</p><h3 id="cmake-and-make-協作使用之過程">CMake and make 協作使用之過程：</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/demo$ <span class="built_in">ls</span></span><br><span class="line">build  CMakeLists.txt  pybind11  test.cpp <span class="comment">#cmake所根據的CMakeLists.txt存在此目錄底下</span></span><br><span class="line">~/git-repo/demo/build$ cmake .. <span class="comment">#cmake根據CMakeLists.txt 生成 Makefile</span></span><br><span class="line">~/git-repo/demo/build$ <span class="built_in">ls</span></span><br><span class="line">CMakeCache.txt  CMakeFiles  cmake_install.cmake  Makefile  pybind11 <span class="comment">#cmake所生成的Makefile</span></span><br><span class="line">~/git-repo/demo/build$ make <span class="comment">#make根據Makefile執行裡頭的shellscript</span></span><br></pre></td></tr></table></figure>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> make </tag>
+            
+            <tag> cmake </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Bash與Makefile</title>
+      <link href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/"/>
+      <url>/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/</url>
+      
+        <content type="html"><![CDATA[<p>在認識到Linux以前，我鮮少接觸到CLI(Command Line Interface)，也花了些許時間去熟悉。一開始看它也許會感到有些震懾，但並沒有想像中的複雜，單純是將我們習慣使用的GUI(Graphical User Interface)改成CLI，滑鼠改成鍵盤，簡單做了轉換。 <span id="more"></span> <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install qt6-default <span class="comment">#以superuser身份安裝qt6-default</span></span><br><span class="line"><span class="built_in">mkdir</span> build/install -p <span class="comment">#新增資料夾</span></span><br><span class="line"><span class="built_in">cd</span> build/install <span class="comment">#切換目錄到build/install</span></span><br><span class="line"><span class="built_in">rm</span> –rf build <span class="comment">#remove文件, recursively.</span></span><br></pre></td></tr></table></figure></p><h3 id="makefile">makefile</h3><p>make 以及 makefile讓我們得以自動化我們想執行的command line。比如說modmesh裡面中clean這個target，若是藉由一行一行的command line我們會需要輸入以下的指令， <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure> 但如果已經在Makefile中寫好了clean這個target，將一行行的command line寫成了shell script。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br></pre></td></tr></table></figure> 我們就可以去藉由make，直接輸入 <code>make clean</code> 去執行我們想要去執行的內容，不用逐步命令。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make clean</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> make </tag>
+            
+            <tag> bash </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>用C++寫python module</title>
+      <link href="/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/"/>
+      <url>/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/</url>
+      
+        <content type="html"><![CDATA[<p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<span id="more"></span> <img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&amp;name=small" alt="C++ chats with python" /></p><blockquote><p>其它的程式語言對你作力學是沒用的，作計算就三本柱 Python、C++、Fortran 足矣，連 C 都沒什麼用處。</p></blockquote><p>Python在計算的速度上相較於C++非常的緩慢，這個<a href="https://www.youtube.com/watch?v=3PcIJKd1PKU&amp;ab_channel=xmdi"><em>demo</em></a>很清楚地呈現了這件事。</p><p>以計算力學為題，python在tool的開發，input的整合上具有優勢，但是在計算效能上的表現不佳，於是就有了許多與python互相支援的foreign function interface(FFI)，如 swig, cython, pybind11。截python所長，補C++所短 (or vice versa) ，似乎是做出更好的力學程式不可或缺的元素，pybind扮演的角色於是顯現。接下來就簡單用C++寫一個python的module:</p><h3 id="寫-.cpp.h-file">寫 .cpp/.h file</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pybind11/pybind11.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">square</span><span class="params">(<span class="type">double</span> i)</span></span>&#123;</span><br><span class="line"><span class="keyword">return</span> i*i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(test, handle)&#123; <span class="comment">//Module 的attributes 會在這裡做定義</span></span><br><span class="line">        handle.<span class="built_in">doc</span>()=<span class="string">&quot;This is my doc&quot;</span>;</span><br><span class="line">        handle.<span class="built_in">def</span>(<span class="string">&quot;sqrt&quot;</span>, &amp;square);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h3 id="寫-cmakelist.txt">寫 CMakeList.txt</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.4)</span><br><span class="line">PROJECT(pybind_vid)</span><br><span class="line">add_subdirectory(pybind11)</span><br><span class="line">pybind11_add_module(<span class="built_in">test</span> test.cpp) //test為建構的module的名稱 test.cpp是它所依據的檔案</span><br></pre></td></tr></table></figure><h3 id="build-the-module">Build the module</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build/</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure><h3 id="在python中使用前面所建立的module">在python中使用前面所建立的module</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation/test$ python3</span><br><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt; test.sqrt(3.145)</span><br><span class="line">9.891025</span><br><span class="line">&gt;&gt;&gt; test.__doc__</span><br><span class="line"><span class="string">&quot;This is my doc&quot;</span></span><br></pre></td></tr></table></figure><ul><li>dir(test)中可以看我們define的function以及attributes。</li></ul><h3 id="problem-unsolved">Problem Unsolved</h3><ul><li>What's the cause of success within <code>~/git-repo/importation/test</code> but not <code>~/git-repo/importation</code>? <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;cached&#x27;</span>, <span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;path&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>]</span><br></pre></td></tr></table></figure></li></ul>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> python </tag>
+            
+            <tag> C++ </tag>
+            
+            <tag> Computation </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Python importation 機制</title>
+      <link href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/"/>
+      <url>/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/</url>
+      
+        <content type="html"><![CDATA[<p>Comment:<br />In a well-organized C++ code base, the hpp files should always be included using the full path like:<span id="more"></span> <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/base.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/profile.hpp&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;modmesh/buffer/buffer.hpp&gt;</span></span></span><br></pre></td></tr></table></figure></p><p>「Python import 的module 並不必然要用python撰寫，也可以藉由C++」。然而我誤解了這番話的意思，進而混用了 header files 與 modules，以為以下的實驗會成功： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">import importation <span class="comment">#succeed</span></span><br><span class="line">import layer1.importation <span class="comment">#succeed</span></span><br><span class="line">import header <span class="comment">#failed</span></span><br></pre></td></tr></table></figure> 以下是python importation 整理過後的資訊：</p><h3 id="import-modmesh">import modmesh</h3><p>以<a href="https://github.com/solvcon/modmesh"><em>modmesh</em></a>作為例子， <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import modmesh</span><br></pre></td></tr></table></figure> 我原先同樣是誤會 modmesh.hpp 才是被 python import的對象；但這個對象其實是library(or python package):<code>$(MODMESH_ROOT)/modmesh</code>。如果它已經被 built, 那麼目錄裡頭就會有 <code>__init__.py</code> 以及 <code>.so</code> 。</p><h3 id="python-importation">python importation</h3><p>python importation 的機制在於編輯 <code>sys.path</code>. e,g <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">del sys.path[0]</span><br></pre></td></tr></table></figure> <code>sys.path</code>儲存的是尋找python module的路徑。在這個動作之後，原先若是被import的對象被列在<code>sys.path[0]</code>所儲存的路徑之下，那麼import就會失敗。</p><h3 id="module-written-in-c">Module written in C++</h3><p>如前所述，Python import 的module 並不必然要用python撰寫，e.g. C++, 它們是透過 import shared library(.so)來被python支援。 C++ and python 的連結可透過 swig, cython, pybind11 等等。在modmesh 中則是使用 pybind11。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> YYQA </tag>
+            
+            <tag> python </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>2022-07-08-Mini-sprint</title>
+      <link href="/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/"/>
+      <url>/2022/07/08/2022-07-08-%E9%9A%A8%E6%89%8B%E8%A8%98/</url>
+      
+        <content type="html"><![CDATA[<p>這一天是mini-sprint。Sprint的精隨就如同字面上的意思，透過實體會面的方式將問題拋出並且修正，在短時間中加速突破困難，就像衝刺一樣。這一天的內容也涵蓋幾個面向： <span id="more"></span></p><h3 id="unit-testing">Unit testing</h3><p>Unit testing是用來確保程式的品質。與我原先想像不同之處是，100％的unit testing 覆蓋率並非最為理想，100％意味著及便是無傷小雅的修正也會造成testing不通過，然而這並非我們所預期的。而在<a href="https://github.com/solvcon/modmesh"><em>modmesh</em></a>中，pytest是用來跑unit testing的target。 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure></p><h3 id="compiler-explorer"><a href="https://godbolt.org/"><em>Compiler Explorer</em></a></h3><p>We get to know that some bugs lies in runtime rather than compile time, and that same numbers of line in C may not be same number of lines in assembly code, so we may benefit from understanding assembly code. I've pasted one of my code to the left, finding the assembly language to the right is nonsense to me, and I went look up for more information, and learned that assembly code is a layer above machine code, where it replace the 0&amp;1 with English; it is also not cross platform. Comparing C with assembly code, C is easier and more efficient in programming, and the running time of the two is roughly the same, therefore it might not be practical to code assembly code. Yet, I have question upon understanding assembly code, at what extent should I expect myself to learn this in the aspect of practical?</p><p><strong>Reply: </strong><br />You do not need to worry about assembly right now, but a programmer needs to know their machines eventually. At the moment your understanding to assembly is sufficient. Just be aware of its existence.</p><h3 id="citcuit">Citcuit</h3><p>每次執行指令時，在電路端都會有不同的表現。</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mini-sprint </tag>
+            
+            <tag> YYQA </tag>
+            
+            <tag> 隨手記 </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>CMake-QA</title>
+      <link href="/2022/07/07/2022-07-07-cmake-QA/"/>
+      <url>/2022/07/07/2022-07-07-cmake-QA/</url>
+      
+        <content type="html"><![CDATA[<p>In respond of <a href="https://en-chou.github.io/2022/07/05/2022-07-05-pybind11-build-from-source-md/"><em>Note：Pybind11 build from source</em></a>, <span id="more"></span></p><h3 id="please-search-the-cmake-document-for-why-you-should-mkdir-before-building-a-cmake-project.-similarly-please-share-the-link-that-provides-the-information.">Please search the cmake document for why you should <code>mkdir</code> before building a cmake project. Similarly, please share the link that provides the information.</h3><p>So at first I went <a href="https://www.youtube.com/watch?v=nlKcXPUJGwA&amp;ab_channel=Code%2CTech%2CandTutorials"><em>here</em></a>. I get to know:</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Usage</span><br><span class="line"></span><br><span class="line">  cmake [options] path-to-source</span><br><span class="line">  cmake [options] path-to-existing-build</span><br><span class="line">  cmake [options] -S path-to-source -B path-to-build</span><br></pre></td></tr></table></figure><p>From the <a href="https://www.youtube.com/watch?v=nlKcXPUJGwA&amp;ab_channel=Code%2CTech%2CandTutorials+"><em>video</em></a>, the <code>mkdir</code> seems to be what most people do. The reason to why <code>mkdir</code> I supposed is that it helps organize our files, so that files won't be a mess. It helps, but not a necessity. In order to better confirm my words, I did a little experiment on it: <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/ .</span><br><span class="line">sudo make install</span><br></pre></td></tr></table></figure> It works as well. So I think the reason to <code>mkdir</code> is that it helps sort our files in an organized way.</p><p>While building pybind, there are files being generated, including <code>Makefile</code>; no additional <code>CMakeLists.txt</code> are generated accordingly. I'm not sure whether it is possible that cmake would generate an additional <code>CMakeLists.txt</code>. If it does, the reason to mkdir will be even obvious, i.e, overwritting will increase the difficulty if we want to undo.</p><h3 id="please-find-out-what-cmake_install_prefix-does-and-show-me-the-link-that-explains-it-to-you.">Please find out what CMAKE_INSTALL_PREFIX does, and show me the link that explains it to you.</h3><p>It designated the directory of installation (<a href="https://zh.wikibooks.org/wiki/CMake_%E5%85%A5%E9%96%80/%E8%BC%B8%E5%87%BA%E4%BD%8D%E7%BD%AE%E8%88%87%E5%AE%89%E8%A3%9D"><em>link</em></a>). On my pc, while cmake <code>-DCMAKE_INSTALL_PREFIX=/ .</code>, <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">-- Installing: /usr/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/include/pybind11/pybind11.h</span><br><span class="line">...</span><br><span class="line"><span class="keyword">while</span> cmake -DCMAKE_INSTALL_PREFIX=/usr/local .,</span><br><span class="line">...</span><br><span class="line">-- Installing: /usr/local/include/pybind11/common.h</span><br><span class="line">-- Installing: /usr/local/include/pybind11/pybind11.h</span><br><span class="line">...</span><br></pre></td></tr></table></figure></p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> YYQA </tag>
+            
+            <tag> cmake </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>Note：Pybind11 build from source</title>
+      <link href="/2022/07/05/2022-07-05-pybind11-build-from-source-md/"/>
+      <url>/2022/07/05/2022-07-05-pybind11-build-from-source-md/</url>
+      
+        <content type="html"><![CDATA[<p>Hi,<br />what I tried to reach in the past 2 days was to build the pybind11 from source. At first I failed to find information I expected in the <a href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/"><em>pdf documentation</em></a> in readme (I focused on the wrong chapter I later found). <span id="more"></span> I followed the history at first, and it was like: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -rf /usr/local/include/pybind</span><br><span class="line"><span class="built_in">cd</span> ~/git-repo</span><br><span class="line">git <span class="built_in">clone</span> (github pybind repository)</span><br><span class="line"><span class="built_in">cd</span> pybind</span><br><span class="line"><span class="built_in">mkdir</span> build/install -p</span><br><span class="line"><span class="built_in">cd</span> build/install</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local -DCMAKE_BUILD_TYPE=Release ../..</span><br></pre></td></tr></table></figure> the <code>viewer</code> could be successfully built and run. The second attempt was following was following the <a href="https://pybind11.readthedocs.io/_/downloads/en/latest/pdf/"><em>pdf documentation in readme</em></a>: <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build</span><br><span class="line">cmake -DCMAKE_INSTALL_PREFIX=/usr/local ..</span><br><span class="line">make check -j 4</span><br></pre></td></tr></table></figure> along with <code>sudo make install</code> followed.</p><p>Up to this point, I don't quite understand the purpose of <code>mkdir</code> before <code>cmake</code>, and the reason to why <code>cmake</code> and <code>sudo make install</code> seems to be the main point to build <code>pybind11</code> instead of other action such as <code>python3 setup.py install</code>, and when to define certain variable such as <code>-DCMAKE_INSTALL_PREFIX=/usr/local</code> instead of leaving it default.</p>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> YYQA </tag>
+            
+            <tag> pybind11 </tag>
+            
+            <tag> make </tag>
+            
+            <tag> cmake </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+    
+    <entry>
+      <title>軟體工程兩件事</title>
+      <link href="/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/"/>
+      <url>/2022/07/03/2022-07-03-%E8%BB%9F%E9%AB%94%E5%B7%A5%E7%A8%8B%E5%85%A9%E4%BB%B6%E4%BA%8B/</url>
+      
+        <content type="html"><![CDATA[<p>軟體工程兩件事：寫腳本與命名檔案。<span id="more"></span></p><h3 id="寫腳本---也就是寫makefile">寫腳本-- 也就是寫makefile。</h3><p>以<a href="https://github.com/solvcon/modmesh"><em>modmesh</em></a>的makefile作為例子：</p><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">.PHONY: default</span><br><span class="line">default: buildext</span><br><span class="line"></span><br><span class="line">.PHONY: clean</span><br><span class="line">clean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        make -C $(BUILD_PATH) clean</span><br><span class="line"></span><br><span class="line">.PHONY: cmakeclean</span><br><span class="line">cmakeclean:</span><br><span class="line">        <span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br><span class="line"></span><br><span class="line">.PHONY: pytest</span><br><span class="line">pytest: $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line">        <span class="built_in">env</span> $(RUNENV) \</span><br></pre></td></tr></table></figure><p>.PHONY，根據<a href="https://mropengate.blogspot.com/2018/01/makefile.html"><em>這篇文章</em></a>的說法它叫做「偽目標」，冒號之前為target，冒號之後為dependency, i.e, <code>target: dependency</code>，層層向下追朔，以上的例子來看<code>default</code>作為target，dependency則是<code>buildext</code>，此時程式就會再向下追朔，找到<code>buildext</code>作為target之處，向下追朔，或是執行裡頭的指令。</p><p>To "build the target"，則如 <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make pytest</span><br></pre></td></tr></table></figure> 同樣的事情也不見得要透過這樣的方法來進行，i.e, <code>make clean</code>在terminal中藉由以下的指令產生等效的結果： <figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">rm</span> -f $(MODMESH_ROOT)/modmesh/_modmesh$(pyextsuffix)</span><br><span class="line"><span class="built_in">rm</span> -rf $(BUILD_PATH)</span><br></pre></td></tr></table></figure> 我想這就是為什麼寫makefile會叫做寫腳本，真的是有異曲同工之妙ㄋ～</p><h3 id="命名檔案">命名檔案</h3>]]></content>
+      
+      
+      <categories>
+          
+          <category> Computer engineering </category>
+          
+      </categories>
+      
+      
+        <tags>
+            
+            <tag> mini-sprint </tag>
+            
+            <tag> YYQA </tag>
+            
+        </tags>
+      
+    </entry>
+    
+    
+  
+  
+</search>

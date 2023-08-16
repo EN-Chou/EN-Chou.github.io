@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="$mycolor_1"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="$mycolor_1">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="做這個小實驗的當天看到這個梗圖，相當呼應這個主題:">
+<meta property="og:type" content="article">
+<meta property="og:title" content="用C++寫python module">
+<meta property="og:url" content="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/index.html">
+<meta property="og:site_name" content="Echo November&#39;s Note">
+<meta property="og:description" content="做這個小實驗的當天看到這個梗圖，相當呼應這個主題:">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&name=small">
+<meta property="article:published_time" content="2022-07-20T03:41:47.000Z">
+<meta property="article:modified_time" content="2023-08-16T06:59:32.322Z">
+<meta property="article:author" content="Echo November">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="C++">
+<meta property="article:tag" content="Computation">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&name=small">
+
+
+<link rel="canonical" href="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/","path":"2022/07/20/2022-07-20-用C-寫python-module/","title":"用C++寫python module"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>用C++寫python module | Echo November's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Echo November's Note</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%AB-cpp-h-file"><span class="nav-number">1.</span> <span class="nav-text">寫 .cpp&#x2F;.h file</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%AF%AB-CMakeList-txt"><span class="nav-number">2.</span> <span class="nav-text">寫 CMakeList.txt</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Build-the-module"><span class="nav-number">3.</span> <span class="nav-text">Build the module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E5%9C%A8python%E4%B8%AD%E4%BD%BF%E7%94%A8%E5%89%8D%E9%9D%A2%E6%89%80%E5%BB%BA%E7%AB%8B%E7%9A%84module"><span class="nav-number">4.</span> <span class="nav-text">在python中使用前面所建立的module</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Problem-Unsolved"><span class="nav-number">5.</span> <span class="nav-text">Problem Unsolved</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Echo November"
+      src="/images/me_square.jpg">
+  <p class="site-author-name" itemprop="name">Echo November</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/EN-Chou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;EN-Chou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dodger25685@gmail.com" title="E-Mail → mailto:dodger25685@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/EN#2060" title="Discord → EN#2060">Discord</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/yi-en-chou/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;yi-en-chou&#x2F;" rel="noopener" target="_blank">LinkedIn</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/07/20/2022-07-20-%E7%94%A8C-%E5%AF%ABpython-module/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me_square.jpg">
+      <meta itemprop="name" content="Echo November">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="用C++寫python module | Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          用C++寫python module
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-07-20 11:41:47" itemprop="dateCreated datePublished" datetime="2022-07-20T11:41:47+08:00">2022-07-20</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>做這個小實驗的當天看到這個梗圖，相當呼應這個主題:<span id="more"></span><br><img src="https://pbs.twimg.com/media/FX8ahbrWIAMEd1I?format=jpg&name=small" alt="C++ chats with python"></p>
+<blockquote>
+<p>其它的程式語言對你作力學是沒用的，作計算就三本柱 Python、C++、Fortran 足矣，連 C 都沒什麼用處。</p>
+</blockquote>
+<p>Python在計算的速度上相較於C++非常的緩慢，這個<a target="_blank" rel="noopener" href="https://www.youtube.com/watch?v=3PcIJKd1PKU&ab_channel=xmdi"><em>demo</em></a>很清楚地呈現了這件事。</p>
+<p>以計算力學為題，python在tool的開發，input的整合上具有優勢，但是在計算效能上的表現不佳，於是就有了許多與python互相支援的foreign function interface(FFI)，如 swig, cython, pybind11。截python所長，補C++所短 (or vice versa) ，似乎是做出更好的力學程式不可或缺的元素，pybind扮演的角色於是顯現。接下來就簡單用C++寫一個python的module:</p>
+<h3 id="寫-cpp-h-file"><a href="#寫-cpp-h-file" class="headerlink" title="寫 .cpp&#x2F;.h file"></a>寫 .cpp&#x2F;.h file</h3><figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="keyword">include</span> <span class="string">&lt;pybind11/pybind11.h&gt;</span></span></span><br><span class="line"><span class="function"><span class="type">double</span> <span class="title">square</span><span class="params">(<span class="type">double</span> i)</span></span>&#123;</span><br><span class="line">	<span class="keyword">return</span> i*i;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">PYBIND11_MODULE</span>(test, handle)&#123; <span class="comment">//Module 的attributes 會在這裡做定義</span></span><br><span class="line">        handle.<span class="built_in">doc</span>()=<span class="string">&quot;This is my doc&quot;</span>;</span><br><span class="line">        handle.<span class="built_in">def</span>(<span class="string">&quot;sqrt&quot;</span>, &amp;square);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="寫-CMakeList-txt"><a href="#寫-CMakeList-txt" class="headerlink" title="寫 CMakeList.txt"></a>寫 CMakeList.txt</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cmake_minimum_required(VERSION 3.4)</span><br><span class="line">PROJECT(pybind_vid)</span><br><span class="line">add_subdirectory(pybind11)</span><br><span class="line">pybind11_add_module(<span class="built_in">test</span> test.cpp) //test為建構的module的名稱 test.cpp是它所依據的檔案</span><br></pre></td></tr></table></figure>
+<h3 id="Build-the-module"><a href="#Build-the-module" class="headerlink" title="Build the module"></a>Build the module</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">mkdir</span> build</span><br><span class="line"><span class="built_in">cd</span> build/</span><br><span class="line">cmake ..</span><br><span class="line">make</span><br></pre></td></tr></table></figure>
+<h3 id="在python中使用前面所建立的module"><a href="#在python中使用前面所建立的module" class="headerlink" title="在python中使用前面所建立的module"></a>在python中使用前面所建立的module</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">~/git-repo/importation/test$ python3</span><br><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>, <span class="string">&#x27;sqrt&#x27;</span>]</span><br><span class="line">&gt;&gt;&gt; test.sqrt(3.145)</span><br><span class="line">9.891025</span><br><span class="line">&gt;&gt;&gt; test.__doc__</span><br><span class="line"><span class="string">&quot;This is my doc&quot;</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>dir(test)中可以看我們define的function以及attributes。</li>
+</ul>
+<h3 id="Problem-Unsolved"><a href="#Problem-Unsolved" class="headerlink" title="Problem Unsolved"></a>Problem Unsolved</h3><ul>
+<li>What’s the cause of success within <code>~/git-repo/importation/test</code> but not <code>~/git-repo/importation</code>?<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt; import <span class="built_in">test</span></span><br><span class="line">&gt;&gt;&gt; <span class="built_in">dir</span>(<span class="built_in">test</span>)</span><br><span class="line">[<span class="string">&#x27;builtins&#x27;</span>, <span class="string">&#x27;cached&#x27;</span>, <span class="string">&#x27;doc&#x27;</span>, <span class="string">&#x27;file&#x27;</span>, <span class="string">&#x27;loader&#x27;</span>, <span class="string">&#x27;name&#x27;</span>, <span class="string">&#x27;package&#x27;</span>, <span class="string">&#x27;path&#x27;</span>, <span class="string">&#x27;spec&#x27;</span>]</span><br></pre></td></tr></table></figure></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/C/" rel="tag"># C++</a>
+              <a href="/tags/Computation/" rel="tag"># Computation</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/07/23/2022-07-23-Bash%E8%88%87Makefile/" rel="prev" title="Bash與Makefile">
+                  <i class="fa fa-chevron-left"></i> Bash與Makefile
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/07/16/2022-07-16-Python-importation-%E6%A9%9F%E5%88%B6/" rel="next" title="Python importation 機制">
+                  Python importation 機制 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+  <div class="comments" id="comments">
+    <script src="https://utteranc.es/client.js"
+            repo="EN-Chou/EN-Chou.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a target="_blank" rel="noopener" href='https://github.com/EN-Chou'>EN-Chou</a></span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":"all","tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
+

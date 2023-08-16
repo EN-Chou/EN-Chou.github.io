@@ -1,0 +1,357 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="$mycolor_1"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="$mycolor_1">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="執行以下的程式會出現segementation fault的原因在於記憶體配置：宣告在main()中的矩陣是被存放在stack的區域中，但stack被分配的記憶體空間並不足以存放這些矩陣。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="C++的記憶體配置-heap and stack">
+<meta property="og:url" content="http://example.com/2022/11/02/2022-11-02-C-%E5%AE%A3%E5%91%8A%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94%E5%88%86%E9%85%8D/index.html">
+<meta property="og:site_name" content="Echo November&#39;s Note">
+<meta property="og:description" content="執行以下的程式會出現segementation fault的原因在於記憶體配置：宣告在main()中的矩陣是被存放在stack的區域中，但stack被分配的記憶體空間並不足以存放這些矩陣。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-11-02T08:48:25.000Z">
+<meta property="article:modified_time" content="2023-08-16T06:59:32.318Z">
+<meta property="article:author" content="Echo November">
+<meta property="article:tag" content="C++">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/11/02/2022-11-02-C-%E5%AE%A3%E5%91%8A%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94%E5%88%86%E9%85%8D/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/11/02/2022-11-02-C-%E5%AE%A3%E5%91%8A%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94%E5%88%86%E9%85%8D/","path":"2022/11/02/2022-11-02-C-宣告與記憶體分配/","title":"C++的記憶體配置-heap and stack"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>C++的記憶體配置-heap and stack | Echo November's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Echo November's Note</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E8%A8%98%E6%86%B6%E9%AB%94%E9%85%8D%E7%BD%AE"><span class="nav-number">1.</span> <span class="nav-text">記憶體配置</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Stack"><span class="nav-number">2.</span> <span class="nav-text">Stack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Heap"><span class="nav-number">3.</span> <span class="nav-text">Heap</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Echo November"
+      src="/images/me_square.jpg">
+  <p class="site-author-name" itemprop="name">Echo November</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/EN-Chou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;EN-Chou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dodger25685@gmail.com" title="E-Mail → mailto:dodger25685@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/EN#2060" title="Discord → EN#2060">Discord</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/yi-en-chou/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;yi-en-chou&#x2F;" rel="noopener" target="_blank">LinkedIn</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/11/02/2022-11-02-C-%E5%AE%A3%E5%91%8A%E8%88%87%E8%A8%98%E6%86%B6%E9%AB%94%E5%88%86%E9%85%8D/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me_square.jpg">
+      <meta itemprop="name" content="Echo November">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="C++的記憶體配置-heap and stack | Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          C++的記憶體配置-heap and stack
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-11-02 16:48:25" itemprop="dateCreated datePublished" datetime="2022-11-02T16:48:25+08:00">2022-11-02</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>執行以下的程式會出現segementation fault的原因在於記憶體配置：宣告在<code>main()</code>中的矩陣是被存放在stack的區域中，但stack被分配的記憶體空間並不足以存放這些矩陣。<span id="more"></span></p>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span> <span class="params">()</span></span>&#123;</span><br><span class="line">	<span class="type">double</span> u[<span class="number">162</span>][<span class="number">161</span>],unew[<span class="number">162</span>][<span class="number">161</span>],uans[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line">	<span class="type">double</span> v[<span class="number">161</span>][<span class="number">162</span>],vnew[<span class="number">161</span>][<span class="number">162</span>],vans[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line">	<span class="type">double</span> p[<span class="number">162</span>][<span class="number">162</span>],pnew[<span class="number">162</span>][<span class="number">162</span>],pans[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line">	<span class="type">double</span> mdot[<span class="number">162</span>][<span class="number">162</span>],uv[<span class="number">161</span>][<span class="number">161</span>];</span><br><span class="line">	<span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<blockquote>
+<p>TY: Stack預設的上限好像是10mb，heap預設我記得是可以容納300萬個int吧，heap 的上限通常都比stack 大很多。兩者上限都可以另外設定，假設把Stack Memory 的大小設定成 1 GB 的話，你的程式一打開就會直接吃掉 1 GB 的 ram。</p>
+</blockquote>
+<h3 id="記憶體配置"><a href="#記憶體配置" class="headerlink" title="記憶體配置"></a>記憶體配置</h3><p>記憶體配置分成幾個區段，分別是：</p>
+<ul>
+<li>stack: 區域變數存放的區域。</li>
+<li>heap: 動態記憶體存放的區域。</li>
+<li>data: 全域變數存放的區域。</li>
+<li>text: 程式被存放的區域。</li>
+</ul>
+<h3 id="Stack"><a href="#Stack" class="headerlink" title="Stack"></a>Stack</h3><p>在function被呼叫後機器才會分配記憶體空間給function的區域變數，<code>return</code>過後空間就會被釋放；在下一次呼叫機器會重新分配記憶體空間給function的區域變數，亦即區域變數的記憶體位址在程式運行的過程中是有可能改變的。</p>
+<h3 id="Heap"><a href="#Heap" class="headerlink" title="Heap"></a>Heap</h3><p>C++ 中使用heap memory是透過<code>new</code>這個keyword，釋放heap memory則是透過<code>delete</code>這個keyword。與stack不同之處在於，它並不會在<code>return</code>被執行時自動釋放記憶體空間，若是在程式結束前沒有將被分配的空間透過<code>delete</code>來釋放，就會造成”memory leak”。</p>
+<blockquote>
+<p> Memory leaks in small programs might not look like a big deal, but for long-running servers, memory leaks can slow down the whole machine and eventually cause the program to crash.</p>
+</blockquote>
+<figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="type">int</span> <span class="title">main</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="type">int</span> *p=<span class="keyword">new</span> <span class="type">int</span>;</span><br><span class="line">    <span class="keyword">delete</span> p;</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>一開始所出現的問題則可以透過兩個方是解決：  </p>
+<ol>
+<li>改使用data的記憶體區段，以全域變數宣告。</li>
+<li>改使用heap的記憶體區段，以動態變數宣告。</li>
+</ol>
+<ul>
+<li>Reference: <a target="_blank" rel="noopener" href="https://courses.engr.illinois.edu/cs225/fa2022/resources/stack-heap/"><em>Stack and Heap Memory</em></a></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/C/" rel="tag"># C++</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/11/06/2022-11-06-Dynamic-Programming/" rel="prev" title="淺談Dynamic Programming">
+                  <i class="fa fa-chevron-left"></i> 淺談Dynamic Programming
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/31/2022-10-31-%E4%BF%AE%E6%94%B9-%E6%81%A2%E5%BE%A9commit/" rel="next" title="修改/恢復commit">
+                  修改/恢復commit <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+  <div class="comments" id="comments">
+    <script src="https://utteranc.es/client.js"
+            repo="EN-Chou/EN-Chou.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a target="_blank" rel="noopener" href='https://github.com/EN-Chou'>EN-Chou</a></span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":"all","tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
+

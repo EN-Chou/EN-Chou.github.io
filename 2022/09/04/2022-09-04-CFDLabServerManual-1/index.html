@@ -1,0 +1,450 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="$mycolor_1"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="$mycolor_1">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="這篇是CFDLab的server灌系統流程上篇，內容包括Linux的安裝，IP設定，NFS設定 及 NIS設定。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="CFDLabServerManual 上">
+<meta property="og:url" content="http://example.com/2022/09/04/2022-09-04-CFDLabServerManual-1/index.html">
+<meta property="og:site_name" content="Echo November&#39;s Note">
+<meta property="og:description" content="這篇是CFDLab的server灌系統流程上篇，內容包括Linux的安裝，IP設定，NFS設定 及 NIS設定。">
+<meta property="og:locale" content="en_US">
+<meta property="article:published_time" content="2022-09-04T02:09:06.000Z">
+<meta property="article:modified_time" content="2023-08-16T06:59:32.326Z">
+<meta property="article:author" content="Echo November">
+<meta property="article:tag" content="Computation">
+<meta property="article:tag" content="bash">
+<meta name="twitter:card" content="summary">
+
+
+<link rel="canonical" href="http://example.com/2022/09/04/2022-09-04-CFDLabServerManual-1/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/09/04/2022-09-04-CFDLabServerManual-1/","path":"2022/09/04/2022-09-04-CFDLabServerManual-1/","title":"CFDLabServerManual 上"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>CFDLabServerManual 上 | Echo November's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Echo November's Note</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux-installation"><span class="nav-number">1.</span> <span class="nav-text">Linux installation</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E9%80%B2bios%E8%A6%81%E5%81%9A%E5%85%A9%E4%BB%B6%E4%BA%8B%EF%BC%9A"><span class="nav-number">1.1.</span> <span class="nav-text">進bios要做兩件事：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Install-system"><span class="nav-number">1.2.</span> <span class="nav-text">Install system:</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Server-%E8%A8%AD%E5%AE%9A"><span class="nav-number">2.</span> <span class="nav-text">Server 設定</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%80%E6%AD%A5%E9%97%9C%E9%96%89SELinux-Security-Enhanced-Linux-%EF%BC%9A"><span class="nav-number">2.1.</span> <span class="nav-text">第一步關閉SELinux(Security Enhanced Linux)：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%BA%8C%E6%AD%A5-%E8%A8%AD%E5%AE%9AIP%EF%BC%9A"><span class="nav-number">2.2.</span> <span class="nav-text">第二步 設定IP：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E4%B8%89%E6%AD%A5-NFS%EF%BC%88Network-File-System%EF%BC%8C%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E6%94%AF%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%90%8C%E6%AD%A5-mount-%E4%BC%BA%E6%9C%8D%E5%99%A8%E6%94%AF%E7%A1%AC%E7%A2%9F%EF%BC%8C%E5%88%86%E4%BA%AB%E8%B3%87%E6%96%99%EF%BC%89%EF%BC%9A"><span class="nav-number">2.3.</span> <span class="nav-text">第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E7%AC%AC%E5%9B%9B%E6%AD%A5-NIS%EF%BC%88Network-Information-System%EF%BC%8C%E8%AE%93%E7%94%A8%E6%88%B6%E7%AB%AF%E4%B9%8B%E4%B8%BB%E6%A9%9F%E5%8F%AF%E4%BB%A5%E5%88%86%E4%BA%AB%E4%BC%BA%E6%9C%8D%E5%99%A8%E7%9A%84%E4%BD%BF%E7%94%A8%E8%80%85%E8%B3%87%E8%A8%8A%EF%BC%89%EF%BC%9A"><span class="nav-number">2.4.</span> <span class="nav-text">第四步 NIS（Network Information System，讓用戶端之主機可以分享伺服器的使用者資訊）：</span></a></li></ol></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Echo November"
+      src="/images/me_square.jpg">
+  <p class="site-author-name" itemprop="name">Echo November</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/EN-Chou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;EN-Chou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dodger25685@gmail.com" title="E-Mail → mailto:dodger25685@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/EN#2060" title="Discord → EN#2060">Discord</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/yi-en-chou/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;yi-en-chou&#x2F;" rel="noopener" target="_blank">LinkedIn</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/09/04/2022-09-04-CFDLabServerManual-1/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me_square.jpg">
+      <meta itemprop="name" content="Echo November">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="CFDLabServerManual 上 | Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          CFDLabServerManual 上
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-09-04 10:09:06" itemprop="dateCreated datePublished" datetime="2022-09-04T10:09:06+08:00">2022-09-04</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>這篇是CFDLab的server灌系統流程上篇，內容包括Linux的安裝，IP設定，NFS設定 及 NIS設定。<span id="more"></span>感謝實驗室前輩的傳承和同學們的努力。</p>
+<h3 id="Linux-installation"><a href="#Linux-installation" class="headerlink" title="Linux installation"></a>Linux installation</h3><p>製作USB開機隨身碟。<br>插入USB開機隨身碟。<br>進bios（開機之後狂按delete, F2 or F10，依據主機板而不同）。  </p>
+<h4 id="進bios要做兩件事："><a href="#進bios要做兩件事：" class="headerlink" title="進bios要做兩件事："></a>進bios要做兩件事：</h4><ol>
+<li>進階頻率設定 -&gt; 進階CPU -&gt; Hyper-Threading技術 -&gt; 關閉（不同廠家的Hyper-Threading 位置不同需要找一下）</li>
+<li>BIOS功能 -&gt; 啟動優先權一（Boot Priority I）-&gt; 選擇USB開機隨身碟(UEFI…Transcend…16GB…) (如果沒有出現UEFI，重開機)<br>改完以上兩件事後， Save and exit。</li>
+</ol>
+<p>開機後選擇Install Scientific 7.7。  </p>
+<h4 id="Install-system"><a href="#Install-system" class="headerlink" title="Install system:"></a>Install system:</h4><ol>
+<li><p>DATE &amp; TIME 選 Taiwan(Taipei)，設定時間。</p>
+</li>
+<li><p>語言設English(絕對不要改)</p>
+</li>
+<li><p>鍵盤設US(絕對不要改)</p>
+</li>
+<li><p>Software Selection(見Appendix I)</p>
+</li>
+<li><p>Installation Destination:<br> Create-&gt; Standard-&gt; 分配容量<br> 先將原有的都刪除，  </p>
+<table>
+<thead>
+<tr>
+<th>名稱</th>
+<th>容量</th>
+<th>資料型態</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>&#x2F;boot</td>
+<td>10GiB</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>Swap</td>
+<td>10GiB</td>
+<td>swap</td>
+</tr>
+<tr>
+<td>&#x2F;boot&#x2F;efi</td>
+<td>10GiB</td>
+<td>EFI</td>
+</tr>
+<tr>
+<td>&#x2F;</td>
+<td>150GiB</td>
+<td>ext4</td>
+</tr>
+<tr>
+<td>&#x2F;home</td>
+<td>其他全部給它(看free)</td>
+<td>ext4</td>
+</tr>
+</tbody></table>
+</li>
+</ol>
+<p>以上弄完進到下一個頁面：  </p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">Root password: cfd(<span class="built_in">shift</span>)2603</span><br><span class="line">User creation: CFD-ibX(看第幾台，e.g. 第三台就輸入CFD-ib3)</span><br><span class="line">User password: CFD(<span class="built_in">shift</span>)2603</span><br></pre></td></tr></table></figure>
+
+<p>關機並移除USB開機隨身碟。 </p>
+<h3 id="Server-設定"><a href="#Server-設定" class="headerlink" title="Server 設定"></a>Server 設定</h3><p>開機並以root進入系統（進入系統要選擇not listed，帳號打root），第一次登入時有關網路設定的全部跳過，最後的 <strong>Privacy</strong> 要 off。<br>桌面點右鍵選擇<code>open terminal</code> 進到終端機畫面。</p>
+<h4 id="第一步關閉SELinux-Security-Enhanced-Linux-："><a href="#第一步關閉SELinux-Security-Enhanced-Linux-：" class="headerlink" title="第一步關閉SELinux(Security Enhanced Linux)："></a>第一步關閉SELinux(Security Enhanced Linux)：</h4><p>用文字編輯器<code>vi</code>編輯 SELinux 設定檔：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/selinux/config</span><br></pre></td></tr></table></figure>
+<p>檔案中加入：（輸入<code>i</code>即可該使打字，輸入<code>esc</code>後輸入<code>:wq</code>儲存離開。（完整指令可以參考<a target="_blank" rel="noopener" href="https://www.csie.ntu.edu.tw/~r92094/c++/vi_command.htm">這篇</a>）</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">SELINUX=disabled</span><br></pre></td></tr></table></figure>
+<p>關閉防火牆：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl disabled firewalld</span><br></pre></td></tr></table></figure>
+
+<h4 id="第二步-設定IP："><a href="#第二步-設定IP：" class="headerlink" title="第二步 設定IP："></a>第二步 設定IP：</h4><p>進入圖形界面的設定（畫面右上角時間的地方，左下角的齒輪）。<br>Bluetooth(Infiniband)打開。   </p>
+<p><strong>設定Infiniband:</strong><br>Method: Infiniband -&gt; Manual。<br>IPV4(下方Address，看第幾台，e.g. 第三台就輸入192.168.170.133)</p>
+<table>
+<thead>
+<tr>
+<th>Address</th>
+<th>Netmask</th>
+<th>Gateway</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>192.168.170.13X</td>
+<td>255.255.255.0</td>
+<td>(不要設定)</td>
+</tr>
+</tbody></table>
+<h4 id="第三步-NFS（Network-File-System，讓用戶端支主機可以同步-mount-伺服器支硬碟，分享資料）："><a href="#第三步-NFS（Network-File-System，讓用戶端支主機可以同步-mount-伺服器支硬碟，分享資料）：" class="headerlink" title="第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）："></a>第三步 NFS（Network File System，讓用戶端支主機可以同步(mount)伺服器支硬碟，分享資料）：</h4><p>接上ethernet(白色)，並上網檢查連線狀態。<br>下載三個套件：<code>glibc-utils</code>, <code>nfs-utils</code>, <code>portmap</code>：  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install glibc-utils</span><br><span class="line">yum -y install nfs-utils</span><br><span class="line">yum -y install portmap</span><br></pre></td></tr></table></figure>
+<p>**製作host檔（讓每台電腦都可認出彼此）： ** </p>
+<p>編輯 <code>/etc/hosts</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/hosts</span><br></pre></td></tr></table></figure>
+
+<p>檔案中加入：（看有實驗室有幾台）</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">192.168.170.130 CFDLab CFDLab</span><br><span class="line">192.168.170.131 CFDLab-ib1 CFDLab-ib1</span><br><span class="line">192.168.170.132 CFDLab-ib2 CFDLab-ib2</span><br><span class="line">192.168.170.133 CFDLab-ib3 CFDLab-ib3</span><br><span class="line">192.168.170.134 CFDLab-ib4 CFDLab-ib4</span><br><span class="line">192.168.170.135 CFDLab-ib5 CFDLab-ib5</span><br><span class="line">192.168.170.136 CFDLab-ib6 CFDLab-ib6</span><br><span class="line">192.168.170.137 CFDLab-ib7 CFDLab-ib7</span><br><span class="line">192.168.170.138 CFDLab-ib8 CFDLab-ib8</span><br></pre></td></tr></table></figure>
+<p>編輯 <code>/home/hosts</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /home/hosts</span><br></pre></td></tr></table></figure>
+
+<p>檔案中加入：(同<code>/etc/hosts</code>)</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">192.168.170.130 CFDLab CFDLab</span><br><span class="line">192.168.170.131 CFDLab-ib1 CFDLab-ib1</span><br><span class="line">192.168.170.132 CFDLab-ib2 CFDLab-ib2</span><br><span class="line">192.168.170.133 CFDLab-ib3 CFDLab-ib3</span><br><span class="line">192.168.170.134 CFDLab-ib4 CFDLab-ib4</span><br><span class="line">192.168.170.135 CFDLab-ib5 CFDLab-ib5</span><br><span class="line">192.168.170.136 CFDLab-ib6 CFDLab-ib6</span><br><span class="line">192.168.170.137 CFDLab-ib7 CFDLab-ib7</span><br><span class="line">192.168.170.138 CFDLab-ib8 CFDLab-ib8</span><br></pre></td></tr></table></figure>
+<p>編輯 <code>/etc/fstab</code>：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/fstab</span><br></pre></td></tr></table></figure>
+<p>檔案中加入：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">CFDLab:/home    /home   nfs auto,hard,<span class="built_in">bg</span>,intr   0   0</span><br><span class="line">CFDLab:/opt     /opt    nfs auto,hard,<span class="built_in">bg</span>,intr   0   0</span><br></pre></td></tr></table></figure>
+
+<h4 id="第四步-NIS（Network-Information-System，讓用戶端之主機可以分享伺服器的使用者資訊）："><a href="#第四步-NIS（Network-Information-System，讓用戶端之主機可以分享伺服器的使用者資訊）：" class="headerlink" title="第四步 NIS（Network Information System，讓用戶端之主機可以分享伺服器的使用者資訊）："></a>第四步 NIS（Network Information System，讓用戶端之主機可以分享伺服器的使用者資訊）：</h4><p>下載套件與設定：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">yum -y install ypbind </span><br><span class="line">yum -y install yp-tools</span><br><span class="line">/bin/domainname CFD-CLUSTER <span class="comment">#設定 NIS domain的名字</span></span><br></pre></td></tr></table></figure>
+<p><strong>Config-1</strong></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/sysconfig/network</span><br></pre></td></tr></table></figure>
+<p>檔案中加入:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NISDOMAIN=CFD-CLUSTER</span><br></pre></td></tr></table></figure>
+<p><strong>Config-2</strong>  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/yp.conf</span><br></pre></td></tr></table></figure>
+<p>檔案中加入:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Domain CFD-CLUSTER server CFDLab</span><br></pre></td></tr></table></figure>
+<p><strong>Config-3</strong>  </p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/idmapd.conf</span><br></pre></td></tr></table></figure>
+<p>檔案中加入:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Domain=CFD-CLUSTER</span><br></pre></td></tr></table></figure>
+<p><strong>Config-4</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vi /etc/nsswitch.conf</span><br></pre></td></tr></table></figure>
+<p>檔案中找到以下區塊，並修改成以下內容:</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">Passwd: files nisplus nis</span><br><span class="line">shadow: files nisplus nis</span><br><span class="line">Group: files nisplus nis</span><br><span class="line">Hosts: files dns nisplus nis</span><br></pre></td></tr></table></figure>
+<p>可以用 <code>setup</code> 快速檢查。</p>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/Computation/" rel="tag"># Computation</a>
+              <a href="/tags/bash/" rel="tag"># bash</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/09/04/2022-09-04-CFDLabServerManual-2/" rel="prev" title="CFDLabServerManual 下">
+                  <i class="fa fa-chevron-left"></i> CFDLabServerManual 下
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/09/03/2022-09-03-%E6%B7%BA%E5%85%A5C++%E5%B7%A8%E9%9B%86/" rel="next" title="什麼是C++巨集">
+                  什麼是C++巨集 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+  <div class="comments" id="comments">
+    <script src="https://utteranc.es/client.js"
+            repo="EN-Chou/EN-Chou.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a target="_blank" rel="noopener" href='https://github.com/EN-Chou'>EN-Chou</a></span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":"all","tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
+

@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="$mycolor_1"><meta name="generator" content="Hexo 6.3.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="$mycolor_1">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.0/css/all.min.css" integrity="sha256-AbA177XfpSnFEvgpYu1jMygiLabzPCJCRIBtR5jGc0k=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
+
+    <meta name="description" content="共同開發一個專案必須會使用branch相關的指令，包括git branch, git checkout, 以及 git merge。文章內容將走過以下流程： 1. 創立多個feature branch 2. 切換到名為”feature2”的branch 3. 將編修過後的”feature2” 接回到master branch。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="使用 Git branch">
+<meta property="og:url" content="http://example.com/2022/10/24/2022-10-24-git-branch%E5%AF%A6%E7%94%A8%E6%8A%80%E5%B7%A7/index.html">
+<meta property="og:site_name" content="Echo November&#39;s Note">
+<meta property="og:description" content="共同開發一個專案必須會使用branch相關的指令，包括git branch, git checkout, 以及 git merge。文章內容將走過以下流程： 1. 創立多個feature branch 2. 切換到名為”feature2”的branch 3. 將編修過後的”feature2” 接回到master branch。">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://i.imgur.com/vxuqEEe.png">
+<meta property="og:image" content="https://i.imgur.com/77GpcGc.png">
+<meta property="og:image" content="https://i.imgur.com/IAnlC3O.png">
+<meta property="og:image" content="https://i.imgur.com/xtZFmFd.png">
+<meta property="og:image" content="https://i.imgur.com/4I8inGY.png">
+<meta property="article:published_time" content="2022-10-24T08:46:01.000Z">
+<meta property="article:modified_time" content="2023-08-16T06:59:32.320Z">
+<meta property="article:author" content="Echo November">
+<meta property="article:tag" content="git">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://i.imgur.com/vxuqEEe.png">
+
+
+<link rel="canonical" href="http://example.com/2022/10/24/2022-10-24-git-branch%E5%AF%A6%E7%94%A8%E6%8A%80%E5%B7%A7/">
+
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2022/10/24/2022-10-24-git-branch%E5%AF%A6%E7%94%A8%E6%8A%80%E5%B7%A7/","path":"2022/10/24/2022-10-24-git-branch實用技巧/","title":"使用 Git branch"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>使用 Git branch | Echo November's Note</title>
+  
+
+
+
+
+
+
+  <noscript>
+    <link rel="stylesheet" href="/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Echo November's Note</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-about"><a href="/about/" rel="section"><i class="fa fa-user fa-fw"></i>About</a></li><li class="menu-item menu-item-tags"><a href="/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</div>
+        
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#git-branch"><span class="nav-number">1.</span> <span class="nav-text">git branch</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-checkout"><span class="nav-number">2.</span> <span class="nav-text">git checkout</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#git-merge"><span class="nav-number">3.</span> <span class="nav-text">git merge</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E9%97%9C%E6%96%BC%E5%B0%87branch%E5%90%8C%E6%AD%A5%E5%88%B0github%E7%9A%84%E9%A1%8C%E5%A4%96%E8%A9%B1"><span class="nav-number">4.</span> <span class="nav-text">關於將branch同步到github的題外話</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author site-overview-item animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Echo November"
+      src="/images/me_square.jpg">
+  <p class="site-author-name" itemprop="name">Echo November</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap site-overview-item animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/archives/">
+          <span class="site-state-item-count">38</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/categories/">
+        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/tags/">
+        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author site-overview-item animated">
+      <span class="links-of-author-item">
+        <a href="https://github.com/EN-Chou" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;EN-Chou" rel="noopener" target="_blank"><i class="fab fa-github fa-fw"></i>GitHub</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:dodger25685@gmail.com" title="E-Mail → mailto:dodger25685@gmail.com" rel="noopener" target="_blank"><i class="fa fa-envelope fa-fw"></i>E-Mail</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/EN#2060" title="Discord → EN#2060">Discord</a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.linkedin.com/in/yi-en-chou/" title="LinkedIn → https:&#x2F;&#x2F;www.linkedin.com&#x2F;in&#x2F;yi-en-chou&#x2F;" rel="noopener" target="_blank">LinkedIn</a>
+      </span>
+  </div>
+
+
+
+        </div>
+      </div>
+    </div>
+  </aside>
+  <div class="sidebar-dimmer"></div>
+
+
+    </header>
+
+    
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2022/10/24/2022-10-24-git-branch%E5%AF%A6%E7%94%A8%E6%8A%80%E5%B7%A7/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/me_square.jpg">
+      <meta itemprop="name" content="Echo November">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="使用 Git branch | Echo November's Note">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          使用 Git branch
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+
+      <time title="Created: 2022-10-24 16:46:01" itemprop="dateCreated datePublished" datetime="2022-10-24T16:46:01+08:00">2022-10-24</time>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+        <p>共同開發一個專案必須會使用branch相關的指令，包括<code>git branch</code>, <code>git checkout</code>, 以及 <code>git merge</code>。<br>文章內容將走過以下流程： 1. 創立多個feature branch 2. 切換到名為”feature2”的branch 3. 將編修過後的”feature2” 接回到master branch。  <span id="more"></span>  </p>
+<h3 id="git-branch"><a href="#git-branch" class="headerlink" title="git branch"></a><code>git branch</code></h3><ul>
+<li>用途1：查看branch<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># * denote the current working branch</span></span><br><span class="line">$ git branch</span><br><span class="line">* master</span><br></pre></td></tr></table></figure></li>
+<li>用途2：創立branch (1. 創立多個feature branch)<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git branch feature1 <span class="comment">#創立名為&quot;feature1&quot;的branch</span></span><br><span class="line">$ git branch feature2 <span class="comment">#創立名為&quot;feature2&quot;的branch</span></span><br><span class="line">$ git branch feature3 <span class="comment">#創立名為&quot;feature3&quot;的branch</span></span><br></pre></td></tr></table></figure></li>
+<li>用途3：刪除branch<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ git branch -d feature3 <span class="comment">#刪除名為&quot;feature3&quot;的branch</span></span><br><span class="line">Deleted branch feature3 (was 1d9e1c2).</span><br><span class="line">$ git branch <span class="comment">#查看刪除&quot;feature3&quot;後的狀態</span></span><br><span class="line">  feature1</span><br><span class="line">  feature2</span><br><span class="line">* master</span><br></pre></td></tr></table></figure></li>
+</ul>
+<h3 id="git-checkout"><a href="#git-checkout" class="headerlink" title="git checkout"></a><code>git checkout</code></h3><ul>
+<li>用途：切換branch（2. 切換到名為”feature2”的branch）<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$ git branch <span class="comment">#查看切換branch前的狀態</span></span><br><span class="line">  feature1</span><br><span class="line">  feature2</span><br><span class="line">* master</span><br><span class="line">$ git checkout feature2 <span class="comment">#切換</span></span><br><span class="line">Switched to branch <span class="string">&#x27;feature2&#x27;</span></span><br><span class="line">$ git branch <span class="comment">#查看切換branch後的狀態</span></span><br><span class="line">  feature1</span><br><span class="line">* feature2</span><br><span class="line">  master</span><br></pre></td></tr></table></figure>
+在git graph 上，空心的節點用以表示編輯中的位置，可以看到feature2在切換過後被以空心的節點表示。<br><img src="https://i.imgur.com/vxuqEEe.png"></li>
+</ul>
+<h3 id="git-merge"><a href="#git-merge" class="headerlink" title="git merge"></a><code>git merge</code></h3><ul>
+<li><p>用途：合併branch （3. 將編修過後的”feature2” 接回到master branch）<br>首先，先將工作的branch切換到master：</p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout master</span><br><span class="line">Switched to branch <span class="string">&#x27;master&#x27;</span></span><br></pre></td></tr></table></figure>
+<p>在git graph 上，空心的節點換到了master branch上：<br><img src="https://i.imgur.com/77GpcGc.png"></p>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ git merge feature2</span><br></pre></td></tr></table></figure>
+<p><img src="https://i.imgur.com/IAnlC3O.png"></p>
+</li>
+<li><p>Note: 最左邊的branch不一定是master。</p>
+</li>
+</ul>
+<h3 id="關於將branch同步到github的題外話"><a href="#關於將branch同步到github的題外話" class="headerlink" title="關於將branch同步到github的題外話"></a>關於將branch同步到github的題外話</h3><ul>
+<li>Push並不會將所有的git branch 部屬到 github ：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ git branch</span><br><span class="line">  feature1</span><br><span class="line">* master</span><br><span class="line">$ git push</span><br></pre></td></tr></table></figure>
+在master的branch上做push後，github的結果如下：<br><img src="https://i.imgur.com/xtZFmFd.png"><br>若是希望將名為”feature1”這個branch部屬到github，我們需要先checkout到”feature1”並執行以下的指令：<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ git checkout feature1 </span><br><span class="line">Switched to branch &#x27;feature1&#x27;</span><br><span class="line">$ git push --set-upstream origin feature1</span><br></pre></td></tr></table></figure>
+執行後github的結果如下：<br><img src="https://i.imgur.com/4I8inGY.png"></li>
+</ul>
+
+    </div>
+
+    
+    
+    
+      
+
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/git/" rel="tag"># git</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/2022/10/31/2022-10-31-%E4%BF%AE%E6%94%B9-%E6%81%A2%E5%BE%A9commit/" rel="prev" title="修改/恢復commit">
+                  <i class="fa fa-chevron-left"></i> 修改/恢復commit
+                </a>
+            </div>
+            <div class="post-nav-item">
+                <a href="/2022/10/24/2022-10-24-%E5%85%B1%E5%90%8C%E9%96%8B%E7%99%BC%E4%B8%80%E5%80%8B%E5%B0%88%E6%A1%88%E7%9A%84%E5%B0%8F%E7%AD%86%E8%A8%98/" rel="next" title="共同開發一個專案的小筆記">
+                  共同開發一個專案的小筆記 <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+  <div class="comments" id="comments">
+    <script src="https://utteranc.es/client.js"
+            repo="EN-Chou/EN-Chou.github.io"
+            issue-term="pathname"
+            theme="github-light"
+            crossorigin="anonymous"
+            async>
+    </script>
+  </div>
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+
+<div class="copyright">
+  &copy; 
+  <span itemprop="copyrightYear">2023</span>
+  <span class="with-love">
+    <i class="fab fa-github"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder"><a target="_blank" rel="noopener" href='https://github.com/EN-Chou'>EN-Chou</a></span>
+</div>
+
+    </div>
+  </footer>
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous"></script>
+<script src="/js/comments.js"></script><script src="/js/utils.js"></script><script src="/js/motion.js"></script><script src="/js/next-boot.js"></script>
+
+  
+
+
+
+
+
+  
+
+
+
+
+  
+
+  <script class="next-config" data-name="enableMath" type="application/json">false</script><script class="next-config" data-name="mathjax" type="application/json">{"enable":"all","tags":"none","js":{"url":"https://cdnjs.cloudflare.com/ajax/libs/mathjax/3.2.2/es5/tex-mml-chtml.js","integrity":"sha256-MASABpB4tYktI2Oitl4t+78w/lyA+D7b/s9GEP0JOGI="}}</script>
+<script src="/js/third-party/math/mathjax.js"></script>
+
+
+
+</body>
+</html>
+

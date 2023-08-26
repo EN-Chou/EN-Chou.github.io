@@ -22,25 +22,26 @@
 
     <meta name="description" content="程式被編譯成 machine instruction 後，此指令會從 memory 被複製至 processor 進行處理。然而這些複製資訊所需要的時間，遠遠慢於處理器處理資訊的時間(overhead)，進而使得處理器沒辦法發揮它本身的效能，兩者之間的落差(processor-memory gap)也隨著半導體技術的發展而越來越大，而快取（cache）在這之中扮演了減少兩者差距的角色。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="快取cache 與 快存memory">
-<meta property="og:url" content="http://example.com/2023/08/18/2023-08-18-%E5%BF%AB%E5%8F%96cache-%E8%88%87-%E5%BF%AB%E5%AD%98memory/index.html">
+<meta property="og:title" content="快取(cache)與快存(memory)">
+<meta property="og:url" content="http://example.com/2023/08/18/2023-08-18-cache-and-memory/index.html">
 <meta property="og:site_name" content="Echo November&#39;s Note">
 <meta property="og:description" content="程式被編譯成 machine instruction 後，此指令會從 memory 被複製至 processor 進行處理。然而這些複製資訊所需要的時間，遠遠慢於處理器處理資訊的時間(overhead)，進而使得處理器沒辦法發揮它本身的效能，兩者之間的落差(processor-memory gap)也隨著半導體技術的發展而越來越大，而快取（cache）在這之中扮演了減少兩者差距的角色。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-18T04:26:34.000Z">
-<meta property="article:modified_time" content="2023-08-26T05:12:41.666Z">
+<meta property="article:modified_time" content="2023-08-26T07:27:01.585Z">
 <meta property="article:author" content="Echo November">
+<meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/08/18/2023-08-18-%E5%BF%AB%E5%8F%96cache-%E8%88%87-%E5%BF%AB%E5%AD%98memory/">
+<link rel="canonical" href="http://example.com/2023/08/18/2023-08-18-cache-and-memory/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/08/18/2023-08-18-%E5%BF%AB%E5%8F%96cache-%E8%88%87-%E5%BF%AB%E5%AD%98memory/","path":"2023/08/18/2023-08-18-快取cache-與-快存memory/","title":"快取cache 與 快存memory"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/08/18/2023-08-18-cache-and-memory/","path":"2023/08/18/2023-08-18-cache-and-memory/","title":"快取(cache)與快存(memory)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>快取cache 與 快存memory | Echo November's Note</title>
+<title>快取(cache)與快存(memory) | Echo November's Note</title>
   
 
 
@@ -141,7 +142,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -194,7 +195,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/2023-08-18-%E5%BF%AB%E5%8F%96cache-%E8%88%87-%E5%BF%AB%E5%AD%98memory/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/2023-08-18-cache-and-memory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me_square.jpg">
@@ -207,12 +208,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="快取cache 與 快存memory | Echo November's Note">
+      <meta itemprop="name" content="快取(cache)與快存(memory) | Echo November's Note">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          快取cache 與 快存memory
+          快取(cache)與快存(memory)
         </h1>
 
         <div class="post-meta-container">
@@ -237,6 +238,13 @@
     
     <div class="post-body" itemprop="articleBody">
         <p>程式被編譯成 machine instruction 後，此指令會從 memory 被複製至 processor 進行處理。然而這些複製資訊所需要的時間，遠遠慢於處理器處理資訊的時間(overhead)，進而使得處理器沒辦法發揮它本身的效能，兩者之間的落差(processor-memory gap)也隨著半導體技術的發展而越來越大，而快取（cache）在這之中扮演了減少兩者差距的角色。<span id="more"></span> </p>
+<p>記憶體的階層中，cache 的定位高於 memory，cache 的儲存空間更小、更快、也更昂貴。cache 是透過 SRAM(static memory)來實現，這種儲存技術需要面積相對大的電路(e.g, flip-flop)來完成，單位面積的容量小，因此容量做不多，但是存取速度快。</p>
+<p>memory則是透過 DRAM(dynamic memory)來實現，不同於前者的是，它是憑藉電容做「記憶」，這大幅縮減了它的面積，單位面積的容量大；然而也因其仰賴電容以及空間狹小等因素所造成的漏電（漸漸「忘記」），它需要 refresh circuit 來維持刷新電路的狀態，也需要時間做refresh，因此相較於前者耗電量較大，存取速度也較慢。</p>
+<p>而在記憶體階層中，最頂端的是 register(L0 cache), L1 cache, L2 cache, L3 cache, (main) memory, disks…，每一階的儲存裝置皆為其下一階的快取裝置，藉此來增進處理器的效率。 </p>
+<p>keyword</p>
+<ul>
+<li>Access latency</li>
+</ul>
 
     </div>
 
@@ -247,6 +255,9 @@
 
 
     <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/CSAPP/" rel="tag"># CSAPP</a>
+          </div>
 
         
 

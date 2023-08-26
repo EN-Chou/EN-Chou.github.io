@@ -137,7 +137,7 @@
       </div>
       <div class="site-state-item site-state-tags">
           <a href="/tags/">
-        <span class="site-state-item-count">21</span>
+        <span class="site-state-item-count">22</span>
         <span class="site-state-item-name">tags</span></a>
       </div>
   </nav>
@@ -231,7 +231,7 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <p>Program counter(PC) 是與 processor 緊密合作的儲存裝置，這個儲存裝置的定位為register(L0 cache)，最小且最快。它的體積僅是一個 word-size[1] ，而所存放的內容是一個指向 machine instruction的位址。
+          <p>Program counter(PC) 是與 processor 緊密合作的儲存裝置，從通電的剎那到斷電的剎那，processor反覆地執行 PC 所指向的 instruction，與更新 PC 去指向下一個instruction。
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2023/08/21/2023-08-21-Program-counter/#more" rel="contents">
@@ -265,7 +265,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/2023-08-18-%E5%BF%AB%E5%8F%96cache-%E8%88%87-%E5%BF%AB%E5%AD%98memory/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/18/2023-08-18-cache-and-memory/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me_square.jpg">
@@ -283,7 +283,7 @@
     </span>
       <header class="post-header">
         <h2 class="post-title" itemprop="name headline">
-          <a href="/2023/08/18/2023-08-18-%E5%BF%AB%E5%8F%96cache-%E8%88%87-%E5%BF%AB%E5%AD%98memory/" class="post-title-link" itemprop="url">快取cache 與 快存memory</a>
+          <a href="/2023/08/18/2023-08-18-cache-and-memory/" class="post-title-link" itemprop="url">快取(cache)與快存(memory)</a>
         </h2>
 
         <div class="post-meta-container">
@@ -310,7 +310,7 @@
           <p>程式被編譯成 machine instruction 後，此指令會從 memory 被複製至 processor 進行處理。然而這些複製資訊所需要的時間，遠遠慢於處理器處理資訊的時間(overhead)，進而使得處理器沒辦法發揮它本身的效能，兩者之間的落差(processor-memory gap)也隨著半導體技術的發展而越來越大，而快取（cache）在這之中扮演了減少兩者差距的角色。
           <!--noindex-->
             <div class="post-button">
-              <a class="btn" href="/2023/08/18/2023-08-18-%E5%BF%AB%E5%8F%96cache-%E8%88%87-%E5%BF%AB%E5%AD%98memory/#more" rel="contents">
+              <a class="btn" href="/2023/08/18/2023-08-18-cache-and-memory/#more" rel="contents">
                 Read more &raquo;
               </a>
             </div>

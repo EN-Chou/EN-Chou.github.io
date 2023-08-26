@@ -28,7 +28,7 @@
 <meta property="og:description" content="Program counter(PC) 是與 processor 緊密合作的儲存裝置，從通電的剎那到斷電的剎那，processor反覆地執行 PC 所指向的 instruction，與更新 PC 去指向下一個instruction。">
 <meta property="og:locale" content="en_US">
 <meta property="article:published_time" content="2023-08-21T04:30:30.000Z">
-<meta property="article:modified_time" content="2023-08-26T07:27:02.202Z">
+<meta property="article:modified_time" content="2023-08-26T07:29:03.010Z">
 <meta property="article:author" content="Echo November">
 <meta property="article:tag" content="CSAPP">
 <meta name="twitter:card" content="summary">
@@ -239,7 +239,6 @@
     <div class="post-body" itemprop="articleBody">
         <p>Program counter(PC) 是與 processor 緊密合作的儲存裝置，從通電的剎那到斷電的剎那，processor反覆地執行 PC 所指向的 instruction，與更新 PC 去指向下一個instruction。<span id="more"></span> </p>
 <p>PC使用的儲存裝置的定位為register(L0 cache)，位於記憶體的階層中的頂端，最小且最快。它的體積僅是一個 word-size(比較常見的則如 32-bit、64-bit) ，而所存放的內容是一個指向 machine instruction的位址。</p>
-<p>ARM 處理器中使用R15 作為PC，並且ARM 處理器中只有一個PC 暫存器。R15 有32 位寬度，可以直接定址4GB的地址空間（2^32 &#x3D; 4G ）。</p>
 
     </div>
 

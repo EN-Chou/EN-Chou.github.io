@@ -20,27 +20,27 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"example.com","root":"/","images":"/images","scheme":"Pisces","darkmode":false,"version":"8.13.0","exturl":false,"sidebar":{"position":"left","display":"post","padding":18,"offset":12},"copycode":{"enable":true,"style":"default"},"bookmark":{"enable":false,"color":"#778899","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"prism":false,"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/js/config.js"></script>
 
-    <meta name="description" content="Web API design. note Agile&#x2F; engineering dev Client(Customer) - request&#x2F;response - API(Waiter) - API server(Kitchen) postman server 堪輝定律（？） team有幾層，架構就有幾層，不同層的連接皆是透過api history of APIs &lt;-">
+    <meta name="description" content="多執行緒(multi-threading)與平行運算(parallel-computing)皆可提高 processor 的使用率，減少 processor 閒置的時間。">
 <meta property="og:type" content="article">
-<meta property="og:title" content="API First for begineer">
-<meta property="og:url" content="http://example.com/2023/08/23/2023-08-23-API-first/index.html">
+<meta property="og:title" content="多執行緒(multi-threading)與平行運算(parallel-computing)">
+<meta property="og:url" content="http://example.com/2023/08/26/2023-08-26-%E5%A4%9A%E5%9F%B7%E8%A1%8C%E7%B7%92%E8%88%87%E5%B9%B3%E8%A1%8C%E9%81%8B%E7%AE%97/index.html">
 <meta property="og:site_name" content="Echo November&#39;s Note">
-<meta property="og:description" content="Web API design. note Agile&#x2F; engineering dev Client(Customer) - request&#x2F;response - API(Waiter) - API server(Kitchen) postman server 堪輝定律（？） team有幾層，架構就有幾層，不同層的連接皆是透過api history of APIs &lt;-">
+<meta property="og:description" content="多執行緒(multi-threading)與平行運算(parallel-computing)皆可提高 processor 的使用率，減少 processor 閒置的時間。">
 <meta property="og:locale" content="en_US">
-<meta property="article:published_time" content="2023-08-23T11:31:40.000Z">
-<meta property="article:modified_time" content="2023-08-26T04:32:44.570Z">
+<meta property="article:published_time" content="2023-08-26T09:43:34.000Z">
+<meta property="article:modified_time" content="2023-08-27T03:10:40.565Z">
 <meta property="article:author" content="Echo November">
 <meta name="twitter:card" content="summary">
 
 
-<link rel="canonical" href="http://example.com/2023/08/23/2023-08-23-API-first/">
+<link rel="canonical" href="http://example.com/2023/08/26/2023-08-26-%E5%A4%9A%E5%9F%B7%E8%A1%8C%E7%B7%92%E8%88%87%E5%B9%B3%E8%A1%8C%E9%81%8B%E7%AE%97/">
 
 
 
-<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/08/23/2023-08-23-API-first/","path":"2023/08/23/2023-08-23-API-first/","title":"API First for begineer"}</script>
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"http://example.com/2023/08/26/2023-08-26-%E5%A4%9A%E5%9F%B7%E8%A1%8C%E7%B7%92%E8%88%87%E5%B9%B3%E8%A1%8C%E9%81%8B%E7%AE%97/","path":"2023/08/26/2023-08-26-多執行緒與平行運算/","title":"多執行緒(multi-threading)與平行運算(parallel-computing)"}</script>
 
 <script class="next-config" data-name="calendar" type="application/json">""</script>
-<title>API First for begineer | Echo November's Note</title><meta name="robots" content="noindex">
+<title>多執行緒(multi-threading)與平行運算(parallel-computing) | Echo November's Note</title>
   
 
 
@@ -116,7 +116,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#note"><span class="nav-number">1.</span> <span class="nav-text">note</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Multi-threading"><span class="nav-number">1.</span> <span class="nav-text">Multi-threading</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Parallel-Computing"><span class="nav-number">2.</span> <span class="nav-text">Parallel Computing</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -195,7 +195,7 @@
   
 
   <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
-    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/23/2023-08-23-API-first/">
+    <link itemprop="mainEntityOfPage" href="http://example.com/2023/08/26/2023-08-26-%E5%A4%9A%E5%9F%B7%E8%A1%8C%E7%B7%92%E8%88%87%E5%B9%B3%E8%A1%8C%E9%81%8B%E7%AE%97/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/me_square.jpg">
@@ -208,12 +208,12 @@
     </span>
 
     <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
-      <meta itemprop="name" content="API First for begineer | Echo November's Note">
+      <meta itemprop="name" content="多執行緒(multi-threading)與平行運算(parallel-computing) | Echo November's Note">
       <meta itemprop="description" content="">
     </span>
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
-          API First for begineer
+          多執行緒(multi-threading)與平行運算(parallel-computing)
         </h1>
 
         <div class="post-meta-container">
@@ -224,7 +224,7 @@
       </span>
       <span class="post-meta-item-text">Posted on</span>
 
-      <time title="Created: 2023-08-23 19:31:40" itemprop="dateCreated datePublished" datetime="2023-08-23T19:31:40+08:00">2023-08-23</time>
+      <time title="Created: 2023-08-26 17:43:34" itemprop="dateCreated datePublished" datetime="2023-08-26T17:43:34+08:00">2023-08-26</time>
     </span>
 
   
@@ -237,28 +237,11 @@
     
     
     <div class="post-body" itemprop="articleBody">
-        <p>Web API design.</p>
-<h3 id="note"><a href="#note" class="headerlink" title="note"></a>note</h3><ul>
-<li>Agile&#x2F; engineering dev</li>
-<li>Client(Customer) - request&#x2F;response - API(Waiter) - API server(Kitchen)</li>
-<li>postman server</li>
-<li>堪輝定律（？） team有幾層，架構就有幾層，不同層的連接皆是透過api</li>
-<li>history of APIs &lt;- restful API(RPC, SOAP, GraphQL)</li>
-<li>Types of APIs(Private&#x2F; public&#x2F;partner)</li>
-<li>RESTful APIs surround resource</li>
-<li>rest api rules</li>
-<li>verb and CRUD(PUT GET DELETE HEAD …)</li>
-<li>200 (HTTP status code)</li>
-<li>Versioning(maintain version)</li>
-<li>Treat as aproduct -&gt; API first &#x3D; Contract first (淺談 API first)</li>
-<li>Spec - Mock - contract (reduce overhead)</li>
-<li>“Swobber” (&lt;-&gt;spec)</li>
-<li>Agile - PDCA(plan, do,.., action) - ADDR</li>
-<li>“DDD” domain driven d..</li>
-<li>(?) api vs sdk</li>
-<li>tool project</li>
-</ul>
-<!-- flag of hidden posts -->
+        <p>多執行緒(multi-threading)與平行運算(parallel-computing)皆可提高 processor 的使用率，減少 processor 閒置的時間。<span id="more"></span> </p>
+<p>現今的 processor 大多都是 multi-core processor，意旨上方會搭載許多核心的 CPUs(cores)，而每一顆 CPU 能夠執行一個thread；而硬體上若是支援 multithreading 的技術，則一顆 CPU 則能夠執行多個thread，像是多了更多的CPU。</p>
+<h3 id="Multi-threading"><a href="#Multi-threading" class="headerlink" title="Multi-threading"></a>Multi-threading</h3><p>雖然如此，實質上 CPU 在同一個時間內僅能夠執行一個 thread，multi-threading 所做的事情是在短時間內快速切換著去執行不同的 thread，給使用者造成同時執行的假象；在等待其中一個 thread 做 I&#x2F;0 執行另外一個 thread，透過這樣的機制來減少 CPU 閒置的時間，提高 processor 的使用率。</p>
+<h3 id="Parallel-Computing"><a href="#Parallel-Computing" class="headerlink" title="Parallel Computing"></a>Parallel Computing</h3><p>當我們把演算法寫入程式，並被編譯成一連串的指令給 processor 做執行，這些指令皆會被送至單一顆 CPU，循序的被執行。而平行運算則是將問題拆解成數個子問題，分派給不同的 CPU 執行，減少其他 CPU 閒置的時間，提高 processor 的使用率。</p>
+
     </div>
 
     
@@ -271,6 +254,15 @@
 
         
 
+          <div class="post-nav">
+            <div class="post-nav-item">
+            </div>
+            <div class="post-nav-item">
+                <a href="/2023/08/21/2023-08-21-Program-counter/" rel="next" title="Program counter(PC)">
+                  Program counter(PC) <i class="fa fa-chevron-right"></i>
+                </a>
+            </div>
+          </div>
     </footer>
   </article>
 </div>
